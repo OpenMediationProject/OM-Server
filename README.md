@@ -1,4 +1,4 @@
-# OpenMediation Server 
+# OpenMediation SDK Server
 
 
 |API|Description|
