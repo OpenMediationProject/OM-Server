@@ -7,7 +7,7 @@ import java.util.List;
 
 public class InitRequest extends CommonRequest {
 
-    private long uptime;           // uptime
+    private long btime;            // uptime
     private long ram;              // RAM size, unit B
     private String country;
     private List<AdNetwork> adns;
@@ -58,7 +58,7 @@ public class InitRequest extends CommonRequest {
         public List<Sensor> sensors;         // sensor list
         public AppSource as;                 // app source
         public String fb_id;                 // FacebookID
-        public long tdm;                     // User total disk size, unit B
+        public int tdm;                      // User total disk size, unit M
     }
 
     public static class Sensor {
@@ -94,12 +94,12 @@ public class InitRequest extends CommonRequest {
         public String rdsg;            // Available capacity GB
     }
 
-    public long getUptime() {
-        return uptime;
+    public long getBtime() {
+        return btime;
     }
 
-    public void setUptime(long uptime) {
-        this.uptime = uptime;
+    public void setBtime(long btime) {
+        this.btime = btime;
     }
 
     public long getRam() {
