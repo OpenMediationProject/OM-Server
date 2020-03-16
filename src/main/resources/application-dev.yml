@@ -6,21 +6,3 @@ app:
 
 logging:
   config: classpath:log4j2-dev.xml
-
-server:
-  tomcat:
-    accesslog:
-      enabled: false
-
-management:
-  endpoint:
-    httptrace:
-      enabled: false
-  endpoints:
-    web:
-      base-path: /holy
-      exposure:
-        include: metrics,loggers,threaddump
-
-
-
