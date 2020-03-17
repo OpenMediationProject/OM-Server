@@ -15,7 +15,7 @@ You can package using [mvn](https://maven.apache.org/).
 mvn clean package -Dmaven.test.skip=true
 ```
 
-After packaging is complete, you can find "on-server.jar" in the directory "target".
+After packaging is complete, you can find "on-server.jar" in the directory "target".  
 "om-server.jar" is a executable jar, see [springboot](https://spring.io/projects/spring-boot/)
 
 ### Configuration
@@ -45,6 +45,12 @@ LOG_FILENAME=stdout.log
 ### Run
 
 put "om-server.conf" and "om-server.jar" in the same directory.
+
+```
+├── on-server.conf
+├── on-server.jar
+└── log
+```
 
 ```shell script
 mkdir -p log
