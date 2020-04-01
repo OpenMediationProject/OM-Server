@@ -147,7 +147,7 @@ run_program(){
    RUNCMD=$1
    cd ${RUNCMD}/
    [[ ! -x ${RUNCMD}.jar ]] && chmod +x ${RUNCMD}.jar
-   ./${RUNCMD}.jar start && /usr/local/nginx/sbin/nginx -g "daemon off;"
+   ./${RUNCMD}.jar start
 }
 
 
