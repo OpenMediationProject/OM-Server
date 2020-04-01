@@ -147,7 +147,7 @@ run_program(){
    RUNCMD=$1
    cd ${RUNCMD}/
    [[ ! -x ${RUNCMD}.jar ]] && chmod +x ${RUNCMD}.jar
-   ./${RUNCMD}.jar start
+   ./${RUNCMD}.jar run
 }
 
 
