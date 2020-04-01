@@ -1,0 +1,134 @@
+package com.adtiming.om.server.web;
+
+import com.adtiming.om.server.dto.*;
+import com.adtiming.om.server.service.AppConfig;
+import com.adtiming.om.server.service.CacheService;
+import com.adtiming.om.server.service.GeoService;
+import com.adtiming.om.server.util.Compressor;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class WaterfallBase extends BaseController {
+
+    private static final Logger LOG = LogManager.getLogger();
+
+    @Resource
+    private ObjectMapper objectMapper;
+
+    public static class DebugMsgs extends ArrayList<CharSequence> {
+        static final DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
+
+        @Override
+        public boolean add(CharSequence o) {
+            return super.add(LocalDateTime.now().format(fmt) + " - " + o);
+        }
+    }
+
+    WaterfallRequest fillRequestParams(byte[] data, int apiv, String sdkv, int plat, String ua, String reqHost, HttpServletRequest req, GeoService geoService, AppConfig cfg, CacheService cacheService) {
+        WaterfallRequest o;
+        try {
+            o = objectMapper.readValue(Compressor.gunzip2s(data), WaterfallRequest.class);
+            o.setApiv(apiv);
+            o.setSdkv(sdkv);
+            o.setPlat(plat);
+            o.setUa(ua);
+            o.setReqHost(reqHost);
+            o.setGeo(geoService.getGeoData(req));
+            o.setAppConfig(cfg);
+            o.processBid(cacheService);
+        } catch (Exception e) {
+            LOG.warn("wf decode fail v{}", apiv, e);
+            return null;
+        }
+        return o;
+    }
+
+    Set<Integer> getBlockAdnIds(List<AdNetworkApp> adnApps, WaterfallRequest o) {
+        Set<Integer> removeAdnIds = Collections.emptySet();
+        for (AdNetworkApp app : adnApps) {
+            if (app.isBlock(o, "*")) {
+                if (removeAdnIds.isEmpty())
+                    removeAdnIds = new HashSet<>();
+                removeAdnIds.add(app.getAdnId());
+            }
+        }
+        return removeAdnIds;
+    }
+
+    List<Integer> matchDev(Integer devDevicePubId, Placement p, CacheService cacheService) {
+        if (devDevicePubId != null) {
+            // When devDevicePubId is 0, all apps are remediated in test mode
+            if (devDevicePubId == 0 || devDevicePubId == p.getPublisherId()) {
+                Integer adnId = cacheService.getDevAppAdnId(p.getPubAppId());
+                if (adnId != null) {
+                    List<Instance> ins = cacheService.getPlacementAdnInstances(p.getId(), adnId);
+                    if (ins.isEmpty())
+                        return null;
+                    return ins.stream().map(Instance::getId).collect(Collectors.toList());
+                }
+            }
+        }
+        return null;
+    }
+
+    Boolean matchPlacement(WaterfallRequest o, Placement p) {
+        if (p.isBlockSdkVersion(o.getSdkv())) {
+            return false;
+        }
+
+        if (!p.isAllowOsv(o.getOsv())) {
+            return false;
+        }
+
+        if (!p.isAllowMake(o.getMake())) {
+            return false;
+        }
+
+        if (!p.isAllowBrand(o.getBrand())) {
+            return false;
+        }
+
+        if (!p.isAllowModel(o.getModel())) {
+            return false;
+        }
+
+        if (p.isBlockDeviceId(o.getDid())) {
+            return false;
+        }
+
+        if (!p.isAllowPeriod(o.getCountry())) {
+            return false;
+        }
+
+        return true;
+    }
+
+    InstanceRule getMatchedRule(CacheService cacheService, List<InstanceRule> rules, WaterfallRequest o, boolean DEBUG, List<CharSequence> dmsg) {
+        if (rules == null || rules.isEmpty())
+            return null;
+        InstanceRule matchedRule = null;
+        for (InstanceRule rule : rules) {
+            Segment segment = cacheService.getSegment(rule.getSegmentId());
+            if (segment == null) {
+                if (DEBUG) {
+                    dmsg.add(String.format("segment not find, ruleId:%d, segmentId:%d", rule.getId(), rule.getSegmentId()));
+                }
+                continue;
+            }
+            if (o.getAbt() == rule.getAbt().getNumber() && segment.isMatched(o.getCountry(), o.getContype(), o.getBrand(), o.getModel(), o.getIap(), o.getImprTimes())) {
+                if (matchedRule == null || rule.getPriority() < matchedRule.getPriority()) {
+                    matchedRule = rule;
+                }
+            }
+        }
+        return matchedRule;
+    }
+}

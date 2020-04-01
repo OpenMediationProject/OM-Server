@@ -1,0 +1,8 @@
+app:
+  env: dev
+  dcenter: 1
+  snode: 1
+  dtask: replace_to_dtask_host
+
+logging:
+  config: classpath:log4j2-dev.xml

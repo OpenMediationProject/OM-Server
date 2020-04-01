@@ -1,0 +1,15 @@
+# Created by .ignore support plugin (hsz.mobi)
+/.idea
+/*.iml
+/log
+**/.DS_Store
+/target
+/data
+/cache
+/work
+
+# eclipse
+.project
+.factorypath
+.classpath
+.settings

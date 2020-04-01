@@ -1,0 +1,53 @@
+server:
+  port: 19011
+  compression:
+    enabled: true
+    min-response-size: 200
+  http2:
+    enabled: true
+  servlet:
+    application-display-name: om-server
+    session:
+      timeout: 1m
+  tomcat:
+    basedir: .
+    max-connections: 20000
+    max-threads: 1000
+    accept-count: 500
+    accesslog:
+      directory: log
+      enabled: true
+      file-date-format: .yyyyMMdd.HH
+      buffered: true
+      rename-on-rotate: true
+      prefix: access
+      pattern: '%h %t [%I] %{Host}i "%r" %s %b %D %F "%{Referer}i" "%{User-Agent}i"'
+
+spring:
+  ## scheduling
+  task:
+    scheduling:
+      pool:
+        size: 10
+  ## jackson
+  jackson:
+    parser:
+      ALLOW_SINGLE_QUOTES: true
+      ALLOW_UNQUOTED_FIELD_NAMES: true
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: true
+    default-property-inclusion: non_null
+    generator:
+      AUTO_CLOSE_TARGET: false
+      IGNORE_UNKNOWN: true
+  ## mvc
+  mvc:
+    favicon:
+      enabled: false
+  ## proviles
+  profiles:
+    active: dev
+
+

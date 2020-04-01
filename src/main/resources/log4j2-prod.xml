@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration monitorInterval="10" status="ERROR">
+    <Appenders>
+        <RollingFile name="Console" fileName="log/stdout.log" filePattern="log/stdout.%d{yyyyMMdd}.log.gz">
+            <PatternLayout
+                    pattern="%style{%d{yyyy-MM-dd HH:mm:ss.SSS}}{magenta} [%style{%t}{blue}] %highlight{%-5level} %style{%logger{36}}{cyan} - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="data" maxDepth="1">
+                    <IfFileName glob="*.log.gz"/>
+                    <IfLastModified age="7d"/>
+                </Delete>
+                <Delete basePath="log" maxDepth="1">
+                    <IfFileName glob="*.log.gz"/>
+                    <IfLastModified age="7d"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+
+        <RollingFile name="om.lr" immediateFlush="false" bufferedIO="true" bufferSize="65536"
+                     fileName="data/om.lr.log" filePattern="data/om.lr.%d{yyyy-MM-dd.HH}.log.gz">
+            <PatternLayout pattern="%msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="om.event" immediateFlush="false" bufferedIO="true" bufferSize="65536"
+                     fileName="data/om.event.log" filePattern="data/om.event.%d{yyyy-MM-dd.HH}.log.gz">
+            <PatternLayout pattern="%msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="om.iap" immediateFlush="false" bufferedIO="true" bufferSize="65536"
+                     fileName="data/om.iap.log" filePattern="data/om.iap.%d{yyyy-MM-dd.HH}.log.gz">
+            <PatternLayout pattern="%msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="om.ic" immediateFlush="false" bufferedIO="true" bufferSize="65536"
+                     fileName="data/om.ic.log" filePattern="data/om.ic.%d{yyyy-MM-dd.HH}.log.gz">
+            <PatternLayout pattern="%msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+            </Policies>
+        </RollingFile>
+
+        <RollingFile name="om.error" immediateFlush="false" bufferedIO="true" bufferSize="65536"
+                     fileName="data/om.error.log" filePattern="data/om.error.%d{yyyy-MM-dd.HH}.log.gz">
+            <PatternLayout pattern="%msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+            </Policies>
+        </RollingFile>
+
+    </Appenders>
+
+    <Loggers>
+
+        <Root level="error">
+            <AppenderRef ref="Console"/>
+        </Root>
+
+        <Logger name="com.adtiming.om" level="debug"/>
+        <Logger name="org.springframework.boot.web.embedded" level="info"/>
+        <Logger name="org.apache.catalina.connector.CoyoteAdapter" level="fatal"/>
+
+        <Logger name="om.lr" level="info" additivity="false">
+            <AppenderRef ref="om.lr"/>
+        </Logger>
+        <Logger name="om.event" level="info" additivity="false">
+            <AppenderRef ref="om.event"/>
+        </Logger>
+        <Logger name="om.iap" level="info" additivity="false">
+            <AppenderRef ref="om.iap"/>
+        </Logger>
+        <Logger name="om.ic" level="info" additivity="false">
+            <AppenderRef ref="om.ic"/>
+        </Logger>
+        <Logger name="om.error" level="info" additivity="false">
+            <AppenderRef ref="om.error"/>
+        </Logger>
+    </Loggers>
+</Configuration>
