@@ -5,8 +5,10 @@ package com.adtiming.om.server.service;
 
 import com.adtiming.om.server.dto.GeoData;
 import com.adtiming.om.server.dto.GeoDataMaxMind;
+import com.adtiming.om.server.util.RequestParamsUtil;
 import com.maxmind.geoip2.DatabaseReader;
 import com.maxmind.geoip2.exception.AddressNotFoundException;
+import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.AbstractCountryResponse;
 import com.maxmind.geoip2.model.CityResponse;
 import com.maxmind.geoip2.model.CountryResponse;
@@ -43,6 +45,20 @@ public class GeoService {
         Country, City;
     }
 
+    public static void main(String[] args) {
+        GeoService obj = new GeoService();
+        obj.init();
+        try {
+            InetAddress addr = InetAddress.getByName("117.22.228.66");
+            CountryResponse res = obj.dbReader.country(addr);
+            System.out.println(res);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (GeoIp2Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     @PostConstruct
     @Scheduled(cron = "0 5 13 * * ?")
     private synchronized void init() {
@@ -73,7 +89,7 @@ public class GeoService {
     }
 
     public GeoData getGeoData(HttpServletRequest req) {
-        String ip = getClientIP(req);
+        String ip = RequestParamsUtil.getClientIp(req);
         GeoDataMaxMind geo = new GeoDataMaxMind(ip);
         if (dbReader == null)
             return geo;
@@ -99,19 +115,6 @@ public class GeoService {
             LOG.error("get geo error", e);
         }
         return geo;
-    }
-
-    private String getClientIP(HttpServletRequest req) {
-        String clientIP = req.getHeader("X-Real-IP");
-        if (clientIP == null) {
-            clientIP = req.getRemoteAddr();
-        }
-        return clientIP;
-//        String xff = req.getHeader("X-Forwarded-For");
-//        if (StringUtils.isNotBlank(xff)) {
-//            return StringUtils.trim(xff.split(",")[0]);
-//        } else
-//            return remote_ip;
     }
 
     private String getCountry(AbstractCountryResponse res) {
