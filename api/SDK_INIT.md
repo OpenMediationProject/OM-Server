@@ -7,7 +7,7 @@
 
 ### https://om.adtiming.com/init 
 
-* POST 请求, 以下参数拼入url地址, 压缩内容放入 post body
+* POST, The following parameters are put into the url req, and request content should be compressed into post body
 
 | Name  |  Type	| Description	|Example| Required |
 | ------- | -------| ----- | ----| ------ |
@@ -16,17 +16,17 @@
 | sdkv | string | SDK Version Name| 1.0.1 |✔︎|
 | k | string | appKey| higNI1z4a5l94D3ucZRn5zNZa00NuDTq|✔︎|
 
-### 请求内容 json + gzip, 压缩前json数据格式如下
-* 对于所有参数值只有`0`和`1`的参数, 如果值是`0`, 则不需要上报
+### Request content is json + gzip, the json format as follow
+* For parameters those values are 0 and 1, if value is 0, no need to report
 
 | Name | Type | Description | Example | iOS | Android |
 | --- | ---| --- | --- | --- | --- |
 |...||<a href="SDK_COMMON.md#baserequestfields">BaseRequestFields</a>||✔︎|✔︎|
-| btime | int64 | 开机时间点,单位毫秒 | 1567479919643 |✔︎|✔︎|
-| ram | int64 | 总RAM大小, 单位B | 3456642 |✔︎|✔︎|
-| adns | Array of <a href='#adnetwork'>AdNetwork</a> | 已集成的AdNetwork集合 | |✔︎|✔︎|
-| ios| Object of <a href='#ios'>iOS</a> | iOS特有参数| |✔︎|✖︎|
-| android| Object of <a href='#android'>Android</a> | Android特有参数| |✖︎|✔︎|
+| btime | int64 | device boot time, millisecond | 1567479919643 |✔︎|✔︎|
+| ram | int64 | total RAM size, Byte | 3456642 |✔︎|✔︎|
+| adns | Array of <a href='#adnetwork'>AdNetwork</a> | integrated AdNetworks | |✔︎|✔︎|
+| ios| Object of <a href='#ios'>iOS</a> | iOS-specific parameters| |✔︎|✖︎|
+| android| Object of <a href='#android'>Android</a> | Android-specific parameters| |✖︎|✔︎|
 
 
 #### iOS
@@ -34,21 +34,21 @@
 | Name | Type | Description | Example | Required |
 | --- | ---| --- | --- | --- |
 | idfv | string | iOS IDFV |BBD6E1CD-8C4B-40CB-8A62-4BBC7AFE07D6 |✔︎|
-| cpu_type| string | CPU架构 |ARM64_V8|✔︎|
-| cpu_64bits| int32 | CPU架构是否64位,0:否,1:是 |1|✔︎|
-| cpu_count| int32 | CPU数量 |6︎|✔︎|
-| ui_width| int32 | UI宽,非屏幕像素宽 |375|✔︎|
-| ui_height| int32 | UI高,非屏幕像素高 |812|✔︎|
+| cpu_type| string | CPU Arch |ARM64_V8|✔︎|
+| cpu_64bits| int32 | CPU Arch 64-bit,0:否,1:是 |1|✔︎|
+| cpu_count| int32 | CPU numbers |6︎|✔︎|
+| ui_width| int32 | UI width, not with screen pixel |375|✔︎|
+| ui_height| int32 | UI height, not with screen pixel |812|✔︎|
 | ui_scale| float | ui_screen |3.0|✔︎|
-| hardware_name| string | 硬件名称 |D21AP︎|✔︎|
-| device_name| string | 设备名称 |Xiaoming De iPhone|✔︎|
+| hardware_name| string | hardware name |D21AP︎|✔︎|
+| device_name| string | device name |Xiaoming De iPhone|✔︎|
 | cf_network| string | | ︎758.1.6|✔︎|
-| darwin| string | Darwin 版本 |15.0.0 |✔︎|
-| ra| string | 网络制式 |CTRadioAccessTechnologyLTE︎|✔︎|
+| darwin| string | Darwin version |15.0.0 |✔︎|
+| ra| string | network format |CTRadioAccessTechnologyLTE︎|✔︎|
 | local_id| string | currentLocale.localeIdentifier |zh_CN︎|✔︎|
 | tz_ab| string | systemTimeZone.abbreviation |GMT+8︎|✔︎|
-| tdsg| string | 总容量GB |256|✔︎|
-| rdsg| string | 可用容量GB|62.18|✔︎|
+| tdsg| string | total storage, GB |256|✔︎|
+| rdsg| string | available storage, GB|62.18|✔︎|
 
 
 #### Android 
@@ -57,8 +57,8 @@
 | --- | ---| --- | --- | --- |
 | device | string | Build.DEVICE |lteub |✔︎|
 | product | string | Build.PRODUCT |a6plteub |✔︎|
-| screen_density| int32 | 像素密度. [0,1,2] |2|✔︎|
-| screen_size| int32 | 像素密度. [1,2,3,4] |2|✔︎|
+| screen_density| int32 | Pixel density. [0,1,2] |2|✔︎|
+| screen_size| int32 | Pixel size. [1,2,3,4] |2|✔︎|
 | cpu_abi| string |ro.product.cpu.abi |armeabi-v7a|✔︎|
 | cpu_abi2| string | ro.product.cpu.abi2|armeabi|✔︎|
 | cpu_abilist| string | ro.product.cpu.abilist | |✔︎|
@@ -67,8 +67,8 @@
 | api_level| int32 | Android API Level | 26 |✔︎|
 | d_dpi| int32 | DisplayMetrics.densityDpi |420 |✔︎|
 | dim_size| int32 |WebViewBridge.getScreenMetrics().size |2|✔︎|
-| xdp| string | x像素密度, DisplayMetrics.xdpi |268.941|✔︎|
-| ydp| string | y像素密度, DisplayMetrics.ydpi |268.694|✔︎|
+| xdp| string | x Pixel density, DisplayMetrics.xdpi |268.941|✔︎|
+| ydp| string | y Pixel density, DisplayMetrics.ydpi |268.694|✔︎|
 | dfpid| string | deviceFingerPrintId, getUniquePsuedoID | |✔︎|
 | time_zone| string | TimeZone.getDefault().getID() |Asia/Shanghai︎|✔︎|
 | arch| string | ro.arch| |✔︎|
@@ -88,11 +88,11 @@
 | build_user| string |ro.build.user | |✔︎|
 | kernel_qemu| string |ro.kernel.qemu | |✔︎|
 | hardware| string | ro.hardware| |✔︎|
-| sensor_size| int32 | 传感器数量 |18|✔︎|
-| sensors| Array of <a href='#sensor'>Sensor</a> |传感器列表||✔︎|
-| as| Object of <a href='#appsource'>AppSource</a> |app安装来源统计||✔︎|
+| sensor_size| int32 | sensor numbers |18|✔︎|
+| sensors| Array of <a href='#sensor'>Sensor</a> |sensor list||✔︎|
+| as| Object of <a href='#appsource'>AppSource</a> |app install source||✔︎|
 | fb_id| string | FacebookID | |✔︎|
-| tdm| int32 | 用户硬盘总容量, 单位M (不含SD Card) | 5837498317 |✔︎|
+| tdm| int32 | device total storage capacity, MB (without SD Card) | 5837498317 |✔︎|
 
 
 #### AdNetwork
@@ -108,7 +108,7 @@
 
 | Name | Type | Description | Example | Required |
 | --- | ---| --- | --- | --- |
-| sT | int32 | 传感器类型 | 2 | ✔︎ |
+| sT | int32 | sensor type | 2 | ✔︎ |
 | sV | string | | Invensense Inc.|✔︎|
 | sVE | Array of float | | [43.411255, 4.421997, 33.135986] |✔︎|
 | sVS | Array of float | | [43.411255, 4.421997, 33.135986] |✔︎|
@@ -118,20 +118,20 @@
 
 | Name | Type | Description | Example | Required |
 | --- | ---| --- | --- | --- |
-| os | int32 | 系统自带安装数量 | 126 | ✔︎ |
-| gp | int32 | GooglePlay 安装数量 | 35 |✔︎|
-| other | int32 | 非GooglePlay安装数量 | 14 |✔︎|
+| os | int32 | installs number from os | 126 | ✔︎ |
+| gp | int32 | installs number from GooglePlay | 35 |✔︎|
+| other | int32 | installs number not from GooglePlay | 14 |✔︎|
 
 
-### 返回内容 json + gzip, 压缩前json数据格式如下
+### response content with json + gzip, the json format as follow
 
 | Name | Type | Description | Example | Necessary |
 | --- | ---| --- | --- | --- |
-| d | int8 | debug 模式, 0关, 1开 | 1 | ✔︎ |
+| d | int8 | debug model, 0-close, 1-open | 1 | ✔︎ |
 | api | Object of <a href="#apis">APIs</a> | API URLs |  | ✔︎ |
-| events | Object of <a href="#events">Events</a> | 事件上报设置, 无值无需上报| |✖︎|
-| ms | Array of <a href="#mediation">Mediation</a> | Mediation 列表,<br> **SDK初始化和Load时, 不要全部Mediation做初始化, 原则是按需初始化** |  |✔︎|
-| pls | Array of <a href="#placement">Placement</a> | Placement 列表 |  |✔︎|
+| events | Object of <a href="#events">Events</a> | events need to report, events with no value have no need to report| |✖︎|
+| ms | Array of <a href="#mediation">Mediation</a> | Mediation list,<br> **when SDK initialization and load. Do not initial all mediations, The principle is to initialize on demand** |  |✔︎|
+| pls | Array of <a href="#placement">Placement</a> | Placement list |  |✔︎|
 
 #### APIs
 
@@ -145,15 +145,15 @@
 | er | string | Error API URL(`No need to report errors if url is empty`) | https://om.adtiming.com/er | ✖︎ |
 
 #### Events
-* 事件上报设置, 其中 ids 字段表示需要上报的事件集合, 如果为空则不需要上报
-* 事件上报有两种触发方式, `定量`(mn)和`定时`(ci). 无论哪种触发, 同时只做一个上报请求.
+* Event reporting settings, where the ids field indicates the set of events that need to be reported, and if empty, no reporting is required
+* There are two triggering methods for event reporting, `quantitative` (mn) and` timing` (ci). No matter which trigger, only one report request is made at the same time.
 
 | Name | Type | Description | Example | Necessary |
 | --- | ---| --- | --- | --- |
-| url | string | 上报地址 | https://om.adtiming.com/l | ✔︎ |
-| mn | int32 | maxNumOfEventsToUpload 最大打包上报事件数,队列长度达到mn时做一次上报| 5 |✔︎|
-| ci | int32 | checkInterval 定时检查事件队列间隔,单位秒,发现队列里有事件就做一次上报| 10 |✔︎|
-| ids | Array of <a href="SDK_EVENT.md#eventid" target="_eventid">EventID</a> | 需要上报的EventID列表| [100,101] |✖︎|
+| url | string | report url | https://om.adtiming.com/l | ✔︎ |
+| mn | int32 | maxNumOfEventsToUpload The maximum number of packet reporting events, once when the queue length reaches mn| 5 |✔︎|
+| ci | int32 | checkInterval Check the event queue interval regularly, in seconds, and report it once when there are events in the queue| 10 |✔︎|
+| ids | Array of <a href="SDK_EVENT.md#eventid" target="_eventid">EventID</a> | List of EventIDs to be reported| [100,101] |✖︎|
 
 #### Mediation
 
@@ -170,18 +170,18 @@
 | id | int32 | Placement ID | 2341 | ✔︎ |
 | t | int8 | <a href="SDK_COMMON.md#adtype" target="_blank">AdType</a>| 3 |✔︎|
 | main | int8 | Main Placement mark, 0:No, 1:Yes| 1 |✖︎|
-| fi | int32 | frequencryInterval 两次load间隔最小值, 单位秒 | 0 |✖︎|
-| fc | int32 | frequencryCap 0或无该属性不控制,n代表表示此广告位fu小时内该用户最多展示n次广告<br>(`仅限Banner&Native有效`)| 0 |✖︎|
-| fu | int32 | frequencryUnit, 修饰 fc 的时间间隔, 单位小时<br>(`仅限Banner&Native有效`)| 0 |✖︎|
-| scenes | Array of <a href="#scene">Scene</a> | Scene 列表||✔︎|
-| bs | int32 | batchSize, Instance 分组大小, 组内并行, 组间串行<br>(`仅限Banner&Native有效`)<br>Max Parallel load count. 加载广告 Instance 最大并行加载数 |2|✖︎|
-| fo | int8 | Fan Out 开关, 是否开启立即Ready模式 <br>(`仅限Banner&Native有效`)| 1 |✖︎|
-| pt | int32 | 加载超时时间, 加载时单个AdNetwork允许的最大时长, 单位秒 | 30 |✔︎|
-| cs | int8 | caches 库存大小, 缓存Ready的数量 | 3 |✔︎|
-| rf | int32 | refresh, RewardVideo定时自动刷新补库存间隔,单位秒| 30 |✖︎|
-| rlw | int32 | reload Waterfall, Banner展示状态下自动刷新间隔,单位秒|60 |✖︎|
-| hb | int8 | HeadBidding 开关, 0:关,1:开| 1 |✖︎|
-| ins | Array of <a href="#instance">Instance</a> | Instance 列表||✔︎|
+| fi | int32 | frequencryInterval, Minimum load interval in seconds | 0 |✖︎|
+| fc | int32 | frequencryCap, 0 or None This attribute means not controlled, n means that the user can show up to n ads in this ad placement within <fu> hours<br>(`Only valid for Banner & Native`)| 0 |✖︎|
+| fu | int32 | frequencryUnit, Time interval for parameter fc in hours<br>(`Only valid for Banner & Native`)| 0 |✖︎|
+| scenes | Array of <a href="#scene">Scene</a> | Scene list||✔︎|
+| bs | int32 | batchSize, Instance group size, means how many instances in a group.<br>(`Only valid for Banner & Native`)<br>Max Parallel load count. |2|✖︎|
+| fo | int8 | Fan Out switch, Whether to turn on the Ready mode immediately <br>(`Only valid for Banner & Native`)| 1 |✖︎|
+| pt | int32 | Load timeout, the maximum time allowed for a single AdNetwork during loading, in seconds | 30 |✔︎|
+| cs | int8 | caches, Inventory size, number of cached Ready | 3 |✔︎|
+| rf | int32 | refresh, RewardVideo&Interstitial Timed automatic refresh inventory replenishment interval in seconds| 30 |✖︎|
+| rlw | int32 | reload Waterfall, Banner auto refresh interval in display state, unit is second|60 |✖︎|
+| hb | int8 | HeadBidding switch, 0:close,1:open| 1 |✖︎|
+| ins | Array of <a href="#instance">Instance</a> | Instance list||✔︎|
 
 #### Scene
 
@@ -189,9 +189,9 @@
 | --- | ---| --- | --- | --- |
 | id | int32 | Scene ID | 0 | ✔︎ |
 | n | string | Scene Name| Default |✔︎|
-| isd | int8 | isDefault 是否是默认Scene| 1 |✖︎|
-| fc | int32 | frequencry_cap 0或无该属性不控制,n代表表示此广告位fu小时内该用户最多展示n次广告| 0 |✖︎|
-| fu | int32 | frequencry_unit, 修饰 fc 的时间间隔, 单位小时| 0 |✖︎|
+| isd | int8 | isDefault, whether default Scene| 1 |✖︎|
+| fc | int32 | frequencry_cap, 0 or no this attribute means no control, n means that this user can show up to n ads at most within <fu> hour| 0 |✖︎|
+| fu | int32 | frequencry_unit, Time interval for parameter fc in hours| 0 |✖︎|
 
 #### Instance
 
@@ -200,11 +200,11 @@
 | id | int32 | Instance ID | 2341 | ✔︎ |
 | m | int32 | <a href="SDK_COMMON.md#adnetwork">AdNetwork ID</a>| 2 |✔︎|
 | k | string | Mediation Placement ID/Key/ZoneId|  |✔︎|
-| fc | int32 | frequencry_cap 0或无该属性不控制，n代表表示此广告位fu小时内该用户最多展示n次广告| 0 |✖︎|
-| fu | int32 | frequencry_unit, 修饰 fc 的时间间隔, 单位小时| 0 |✖︎|
-| fi | int32 | frequencry_interval 两次load间隔最小值, 单位秒| 2 |✖︎|
-| hb | int8 | HeadBidding 开关, 0:关,1:开| 1 |✖︎|
-| hbt | int32 | HeadBidding 超时时长,单位毫秒; 注:`如果值小于1000, 默认取5000`| 3000 |✖︎|
+| fc | int32 | frequencry_cap, 0 or no this attribute means no control, n means that this user can show up to n ads at most within <fu> hour| 0 |✖︎|
+| fu | int32 | frequencry_unit, Time interval for parameter fc in hours| 0 |✖︎|
+| fi | int32 | frequencry_interval, Minimum load interval in seconds| 2 |✖︎|
+| hb | int8 | HeadBidding switch, 0:close,1:open| 1 |✖︎|
+| hbt | int32 | HeadBidding Timeout duration in milliseconds; Note: `If the value is less than 1000, the default is 5000`| 3000 |✖︎|
 
 
 #### Response JSON Example
