@@ -45,7 +45,7 @@ public class GeoService {
         Country, City;
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         GeoService obj = new GeoService();
         obj.init();
         try {
@@ -57,7 +57,7 @@ public class GeoService {
         } catch (GeoIp2Exception e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     @PostConstruct
     @Scheduled(cron = "0 5 13 * * ?")
@@ -74,6 +74,7 @@ public class GeoService {
         } else {
             dbType = DBType.City;
         }
+        LOG.debug("GeoIP2 database{}", database.getName());
         try (InputStream in = new GZIPInputStream(new FileInputStream(database))) {
             // This creates the DatabaseReader object. To improve performance, reuse
             // the object across lookups. The object is thread-safe.
