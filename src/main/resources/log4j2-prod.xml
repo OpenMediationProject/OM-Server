@@ -3,7 +3,7 @@
     <Appenders>
         <RollingFile name="Console" fileName="log/stdout.log" filePattern="log/stdout.%d{yyyyMMdd}.log.gz">
             <PatternLayout
-                    pattern="%style{%d{yyyy-MM-dd HH:mm:ss.SSS}}{magenta} [%style{%t}{blue}] %highlight{%-5level} %style{%logger{36}}{cyan} - %msg%n"/>
+                    pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
             </Policies>
