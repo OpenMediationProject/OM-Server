@@ -16,6 +16,7 @@ ADD rsync /bin/
 ADD nginx/ /usr/local/nginx/
 COPY --from=builder ${GET_BUILDER_DIR}/target/${SERVERNAME}.jar /${SERVERNAME}/
 WORKDIR /
+RUN chmod +x /docker-entrypoint.sh /bin/rsync /usr/local/nginx/sbin/nginx /${SERVERNAME}/${SERVERNAME}.jar
 HEALTHCHECK --interval=30s --timeout=3s \
   CMD curl -f http://localhost:19011/ || exit 1
 EXPOSE 19011 80 443
