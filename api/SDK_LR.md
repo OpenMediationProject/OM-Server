@@ -1,4 +1,4 @@
-## SDK lr 接口文档
+## SDK lr Interface
 
 ### API History
 |Version|Description|
@@ -6,9 +6,9 @@
 | 1 | API URL from /init Response |
 
 
-接口用于sdk Load和Ready的计数上报, 返回http 状态 200 为成功, 非200为失败, 无返回body 失败无需重发
+This interface is used to report the counts of sdk load and ready. It returns http status 200 indicates success, non-200 indicates failure. If no body is returned, no resend is required.
 
-### POST 请求, 以下参数拼入url地址, 加密内容放入post body
+### POST request, the following parameters are spelled into the url address, the encrypted content is put into the post body
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
@@ -17,30 +17,30 @@
 | sdkv | string | SDK Version Name |1.0.1| ✔︎|
 
 
-### 请求内容 json + gzip 结构, 压缩前json数据格式如下
-* 对于所有参数值只有`0`和`1`的参数, 如果值是`0`, 则不需要上报
+### The request content is a json + gzip structure.The format of the json data before compression is as follows
+* For all parameters whose parameter values are only `0` and` 1`, if the value is `0`, you do not need to report
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
 |...||<a href="SDK_COMMON.md#baserequestfields">BaseRequestFields</a>||✔︎|
 | type | int32 | <a href="#type">Type</a>|3|︎✔︎|
-| pid | int32 | 广告位ID | 2345|✔︎|
+| pid | int32 | Placement ID | 2345|✔︎|
 | mid | int32 | <a href="SDK_COMMON.md#adnetwork">AdNetwork ID</a> | 1|✔︎|
 | iid | int32 | InstanceID | 1111|✔︎|
-| act | int8 | 加载请求触发类型, [1:init,2:interval,3:adclose,4:manual] |3|✔︎|
+| act | int8 | Trigger type for loading ads, [1:init,2:interval,3:adclose,4:manual] |3|✔︎|
 | scene | int32 | sceneID |1123|✖︎|
 | abt | int32 | ABTest Mode | 0 |✖︎|
 
 
-* Resp, 空Body, 以 http 状态码 200 为成功
+* Resp, Body is empty, Success with http status code=200
 
 
 #### Type
 
 |Value|Description|
 | --- | ---| 
-| 1 | Init (无需上报, 取自 init 接口)|
-| 2 | TYPE\_WATERFALL\_REQUEST (无需上报, 取自wf接口)|
+| 1 | Init (No need to report, taken from init interface)|
+| 2 | TYPE\_WATERFALL\_REQUEST (No need to report, taken from wf interface)|
 | 3 | TYPE\_WATERFALL\_FILLED |
 | 4 | TYPE\_INSTANCE\_REQUEST |
 | 5 | TYPE\_INSTANCE\_FILLED |
