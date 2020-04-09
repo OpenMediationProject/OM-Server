@@ -136,7 +136,7 @@ do
             loginfo_note "[Configuring] ${item_name} in /usr/local/nginx/conf/nginx.conf"
             sed -i "/log_format/i\    real_ip_header    X-Real-IP;" /usr/local/nginx/conf/nginx.conf
             sed -i "/real_ip_header/a\    real_ip_recursive on;" /usr/local/nginx/conf/nginx.conf
-            proxy_ip=$(echo ${!env_var}|sed "s/,/ /g")
+            proxy_ip=$(echo ${!env_var}|sed "s@,@\n@g")
             for ip in ${proxy_ip}
             do
                sed -i "/real_ip_header/i\    set_real_ip_from ${ip};"  /usr/local/nginx/conf/nginx.conf
