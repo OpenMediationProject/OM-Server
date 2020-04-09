@@ -15,7 +15,7 @@ server:
     max-threads: 1000
     accept-count: 500
     accesslog:
-      directory: log
+      directory: /data/om-server/log
       enabled: true
       file-date-format: .yyyyMMdd.HH
       buffered: true
