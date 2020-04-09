@@ -2,6 +2,7 @@ FROM adtiming/omjava
 MAINTAINER openmediation
 ENV SYSTEMNAME "omsystem"
 ENV SERVERNAME "om-server"
+ENV OMCONF_JAVA_OPTS "-Dapp.snode=1 -Dapp.dcenter=1 -Dapp.dtask=192.168.1.58"
 RUN mkdir ${SERVERNAME}
 ARG JAR_FILE
 ADD docker/docker-entrypoint.sh /
