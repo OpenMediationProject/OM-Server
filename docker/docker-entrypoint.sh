@@ -130,7 +130,7 @@ MODE=service
 APP_NAME=${CONFILE}
 JAVA_HOME=/usr/local/java/jdk
 JAVA_OPTS="-Dapp=\$APP_NAME\
- -Duser.timezone=UTC+8\
+ -Duser.timezone=GMT+08\
  -Xmx${OMJAVA_MAX_MEM}\
  -Xms${OMJAVA_MAX_MEM}\
  -server"
