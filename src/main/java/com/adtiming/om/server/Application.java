@@ -41,7 +41,7 @@ public class Application {
     public NodeConfig nc(@Autowired AppConfig cfg,
                          @Autowired ObjectMapper objectMapper) {
         try {
-            String url = String.format("http://%s:19012/snode/config/get?id=%d&dcenter=%d", cfg.getDtask(), cfg.getSnode(), cfg.getDcenter());
+            String url = String.format("http://%s/snode/config/get?id=%d&dcenter=%d", cfg.getDtask(), cfg.getSnode(), cfg.getDcenter());
             NodeConfig nc = objectMapper.readValue(new URL(url), NodeConfig.class);
             LOG.info(nc);
             return nc;

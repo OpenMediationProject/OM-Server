@@ -3,6 +3,7 @@ app:
   dcenter: 1
   snode: 1
   dtask: replace_to_dtask_host
+#  cache: /data/om-dtask/cache
 
 logging:
   config: classpath:log4j2-prod.xml
