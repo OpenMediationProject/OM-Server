@@ -31,7 +31,7 @@ JAVA_OPTS="-Dapp=$APP_NAME\
  -Dapp.snode=1\
  -Dapp.dcenter=1\
  -Dapp.dtask=replace_dtask_host\
- -Duser.timezone=UTC\
+ -Duser.timezone=UTC+8\
  -Xmx5g\
  -Xms2g\
  -server"
