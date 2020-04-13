@@ -84,6 +84,10 @@ public class LogService {
      * put log to aws s3 bucket hourly
      */
     @Scheduled(cron = "0 2 * * * ?")
+    public void awsS3Push() {
+        this.awsS3Push(LocalDateTime.now().plusHours(-1));
+    }
+
     public void awsS3Push(LocalDateTime lastHour) {
         if (!awsClient.isEnabled())
             return;
