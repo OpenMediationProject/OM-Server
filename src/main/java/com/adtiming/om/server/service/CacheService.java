@@ -108,7 +108,7 @@ public class CacheService {
         if (!cacheDir.exists() && cacheDir.mkdir())
             LOG.debug("mkdir {}", cacheDir);
         rsyncCache();
-//        geoService.init();
+        geoService.init();
         reloadCache();
     }
 

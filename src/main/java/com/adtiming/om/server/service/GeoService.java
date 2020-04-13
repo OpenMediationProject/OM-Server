@@ -61,7 +61,6 @@ public class GeoService {
         }
     }*/
 
-    @PostConstruct
     @Scheduled(cron = "0 5 13 * * ?")
     public synchronized void init() {
         try {
