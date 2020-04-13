@@ -58,8 +58,11 @@ public class GeoService {
             e.printStackTrace();
         }
     }*/
-
     @PostConstruct
+    public synchronized void initStart() {
+        this.init();
+    }
+
     @Scheduled(cron = "0 5 13 * * ?")
     private synchronized void init() {
         // A File object pointing to your GeoIP2 or GeoLite2 database

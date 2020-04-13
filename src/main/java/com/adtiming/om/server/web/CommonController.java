@@ -26,7 +26,7 @@ public class CommonController {
     }
 
     @GetMapping("/s3/exec/{year}/{month}/{day}/{startHour}/{endHour}")
-    public ResponseEntity<?> execS3Push(@PathVariable Integer year,
+    public ResponseEntity<String> execS3Push(@PathVariable Integer year,
                                         @PathVariable Integer month,
                                         @PathVariable Integer day,
                                         @PathVariable Integer startHour,
@@ -38,6 +38,6 @@ public class CommonController {
             logService.awsS3Push(startTime);
             startTime = startTime.plusHours(1);
         }
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body("执行完成");
     }
 }
