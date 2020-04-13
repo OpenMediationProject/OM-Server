@@ -65,6 +65,7 @@ public class GeoService {
 
     @Scheduled(cron = "0 5 13 * * ?")
     private synchronized void init() {
+        LOG.debug("start init GeoIP2...");
         // A File object pointing to your GeoIP2 or GeoLite2 database
         File database = new File("cache/GeoIP2-City.mmdb.gz");
         if (!database.exists()) {
