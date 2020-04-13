@@ -12,6 +12,7 @@ import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.AbstractCountryResponse;
 import com.maxmind.geoip2.model.CityResponse;
 import com.maxmind.geoip2.model.CountryResponse;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -58,38 +60,39 @@ public class GeoService {
             e.printStackTrace();
         }
     }*/
-    @PostConstruct
-    public synchronized void initStart() {
-        this.init();
-    }
 
+    @PostConstruct
     @Scheduled(cron = "0 5 13 * * ?")
-    private synchronized void init() {
-        LOG.debug("start init GeoIP2...");
-        // A File object pointing to your GeoIP2 or GeoLite2 database
-        File database = new File("cache/GeoIP2-City.mmdb.gz");
-        if (!database.exists()) {
-            database = new File("cache/GeoIP2-Country.mmdb.gz");
+    public synchronized void init() {
+        try {
+            LOG.debug("start init GeoIP2...");
+            // A File object pointing to your GeoIP2 or GeoLite2 database
+            File database = new File("cache/GeoIP2-City.mmdb.gz");
             if (!database.exists()) {
-                return;
+                database = new File("cache/GeoIP2-Country.mmdb.gz");
+                if (!database.exists()) {
+                    return;
+                } else {
+                    dbType = DBType.Country;
+                }
             } else {
-                dbType = DBType.Country;
+                dbType = DBType.City;
             }
-        } else {
-            dbType = DBType.City;
-        }
-        LOG.debug("GeoIP2 database{}", database.getName());
-        try (InputStream in = new GZIPInputStream(new FileInputStream(database))) {
-            // This creates the DatabaseReader object. To improve performance, reuse
-            // the object across lookups. The object is thread-safe.
-            DatabaseReader oldIpReader = dbReader;
-            dbReader = new DatabaseReader.Builder(in).build();
-            if (oldIpReader != null) {
-                oldIpReader.close();
+            LOG.debug("GeoIP2 database{}", database.getName());
+            try (InputStream in = new GZIPInputStream(new FileInputStream(database))) {
+                // This creates the DatabaseReader object. To improve performance, reuse
+                // the object across lookups. The object is thread-safe.
+                DatabaseReader oldIpReader = dbReader;
+                dbReader = new DatabaseReader.Builder(in).build();
+                if (oldIpReader != null) {
+                    oldIpReader.close();
+                }
+                LOG.info("init GeoIP2, {}", dbReader.getMetadata());
+            } catch (IOException e) {
+                LOG.error("init GeoIP2 error", e);
             }
-            LOG.info("init GeoIP2, {}", dbReader.getMetadata());
-        } catch (IOException e) {
-            LOG.error("init GeoIP2 error", e);
+        } catch (Exception e) {
+            LOG.error("init GeoIP error", e);
         }
     }
 

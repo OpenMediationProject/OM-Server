@@ -34,6 +34,8 @@ public class CacheService {
 
     @Resource
     private AppConfig appConfig;
+    @Resource
+    private GeoService geoService;
 
     private final File cacheDir = new File("cache");
 
@@ -106,6 +108,7 @@ public class CacheService {
         if (!cacheDir.exists() && cacheDir.mkdir())
             LOG.debug("mkdir {}", cacheDir);
         rsyncCache();
+//        geoService.init();
         reloadCache();
     }
 
