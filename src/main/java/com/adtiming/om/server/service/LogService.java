@@ -5,6 +5,7 @@ package com.adtiming.om.server.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.logging.log4j.LogManager;
@@ -13,6 +14,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -82,19 +84,21 @@ public class LogService {
      * put log to aws s3 bucket hourly
      */
     @Scheduled(cron = "0 2 * * * ?")
-    public void awsS3Push() {
+    public void awsS3Push(LocalDateTime lastHour) {
         if (!awsClient.isEnabled())
             return;
         LOG.info("awsS3Push start");
         long allStart = System.currentTimeMillis();
 
-        LocalDateTime lastHour = LocalDateTime.now().plusHours(-1);
+        if (lastHour == null) {
+            lastHour = LocalDateTime.now().plusHours(-1);
+        }
         String keyTimePath = DateTimeFormatter.ofPattern("yyyy/MM/dd/HH").format(lastHour);
         String fileNameTimePart = DateTimeFormatter.ofPattern("yyyy-MM-dd.HH").format(lastHour);
 
         for (String name : LOG_NAMES) {
             String fileNamePrefix = name + '.' + fileNameTimePart;
-            File file = new File("data", fileNamePrefix + ".log.gz");
+            File file = new File("/data/om-server/data", fileNamePrefix + ".log.gz");
             if (!file.exists()) {
                 LOG.warn("file not found: {}", file);
                 continue;
