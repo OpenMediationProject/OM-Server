@@ -70,6 +70,7 @@ public class GeoService {
             if (!database.exists()) {
                 database = new File("cache/GeoIP2-Country.mmdb.gz");
                 if (!database.exists()) {
+                    LOG.error("GeoIP database not found");
                     return;
                 } else {
                     dbType = DBType.Country;
