@@ -2,6 +2,8 @@ package com.adtiming.om.server.web;
 
 import com.adtiming.om.server.service.LogService;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +22,7 @@ import java.time.LocalDateTime;
 public class CommonController {
 
     private final LogService logService;
+    private static final Logger LOG = LogManager.getLogger();
 
     public CommonController(LogService logService) {
         this.logService = logService;
@@ -34,6 +37,8 @@ public class CommonController {
     ) {
         LocalDateTime startTime = LocalDateTime.of(year, month, day, startHour, 0);
         LocalDateTime endTime = LocalDateTime.of(year, month, day, endHour, 0);
+        LOG.info("startTime:{}", startTime);
+        LOG.info("endTime:{}", endTime);
         while (startTime.compareTo(endTime) <= 0) {
             logService.awsS3Push(startTime);
             startTime = startTime.plusHours(1);

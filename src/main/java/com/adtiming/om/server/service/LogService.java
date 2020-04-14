@@ -62,7 +62,7 @@ public class LogService {
     private void gzipAccessLogHourly() {
         LOG.info("gzip access log start");
         try {
-            String[] cmd = {"bash", "-c", "cd log; ls access.*.log|xargs gzip"};
+            String[] cmd = {"bash", "-c", "cd /data/om-server/log; ls access.*.log|xargs gzip"};
             Process p = new ProcessBuilder(cmd).redirectErrorStream(true).start();
             IOUtils.copy(p.getInputStream(), System.out);
             LOG.info("gzip access log finished {}", p.waitFor());
@@ -83,7 +83,7 @@ public class LogService {
     /**
      * put log to aws s3 bucket hourly
      */
-    @Scheduled(cron = "0 2 * * * ?")
+    @Scheduled(cron = "0 4 * * * ?")
     public void awsS3Push() {
         this.awsS3Push(LocalDateTime.now().plusHours(-1));
     }
