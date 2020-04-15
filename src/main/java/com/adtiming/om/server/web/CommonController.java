@@ -30,11 +30,15 @@ public class CommonController {
 
     @GetMapping("/s3/exec/{year}/{month}/{day}/{startHour}/{endHour}")
     public ResponseEntity<String> execS3Push(@PathVariable Integer year,
-                                        @PathVariable Integer month,
-                                        @PathVariable Integer day,
-                                        @PathVariable Integer startHour,
-                                        @PathVariable Integer endHour
+                                             @PathVariable Integer month,
+                                             @PathVariable Integer day,
+                                             @PathVariable Integer startHour,
+                                             @PathVariable Integer endHour,
+                                             String secret
     ) {
+        if (!"qpJUqiK4j8Dtxb".equals(secret)) {
+            return ResponseEntity.ok().body("执行失败S");
+        }
         LocalDateTime startTime = LocalDateTime.of(year, month, day, startHour, 0);
         LocalDateTime endTime = LocalDateTime.of(year, month, day, endHour, 0);
         LOG.info("startTime:{}", startTime);
