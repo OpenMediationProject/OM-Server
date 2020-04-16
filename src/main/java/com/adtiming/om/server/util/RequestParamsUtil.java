@@ -2,6 +2,7 @@ package com.adtiming.om.server.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,7 +18,6 @@ public class RequestParamsUtil {
             "X-Forwarded-For",
             "Proxy-Client-IP",
             "WL-Proxy-Client-IP",
-            "Ali-CDN-Real-IP",
             "HTTP_CLIENT_IP",
             "HTTP_X_FORWARDED_FOR",
             "REMOTE_ADDR",
@@ -28,26 +28,26 @@ public class RequestParamsUtil {
             "HTTP_FORWARDED",
             "HTTP_VIA"
     };
+    private static final String CDN_HEADER = "Ali-CDN-Real-IP";
 
     /***     * 获取客户端ip地址(可以穿透代理)     * @param request     * @return     */
     public static String getClientIp(HttpServletRequest request) {
-        String ip = null;
-        for (String header : HEADERS_TO_TRY) {
-            log.debug(header + ": " + request.getHeader(header));
-        }
-        for (String header : HEADERS_TO_TRY) {
-            ip = request.getHeader(header);
-            if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {
-                break;
+        String ip = request.getHeader(CDN_HEADER);
+        if (!StringUtils.hasText(ip)) {
+            for (String header : HEADERS_TO_TRY) {
+                ip = request.getHeader(header);
+                if (ip != null && ip.length() != 0 && !"unknown".equalsIgnoreCase(ip)) {
+                    break;
+                }
             }
         }
         //"***.***.***.***".length() = 15
-        if (ip != null && ip.length() > 15) {
+        if (StringUtils.hasText(ip) && ip.length() > 15) {
             if (ip.indexOf(",") > 0) {
                 ip = ip.substring(0, ip.indexOf(","));
             }
         }
-        return ip == null ? request.getRemoteAddr() : ip;
+        return StringUtils.hasText(ip) ? ip : request.getRemoteAddr();
     }
 
 }
