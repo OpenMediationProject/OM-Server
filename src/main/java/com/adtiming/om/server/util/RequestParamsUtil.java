@@ -17,6 +17,7 @@ public class RequestParamsUtil {
             "X-Forwarded-For",
             "Proxy-Client-IP",
             "WL-Proxy-Client-IP",
+            "Ali-CDN-Real-IP",
             "HTTP_CLIENT_IP",
             "HTTP_X_FORWARDED_FOR",
             "REMOTE_ADDR",
@@ -32,7 +33,7 @@ public class RequestParamsUtil {
     public static String getClientIp(HttpServletRequest request) {
         String ip = null;
         for (String header : HEADERS_TO_TRY) {
-            log.debug(request.getHeader(header));
+            log.debug(header + ": " + request.getHeader(header));
         }
         for (String header : HEADERS_TO_TRY) {
             ip = request.getHeader(header);
