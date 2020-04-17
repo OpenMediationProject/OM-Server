@@ -6,9 +6,9 @@
 | 1 | API URL from /init Response |
 
 
-* wf接口用于sdk获取waterfall顺序, 返回http 状态 200 为成功, 非200为失败
+* The wf interface is used for SDK to obtain waterfall sequence, return http status 200 for success, non 200 for failure
 
-### POST 请求, 以下参数拼入url地址
+### POST request, the following parameters are spelled into the url address
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- |---|
@@ -16,16 +16,16 @@
 | plat | int32 | Platform, 0:iOS,1:Android|1| ✔︎|
 | sdkv | string | SDK Version Name |1.0.1| ✔︎|
 
-### 请求内容 json + gzip + aes 结构, 压缩加密前json数据格式如下
-* 对于所有参数值只有`0`和`1`的参数, 如果值是`0`, 则不需要上报
+### The request content is a json + gzip + aes structure.The format of the json data before compression and encryption is as follows
+* For parameters whose parameter values are only `0` and` 1`, if the value is `0`, you do not need to report
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
 |...||<a href="SDK_COMMON.md#baserequestfields">BaseRequestFields</a>||✔︎|
-| pid | int32 | 广告位ID | 2345|✔︎|
+| pid | int32 | Placement ID | 2345|✔︎|
 | iap | float | IAP, inAppPurchase |1|✖︎|
-| `imprTimes` | int32 | placementImprTimes 用户当天该广告位展示次数|5|✖︎|
-| act | int8 | 加载请求触发类型, [1:init,2:interval,3:adclose,4:manual] |3|✔︎|
+| `imprTimes` | int32 | placementImprTimes The number of times the placement was displayed by the user on that day|5|✖︎|
+| act | int8 | Trigger type for loading ads, [1:init,2:interval,3:adclose,4:manual] |3|✔︎|
 | bid | Array of <a href="#biddingresponse">BiddingResponse</a> | HeadBidding Response ||✖︎|
 
 ### BiddingResponse
@@ -37,7 +37,7 @@
 | cur | string | Currency Unit, default USD | USD |✖︎|
 
 
-### 返回内容 json + gzip, 压缩前json数据格式如下
+### The returned content is a json + gzip structure.The format of the json data before compression is as follows
 
 | Name | Type | Description | Example | Necessary |
 | --- | ---| --- | --- | --- |

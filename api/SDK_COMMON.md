@@ -2,7 +2,7 @@
 
 
 ### BaseRequestFields
-* 对于所有参数值只有`0`和`1`的参数, 如果值是`0`, 则不需要上报
+* For the parameters those values are only 0 and 1, if value is 0,  no need to report.
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
@@ -25,16 +25,16 @@
 | osv | string | OS Version | 12.1 |✔︎|
 | build| string | build number, Android: ro.build.display.id |16A366|✔︎|
 | appv | string | App Version Name | 1.0|✔︎|
-| width| int32 | 广告位或屏幕宽度 |1028 |✔︎|
-| height| int32 | 广告位或屏幕高度|2094|✔︎|
+| width| int32 | width of placement or screen |1028 |✔︎|
+| height| int32 | height of placement or screen|2094|✔︎|
 | contype | int32 | <a href="#connectiontype" target="_contype">ConnectionType</a>| 4|✔︎|
-| carrier | string | NetworkOperatorName with mccmnc | 46002中国移动 |✔︎|
+| carrier | string | NetworkOperatorName with mccmnc | 46002China Mobile |✔︎|
 | lip | string| Local ip | 192.168.1.101 |✖︎|
 | lcountry | string| [[NSLocale currentLocale]localeIdentifier], Locale.getCountry() | CN |✔︎|
 | fm|int32|Free hard disk space, unit M|17799 |✔︎|
-| battery| int32| 剩余电量百分比 | 52 |✔︎|
-| btch| int8| 是否充电中, 0:否,1:是 | 1 |✖︎|
-| lowp| int8| 是否低电量模式, 0:否,1:是 |0|✖︎|
+| battery| int32| Remaining battery percentage | 52 |✔︎|
+| btch| int8| whether charging, 0:否,1:是 | 1 |✖︎|
+| lowp| int8| Whether low battery mode, 0:否,1:是 |0|✖︎|
 
 
 #### ConnectionType
@@ -55,36 +55,36 @@
 
 #### Currency
 
-| 序号 |     币种名称  |  缩写	|
+| No |     currency  |  abbr	|
 | ---- | ------------- | ------- |
-| 1 | 人民币| CNY |
-| 2 | 美元 | USD |
-| 3 | 日元 | JPY |
-| 4 | 欧元 | EUR |
-| 5 | 英镑 | GBP |
-| 6 | 德国马克 | DEM |
-| 7 | 瑞士法郎 | CHF |
-| 8 | 法国法郎 | FRF |
-| 9 | 加拿大元 | CAD |
-| 10 | 澳大利亚元 | AUD |
-| 11 | 港币 | HKD |
-| 12 | 奥地利先令 | ATS |
-| 13 | 芬兰马克 | FIM |
-| 14 | 比利时法郎 | BEF |
-| 15 | 爱尔兰镑 | IEP |
-| 16 | 意大利里拉 | ITL |
-| 17 | 卢森堡法郎 | LUF |
-| 18 | 荷兰盾 | NLG |
-| 19 | 葡萄牙埃斯库多 | PTE |
-| 20 | 西班牙比塞塔 | ESP |
-| 21 | 印尼盾 | IDR |
-| 22 | 马来西亚林吉特 | MYR |
-| 23 | 新西兰元 | NZD |
-| 24 | 菲律宾比索 | PHP |
-| 25 | 俄罗斯卢布 | RUB |
-| 26 | 新加坡元 | SGD |
-| 27 | 韩国元 | KRW |
-| 28 | 泰铢 | THB | 
+| 1 | RMB| CNY |
+| 2 | US Dollar | USD |
+| 3 | Japan Yuan | JPY |
+| 4 | euro | EUR |
+| 5 | British Pound | GBP |
+| 6 | Deutsche Mark | DEM |
+| 7 | Swiss Franc | CHF |
+| 8 | French Franc | FRF |
+| 9 | Canadian dollar | CAD |
+| 10 | Australian dollar | AUD |
+| 11 | Hong Kong dollar | HKD |
+| 12 | Austrian shilling | ATS |
+| 13 | Finnish mark | FIM |
+| 14 | Belgian Franc | BEF |
+| 15 | Irish Pound | IEP |
+| 16 | Italian lira | ITL |
+| 17 | Luxembourg Franc | LUF |
+| 18 | Netherlands Guilder | NLG |
+| 19 | Escudo, Portugal | PTE |
+| 20 | Peseta, Spain | ESP |
+| 21 | Indonesian rupiah | IDR |
+| 22 | Malaysian Ringgit | MYR |
+| 23 | New Zealand dollar | NZD |
+| 24 | Philippine Peso | PHP |
+| 25 | Russian ruble | RUB |
+| 26 | Singapore dollar | SGD |
+| 27 | South Korean won | KRW |
+| 28 | Thai Baht | THB | 
 
 
 #### AdType

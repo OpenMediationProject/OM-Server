@@ -1,4 +1,4 @@
-## SDK iap 接口文档
+## SDK iap Interface
 
 ### API History
 |Version|Description|
@@ -6,9 +6,9 @@
 | 1 | API URL from /init Response |
 
 
-接口用于 app内付费信息上报
+This interface is used to report in-app payment information
 
-### POST 请求, 以下参数拼入url地址, 加密内容放入post body
+### POST request, the following parameters are spelled into the url address, the encrypted content is put into the post body
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
@@ -17,21 +17,21 @@
 | sdkv | string | SDK Version Name |1.0.1| ✔︎|
 | k | string | appKey| higNI1z4a5l94D3ucZRn5zNZa00NuDTq|✔︎|
 
-### 请求内容 json + gzip 结构, 压缩前json数据格式如下
+### The request content is a json + gzip structure.The format of the json data before compression is as follows
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
 |...||<a href="SDK_COMMON.md#baserequestfields">BaseRequestFields</a>||✔︎|
 | cur | string | Currency Unit | USD |✖︎|
-| iap | float | iap金额 | 2.5 |✔︎|
-| iapt | float | iap总金额 | 312.8 |✔︎|
+| iap | float | iap amount | 2.5 |✔︎|
+| iapt | float | iap total amount | 312.8 |✔︎|
 
 
-### 返回内容 json + gzip, 压缩前json数据格式如下
+### The returned content is a json + gzip structure.The format of the json data before compression is as follows
 
 | Name | Type | Description | Example | Necessary |
 | --- | ---| --- | --- | --- |
-| iapUsd | float | iap总金额,单位USD | 315.9 | ✔︎ |
+| iapUsd | float | iap total amount in USD | 315.9 | ✔︎ |
 
 
 
