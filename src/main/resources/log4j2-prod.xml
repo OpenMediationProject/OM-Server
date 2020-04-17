@@ -8,11 +8,11 @@
                 <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
             </Policies>
             <DefaultRolloverStrategy>
-                <Delete basePath="data" maxDepth="1">
+                <Delete basePath="/data/om-server/data" maxDepth="1">
                     <IfFileName glob="*.log.gz"/>
-                    <IfLastModified age="7d"/>
+                    <IfLastModified age="3d"/>
                 </Delete>
-                <Delete basePath="log" maxDepth="1">
+                <Delete basePath="/data/om-server/log" maxDepth="1">
                     <IfFileName glob="*.log.gz"/>
                     <IfLastModified age="7d"/>
                 </Delete>
