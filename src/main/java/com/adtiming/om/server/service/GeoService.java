@@ -16,7 +16,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileInputStream;
@@ -43,9 +42,8 @@ public class GeoService {
         Country, City;
     }
 
-    @PostConstruct
     @Scheduled(cron = "0 5 13 * * ?")
-    private synchronized void init() {
+    protected synchronized void init() {
         // A File object pointing to your GeoIP2 or GeoLite2 database
         File database = new File("cache/GeoIP2-City.mmdb.gz");
         if (!database.exists()) {
