@@ -1,4 +1,4 @@
-## SDK error 接口文档
+## SDK error Interface
 
 ### API History
 |Version|Description|
@@ -6,9 +6,9 @@
 | 1 | API URL from /init Response |
 
 
-接口用于 错误日志上报
+This interface is used to report error logs
 
-### POST 请求, 以下参数拼入url地址, 加密内容放入post body
+### POST request, the following parameters are spelled into the url address, the encrypted content is put into the post body
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
@@ -18,18 +18,18 @@
 | k | string | appKey| higNI1z4a5l94D3ucZRn5zNZa00NuDTq|✔︎|
 
 
-### 请求内容 json + gzip 结构, 压缩前json数据格式如下
+### The request content is a json + gzip structure.The format of the json data before compression is as follows
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
 |...||<a href="SDK_COMMON.md#baserequestfields">BaseRequestFields</a>||✔︎|
-| pid | int32 | 广告位ID | 2345|✖︎|
+| pid | int32 | Placement ID | 2345|✖︎|
 | mid | int32 | <a href="SDK_COMMON.md#adnetwork">AdNetwork ID</a> | 1|✖︎|
 | iid | int32 | InstanceID | 1111|✖︎|
 | scene | int32 | sceneID |1123|✖︎|
-| tag | string | 错误标签 ||✔︎|
-| error | string | 错误信息 ||✔︎|
+| tag | string | Error tag ||✔︎|
+| error | string | Error information ||✔︎|
 
 
-* Resp, 空Body, 以 http 状态码 200 为成功
+* Resp, Body is empty, success with http status code=200
 
