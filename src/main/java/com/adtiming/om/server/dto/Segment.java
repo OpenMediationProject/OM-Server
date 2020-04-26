@@ -74,16 +74,16 @@ public class Segment {
         if (s.getConType() > 0 && (s.getConType() & conType) == 0)
             return false;
 
-        if (!brandWhitelist.isEmpty() && (StringUtils.isBlank(brand) || !brandWhitelist.contains(brand.toLowerCase())))
+        if (!brandWhitelist.isEmpty() && (StringUtils.isBlank(brand) || !brandWhitelist.contains(brand)))
             return false;
 
-        if (!brandBlacklist.isEmpty() && brandBlacklist.contains(model.toLowerCase()))
+        if (!brandBlacklist.isEmpty() && brandBlacklist.contains(brand))
             return false;
 
-        if (!modelWhitelist.isEmpty() && (StringUtils.isBlank(brand) || !modelWhitelist.contains(brand.toLowerCase())))
+        if (!modelWhitelist.isEmpty() && (StringUtils.isBlank(model) || !modelWhitelist.contains(model)))
             return false;
 
-        if (!modelBlacklist.isEmpty() && modelBlacklist.contains(model.toLowerCase()))
+        if (!modelBlacklist.isEmpty() && modelBlacklist.contains(model))
             return false;
 
         if ((s.getIapMax() > 0 && iap > s.getIapMax()) || (s.getIapMin() > 0 && iap < s.getIapMin()))

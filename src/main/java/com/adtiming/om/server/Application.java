@@ -53,6 +53,9 @@ public class Application {
                 nodeid = new String(Files.readAllBytes(nodeidPath), UTF_8);
             } else {
                 nodeid = UUID.randomUUID().toString();
+                if (Files.notExists(nodeidPath.getParent())) {
+                    Files.createDirectories(nodeidPath.getParent());
+                }
                 Files.write(nodeidPath, nodeid.getBytes(UTF_8));
             }
 
