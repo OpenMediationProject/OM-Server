@@ -116,7 +116,7 @@ public class WaterfallBase extends BaseController {
             return null;
         InstanceRule matchedRule = null;
         for (InstanceRule rule : rules) {
-            Segment segment = cacheService.getSegment(rule.getSegmentId());
+            Segment segment = cacheService.getSegment(rule.getSegmentId(), o.getCountry());
             if (segment == null) {
                 if (DEBUG) {
                     dmsg.add(String.format("segment not find, ruleId:%d, segmentId:%d", rule.getId(), rule.getSegmentId()));

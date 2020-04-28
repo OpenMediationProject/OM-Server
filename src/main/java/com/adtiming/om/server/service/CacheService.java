@@ -77,14 +77,8 @@ public class CacheService {
     // key: placementId, country
     private Map<Integer, Map<String, List<InstanceRule>>> placementCountryRules = Collections.emptyMap();
 
-    // key: placementId
-    private Map<Integer, List<InstanceRule>> placementRules = Collections.emptyMap();
-
-    // key: placementId, country
-    private Map<Integer, Map<String, Segment>> placementCountrySegment = Collections.emptyMap();
-
-    // key: segmentId
-    private Map<Integer, Segment> segmentMap = Collections.emptyMap();
+    // key: segmentId, country
+    private Map<Integer, Map<String, Segment>> segmentCountryMap = Collections.emptyMap();
 
     // key: currency
     private Map<String, Float> currencyRate = Collections.emptyMap();
@@ -370,35 +364,28 @@ public class CacheService {
     private void loadInstanceRule() {
         load("om_instance_rule", in -> {
             Map<Integer, Map<String, List<InstanceRule>>> pcrList = newMap(placementCountryRules, 100, 30);
-            Map<Integer, List<InstanceRule>> prList = newMap(placementRules, 100, 30);
             while (true) {
                 AdNetworkPB.InstanceRule rule = AdNetworkPB.InstanceRule.parseDelimitedFrom(in);
                 if (rule == null) break;
                 InstanceRule irule = new InstanceRule(rule);
                 pcrList.computeIfAbsent(irule.getPlacementId(), k -> new HashMap<>())
                         .computeIfAbsent(irule.getCountry(), k -> new ArrayList<>()).add(irule);
-                prList.computeIfAbsent(irule.getPlacementId(), k -> new ArrayList<>()).add(irule);
             }
             this.placementCountryRules = pcrList;
-            this.placementRules = prList;
         });
     }
 
     private void loadSegment() {
         load("om_segment", in -> {
-            Map<Integer, Map<String, Segment>> map = newMap(placementCountrySegment, 100, 30);
-            Map<Integer, Segment> map1 = newMap(segmentMap, 100, 30);
-
+            Map<Integer, Map<String, Segment>> map = newMap(segmentCountryMap, 100, 30);
             while (true) {
                 AdNetworkPB.Segment segment = AdNetworkPB.Segment.parseDelimitedFrom(in);
                 if (segment == null) break;
                 Segment seg = new Segment(segment);
-                map.computeIfAbsent(seg.getPlacementId(), k -> new HashMap<>())
+                map.computeIfAbsent(seg.getId(), k -> new HashMap<>())
                         .put(seg.getCountry(), seg);
-                map1.put(segment.getId(), seg);
             }
-            this.placementCountrySegment = map;
-            this.segmentMap = map1;
+            this.segmentCountryMap = map;
         });
     }
 
@@ -518,12 +505,17 @@ public class CacheService {
         return null;
     }
 
-    public List<InstanceRule> getPlacementRules(int placementId) {
-        return placementRules.getOrDefault(placementId, Collections.emptyList());
-    }
 
-    public Segment getSegment(int segmentId) {
-        return segmentMap.get(segmentId);
+    public Segment getSegment(int segmentId, String country) {
+        Map<String, Segment> segmentMap = segmentCountryMap.get(segmentId);
+        if (segmentMap == null) {
+            return null;
+        }
+        Segment seg = segmentMap.get(country);
+        if (seg == null) {
+            seg = segmentMap.get(Util.COUNTRY_ALL);
+        }
+        return seg;
     }
 
     /**
@@ -626,7 +618,7 @@ public class CacheService {
             if (abTest == null)
                 return CommonPB.ABTest.None_VALUE;
         }
-        Segment segment = segmentMap.get(abTest.getSegmentId());
+        Segment segment = getSegment(abTest.getSegmentId(), o.getCountry());
         if (segment == null) {
             return CommonPB.ABTest.None_VALUE;
         }
@@ -730,7 +722,7 @@ public class CacheService {
         if (list == null) return 0;
 
         for (InstanceRule rule : list) {
-            Segment seg = segmentMap.get(rule.getSegmentId());
+            Segment seg = segmentCountryMap.get(rule.getSegmentId());
             if (seg == null) continue;
             if (seg.isMatched(o.getContype(), o.getBrand(), o.getModel(), o.getIap(), o.getImprTimes())) {
                 return seg.getId();

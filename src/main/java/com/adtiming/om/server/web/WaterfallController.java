@@ -165,7 +165,7 @@ public class WaterfallController extends WaterfallBase {
             return null;
         }
 
-        List<InstanceRule> rules = cacheService.getPlacementRules(p.getId());
+        List<InstanceRule> rules = cacheService.getCountryRules(p.getId(), o.getCountry());
         InstanceRule matchedRule = getMatchedRule(cacheService, rules, o, DEBUG, dmsg);
 
         int segmentId = matchedRule != null ? matchedRule.getSegmentId() : 0;
