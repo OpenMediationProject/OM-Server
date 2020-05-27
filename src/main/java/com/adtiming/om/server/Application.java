@@ -34,7 +34,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    @Bean(destroyMethod = "close")
+    @Bean(initMethod = "start", destroyMethod = "close")
     public CloseableHttpAsyncClient httpAsyncClient() {
         return HttpAsyncClients.custom()
                 .setMaxConnPerRoute(50000)

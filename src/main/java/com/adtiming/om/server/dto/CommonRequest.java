@@ -42,6 +42,7 @@ public class CommonRequest implements DeviceInfo {
     private int battery;      //  Remaining battery percentage
     private int btch;         //  Whether charging, 0: No, 1: Yes
     private int abt;
+    private String cnl;       //  Channel
 
     // not from request params
     // set by api controller
@@ -58,6 +59,10 @@ public class CommonRequest implements DeviceInfo {
     private int snode;     // server node id
     private int publisherId;
     private int pubAppId;
+    /**
+     * @see DeviceInfo#getMtype()
+     */
+    private int mtype;     // model type
 
     public long getTs() {
         return ts;
@@ -407,6 +412,23 @@ public class CommonRequest implements DeviceInfo {
 
     public void setSnode(int snode) {
         this.snode = snode;
+    }
+
+    public String getCnl() {
+        return cnl;
+    }
+
+    public void setCnl(String cnl) {
+        this.cnl = cnl;
+    }
+
+    @Override
+    public int getMtype() {
+        return mtype;
+    }
+
+    public void setMtype(int mtype) {
+        this.mtype = mtype;
     }
 
     @JsonIgnore

@@ -13,16 +13,16 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class InitResponse {
 
-    private PublisherApp pubApp;
+    private final PublisherApp pubApp;
     private Map<Integer, AdnAppConf> adnApps = Collections.emptyMap();
     private List<InitPlacement> placements = Collections.emptyList();
 
     // use for debug only when device is overall dev
     public Integer d;
 
-    private CacheService cs;
-    private InitRequest req;
-    private API api;
+    private final CacheService cs;
+    private final InitRequest req;
+    private final API api;
     private Events events;
 
     public InitResponse(InitRequest req, CacheService cs, PublisherApp pubApp, Integer devDevicePubId, Integer devAdnId) {
@@ -97,22 +97,16 @@ public class InitResponse {
         if (placements != null && !placements.isEmpty()) {
             this.placements = new ArrayList<>(placements.size());
             for (Placement p : placements) {
-                Map<Integer, List<Instance>> adnInsListMap = cs.getPlacementAdnInstanceMap(p.getId());
-
                 AtomicBoolean hasHb = new AtomicBoolean(false);
                 List<MInstance> pIns = new ArrayList<>(30);
-                if (adnInsListMap != null) {
-                    if (devAdnId == null) {
-                        Set<Integer> ruleInsIdSet = cs.getPlacementCountryRuleInstanceIdSet(p.getId(), req.getCountry());
-                        adnInsListMap.forEach((adnId, insList) -> {
-                            if (this.adnApps.containsKey(adnId))
-                                addInstances(p, pIns, insList, ruleInsIdSet, hasHb);
-                        });
-                    } else {//dev模式
-                        if (this.adnApps.containsKey(devAdnId)) {
-                            List<Instance> insList = adnInsListMap.get(devAdnId);
-                            addInstances(p, pIns, insList, null, hasHb);
-                        }
+                if (devAdnId == null) {
+                    List<Instance> insList = cs.getPlacementInstancesAfterRuleMatch(p.getId(), this.adnApps.keySet(),
+                            req.getCountry(), req.getBrand(), req.getModel(), req.getCnl(), req.getMtype());
+                    addInstances(p, pIns, insList, hasHb);
+                } else {//dev模式
+                    if (this.adnApps.containsKey(devAdnId)) {
+                        List<Instance> insList = cs.getPlacementAdnInstanceList(p.getId(), devAdnId);
+                        addInstances(p, pIns, insList, hasHb);
                     }
                 }
                 this.placements.add(new InitPlacement(p, pIns, hasHb));
@@ -123,18 +117,15 @@ public class InitResponse {
     /**
      * add instances to placement response
      *
-     * @param p            placement
-     * @param pIns         added to
-     * @param insList      make sure this list are from the same AdNetwork
-     * @param ruleInsIdSet InstanceRule id set
+     * @param p       placement
+     * @param pIns    added to
+     * @param insList make sure this list are from the same AdNetwork
      */
-    private void addInstances(Placement p, List<MInstance> pIns, List<Instance> insList, Set<Integer> ruleInsIdSet, AtomicBoolean hasHb) {
+    private void addInstances(Placement p, List<MInstance> pIns, List<Instance> insList, AtomicBoolean hasHb) {
         if (insList == null || insList.isEmpty())
             return;
         boolean allowHb = p.isAllowHb();
         for (Instance i : insList) {
-            if (ruleInsIdSet != null && !ruleInsIdSet.contains(i.getId()))
-                continue;
             boolean hb = false;
             if (allowHb && !hasHb.get() && i.isHeadBidding()) {
                 hasHb.set(hb = true);
