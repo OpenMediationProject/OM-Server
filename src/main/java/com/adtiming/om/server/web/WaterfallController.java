@@ -23,6 +23,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.protocol.HttpClientContext;
+import org.apache.http.client.protocol.ResponseContentEncoding;
 import org.apache.http.concurrent.FutureCallback;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
@@ -75,6 +77,9 @@ public class WaterfallController extends WaterfallBase {
 
     @Resource
     private HttpAsyncClient httpAsyncClient;
+
+    @Resource
+    private ResponseContentEncoding responseContentEncoding;
 
     /**
      * waterfall
@@ -480,6 +485,7 @@ public class WaterfallController extends WaterfallBase {
             .setRedirectsEnabled(false)
             .build();
     private final Header bidReqUa = new BasicHeader("User-Agent", "om-bid-s2s");
+    private final Header bidReqAe = new BasicHeader("Accept-Encoding", "gzip, deflate");
 
     @FunctionalInterface
     public interface S2SBidCallback {
@@ -495,15 +501,21 @@ public class WaterfallController extends WaterfallBase {
             HttpPost bidreq = new HttpPost(bidderToken.endpoint);
             bidreq.setConfig(bidReqCfg);
             bidreq.setHeader(bidReqUa);
+            bidreq.setHeader(bidReqAe);
             if (bidderToken.adn == ADN_FACEBOOK) {
                 bidreq.setHeader("X-FB-Pool-Routing-Token", bidderToken.token);
             }
             String reqData = buildBidReqData(o, isTest, placement, bidderToken).toJSONString();
             bidreq.setEntity(new StringEntity(reqData, ContentType.APPLICATION_JSON));
-
-            httpAsyncClient.execute(bidreq, new FutureCallback<HttpResponse>() {
+            HttpClientContext hcc = HttpClientContext.create();
+            httpAsyncClient.execute(bidreq, hcc, new FutureCallback<HttpResponse>() {
                 @Override
                 public void completed(HttpResponse result) {
+                    try {
+                        responseContentEncoding.process(result, hcc);
+                    } catch (Exception e) {
+                        LOG.error("process responseContentEncoding error", e);
+                    }
                     HttpEntity entity = null;
                     String content = null;
                     JSONObject bidresp = null;

@@ -6,6 +6,7 @@ package com.adtiming.om.server;
 import com.adtiming.om.server.dto.NodeConfig;
 import com.adtiming.om.server.service.AppConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.http.client.protocol.ResponseContentEncoding;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.apache.logging.log4j.LogManager;
@@ -41,6 +42,11 @@ public class Application {
                 .setMaxConnTotal(100000)
                 .setUserAgent("om-server/1.0.1")
                 .build();
+    }
+
+    @Bean
+    public ResponseContentEncoding responseContentEncoding() {
+        return new ResponseContentEncoding();
     }
 
     @Bean
