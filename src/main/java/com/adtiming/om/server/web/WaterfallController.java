@@ -511,16 +511,12 @@ public class WaterfallController extends WaterfallBase {
             httpAsyncClient.execute(bidreq, hcc, new FutureCallback<HttpResponse>() {
                 @Override
                 public void completed(HttpResponse result) {
-                    try {
-                        responseContentEncoding.process(result, hcc);
-                    } catch (Exception e) {
-                        LOG.error("process responseContentEncoding error", e);
-                    }
                     HttpEntity entity = null;
                     String content = null;
                     JSONObject bidresp = null;
                     String err = null;
                     try {
+                        responseContentEncoding.process(result, hcc);
                         entity = result.getEntity();
                         StatusLine sl = result.getStatusLine();
                         int code = sl.getStatusCode();
