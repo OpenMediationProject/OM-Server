@@ -65,10 +65,6 @@ public class Instance {
         return ins.getPlacementKey();
     }
 
-    public String getAppUnitId() {
-        return ins.getAppUnitId();
-    }
-
 //    public Map<String, SdkPB.SegmentWeight> getContrySegmentWeight() {
 //        return ins.getCountrySegmentWeightMap();
 //    }

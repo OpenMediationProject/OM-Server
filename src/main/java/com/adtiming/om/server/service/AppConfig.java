@@ -3,18 +3,12 @@
 
 package com.adtiming.om.server.service;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-
-import javax.annotation.PostConstruct;
 
 @Configuration
 @ConfigurationProperties(prefix = "app")
 public class AppConfig {
-
-    private static final Logger LOG = LogManager.getLogger();
 
     public enum Env {
         prod, dev
@@ -28,7 +22,7 @@ public class AppConfig {
     private int dcenter;
 
     /**
-     * om-server node id
+     * om-server node id, generate by dtask
      */
     private int snode;
 
@@ -37,11 +31,6 @@ public class AppConfig {
      * Used to get startup configuration and sync cache PB files
      */
     private String dtask;
-
-    @PostConstruct
-    private void init() {
-        LOG.info("OM-Server init, snode: {}, dc: {}, dtask: {}", snode, dcenter, dtask);
-    }
 
     public boolean isDev() {
         return env == Env.dev;

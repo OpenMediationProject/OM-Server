@@ -9,6 +9,7 @@ import com.adtiming.om.server.service.CacheService;
 import com.adtiming.om.server.service.GeoService;
 import com.adtiming.om.server.service.LogService;
 import com.adtiming.om.server.util.Compressor;
+import com.adtiming.om.server.util.Util;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -70,6 +71,7 @@ public class InitController extends BaseController {
             o.setReqHost(reqHost);
             o.setAppConfig(cfg);
             o.setPubApp(pubApp);
+            o.setMtype(Util.getModelType(plat, o.getModel(), ua));
         } catch (Exception e) {
             LOG.warn("init decode fail v{}", version, e);
             return ResponseEntity.badRequest().body("decode fail");

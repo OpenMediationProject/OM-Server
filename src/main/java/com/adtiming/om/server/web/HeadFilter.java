@@ -3,7 +3,7 @@
 
 package com.adtiming.om.server.web;
 
-import com.adtiming.om.server.service.AppConfig;
+import com.adtiming.om.server.dto.NodeConfig;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -18,12 +18,12 @@ import java.io.IOException;
 public class HeadFilter implements Filter {
 
     @Resource
-    private AppConfig appConfig;
+    private NodeConfig nc;
     private String hv;
 
     @PostConstruct
     private void init() {
-        hv = String.format("%d-%d", appConfig.getDcenter(), appConfig.getSnode());
+        hv = String.format("%d-%d", nc.dcenter, nc.id);
     }
 
     @Override

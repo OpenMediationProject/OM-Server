@@ -7,14 +7,36 @@ import com.adtiming.om.pb.AdNetworkPB;
 import com.adtiming.om.pb.CommonPB;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
 public class InstanceRule {
-    private AdNetworkPB.InstanceRule rule;
+
+    private final AdNetworkPB.InstanceRule rule;
+    private Set<String> brandWhitelist, brandBlacklist, modelWhitelist, modelBlacklist;
+    private Set<String> channelList;
 
     public InstanceRule(AdNetworkPB.InstanceRule rule) {
         this.rule = rule;
+
+        if (rule.getBrandWhitelistCount() > 0) {
+            brandWhitelist = new HashSet<>(rule.getBrandWhitelistList());
+        }
+        if (rule.getBrandBlacklistCount() > 0) {
+            brandBlacklist = new HashSet<>(rule.getBrandBlacklistList());
+        }
+
+        if (rule.getModelWhitelistCount() > 0) {
+            modelWhitelist = new HashSet<>(rule.getModelWhitelistList());
+        }
+        if (rule.getModelBlacklistCount() > 0) {
+            modelBlacklist = new HashSet<>(rule.getModelBlacklistList());
+        }
+
+        if (rule.getChannelCount() > 0) {
+            this.channelList = new HashSet<>(rule.getChannelList());
+        }
     }
 
     public int getId() {
@@ -33,10 +55,6 @@ public class InstanceRule {
         return rule.getPlacementId();
     }
 
-    public String getCountry() {
-        return rule.getCountry();
-    }
-
     public int getSortType() {
         return rule.getSortType();
     }
@@ -47,10 +65,6 @@ public class InstanceRule {
 
     public int getAbtValue() {
         return rule.getAbtValue();
-    }
-
-    public int getSegmentId() {
-        return rule.getSegmentId();
     }
 
     public boolean isAutoOpt() {
@@ -74,5 +88,80 @@ public class InstanceRule {
             return rule.getInstanceWeightMap().keySet();
         }
         return Collections.emptySet();
+    }
+
+    /**
+     * determin if match rule
+     *
+     * @param conType   connection type
+     * @param brand     brand
+     * @param model     model
+     * @param iap       In App purchase
+     * @param pic       Placement Impression Count
+     * @param channel   国内 Android channel
+     * @param modelType model type, {0:Phone,1:Pad,2:TV}
+     * @return matched true, otherwise false
+     */
+    public boolean isMatched(int conType, String brand, String model, float iap, int pic, String channel, int modelType) {
+        if (!isHardMatched(brand, model, channel, modelType))
+            return false;
+
+        if (rule.getConType() > 0 && (rule.getConType() & conType) == 0)
+            return false;
+
+        if ((rule.getIapMax() > 0 && iap > rule.getIapMax()) || (rule.getIapMin() > 0 && iap < rule.getIapMin()))
+            return false;
+
+        if (rule.getFrequency() > 0 && pic < rule.getFrequency())
+            return false;
+
+        return true;
+    }
+
+    /**
+     * 主要用于初始化, 硬控过滤规则
+     *
+     * @param brand     brand
+     * @param model     model
+     * @param channel   国内 Android channel
+     * @param modelType model type, {0:Phone,1:Pad,2:TV}
+     * @return matched true, otherwise false
+     */
+    public boolean isHardMatched(String brand, String model, String channel, int modelType) {
+        if (!isAllowBrand(brand))
+            return false;
+
+        if (!isAllowModel(model))
+            return false;
+
+        if (!isAllowChannel(channel))
+            return false;
+
+        // 二进制不包含
+        if (rule.getModelType() > 0 && (rule.getModelType() & modelType) == 0)
+            return false;
+
+        return true;
+    }
+
+    private boolean isAllowBrand(String brand) {
+        return (brandWhitelist == null || brandWhitelist.contains(brand)) &&
+                (brandBlacklist == null || !brandBlacklist.contains(brand));
+    }
+
+    private boolean isAllowModel(String model) {
+        return (modelWhitelist == null || modelWhitelist.contains(model)) &&
+                (modelBlacklist == null || !modelBlacklist.contains(model));
+    }
+
+    private boolean isAllowChannel(String channel) {
+        if (channelList == null)
+            return true;
+        boolean contains = channelList.contains(channel);
+        if (rule.getChannelBow()) {
+            return contains; // 白名单,包含
+        } else {
+            return !contains;// 黑名单,不包含
+        }
     }
 }

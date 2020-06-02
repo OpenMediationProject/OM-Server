@@ -15,6 +15,7 @@ public class WaterfallResponse {
     private int code;
     private String msg;
     private List<Integer> ins;
+    public List<S2SBidResponse> bidresp;
     private List<CharSequence> debug;
     private int abt;
 
@@ -66,5 +67,15 @@ public class WaterfallResponse {
 
     public void setAbt(int abt) {
         this.abt = abt;
+    }
+
+    public static class S2SBidResponse {
+        public int iid;
+        public Integer nbr;
+        public String err;
+        public Float price;
+        public String adm;
+        public String nurl;
+        public String lurl;
     }
 }

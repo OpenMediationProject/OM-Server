@@ -13,6 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -21,6 +22,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.*;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 import java.util.zip.GZIPInputStream;
 
 /**
@@ -34,6 +36,9 @@ public class CacheService {
 
     @Resource
     private AppConfig appConfig;
+    @Resource
+    private GeoService geoService;
+
     @Resource
     private GeoService geoService;
 
@@ -52,6 +57,8 @@ public class CacheService {
     private Map<Integer, AdNetworkPB.AdNetwork> adNetworks;
     // key: pubAppId
     private Map<Integer, List<AdNetworkApp>> adNetworkApps;
+    // key: pubAppId, AdnId
+    private Map<Integer, Map<Integer, AdNetworkApp>> adNetworkAppMap;
 
     // key: instanceId
     private Map<Integer, Instance> instanceMap;
@@ -75,15 +82,6 @@ public class CacheService {
 
     // key: placementId, country
     private Map<Integer, Map<String, List<InstanceRule>>> placementCountryRules = Collections.emptyMap();
-
-    // key: placementId
-    private Map<Integer, List<InstanceRule>> placementRules = Collections.emptyMap();
-
-    // key: placementId, country
-    private Map<Integer, Map<String, Segment>> placementCountrySegment = Collections.emptyMap();
-
-    // key: segmentId
-    private Map<Integer, Segment> segmentMap = Collections.emptyMap();
 
     // key: currency
     private Map<String, Float> currencyRate = Collections.emptyMap();
@@ -110,6 +108,7 @@ public class CacheService {
         rsyncCache();
         geoService.init();
         reloadCache();
+        geoService.init();
     }
 
     @Scheduled(fixedDelay = 60000, initialDelay = 60000)
@@ -152,7 +151,6 @@ public class CacheService {
         loadSdkDevDevice();
 
         loadInstanceRule();
-        loadSegment();
         loadCurrency();
         loadAbTest();
 
@@ -219,13 +217,18 @@ public class CacheService {
     private void loadAdNetworkApp() {
         load("om_adnetwork_app", in -> {
             Map<Integer, List<AdNetworkApp>> map = newMap(this.adNetworkApps, 50, 20);
+            Map<Integer, Map<Integer, AdNetworkApp>> map1 = newMap(this.adNetworkAppMap, 50, 20);
             while (true) {
                 AdNetworkPB.AdNetworkApp o = AdNetworkPB.AdNetworkApp.parseDelimitedFrom(in);
                 if (o == null) break;
+                AdNetworkApp adnApp = new AdNetworkApp(o);
                 map.computeIfAbsent(o.getPubAppId(), k -> new ArrayList<>())
-                        .add(new AdNetworkApp(o));
+                        .add(adnApp);
+                map1.computeIfAbsent(o.getPubAppId(), k -> new HashMap<>())
+                        .put(o.getAdnId(), adnApp);
             }
             this.adNetworkApps = map;
+            this.adNetworkAppMap = map1;
         });
     }
 
@@ -368,36 +371,25 @@ public class CacheService {
 
     private void loadInstanceRule() {
         load("om_instance_rule", in -> {
-            Map<Integer, Map<String, List<InstanceRule>>> pcrList = newMap(placementCountryRules, 100, 30);
-            Map<Integer, List<InstanceRule>> prList = newMap(placementRules, 100, 30);
+            Map<Integer, Map<String, List<InstanceRule>>> map = newMap(this.placementCountryRules, 100, 30);
             while (true) {
-                AdNetworkPB.InstanceRule rule = AdNetworkPB.InstanceRule.parseDelimitedFrom(in);
-                if (rule == null) break;
-                InstanceRule irule = new InstanceRule(rule);
-                pcrList.computeIfAbsent(irule.getPlacementId(), k -> new HashMap<>())
-                        .computeIfAbsent(irule.getCountry(), k -> new ArrayList<>()).add(irule);
-                prList.computeIfAbsent(irule.getPlacementId(), k -> new ArrayList<>()).add(irule);
-            }
-            this.placementCountryRules = pcrList;
-            this.placementRules = prList;
-        });
-    }
+                AdNetworkPB.InstanceRule o = AdNetworkPB.InstanceRule.parseDelimitedFrom(in);
+                if (o == null) break;
+                InstanceRule rule = new InstanceRule(o);
 
-    private void loadSegment() {
-        load("om_segment", in -> {
-            Map<Integer, Map<String, Segment>> map = newMap(placementCountrySegment, 100, 30);
-            Map<Integer, Segment> map1 = newMap(segmentMap, 100, 30);
-
-            while (true) {
-                AdNetworkPB.Segment segment = AdNetworkPB.Segment.parseDelimitedFrom(in);
-                if (segment == null) break;
-                Segment seg = new Segment(segment);
-                map.computeIfAbsent(seg.getPlacementId(), k -> new HashMap<>())
-                        .put(seg.getCountry(), seg);
-                map1.put(segment.getId(), seg);
+                Map<String, List<InstanceRule>> countryRuleList = map
+                        .computeIfAbsent(o.getPlacementId(), k -> new HashMap<>());
+                o.getCountryList().forEach(country -> countryRuleList.computeIfAbsent(country, k -> new ArrayList<>()).add(rule));
             }
-            this.placementCountrySegment = map;
-            this.segmentMap = map1;
+
+            // 对 ruleList 按 priority 由小到大进行排序
+            map.forEach((pid, countryRuleList) -> {
+                countryRuleList.forEach((country, ruleList) -> {
+                    ruleList.sort(Comparator.comparingInt(InstanceRule::getPriority));
+                });
+            });
+
+            this.placementCountryRules = map;
         });
     }
 
@@ -498,31 +490,63 @@ public class CacheService {
         return adNetworks.get(adNetworkId);
     }
 
+    public AdNetworkApp getAdnApp(int pubAppId, int adnId) {
+        return adNetworkAppMap.getOrDefault(pubAppId, Collections.emptyMap()).get(adnId);
+    }
+
     public List<AdNetworkApp> getAdnApps(int pubAppId) {
         return adNetworkApps.getOrDefault(pubAppId, Collections.emptyList());
     }
 
-    public Map<Integer, List<Instance>> getPlacementAdnInstanceMap(int placementId) {
+    public List<Instance> getPlacementAdnInstanceList(int placementId, int adnId) {
         return placementAdnInstances
-                .getOrDefault(placementId, Collections.emptyMap());
+                .getOrDefault(placementId, Collections.emptyMap())
+                .get(adnId);
     }
 
-    public Set<Integer> getPlacementCountryRuleInstanceIdSet(int placementId, String country) {
-        List<InstanceRule> rules = getCountryRules(placementId, country);
-        if (rules != null && !rules.isEmpty()) {
-            Set<Integer> insSet = new HashSet<>();
-            rules.forEach(rule -> insSet.addAll(rule.getInstanceList()));
-            return insSet;
+    /**
+     * 获取广告位下的匹配 placement rule 后的 instance 集合, 用于初始化
+     *
+     * @param placementId    placementId
+     * @param acceptAdnIdSet 可以接受的 adnId 集合
+     * @param country        country
+     * @param brand          brand
+     * @param model          model
+     * @param channel        国内 Android channel
+     * @param modelType      model type, {0:Phone,1:Pad,2:TV}
+     * @return Instance list or null, 返回 list 可修改, 不影响缓存结构
+     */
+    public List<Instance> getPlacementInstancesAfterRuleMatch(
+            int placementId, Set<Integer> acceptAdnIdSet, String country,
+            String brand, String model, String channel, int modelType) {
+        List<InstanceRule> ruleList = getCountryRules(placementId, country);
+
+        if (CollectionUtils.isEmpty(ruleList)) {
+            List<Instance> list = getPlacementInstances(placementId);
+            if (list != null && !list.isEmpty()) {
+                return list.stream()
+                        .filter(ins -> acceptAdnIdSet.contains(ins.getAdnId()))
+                        .collect(Collectors.toList());
+            }
+            return list;
         }
-        return null;
-    }
 
-    public List<InstanceRule> getPlacementRules(int placementId) {
-        return placementRules.getOrDefault(placementId, Collections.emptyList());
-    }
+        Set<Integer> insIdSet = new HashSet<>();
+        for (InstanceRule rule : ruleList) {
+            if (rule.isHardMatched(brand, model, channel, modelType)) {
+                insIdSet.addAll(rule.getInstanceList());
+            }
+        }
 
-    public Segment getSegment(int segmentId) {
-        return segmentMap.get(segmentId);
+        if (insIdSet.isEmpty()) {
+            return null;
+        }
+
+        return insIdSet.stream()
+                .map(instanceMap::get)
+                .filter(Objects::nonNull)
+                .filter(ins -> acceptAdnIdSet.contains(ins.getAdnId()))
+                .collect(Collectors.toList());
     }
 
     /**
@@ -532,21 +556,24 @@ public class CacheService {
      * @see com.adtiming.om.server.dto.InitResponse
      */
     public List<InstanceRule> getCountryRules(int placementId, String country) {
-        Map<String, List<InstanceRule>> countryRule = placementCountryRules
+        Map<String, List<InstanceRule>> countryRuleList = placementCountryRules
                 .getOrDefault(placementId, Collections.emptyMap());
-        if (countryRule.isEmpty()) {
+        if (countryRuleList.isEmpty()) {
             return null;
         }
-        List<InstanceRule> list = new ArrayList<>();
-        List<InstanceRule> rules = countryRule.get(country);
-        if (rules != null && !rules.isEmpty()) {
-            list.addAll(rules);
+
+        List<InstanceRule> ruleList = countryRuleList.get(country);
+        List<InstanceRule> allRuleList = countryRuleList.get(Util.COUNTRY_ALL);// // 00 represent ALL COUNTRY
+        if (ruleList == null) {
+            return immutableList(allRuleList);
+        } else if (allRuleList == null) {
+            return immutableList(ruleList);
+        } else /* neither ruleList or allRuleList is null */ {
+            List<InstanceRule> list = new ArrayList<>(ruleList.size() + allRuleList.size());
+            list.addAll(ruleList);
+            list.addAll(allRuleList);
+            return immutableList(list);
         }
-        List<InstanceRule> allRules = countryRule.get(Util.COUNTRY_ALL);// 00 represent ALL COUNTRY
-        if (allRules != null && !allRules.isEmpty()) {
-            list.addAll(allRules);
-        }
-        return list;
     }
 
     // for waterfall
@@ -616,18 +643,15 @@ public class CacheService {
         return getAbTestMode(placement.getPubAppId(), deviceId);
     }*/
 
-    public int getAbTestMode(int placementId, WaterfallRequest o) {
-        PlacementPB.PlacementAbTest abTest = placementAbTest.getOrDefault(placementId, Collections.emptyMap())
+    /*public int getAbTestMode(int placementId, WaterfallRequest o) {
+        PlacementPB.PlacementAbTest abTest = placementAbTest
+                .getOrDefault(placementId, Collections.emptyMap())
                 .get(o.getCountry());
         if (abTest == null) {
-            abTest = placementAbTest.getOrDefault(placementId, Collections.emptyMap())
-                    .get(Util.COUNTRY_ALL);
-            if (abTest == null)
+            abTest = placementAbTest.getOrDefault(placementId, Collections.emptyMap()).get(Util.COUNTRY_ALL);
+            if (abTest == null) {
                 return CommonPB.ABTest.None_VALUE;
-        }
-        Segment segment = segmentMap.get(abTest.getSegmentId());
-        if (segment == null) {
-            return CommonPB.ABTest.None_VALUE;
+            }
         }
         if (segment.isMatched(o.getCountry(), o.getContype(), o.getBrand(), o.getModel(), o.getIap(), o.getImprTimes())) {
             int aPer = abTest.getAPer();
@@ -641,7 +665,7 @@ public class CacheService {
             return code % 100 < aLast ? 1 : 2;
         }
         return CommonPB.ABTest.None_VALUE;
-    }
+    }*/
 
     public float getPlacementEcpm(Integer placementId, String country) {
         return placementEcpm
@@ -709,92 +733,11 @@ public class CacheService {
         return new InstanceEcpm(iid, -1F, "noEcpmData");
     }
 
-    /*private List<InstanceRule> getCountryAbtRules(int placementId, int abt, String country) {
-        Map<String, List<InstanceRule>> countryRule = placementAbtCountryRule
-                .getOrDefault(placementId, Collections.emptyMap())
-                .getOrDefault(abt, Collections.emptyMap());
-        if (countryRule.isEmpty()) {
+    private <T> List<T> immutableList(List<T> list) {
+        if (list == null) {
             return null;
         }
-
-        List<InstanceRule> rules = countryRule.get(country);
-        if (rules == null) {
-            rules = countryRule.get("00");// 00 represent ALL COUNTRY
-        }
-        return rules;
-    }*/
-
-    /*public int getSegmentId(int placementId, WaterfallRequest o) {
-        List<InstanceRule> list = getCountryAbtRules(placementId, o.getAbt(), o.getCountry());
-        if (list == null) return 0;
-
-        for (InstanceRule rule : list) {
-            Segment seg = segmentMap.get(rule.getSegmentId());
-            if (seg == null) continue;
-            if (seg.isMatched(o.getContype(), o.getBrand(), o.getModel(), o.getIap(), o.getImprTimes())) {
-                return seg.getId();
-            }
-        }
-        return 0;
-    }*/
-
-    /*public InstanceRule getCountryRule(int placementId, String country, int segmentId, int abt) {
-        Map<Integer, Map<Integer, Map<String, InstanceRule>>> segmentAbCountryRule = placementSegmentAbtCountryRule
-                .getOrDefault(placementId, Collections.emptyMap());
-        if (segmentAbCountryRule.isEmpty()) {
-            return null;
-        }
-
-        Map<Integer, Map<String, InstanceRule>> abtCountryRule = segmentAbCountryRule.get(segmentId);
-        if (abtCountryRule == null) {
-            abtCountryRule = segmentAbCountryRule.get(0);
-        }
-        if (abtCountryRule == null) {
-            return null;
-        }
-        Map<String, InstanceRule> countryRule = abtCountryRule.getOrDefault(abt, Collections.emptyMap());
-        InstanceRule rule = countryRule.get(country);
-        if (rule == null) {
-            rule = countryRule.get("00");
-        }
-        return rule;
-    }*/
-
-    /*public Map<Integer, Integer> getInstanceWeight(Collection<Instance> instanceList, int placementId, int placementType, String country, int segmentId, int abTestModel) {
-        if (instanceList == null || instanceList.isEmpty()) return Collections.emptyMap();
-        Map<Integer, Integer> weightMap = new HashMap<>(instanceList.size());
-        InstanceRule rule = getCountryRule(placementId, country, segmentId, abTestModel);
-        if (rule != null) {
-            Map<Integer, Integer> insWeight = rule.getInstanceWeightMap();
-            if (insWeight.isEmpty()) return null;
-            for (Instance ins : instanceList) {
-                if (!insWeight.containsKey(ins.getId())) continue;
-                if (rule.isAutoOpt()) {
-                    InstanceEcpm ecpm = getInstanceEcpm(ins.getAdnId(), ins.getId(), country, placementType);
-                    weightMap.put(ins.getId(), new BigDecimal(ecpm.ecpm * F10000).intValue());
-                } else {
-                    weightMap.put(ins.getId(), insWeight.get(ins.getId()));
-                }
-            }
-        } else {
-            for (Instance ins : instanceList) {
-                InstanceEcpm ecpm = getInstanceEcpm(ins.getAdnId(), ins.getId(), country, placementType);
-                weightMap.put(ins.getId(), new BigDecimal(ecpm.ecpm * F10000).intValue());
-            }
-        }
-        if (rule == null || rule.isAutoOpt()) {
-            List<Integer> sortList = Util.sortByPriority(weightMap);
-            for (int i = 0; i < sortList.size(); i++) {
-                if (i == 0) {
-                    weightMap.put(sortList.get(i), 70);
-                } else if (i == 1) {
-                    weightMap.put(sortList.get(i), 20);
-                } else {
-                    weightMap.put(sortList.get(i), 10);
-                }
-            }
-        }
-        return weightMap;
-    }*/
+        return Collections.unmodifiableList(list);
+    }
 
 }

@@ -67,4 +67,15 @@ public interface DeviceInfo {
         return null;
     }
 
+    default String getCnl() {
+        return null;
+    }
+
+    /**
+     * Model Type, { 0b001: Phone, 0b010: Pad, 0b100: TV }
+     */
+    default int getMtype() {
+        return 0;
+    }
+
 }
