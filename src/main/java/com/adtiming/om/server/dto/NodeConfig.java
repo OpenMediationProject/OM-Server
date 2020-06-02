@@ -4,6 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class NodeConfig {
 
+    @JsonProperty("id")
+    public int id;
+
+    @JsonProperty("dcenter")
+    public int dcenter;
+
     @JsonProperty("kafka_status")
     public int kafkaStatus;
 
@@ -28,7 +34,9 @@ public class NodeConfig {
     @Override
     public String toString() {
         return "NodeConfig{" +
-                "kafkaStatus=" + kafkaStatus +
+                "id=" + id +
+                ", dcenter=" + dcenter +
+                ", kafkaStatus=" + kafkaStatus +
                 ", kafkaServers='" + kafkaServers + '\'' +
                 ", s3Status=" + s3Status +
                 ", s3Region='" + s3Region + '\'' +

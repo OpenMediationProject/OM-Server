@@ -1,7 +1,6 @@
 app:
   env: prod
   dcenter: 1
-  snode: 1
   dtask: replace_to_dtask_host
 #  cache: /data/om-dtask/cache
 

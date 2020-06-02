@@ -136,9 +136,59 @@ public final class PlacementPB {
 
     /**
      * <pre>
-     *    int32 auto_preloading = 23; // 是否预加载,默认开启,0:关闭预加载;1:开启
+     * 自动补库存阈值间隔, 多行分隔, 单行格式: "{连续失败次数}:{间隔}"
      * </pre>
      *
+     * <code>map&lt;int32, int32&gt; inventory_interval_step = 23;</code>
+     */
+    int getInventoryIntervalStepCount();
+    /**
+     * <pre>
+     * 自动补库存阈值间隔, 多行分隔, 单行格式: "{连续失败次数}:{间隔}"
+     * </pre>
+     *
+     * <code>map&lt;int32, int32&gt; inventory_interval_step = 23;</code>
+     */
+    boolean containsInventoryIntervalStep(
+        int key);
+    /**
+     * Use {@link #getInventoryIntervalStepMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.Integer, java.lang.Integer>
+    getInventoryIntervalStep();
+    /**
+     * <pre>
+     * 自动补库存阈值间隔, 多行分隔, 单行格式: "{连续失败次数}:{间隔}"
+     * </pre>
+     *
+     * <code>map&lt;int32, int32&gt; inventory_interval_step = 23;</code>
+     */
+    java.util.Map<java.lang.Integer, java.lang.Integer>
+    getInventoryIntervalStepMap();
+    /**
+     * <pre>
+     * 自动补库存阈值间隔, 多行分隔, 单行格式: "{连续失败次数}:{间隔}"
+     * </pre>
+     *
+     * <code>map&lt;int32, int32&gt; inventory_interval_step = 23;</code>
+     */
+
+    int getInventoryIntervalStepOrDefault(
+        int key,
+        int defaultValue);
+    /**
+     * <pre>
+     * 自动补库存阈值间隔, 多行分隔, 单行格式: "{连续失败次数}:{间隔}"
+     * </pre>
+     *
+     * <code>map&lt;int32, int32&gt; inventory_interval_step = 23;</code>
+     */
+
+    int getInventoryIntervalStepOrThrow(
+        int key);
+
+    /**
      * <code>optional int32 batch_size = 24;</code>
      */
     int getBatchSize();
@@ -662,6 +712,18 @@ public final class PlacementPB {
               preloadTimeout_ = input.readInt32();
               break;
             }
+            case 186: {
+              if (!((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+                inventoryIntervalStep_ = com.google.protobuf.MapField.newMapField(
+                    InventoryIntervalStepDefaultEntryHolder.defaultEntry);
+                mutable_bitField0_ |= 0x00004000;
+              }
+              com.google.protobuf.MapEntry<java.lang.Integer, java.lang.Integer>
+              inventoryIntervalStep = input.readMessage(
+                  InventoryIntervalStepDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              inventoryIntervalStep_.getMutableMap().put(inventoryIntervalStep.getKey(), inventoryIntervalStep.getValue());
+              break;
+            }
             case 192: {
 
               batchSize_ = input.readInt32();
@@ -688,10 +750,10 @@ public final class PlacementPB {
               break;
             }
             case 234: {
-              if (!((mutable_bitField0_ & 0x00080000) == 0x00080000)) {
+              if (!((mutable_bitField0_ & 0x00100000) == 0x00100000)) {
                 countryFloorPrice_ = com.google.protobuf.MapField.newMapField(
                     CountryFloorPriceDefaultEntryHolder.defaultEntry);
-                mutable_bitField0_ |= 0x00080000;
+                mutable_bitField0_ |= 0x00100000;
               }
               com.google.protobuf.MapEntry<java.lang.String, java.lang.Float>
               countryFloorPrice = input.readMessage(
@@ -700,9 +762,9 @@ public final class PlacementPB {
               break;
             }
             case 242: {
-              if (!((mutable_bitField0_ & 0x00100000) == 0x00100000)) {
+              if (!((mutable_bitField0_ & 0x00200000) == 0x00200000)) {
                 scenes_ = new java.util.ArrayList<com.adtiming.om.pb.PlacementPB.Scene>();
-                mutable_bitField0_ |= 0x00100000;
+                mutable_bitField0_ |= 0x00200000;
               }
               scenes_.add(
                   input.readMessage(com.adtiming.om.pb.PlacementPB.Scene.parser(), extensionRegistry));
@@ -722,99 +784,99 @@ public final class PlacementPB {
             }
             case 266: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00800000) == 0x00800000)) {
+              if (!((mutable_bitField0_ & 0x01000000) == 0x01000000)) {
                 osvWhitelist_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00800000;
+                mutable_bitField0_ |= 0x01000000;
               }
               osvWhitelist_.add(s);
               break;
             }
             case 274: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x01000000) == 0x01000000)) {
+              if (!((mutable_bitField0_ & 0x02000000) == 0x02000000)) {
                 osvBlacklist_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x01000000;
+                mutable_bitField0_ |= 0x02000000;
               }
               osvBlacklist_.add(s);
               break;
             }
             case 282: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x02000000) == 0x02000000)) {
+              if (!((mutable_bitField0_ & 0x04000000) == 0x04000000)) {
                 makeWhitelist_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x02000000;
+                mutable_bitField0_ |= 0x04000000;
               }
               makeWhitelist_.add(s);
               break;
             }
             case 290: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x04000000) == 0x04000000)) {
+              if (!((mutable_bitField0_ & 0x08000000) == 0x08000000)) {
                 makeBlacklist_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x04000000;
+                mutable_bitField0_ |= 0x08000000;
               }
               makeBlacklist_.add(s);
               break;
             }
             case 298: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x08000000) == 0x08000000)) {
+              if (!((mutable_bitField0_ & 0x10000000) == 0x10000000)) {
                 brandWhitelist_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x08000000;
+                mutable_bitField0_ |= 0x10000000;
               }
               brandWhitelist_.add(s);
               break;
             }
             case 306: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x10000000) == 0x10000000)) {
+              if (!((mutable_bitField0_ & 0x20000000) == 0x20000000)) {
                 brandBlacklist_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x10000000;
+                mutable_bitField0_ |= 0x20000000;
               }
               brandBlacklist_.add(s);
               break;
             }
             case 314: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x20000000) == 0x20000000)) {
+              if (!((mutable_bitField0_ & 0x40000000) == 0x40000000)) {
                 modelWhitelist_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x20000000;
+                mutable_bitField0_ |= 0x40000000;
               }
               modelWhitelist_.add(s);
               break;
             }
             case 322: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x40000000) == 0x40000000)) {
+              if (!((mutable_bitField0_ & 0x80000000) == 0x80000000)) {
                 modelBlacklist_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x40000000;
+                mutable_bitField0_ |= 0x80000000;
               }
               modelBlacklist_.add(s);
               break;
             }
             case 330: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x80000000) == 0x80000000)) {
+              if (!((mutable_bitField1_ & 0x00000001) == 0x00000001)) {
                 didBlacklist_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x80000000;
+                mutable_bitField1_ |= 0x00000001;
               }
               didBlacklist_.add(s);
               break;
             }
             case 338: {
               java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField1_ & 0x00000001) == 0x00000001)) {
+              if (!((mutable_bitField1_ & 0x00000002) == 0x00000002)) {
                 sdkvBlacklist_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField1_ |= 0x00000001;
+                mutable_bitField1_ |= 0x00000002;
               }
               sdkvBlacklist_.add(s);
               break;
             }
             case 346: {
-              if (!((mutable_bitField1_ & 0x00000002) == 0x00000002)) {
+              if (!((mutable_bitField1_ & 0x00000004) == 0x00000004)) {
                 countrySettings_ = com.google.protobuf.MapField.newMapField(
                     CountrySettingsDefaultEntryHolder.defaultEntry);
-                mutable_bitField1_ |= 0x00000002;
+                mutable_bitField1_ |= 0x00000004;
               }
               com.google.protobuf.MapEntry<java.lang.String, com.adtiming.om.pb.PlacementPB.Placement.CountrySettings>
               countrySettings = input.readMessage(
@@ -830,37 +892,37 @@ public final class PlacementPB {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00100000) == 0x00100000)) {
+        if (((mutable_bitField0_ & 0x00200000) == 0x00200000)) {
           scenes_ = java.util.Collections.unmodifiableList(scenes_);
         }
-        if (((mutable_bitField0_ & 0x00800000) == 0x00800000)) {
+        if (((mutable_bitField0_ & 0x01000000) == 0x01000000)) {
           osvWhitelist_ = osvWhitelist_.getUnmodifiableView();
         }
-        if (((mutable_bitField0_ & 0x01000000) == 0x01000000)) {
+        if (((mutable_bitField0_ & 0x02000000) == 0x02000000)) {
           osvBlacklist_ = osvBlacklist_.getUnmodifiableView();
         }
-        if (((mutable_bitField0_ & 0x02000000) == 0x02000000)) {
+        if (((mutable_bitField0_ & 0x04000000) == 0x04000000)) {
           makeWhitelist_ = makeWhitelist_.getUnmodifiableView();
         }
-        if (((mutable_bitField0_ & 0x04000000) == 0x04000000)) {
+        if (((mutable_bitField0_ & 0x08000000) == 0x08000000)) {
           makeBlacklist_ = makeBlacklist_.getUnmodifiableView();
         }
-        if (((mutable_bitField0_ & 0x08000000) == 0x08000000)) {
+        if (((mutable_bitField0_ & 0x10000000) == 0x10000000)) {
           brandWhitelist_ = brandWhitelist_.getUnmodifiableView();
         }
-        if (((mutable_bitField0_ & 0x10000000) == 0x10000000)) {
+        if (((mutable_bitField0_ & 0x20000000) == 0x20000000)) {
           brandBlacklist_ = brandBlacklist_.getUnmodifiableView();
         }
-        if (((mutable_bitField0_ & 0x20000000) == 0x20000000)) {
+        if (((mutable_bitField0_ & 0x40000000) == 0x40000000)) {
           modelWhitelist_ = modelWhitelist_.getUnmodifiableView();
         }
-        if (((mutable_bitField0_ & 0x40000000) == 0x40000000)) {
+        if (((mutable_bitField0_ & 0x80000000) == 0x80000000)) {
           modelBlacklist_ = modelBlacklist_.getUnmodifiableView();
         }
-        if (((mutable_bitField0_ & 0x80000000) == 0x80000000)) {
+        if (((mutable_bitField1_ & 0x00000001) == 0x00000001)) {
           didBlacklist_ = didBlacklist_.getUnmodifiableView();
         }
-        if (((mutable_bitField1_ & 0x00000001) == 0x00000001)) {
+        if (((mutable_bitField1_ & 0x00000002) == 0x00000002)) {
           sdkvBlacklist_ = sdkvBlacklist_.getUnmodifiableView();
         }
         makeExtensionsImmutable();
@@ -875,6 +937,8 @@ public final class PlacementPB {
     protected com.google.protobuf.MapField internalGetMapField(
         int number) {
       switch (number) {
+        case 23:
+          return internalGetInventoryIntervalStep();
         case 29:
           return internalGetCountryFloorPrice();
         case 43:
@@ -1934,13 +1998,101 @@ public final class PlacementPB {
       return preloadTimeout_;
     }
 
+    public static final int INVENTORY_INTERVAL_STEP_FIELD_NUMBER = 23;
+    private static final class InventoryIntervalStepDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.Integer, java.lang.Integer> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.Integer, java.lang.Integer>newDefaultInstance(
+                  com.adtiming.om.pb.PlacementPB.internal_static_Placement_InventoryIntervalStepEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.INT32,
+                  0,
+                  com.google.protobuf.WireFormat.FieldType.INT32,
+                  0);
+    }
+    private com.google.protobuf.MapField<
+        java.lang.Integer, java.lang.Integer> inventoryIntervalStep_;
+    private com.google.protobuf.MapField<java.lang.Integer, java.lang.Integer>
+    internalGetInventoryIntervalStep() {
+      if (inventoryIntervalStep_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            InventoryIntervalStepDefaultEntryHolder.defaultEntry);
+      }
+      return inventoryIntervalStep_;
+    }
+
+    public int getInventoryIntervalStepCount() {
+      return internalGetInventoryIntervalStep().getMap().size();
+    }
+    /**
+     * <pre>
+     * 自动补库存阈值间隔, 多行分隔, 单行格式: "{连续失败次数}:{间隔}"
+     * </pre>
+     *
+     * <code>map&lt;int32, int32&gt; inventory_interval_step = 23;</code>
+     */
+
+    public boolean containsInventoryIntervalStep(
+        int key) {
+      
+      return internalGetInventoryIntervalStep().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getInventoryIntervalStepMap()} instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.Integer, java.lang.Integer> getInventoryIntervalStep() {
+      return getInventoryIntervalStepMap();
+    }
+    /**
+     * <pre>
+     * 自动补库存阈值间隔, 多行分隔, 单行格式: "{连续失败次数}:{间隔}"
+     * </pre>
+     *
+     * <code>map&lt;int32, int32&gt; inventory_interval_step = 23;</code>
+     */
+
+    public java.util.Map<java.lang.Integer, java.lang.Integer> getInventoryIntervalStepMap() {
+      return internalGetInventoryIntervalStep().getMap();
+    }
+    /**
+     * <pre>
+     * 自动补库存阈值间隔, 多行分隔, 单行格式: "{连续失败次数}:{间隔}"
+     * </pre>
+     *
+     * <code>map&lt;int32, int32&gt; inventory_interval_step = 23;</code>
+     */
+
+    public int getInventoryIntervalStepOrDefault(
+        int key,
+        int defaultValue) {
+      
+      java.util.Map<java.lang.Integer, java.lang.Integer> map =
+          internalGetInventoryIntervalStep().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <pre>
+     * 自动补库存阈值间隔, 多行分隔, 单行格式: "{连续失败次数}:{间隔}"
+     * </pre>
+     *
+     * <code>map&lt;int32, int32&gt; inventory_interval_step = 23;</code>
+     */
+
+    public int getInventoryIntervalStepOrThrow(
+        int key) {
+      
+      java.util.Map<java.lang.Integer, java.lang.Integer> map =
+          internalGetInventoryIntervalStep().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+
     public static final int BATCH_SIZE_FIELD_NUMBER = 24;
     private int batchSize_;
     /**
-     * <pre>
-     *    int32 auto_preloading = 23; // 是否预加载,默认开启,0:关闭预加载;1:开启
-     * </pre>
-     *
      * <code>optional int32 batch_size = 24;</code>
      */
     public int getBatchSize() {
@@ -2630,6 +2782,15 @@ public final class PlacementPB {
       if (preloadTimeout_ != 0) {
         output.writeInt32(22, preloadTimeout_);
       }
+      for (java.util.Map.Entry<java.lang.Integer, java.lang.Integer> entry
+           : internalGetInventoryIntervalStep().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.Integer, java.lang.Integer>
+        inventoryIntervalStep = InventoryIntervalStepDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        output.writeMessage(23, inventoryIntervalStep);
+      }
       if (batchSize_ != 0) {
         output.writeInt32(24, batchSize_);
       }
@@ -2762,6 +2923,16 @@ public final class PlacementPB {
       if (preloadTimeout_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(22, preloadTimeout_);
+      }
+      for (java.util.Map.Entry<java.lang.Integer, java.lang.Integer> entry
+           : internalGetInventoryIntervalStep().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.Integer, java.lang.Integer>
+        inventoryIntervalStep = InventoryIntervalStepDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(23, inventoryIntervalStep);
       }
       if (batchSize_ != 0) {
         size += com.google.protobuf.CodedOutputStream
@@ -2936,6 +3107,8 @@ public final class PlacementPB {
           == other.getFrequencyInterval());
       result = result && (getPreloadTimeout()
           == other.getPreloadTimeout());
+      result = result && internalGetInventoryIntervalStep().equals(
+          other.internalGetInventoryIntervalStep());
       result = result && (getBatchSize()
           == other.getBatchSize());
       result = result && (getInventoryCount()
@@ -3019,6 +3192,10 @@ public final class PlacementPB {
       hash = (53 * hash) + getFrequencyInterval();
       hash = (37 * hash) + PRELOAD_TIMEOUT_FIELD_NUMBER;
       hash = (53 * hash) + getPreloadTimeout();
+      if (!internalGetInventoryIntervalStep().getMap().isEmpty()) {
+        hash = (37 * hash) + INVENTORY_INTERVAL_STEP_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetInventoryIntervalStep().hashCode();
+      }
       hash = (37 * hash) + BATCH_SIZE_FIELD_NUMBER;
       hash = (53 * hash) + getBatchSize();
       hash = (37 * hash) + INVENTORY_COUNT_FIELD_NUMBER;
@@ -3184,6 +3361,8 @@ public final class PlacementPB {
       protected com.google.protobuf.MapField internalGetMapField(
           int number) {
         switch (number) {
+          case 23:
+            return internalGetInventoryIntervalStep();
           case 29:
             return internalGetCountryFloorPrice();
           case 43:
@@ -3197,6 +3376,8 @@ public final class PlacementPB {
       protected com.google.protobuf.MapField internalGetMutableMapField(
           int number) {
         switch (number) {
+          case 23:
+            return internalGetMutableInventoryIntervalStep();
           case 29:
             return internalGetMutableCountryFloorPrice();
           case 43:
@@ -3259,6 +3440,7 @@ public final class PlacementPB {
 
         preloadTimeout_ = 0;
 
+        internalGetMutableInventoryIntervalStep().clear();
         batchSize_ = 0;
 
         inventoryCount_ = 0;
@@ -3272,7 +3454,7 @@ public final class PlacementPB {
         internalGetMutableCountryFloorPrice().clear();
         if (scenesBuilder_ == null) {
           scenes_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00100000);
+          bitField0_ = (bitField0_ & ~0x00200000);
         } else {
           scenesBuilder_.clear();
         }
@@ -3281,25 +3463,25 @@ public final class PlacementPB {
         osvMin_ = "";
 
         osvWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00800000);
-        osvBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x01000000);
-        makeWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        osvBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x02000000);
-        makeBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        makeWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x04000000);
-        brandWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        makeBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x08000000);
-        brandBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        brandWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x10000000);
-        modelWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        brandBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x20000000);
-        modelBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        modelWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x40000000);
-        didBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        modelBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x80000000);
-        sdkvBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        didBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField1_ = (bitField1_ & ~0x00000001);
+        sdkvBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField1_ = (bitField1_ & ~0x00000002);
         internalGetMutableCountrySettings().clear();
         return this;
       }
@@ -3340,6 +3522,8 @@ public final class PlacementPB {
         result.frequencyUnit_ = frequencyUnit_;
         result.frequencyInterval_ = frequencyInterval_;
         result.preloadTimeout_ = preloadTimeout_;
+        result.inventoryIntervalStep_ = internalGetInventoryIntervalStep();
+        result.inventoryIntervalStep_.makeImmutable();
         result.batchSize_ = batchSize_;
         result.inventoryCount_ = inventoryCount_;
         result.inventoryInterval_ = inventoryInterval_;
@@ -3348,9 +3532,9 @@ public final class PlacementPB {
         result.countryFloorPrice_ = internalGetCountryFloorPrice();
         result.countryFloorPrice_.makeImmutable();
         if (scenesBuilder_ == null) {
-          if (((bitField0_ & 0x00100000) == 0x00100000)) {
+          if (((bitField0_ & 0x00200000) == 0x00200000)) {
             scenes_ = java.util.Collections.unmodifiableList(scenes_);
-            bitField0_ = (bitField0_ & ~0x00100000);
+            bitField0_ = (bitField0_ & ~0x00200000);
           }
           result.scenes_ = scenes_;
         } else {
@@ -3358,54 +3542,54 @@ public final class PlacementPB {
         }
         result.osvMax_ = osvMax_;
         result.osvMin_ = osvMin_;
-        if (((bitField0_ & 0x00800000) == 0x00800000)) {
-          osvWhitelist_ = osvWhitelist_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00800000);
-        }
-        result.osvWhitelist_ = osvWhitelist_;
         if (((bitField0_ & 0x01000000) == 0x01000000)) {
-          osvBlacklist_ = osvBlacklist_.getUnmodifiableView();
+          osvWhitelist_ = osvWhitelist_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x01000000);
         }
-        result.osvBlacklist_ = osvBlacklist_;
+        result.osvWhitelist_ = osvWhitelist_;
         if (((bitField0_ & 0x02000000) == 0x02000000)) {
-          makeWhitelist_ = makeWhitelist_.getUnmodifiableView();
+          osvBlacklist_ = osvBlacklist_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x02000000);
         }
-        result.makeWhitelist_ = makeWhitelist_;
+        result.osvBlacklist_ = osvBlacklist_;
         if (((bitField0_ & 0x04000000) == 0x04000000)) {
-          makeBlacklist_ = makeBlacklist_.getUnmodifiableView();
+          makeWhitelist_ = makeWhitelist_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x04000000);
         }
-        result.makeBlacklist_ = makeBlacklist_;
+        result.makeWhitelist_ = makeWhitelist_;
         if (((bitField0_ & 0x08000000) == 0x08000000)) {
-          brandWhitelist_ = brandWhitelist_.getUnmodifiableView();
+          makeBlacklist_ = makeBlacklist_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x08000000);
         }
-        result.brandWhitelist_ = brandWhitelist_;
+        result.makeBlacklist_ = makeBlacklist_;
         if (((bitField0_ & 0x10000000) == 0x10000000)) {
-          brandBlacklist_ = brandBlacklist_.getUnmodifiableView();
+          brandWhitelist_ = brandWhitelist_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x10000000);
         }
-        result.brandBlacklist_ = brandBlacklist_;
+        result.brandWhitelist_ = brandWhitelist_;
         if (((bitField0_ & 0x20000000) == 0x20000000)) {
-          modelWhitelist_ = modelWhitelist_.getUnmodifiableView();
+          brandBlacklist_ = brandBlacklist_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x20000000);
         }
-        result.modelWhitelist_ = modelWhitelist_;
+        result.brandBlacklist_ = brandBlacklist_;
         if (((bitField0_ & 0x40000000) == 0x40000000)) {
-          modelBlacklist_ = modelBlacklist_.getUnmodifiableView();
+          modelWhitelist_ = modelWhitelist_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x40000000);
         }
-        result.modelBlacklist_ = modelBlacklist_;
+        result.modelWhitelist_ = modelWhitelist_;
         if (((bitField0_ & 0x80000000) == 0x80000000)) {
-          didBlacklist_ = didBlacklist_.getUnmodifiableView();
+          modelBlacklist_ = modelBlacklist_.getUnmodifiableView();
           bitField0_ = (bitField0_ & ~0x80000000);
         }
-        result.didBlacklist_ = didBlacklist_;
+        result.modelBlacklist_ = modelBlacklist_;
         if (((bitField1_ & 0x00000001) == 0x00000001)) {
-          sdkvBlacklist_ = sdkvBlacklist_.getUnmodifiableView();
+          didBlacklist_ = didBlacklist_.getUnmodifiableView();
           bitField1_ = (bitField1_ & ~0x00000001);
+        }
+        result.didBlacklist_ = didBlacklist_;
+        if (((bitField1_ & 0x00000002) == 0x00000002)) {
+          sdkvBlacklist_ = sdkvBlacklist_.getUnmodifiableView();
+          bitField1_ = (bitField1_ & ~0x00000002);
         }
         result.sdkvBlacklist_ = sdkvBlacklist_;
         result.countrySettings_ = internalGetCountrySettings();
@@ -3496,6 +3680,8 @@ public final class PlacementPB {
         if (other.getPreloadTimeout() != 0) {
           setPreloadTimeout(other.getPreloadTimeout());
         }
+        internalGetMutableInventoryIntervalStep().mergeFrom(
+            other.internalGetInventoryIntervalStep());
         if (other.getBatchSize() != 0) {
           setBatchSize(other.getBatchSize());
         }
@@ -3517,7 +3703,7 @@ public final class PlacementPB {
           if (!other.scenes_.isEmpty()) {
             if (scenes_.isEmpty()) {
               scenes_ = other.scenes_;
-              bitField0_ = (bitField0_ & ~0x00100000);
+              bitField0_ = (bitField0_ & ~0x00200000);
             } else {
               ensureScenesIsMutable();
               scenes_.addAll(other.scenes_);
@@ -3530,7 +3716,7 @@ public final class PlacementPB {
               scenesBuilder_.dispose();
               scenesBuilder_ = null;
               scenes_ = other.scenes_;
-              bitField0_ = (bitField0_ & ~0x00100000);
+              bitField0_ = (bitField0_ & ~0x00200000);
               scenesBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getScenesFieldBuilder() : null;
@@ -3550,7 +3736,7 @@ public final class PlacementPB {
         if (!other.osvWhitelist_.isEmpty()) {
           if (osvWhitelist_.isEmpty()) {
             osvWhitelist_ = other.osvWhitelist_;
-            bitField0_ = (bitField0_ & ~0x00800000);
+            bitField0_ = (bitField0_ & ~0x01000000);
           } else {
             ensureOsvWhitelistIsMutable();
             osvWhitelist_.addAll(other.osvWhitelist_);
@@ -3560,7 +3746,7 @@ public final class PlacementPB {
         if (!other.osvBlacklist_.isEmpty()) {
           if (osvBlacklist_.isEmpty()) {
             osvBlacklist_ = other.osvBlacklist_;
-            bitField0_ = (bitField0_ & ~0x01000000);
+            bitField0_ = (bitField0_ & ~0x02000000);
           } else {
             ensureOsvBlacklistIsMutable();
             osvBlacklist_.addAll(other.osvBlacklist_);
@@ -3570,7 +3756,7 @@ public final class PlacementPB {
         if (!other.makeWhitelist_.isEmpty()) {
           if (makeWhitelist_.isEmpty()) {
             makeWhitelist_ = other.makeWhitelist_;
-            bitField0_ = (bitField0_ & ~0x02000000);
+            bitField0_ = (bitField0_ & ~0x04000000);
           } else {
             ensureMakeWhitelistIsMutable();
             makeWhitelist_.addAll(other.makeWhitelist_);
@@ -3580,7 +3766,7 @@ public final class PlacementPB {
         if (!other.makeBlacklist_.isEmpty()) {
           if (makeBlacklist_.isEmpty()) {
             makeBlacklist_ = other.makeBlacklist_;
-            bitField0_ = (bitField0_ & ~0x04000000);
+            bitField0_ = (bitField0_ & ~0x08000000);
           } else {
             ensureMakeBlacklistIsMutable();
             makeBlacklist_.addAll(other.makeBlacklist_);
@@ -3590,7 +3776,7 @@ public final class PlacementPB {
         if (!other.brandWhitelist_.isEmpty()) {
           if (brandWhitelist_.isEmpty()) {
             brandWhitelist_ = other.brandWhitelist_;
-            bitField0_ = (bitField0_ & ~0x08000000);
+            bitField0_ = (bitField0_ & ~0x10000000);
           } else {
             ensureBrandWhitelistIsMutable();
             brandWhitelist_.addAll(other.brandWhitelist_);
@@ -3600,7 +3786,7 @@ public final class PlacementPB {
         if (!other.brandBlacklist_.isEmpty()) {
           if (brandBlacklist_.isEmpty()) {
             brandBlacklist_ = other.brandBlacklist_;
-            bitField0_ = (bitField0_ & ~0x10000000);
+            bitField0_ = (bitField0_ & ~0x20000000);
           } else {
             ensureBrandBlacklistIsMutable();
             brandBlacklist_.addAll(other.brandBlacklist_);
@@ -3610,7 +3796,7 @@ public final class PlacementPB {
         if (!other.modelWhitelist_.isEmpty()) {
           if (modelWhitelist_.isEmpty()) {
             modelWhitelist_ = other.modelWhitelist_;
-            bitField0_ = (bitField0_ & ~0x20000000);
+            bitField0_ = (bitField0_ & ~0x40000000);
           } else {
             ensureModelWhitelistIsMutable();
             modelWhitelist_.addAll(other.modelWhitelist_);
@@ -3620,7 +3806,7 @@ public final class PlacementPB {
         if (!other.modelBlacklist_.isEmpty()) {
           if (modelBlacklist_.isEmpty()) {
             modelBlacklist_ = other.modelBlacklist_;
-            bitField0_ = (bitField0_ & ~0x40000000);
+            bitField0_ = (bitField0_ & ~0x80000000);
           } else {
             ensureModelBlacklistIsMutable();
             modelBlacklist_.addAll(other.modelBlacklist_);
@@ -3630,7 +3816,7 @@ public final class PlacementPB {
         if (!other.didBlacklist_.isEmpty()) {
           if (didBlacklist_.isEmpty()) {
             didBlacklist_ = other.didBlacklist_;
-            bitField0_ = (bitField0_ & ~0x80000000);
+            bitField1_ = (bitField1_ & ~0x00000001);
           } else {
             ensureDidBlacklistIsMutable();
             didBlacklist_.addAll(other.didBlacklist_);
@@ -3640,7 +3826,7 @@ public final class PlacementPB {
         if (!other.sdkvBlacklist_.isEmpty()) {
           if (sdkvBlacklist_.isEmpty()) {
             sdkvBlacklist_ = other.sdkvBlacklist_;
-            bitField1_ = (bitField1_ & ~0x00000001);
+            bitField1_ = (bitField1_ & ~0x00000002);
           } else {
             ensureSdkvBlacklistIsMutable();
             sdkvBlacklist_.addAll(other.sdkvBlacklist_);
@@ -4237,22 +4423,161 @@ public final class PlacementPB {
         return this;
       }
 
-      private int batchSize_ ;
+      private com.google.protobuf.MapField<
+          java.lang.Integer, java.lang.Integer> inventoryIntervalStep_;
+      private com.google.protobuf.MapField<java.lang.Integer, java.lang.Integer>
+      internalGetInventoryIntervalStep() {
+        if (inventoryIntervalStep_ == null) {
+          return com.google.protobuf.MapField.emptyMapField(
+              InventoryIntervalStepDefaultEntryHolder.defaultEntry);
+        }
+        return inventoryIntervalStep_;
+      }
+      private com.google.protobuf.MapField<java.lang.Integer, java.lang.Integer>
+      internalGetMutableInventoryIntervalStep() {
+        onChanged();;
+        if (inventoryIntervalStep_ == null) {
+          inventoryIntervalStep_ = com.google.protobuf.MapField.newMapField(
+              InventoryIntervalStepDefaultEntryHolder.defaultEntry);
+        }
+        if (!inventoryIntervalStep_.isMutable()) {
+          inventoryIntervalStep_ = inventoryIntervalStep_.copy();
+        }
+        return inventoryIntervalStep_;
+      }
+
+      public int getInventoryIntervalStepCount() {
+        return internalGetInventoryIntervalStep().getMap().size();
+      }
       /**
        * <pre>
-       *    int32 auto_preloading = 23; // 是否预加载,默认开启,0:关闭预加载;1:开启
+       * 自动补库存阈值间隔, 多行分隔, 单行格式: "{连续失败次数}:{间隔}"
        * </pre>
        *
+       * <code>map&lt;int32, int32&gt; inventory_interval_step = 23;</code>
+       */
+
+      public boolean containsInventoryIntervalStep(
+          int key) {
+        
+        return internalGetInventoryIntervalStep().getMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getInventoryIntervalStepMap()} instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.Integer, java.lang.Integer> getInventoryIntervalStep() {
+        return getInventoryIntervalStepMap();
+      }
+      /**
+       * <pre>
+       * 自动补库存阈值间隔, 多行分隔, 单行格式: "{连续失败次数}:{间隔}"
+       * </pre>
+       *
+       * <code>map&lt;int32, int32&gt; inventory_interval_step = 23;</code>
+       */
+
+      public java.util.Map<java.lang.Integer, java.lang.Integer> getInventoryIntervalStepMap() {
+        return internalGetInventoryIntervalStep().getMap();
+      }
+      /**
+       * <pre>
+       * 自动补库存阈值间隔, 多行分隔, 单行格式: "{连续失败次数}:{间隔}"
+       * </pre>
+       *
+       * <code>map&lt;int32, int32&gt; inventory_interval_step = 23;</code>
+       */
+
+      public int getInventoryIntervalStepOrDefault(
+          int key,
+          int defaultValue) {
+        
+        java.util.Map<java.lang.Integer, java.lang.Integer> map =
+            internalGetInventoryIntervalStep().getMap();
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+      }
+      /**
+       * <pre>
+       * 自动补库存阈值间隔, 多行分隔, 单行格式: "{连续失败次数}:{间隔}"
+       * </pre>
+       *
+       * <code>map&lt;int32, int32&gt; inventory_interval_step = 23;</code>
+       */
+
+      public int getInventoryIntervalStepOrThrow(
+          int key) {
+        
+        java.util.Map<java.lang.Integer, java.lang.Integer> map =
+            internalGetInventoryIntervalStep().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return map.get(key);
+      }
+
+      public Builder clearInventoryIntervalStep() {
+        getMutableInventoryIntervalStep().clear();
+        return this;
+      }
+      /**
+       * <pre>
+       * 自动补库存阈值间隔, 多行分隔, 单行格式: "{连续失败次数}:{间隔}"
+       * </pre>
+       *
+       * <code>map&lt;int32, int32&gt; inventory_interval_step = 23;</code>
+       */
+
+      public Builder removeInventoryIntervalStep(
+          int key) {
+        
+        getMutableInventoryIntervalStep().remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.Integer, java.lang.Integer>
+      getMutableInventoryIntervalStep() {
+        return internalGetMutableInventoryIntervalStep().getMutableMap();
+      }
+      /**
+       * <pre>
+       * 自动补库存阈值间隔, 多行分隔, 单行格式: "{连续失败次数}:{间隔}"
+       * </pre>
+       *
+       * <code>map&lt;int32, int32&gt; inventory_interval_step = 23;</code>
+       */
+      public Builder putInventoryIntervalStep(
+          int key,
+          int value) {
+        
+        
+        getMutableInventoryIntervalStep().put(key, value);
+        return this;
+      }
+      /**
+       * <pre>
+       * 自动补库存阈值间隔, 多行分隔, 单行格式: "{连续失败次数}:{间隔}"
+       * </pre>
+       *
+       * <code>map&lt;int32, int32&gt; inventory_interval_step = 23;</code>
+       */
+
+      public Builder putAllInventoryIntervalStep(
+          java.util.Map<java.lang.Integer, java.lang.Integer> values) {
+        getMutableInventoryIntervalStep().putAll(values);
+        return this;
+      }
+
+      private int batchSize_ ;
+      /**
        * <code>optional int32 batch_size = 24;</code>
        */
       public int getBatchSize() {
         return batchSize_;
       }
       /**
-       * <pre>
-       *    int32 auto_preloading = 23; // 是否预加载,默认开启,0:关闭预加载;1:开启
-       * </pre>
-       *
        * <code>optional int32 batch_size = 24;</code>
        */
       public Builder setBatchSize(int value) {
@@ -4262,10 +4587,6 @@ public final class PlacementPB {
         return this;
       }
       /**
-       * <pre>
-       *    int32 auto_preloading = 23; // 是否预加载,默认开启,0:关闭预加载;1:开启
-       * </pre>
-       *
        * <code>optional int32 batch_size = 24;</code>
        */
       public Builder clearBatchSize() {
@@ -4541,9 +4862,9 @@ public final class PlacementPB {
       private java.util.List<com.adtiming.om.pb.PlacementPB.Scene> scenes_ =
         java.util.Collections.emptyList();
       private void ensureScenesIsMutable() {
-        if (!((bitField0_ & 0x00100000) == 0x00100000)) {
+        if (!((bitField0_ & 0x00200000) == 0x00200000)) {
           scenes_ = new java.util.ArrayList<com.adtiming.om.pb.PlacementPB.Scene>(scenes_);
-          bitField0_ |= 0x00100000;
+          bitField0_ |= 0x00200000;
          }
       }
 
@@ -4737,7 +5058,7 @@ public final class PlacementPB {
       public Builder clearScenes() {
         if (scenesBuilder_ == null) {
           scenes_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00100000);
+          bitField0_ = (bitField0_ & ~0x00200000);
           onChanged();
         } else {
           scenesBuilder_.clear();
@@ -4842,7 +5163,7 @@ public final class PlacementPB {
           scenesBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.adtiming.om.pb.PlacementPB.Scene, com.adtiming.om.pb.PlacementPB.Scene.Builder, com.adtiming.om.pb.PlacementPB.SceneOrBuilder>(
                   scenes_,
-                  ((bitField0_ & 0x00100000) == 0x00100000),
+                  ((bitField0_ & 0x00200000) == 0x00200000),
                   getParentForChildren(),
                   isClean());
           scenes_ = null;
@@ -5010,9 +5331,9 @@ public final class PlacementPB {
 
       private com.google.protobuf.LazyStringList osvWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureOsvWhitelistIsMutable() {
-        if (!((bitField0_ & 0x00800000) == 0x00800000)) {
+        if (!((bitField0_ & 0x01000000) == 0x01000000)) {
           osvWhitelist_ = new com.google.protobuf.LazyStringArrayList(osvWhitelist_);
-          bitField0_ |= 0x00800000;
+          bitField0_ |= 0x01000000;
          }
       }
       /**
@@ -5083,7 +5404,7 @@ public final class PlacementPB {
        */
       public Builder clearOsvWhitelist() {
         osvWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00800000);
+        bitField0_ = (bitField0_ & ~0x01000000);
         onChanged();
         return this;
       }
@@ -5104,9 +5425,9 @@ public final class PlacementPB {
 
       private com.google.protobuf.LazyStringList osvBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureOsvBlacklistIsMutable() {
-        if (!((bitField0_ & 0x01000000) == 0x01000000)) {
+        if (!((bitField0_ & 0x02000000) == 0x02000000)) {
           osvBlacklist_ = new com.google.protobuf.LazyStringArrayList(osvBlacklist_);
-          bitField0_ |= 0x01000000;
+          bitField0_ |= 0x02000000;
          }
       }
       /**
@@ -5177,7 +5498,7 @@ public final class PlacementPB {
        */
       public Builder clearOsvBlacklist() {
         osvBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x01000000);
+        bitField0_ = (bitField0_ & ~0x02000000);
         onChanged();
         return this;
       }
@@ -5198,9 +5519,9 @@ public final class PlacementPB {
 
       private com.google.protobuf.LazyStringList makeWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureMakeWhitelistIsMutable() {
-        if (!((bitField0_ & 0x02000000) == 0x02000000)) {
+        if (!((bitField0_ & 0x04000000) == 0x04000000)) {
           makeWhitelist_ = new com.google.protobuf.LazyStringArrayList(makeWhitelist_);
-          bitField0_ |= 0x02000000;
+          bitField0_ |= 0x04000000;
          }
       }
       /**
@@ -5271,7 +5592,7 @@ public final class PlacementPB {
        */
       public Builder clearMakeWhitelist() {
         makeWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x02000000);
+        bitField0_ = (bitField0_ & ~0x04000000);
         onChanged();
         return this;
       }
@@ -5292,9 +5613,9 @@ public final class PlacementPB {
 
       private com.google.protobuf.LazyStringList makeBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureMakeBlacklistIsMutable() {
-        if (!((bitField0_ & 0x04000000) == 0x04000000)) {
+        if (!((bitField0_ & 0x08000000) == 0x08000000)) {
           makeBlacklist_ = new com.google.protobuf.LazyStringArrayList(makeBlacklist_);
-          bitField0_ |= 0x04000000;
+          bitField0_ |= 0x08000000;
          }
       }
       /**
@@ -5365,7 +5686,7 @@ public final class PlacementPB {
        */
       public Builder clearMakeBlacklist() {
         makeBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x04000000);
+        bitField0_ = (bitField0_ & ~0x08000000);
         onChanged();
         return this;
       }
@@ -5386,9 +5707,9 @@ public final class PlacementPB {
 
       private com.google.protobuf.LazyStringList brandWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureBrandWhitelistIsMutable() {
-        if (!((bitField0_ & 0x08000000) == 0x08000000)) {
+        if (!((bitField0_ & 0x10000000) == 0x10000000)) {
           brandWhitelist_ = new com.google.protobuf.LazyStringArrayList(brandWhitelist_);
-          bitField0_ |= 0x08000000;
+          bitField0_ |= 0x10000000;
          }
       }
       /**
@@ -5459,7 +5780,7 @@ public final class PlacementPB {
        */
       public Builder clearBrandWhitelist() {
         brandWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x08000000);
+        bitField0_ = (bitField0_ & ~0x10000000);
         onChanged();
         return this;
       }
@@ -5480,9 +5801,9 @@ public final class PlacementPB {
 
       private com.google.protobuf.LazyStringList brandBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureBrandBlacklistIsMutable() {
-        if (!((bitField0_ & 0x10000000) == 0x10000000)) {
+        if (!((bitField0_ & 0x20000000) == 0x20000000)) {
           brandBlacklist_ = new com.google.protobuf.LazyStringArrayList(brandBlacklist_);
-          bitField0_ |= 0x10000000;
+          bitField0_ |= 0x20000000;
          }
       }
       /**
@@ -5553,7 +5874,7 @@ public final class PlacementPB {
        */
       public Builder clearBrandBlacklist() {
         brandBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x10000000);
+        bitField0_ = (bitField0_ & ~0x20000000);
         onChanged();
         return this;
       }
@@ -5574,9 +5895,9 @@ public final class PlacementPB {
 
       private com.google.protobuf.LazyStringList modelWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureModelWhitelistIsMutable() {
-        if (!((bitField0_ & 0x20000000) == 0x20000000)) {
+        if (!((bitField0_ & 0x40000000) == 0x40000000)) {
           modelWhitelist_ = new com.google.protobuf.LazyStringArrayList(modelWhitelist_);
-          bitField0_ |= 0x20000000;
+          bitField0_ |= 0x40000000;
          }
       }
       /**
@@ -5647,7 +5968,7 @@ public final class PlacementPB {
        */
       public Builder clearModelWhitelist() {
         modelWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x20000000);
+        bitField0_ = (bitField0_ & ~0x40000000);
         onChanged();
         return this;
       }
@@ -5668,9 +5989,9 @@ public final class PlacementPB {
 
       private com.google.protobuf.LazyStringList modelBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureModelBlacklistIsMutable() {
-        if (!((bitField0_ & 0x40000000) == 0x40000000)) {
+        if (!((bitField0_ & 0x80000000) == 0x80000000)) {
           modelBlacklist_ = new com.google.protobuf.LazyStringArrayList(modelBlacklist_);
-          bitField0_ |= 0x40000000;
+          bitField0_ |= 0x80000000;
          }
       }
       /**
@@ -5741,7 +6062,7 @@ public final class PlacementPB {
        */
       public Builder clearModelBlacklist() {
         modelBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x40000000);
+        bitField0_ = (bitField0_ & ~0x80000000);
         onChanged();
         return this;
       }
@@ -5762,9 +6083,9 @@ public final class PlacementPB {
 
       private com.google.protobuf.LazyStringList didBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureDidBlacklistIsMutable() {
-        if (!((bitField0_ & 0x80000000) == 0x80000000)) {
+        if (!((bitField1_ & 0x00000001) == 0x00000001)) {
           didBlacklist_ = new com.google.protobuf.LazyStringArrayList(didBlacklist_);
-          bitField0_ |= 0x80000000;
+          bitField1_ |= 0x00000001;
          }
       }
       /**
@@ -5835,7 +6156,7 @@ public final class PlacementPB {
        */
       public Builder clearDidBlacklist() {
         didBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x80000000);
+        bitField1_ = (bitField1_ & ~0x00000001);
         onChanged();
         return this;
       }
@@ -5856,9 +6177,9 @@ public final class PlacementPB {
 
       private com.google.protobuf.LazyStringList sdkvBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       private void ensureSdkvBlacklistIsMutable() {
-        if (!((bitField1_ & 0x00000001) == 0x00000001)) {
+        if (!((bitField1_ & 0x00000002) == 0x00000002)) {
           sdkvBlacklist_ = new com.google.protobuf.LazyStringArrayList(sdkvBlacklist_);
-          bitField1_ |= 0x00000001;
+          bitField1_ |= 0x00000002;
          }
       }
       /**
@@ -5929,7 +6250,7 @@ public final class PlacementPB {
        */
       public Builder clearSdkvBlacklist() {
         sdkvBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField1_ = (bitField1_ & ~0x00000001);
+        bitField1_ = (bitField1_ & ~0x00000002);
         onChanged();
         return this;
       }
@@ -7820,6 +8141,11 @@ public final class PlacementPB {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Placement_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Placement_InventoryIntervalStepEntry_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_Placement_InventoryIntervalStepEntry_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Placement_CountryFloorPriceEntry_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -7858,7 +8184,7 @@ public final class PlacementPB {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017placement.proto\032\014common.proto\"\366\010\n\tPlac" +
+      "\n\017placement.proto\032\014common.proto\"\374\t\n\tPlac" +
       "ement\022\n\n\002id\030\001 \001(\005\022\024\n\014publisher_id\030\002 \001(\005\022" +
       "\022\n\npub_app_id\030\003 \001(\005\022\016\n\006app_id\030\004 \001(\t\022\014\n\004p" +
       "lat\030\005 \001(\005\022\030\n\007ad_type\030\006 \001(\0162\007.AdType\022\026\n\016m" +
@@ -7866,36 +8192,39 @@ public final class PlacementPB {
       "an_out\030\t \001(\010\022\020\n\010allow_hb\030\n \001(\010\022\025\n\rfreque" +
       "ncy_cap\030\013 \001(\005\022\026\n\016frequency_unit\030\014 \001(\005\022\032\n" +
       "\022frequency_interval\030\r \001(\005\022\027\n\017preload_tim" +
-      "eout\030\026 \001(\005\022\022\n\nbatch_size\030\030 \001(\005\022\027\n\017invent" +
-      "ory_count\030\031 \001(\005\022\032\n\022inventory_interval\030\032 ",
-      "\001(\005\022\027\n\017reload_interval\030\033 \001(\005\022\023\n\013floor_pr" +
-      "ice\030\034 \001(\002\022>\n\023country_floor_price\030\035 \003(\0132!" +
-      ".Placement.CountryFloorPriceEntry\022\026\n\006sce" +
-      "nes\030\036 \003(\0132\006.Scene\022\017\n\007osv_max\030\037 \001(\t\022\017\n\007os" +
-      "v_min\030  \001(\t\022\025\n\rosv_whitelist\030! \003(\t\022\025\n\ros" +
-      "v_blacklist\030\" \003(\t\022\026\n\016make_whitelist\030# \003(" +
-      "\t\022\026\n\016make_blacklist\030$ \003(\t\022\027\n\017brand_white" +
-      "list\030% \003(\t\022\027\n\017brand_blacklist\030& \003(\t\022\027\n\017m" +
-      "odel_whitelist\030\' \003(\t\022\027\n\017model_blacklist\030" +
-      "( \003(\t\022\025\n\rdid_blacklist\030) \003(\t\022\026\n\016sdkv_bla",
-      "cklist\030* \003(\t\0229\n\020country_settings\030+ \003(\0132\037" +
-      ".Placement.CountrySettingsEntry\0328\n\026Count" +
-      "ryFloorPriceEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030" +
-      "\002 \001(\002:\0028\001\032R\n\024CountrySettingsEntry\022\013\n\003key" +
-      "\030\001 \001(\t\022)\n\005value\030\002 \001(\0132\032.Placement.Countr" +
-      "ySettings:\0028\001\032\240\001\n\017CountrySettings\0226\n\006per" +
-      "iod\030\001 \003(\0132&.Placement.CountrySettings.Pe" +
-      "riodEntry\022\023\n\013floor_price\030\002 \001(\002\022\021\n\tmax_pr" +
-      "ice\030\003 \001(\002\032-\n\013PeriodEntry\022\013\n\003key\030\001 \001(\005\022\r\n" +
-      "\005value\030\002 \001(\005:\0028\001\"z\n\005Scene\022\n\n\002id\030\001 \001(\005\022\024\n",
-      "\014placement_id\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\025\n\rfre" +
-      "quency_cap\030\004 \001(\005\022\026\n\016frequency_unit\030\005 \001(\005" +
-      "\022\022\n\nis_default\030\006 \001(\005\"\220\001\n\017PlacementAbTest" +
-      "\022\024\n\014placement_id\030\001 \001(\005\022\r\n\005a_per\030\002 \001(\005\022\r\n" +
-      "\005b_per\030\003 \001(\005\022\021\n\ta_rule_id\030\004 \001(\005\022\021\n\tb_rul" +
-      "e_id\030\005 \001(\005\022\022\n\nsegment_id\030\006 \001(\005\022\017\n\007countr" +
-      "y\030\007 \001(\tB!\n\022com.adtiming.om.pbB\013Placement" +
-      "PBb\006proto3"
+      "eout\030\026 \001(\005\022F\n\027inventory_interval_step\030\027 " +
+      "\003(\0132%.Placement.InventoryIntervalStepEnt",
+      "ry\022\022\n\nbatch_size\030\030 \001(\005\022\027\n\017inventory_coun" +
+      "t\030\031 \001(\005\022\032\n\022inventory_interval\030\032 \001(\005\022\027\n\017r" +
+      "eload_interval\030\033 \001(\005\022\023\n\013floor_price\030\034 \001(" +
+      "\002\022>\n\023country_floor_price\030\035 \003(\0132!.Placeme" +
+      "nt.CountryFloorPriceEntry\022\026\n\006scenes\030\036 \003(" +
+      "\0132\006.Scene\022\017\n\007osv_max\030\037 \001(\t\022\017\n\007osv_min\030  " +
+      "\001(\t\022\025\n\rosv_whitelist\030! \003(\t\022\025\n\rosv_blackl" +
+      "ist\030\" \003(\t\022\026\n\016make_whitelist\030# \003(\t\022\026\n\016mak" +
+      "e_blacklist\030$ \003(\t\022\027\n\017brand_whitelist\030% \003" +
+      "(\t\022\027\n\017brand_blacklist\030& \003(\t\022\027\n\017model_whi",
+      "telist\030\' \003(\t\022\027\n\017model_blacklist\030( \003(\t\022\025\n" +
+      "\rdid_blacklist\030) \003(\t\022\026\n\016sdkv_blacklist\030*" +
+      " \003(\t\0229\n\020country_settings\030+ \003(\0132\037.Placeme" +
+      "nt.CountrySettingsEntry\032<\n\032InventoryInte" +
+      "rvalStepEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(" +
+      "\005:\0028\001\0328\n\026CountryFloorPriceEntry\022\013\n\003key\030\001" +
+      " \001(\t\022\r\n\005value\030\002 \001(\002:\0028\001\032R\n\024CountrySettin" +
+      "gsEntry\022\013\n\003key\030\001 \001(\t\022)\n\005value\030\002 \001(\0132\032.Pl" +
+      "acement.CountrySettings:\0028\001\032\240\001\n\017CountryS" +
+      "ettings\0226\n\006period\030\001 \003(\0132&.Placement.Coun",
+      "trySettings.PeriodEntry\022\023\n\013floor_price\030\002" +
+      " \001(\002\022\021\n\tmax_price\030\003 \001(\002\032-\n\013PeriodEntry\022\013" +
+      "\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\005:\0028\001\"z\n\005Scene\022" +
+      "\n\n\002id\030\001 \001(\005\022\024\n\014placement_id\030\002 \001(\005\022\014\n\004nam" +
+      "e\030\003 \001(\t\022\025\n\rfrequency_cap\030\004 \001(\005\022\026\n\016freque" +
+      "ncy_unit\030\005 \001(\005\022\022\n\nis_default\030\006 \001(\005\"\220\001\n\017P" +
+      "lacementAbTest\022\024\n\014placement_id\030\001 \001(\005\022\r\n\005" +
+      "a_per\030\002 \001(\005\022\r\n\005b_per\030\003 \001(\005\022\021\n\ta_rule_id\030" +
+      "\004 \001(\005\022\021\n\tb_rule_id\030\005 \001(\005\022\022\n\nsegment_id\030\006" +
+      " \001(\005\022\017\n\007country\030\007 \001(\tB!\n\022com.adtiming.om",
+      ".pbB\013PlacementPBb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -7915,21 +8244,27 @@ public final class PlacementPB {
     internal_static_Placement_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Placement_descriptor,
-        new java.lang.String[] { "Id", "PublisherId", "PubAppId", "AppId", "Plat", "AdType", "MainPlacement", "IcUrl", "FanOut", "AllowHb", "FrequencyCap", "FrequencyUnit", "FrequencyInterval", "PreloadTimeout", "BatchSize", "InventoryCount", "InventoryInterval", "ReloadInterval", "FloorPrice", "CountryFloorPrice", "Scenes", "OsvMax", "OsvMin", "OsvWhitelist", "OsvBlacklist", "MakeWhitelist", "MakeBlacklist", "BrandWhitelist", "BrandBlacklist", "ModelWhitelist", "ModelBlacklist", "DidBlacklist", "SdkvBlacklist", "CountrySettings", });
-    internal_static_Placement_CountryFloorPriceEntry_descriptor =
+        new java.lang.String[] { "Id", "PublisherId", "PubAppId", "AppId", "Plat", "AdType", "MainPlacement", "IcUrl", "FanOut", "AllowHb", "FrequencyCap", "FrequencyUnit", "FrequencyInterval", "PreloadTimeout", "InventoryIntervalStep", "BatchSize", "InventoryCount", "InventoryInterval", "ReloadInterval", "FloorPrice", "CountryFloorPrice", "Scenes", "OsvMax", "OsvMin", "OsvWhitelist", "OsvBlacklist", "MakeWhitelist", "MakeBlacklist", "BrandWhitelist", "BrandBlacklist", "ModelWhitelist", "ModelBlacklist", "DidBlacklist", "SdkvBlacklist", "CountrySettings", });
+    internal_static_Placement_InventoryIntervalStepEntry_descriptor =
       internal_static_Placement_descriptor.getNestedTypes().get(0);
+    internal_static_Placement_InventoryIntervalStepEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Placement_InventoryIntervalStepEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_Placement_CountryFloorPriceEntry_descriptor =
+      internal_static_Placement_descriptor.getNestedTypes().get(1);
     internal_static_Placement_CountryFloorPriceEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Placement_CountryFloorPriceEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_Placement_CountrySettingsEntry_descriptor =
-      internal_static_Placement_descriptor.getNestedTypes().get(1);
+      internal_static_Placement_descriptor.getNestedTypes().get(2);
     internal_static_Placement_CountrySettingsEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Placement_CountrySettingsEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
     internal_static_Placement_CountrySettings_descriptor =
-      internal_static_Placement_descriptor.getNestedTypes().get(2);
+      internal_static_Placement_descriptor.getNestedTypes().get(3);
     internal_static_Placement_CountrySettings_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Placement_CountrySettings_descriptor,

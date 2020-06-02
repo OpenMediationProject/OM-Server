@@ -75,14 +75,14 @@ public class HBController extends WaterfallBase {
         lr.setPlacement(placement);
 
         o.setAdType(placement.getAdTypeValue());
-        o.setAbt(cacheService.getAbTestMode(placement.getId(), o));
+//        o.setAbt(cacheService.getAbTestMode(placement.getId(), o));
 
         if (DEBUG) {
             dmsg.add(String.format("request ip:%s, country:%s", o.getIp(), o.getCountry()));
-            if (o.getAbt() > 0) {
-                dmsg.add("Placement ABTest status: On");
-                dmsg.add("Placement Device ABTest Mode:" + CommonPB.ABTest.forNumber(o.getAbt()));
-            }
+//            if (o.getAbt() > 0) {
+//                dmsg.add("Placement ABTest status: On");
+//                dmsg.add("Placement Device ABTest Mode:" + CommonPB.ABTest.forNumber(o.getAbt()));
+//            }
         }
         Integer devDevicePubId = cacheService.getDevDevicePub(o.getDid());
         // dev device uses the configured abTest mode
@@ -144,17 +144,15 @@ public class HBController extends WaterfallBase {
             return null;
         }
 
-        List<InstanceRule> rules = cacheService.getPlacementRules(p.getId());
-        InstanceRule matchedRule = getMatchedRule(cacheService, rules, o, DEBUG, dmsg);
+        List<InstanceRule> rules = cacheService.getCountryRules(p.getId(), o.getCountry());
+        InstanceRule matchedRule = getMatchedRule(rules, o);
 
-        int segmentId = matchedRule != null ? matchedRule.getSegmentId() : 0;
         if (DEBUG) {
             if (matchedRule != null) {
                 dmsg.add("hit rule:" + matchedRule.getId());
             } else {
                 dmsg.add("miss rule");
             }
-            dmsg.add("hit segment:" + segmentId);
         }
 
         List<AdNetworkApp> adnApps = cacheService.getAdnApps(p.getPubAppId());

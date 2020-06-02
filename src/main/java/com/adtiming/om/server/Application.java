@@ -6,6 +6,7 @@ package com.adtiming.om.server;
 import com.adtiming.om.server.dto.NodeConfig;
 import com.adtiming.om.server.service.AppConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.http.client.protocol.ResponseContentEncoding;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.apache.logging.log4j.LogManager;
@@ -28,7 +29,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
-    @Bean(destroyMethod = "close")
+    @Bean(initMethod = "start", destroyMethod = "close")
     public CloseableHttpAsyncClient httpAsyncClient() {
         return HttpAsyncClients.custom()
                 .setMaxConnPerRoute(50000)
@@ -38,15 +39,21 @@ public class Application {
     }
 
     @Bean
+    public ResponseContentEncoding responseContentEncoding() {
+        return new ResponseContentEncoding();
+    }
+
+    @Bean
     public NodeConfig nc(@Autowired AppConfig cfg,
                          @Autowired ObjectMapper objectMapper) {
         try {
-            String url = String.format("http://%s/snode/config/get?id=%d&dcenter=%d", cfg.getDtask(), cfg.getSnode(), cfg.getDcenter());
+            String url = String.format("http://%s:19012/snode/config/get?id=%d&dcenter=%d", cfg.getDtask(), cfg.getSnode(), cfg.getDcenter());
             NodeConfig nc = objectMapper.readValue(new URL(url), NodeConfig.class);
             LOG.info(nc);
             return nc;
         } catch (Exception e) {
             LOG.error("load snode/config from dtask error", e);
+            System.exit(1);
         }
         return new NodeConfig();
     }

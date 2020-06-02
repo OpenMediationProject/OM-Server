@@ -79,6 +79,24 @@ public final class AdNetworkPB {
      */
     com.google.protobuf.ByteString
         getSdkVersionBytes();
+
+    /**
+     * <pre>
+     * S2S BidEndpointURL
+     * </pre>
+     *
+     * <code>optional string bid_endpoint = 6;</code>
+     */
+    java.lang.String getBidEndpoint();
+    /**
+     * <pre>
+     * S2S BidEndpointURL
+     * </pre>
+     *
+     * <code>optional string bid_endpoint = 6;</code>
+     */
+    com.google.protobuf.ByteString
+        getBidEndpointBytes();
   }
   /**
    * Protobuf type {@code AdNetwork}
@@ -97,6 +115,7 @@ public final class AdNetworkPB {
       className_ = "";
       type_ = 0;
       sdkVersion_ = "";
+      bidEndpoint_ = "";
     }
 
     @java.lang.Override
@@ -150,6 +169,12 @@ public final class AdNetworkPB {
               java.lang.String s = input.readStringRequireUtf8();
 
               sdkVersion_ = s;
+              break;
+            }
+            case 50: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              bidEndpoint_ = s;
               break;
             }
           }
@@ -317,6 +342,48 @@ public final class AdNetworkPB {
       }
     }
 
+    public static final int BID_ENDPOINT_FIELD_NUMBER = 6;
+    private volatile java.lang.Object bidEndpoint_;
+    /**
+     * <pre>
+     * S2S BidEndpointURL
+     * </pre>
+     *
+     * <code>optional string bid_endpoint = 6;</code>
+     */
+    public java.lang.String getBidEndpoint() {
+      java.lang.Object ref = bidEndpoint_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        bidEndpoint_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * S2S BidEndpointURL
+     * </pre>
+     *
+     * <code>optional string bid_endpoint = 6;</code>
+     */
+    public com.google.protobuf.ByteString
+        getBidEndpointBytes() {
+      java.lang.Object ref = bidEndpoint_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        bidEndpoint_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -344,6 +411,9 @@ public final class AdNetworkPB {
       if (!getSdkVersionBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, sdkVersion_);
       }
+      if (!getBidEndpointBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, bidEndpoint_);
+      }
     }
 
     public int getSerializedSize() {
@@ -367,6 +437,9 @@ public final class AdNetworkPB {
       }
       if (!getSdkVersionBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, sdkVersion_);
+      }
+      if (!getBidEndpointBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, bidEndpoint_);
       }
       memoizedSize = size;
       return size;
@@ -394,6 +467,8 @@ public final class AdNetworkPB {
           == other.getType());
       result = result && getSdkVersion()
           .equals(other.getSdkVersion());
+      result = result && getBidEndpoint()
+          .equals(other.getBidEndpoint());
       return result;
     }
 
@@ -414,6 +489,8 @@ public final class AdNetworkPB {
       hash = (53 * hash) + getType();
       hash = (37 * hash) + SDK_VERSION_FIELD_NUMBER;
       hash = (53 * hash) + getSdkVersion().hashCode();
+      hash = (37 * hash) + BID_ENDPOINT_FIELD_NUMBER;
+      hash = (53 * hash) + getBidEndpoint().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -542,6 +619,8 @@ public final class AdNetworkPB {
 
         sdkVersion_ = "";
 
+        bidEndpoint_ = "";
+
         return this;
       }
 
@@ -569,6 +648,7 @@ public final class AdNetworkPB {
         result.className_ = className_;
         result.type_ = type_;
         result.sdkVersion_ = sdkVersion_;
+        result.bidEndpoint_ = bidEndpoint_;
         onBuilt();
         return result;
       }
@@ -626,6 +706,10 @@ public final class AdNetworkPB {
         }
         if (!other.getSdkVersion().isEmpty()) {
           sdkVersion_ = other.sdkVersion_;
+          onChanged();
+        }
+        if (!other.getBidEndpoint().isEmpty()) {
+          bidEndpoint_ = other.bidEndpoint_;
           onChanged();
         }
         onChanged();
@@ -968,6 +1052,95 @@ public final class AdNetworkPB {
   checkByteStringIsUtf8(value);
         
         sdkVersion_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object bidEndpoint_ = "";
+      /**
+       * <pre>
+       * S2S BidEndpointURL
+       * </pre>
+       *
+       * <code>optional string bid_endpoint = 6;</code>
+       */
+      public java.lang.String getBidEndpoint() {
+        java.lang.Object ref = bidEndpoint_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          bidEndpoint_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * S2S BidEndpointURL
+       * </pre>
+       *
+       * <code>optional string bid_endpoint = 6;</code>
+       */
+      public com.google.protobuf.ByteString
+          getBidEndpointBytes() {
+        java.lang.Object ref = bidEndpoint_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          bidEndpoint_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * S2S BidEndpointURL
+       * </pre>
+       *
+       * <code>optional string bid_endpoint = 6;</code>
+       */
+      public Builder setBidEndpoint(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        bidEndpoint_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * S2S BidEndpointURL
+       * </pre>
+       *
+       * <code>optional string bid_endpoint = 6;</code>
+       */
+      public Builder clearBidEndpoint() {
+        
+        bidEndpoint_ = getDefaultInstance().getBidEndpoint();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * S2S BidEndpointURL
+       * </pre>
+       *
+       * <code>optional string bid_endpoint = 6;</code>
+       */
+      public Builder setBidEndpointBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        bidEndpoint_ = value;
         onChanged();
         return this;
       }
@@ -7501,14 +7674,23 @@ public final class AdNetworkPB {
     int getPlacementId();
 
     /**
-     * <code>optional string country = 5;</code>
+     * <code>repeated string country = 5;</code>
      */
-    java.lang.String getCountry();
+    java.util.List<java.lang.String>
+        getCountryList();
     /**
-     * <code>optional string country = 5;</code>
+     * <code>repeated string country = 5;</code>
+     */
+    int getCountryCount();
+    /**
+     * <code>repeated string country = 5;</code>
+     */
+    java.lang.String getCountry(int index);
+    /**
+     * <code>repeated string country = 5;</code>
      */
     com.google.protobuf.ByteString
-        getCountryBytes();
+        getCountryBytes(int index);
 
     /**
      * <pre>
@@ -7529,25 +7711,20 @@ public final class AdNetworkPB {
     com.adtiming.om.pb.CommonPB.ABTest getAbt();
 
     /**
-     * <code>optional int32 segment_id = 8;</code>
-     */
-    int getSegmentId();
-
-    /**
      * <pre>
      *自动优化开关
      * </pre>
      *
-     * <code>optional int32 auto_switch = 9;</code>
+     * <code>optional int32 auto_switch = 8;</code>
      */
     int getAutoSwitch();
 
     /**
-     * <code>map&lt;int32, int32&gt; instance_weight = 10;</code>
+     * <code>map&lt;int32, int32&gt; instance_weight = 9;</code>
      */
     int getInstanceWeightCount();
     /**
-     * <code>map&lt;int32, int32&gt; instance_weight = 10;</code>
+     * <code>map&lt;int32, int32&gt; instance_weight = 9;</code>
      */
     boolean containsInstanceWeight(
         int key);
@@ -7558,28 +7735,209 @@ public final class AdNetworkPB {
     java.util.Map<java.lang.Integer, java.lang.Integer>
     getInstanceWeight();
     /**
-     * <code>map&lt;int32, int32&gt; instance_weight = 10;</code>
+     * <code>map&lt;int32, int32&gt; instance_weight = 9;</code>
      */
     java.util.Map<java.lang.Integer, java.lang.Integer>
     getInstanceWeightMap();
     /**
-     * <code>map&lt;int32, int32&gt; instance_weight = 10;</code>
+     * <code>map&lt;int32, int32&gt; instance_weight = 9;</code>
      */
 
     int getInstanceWeightOrDefault(
         int key,
         int defaultValue);
     /**
-     * <code>map&lt;int32, int32&gt; instance_weight = 10;</code>
+     * <code>map&lt;int32, int32&gt; instance_weight = 9;</code>
      */
 
     int getInstanceWeightOrThrow(
         int key);
 
     /**
-     * <code>optional int32 priority = 11;</code>
+     * <code>optional int32 priority = 10;</code>
      */
     int getPriority();
+
+    /**
+     * <pre>
+     * Segment Conditions
+     * </pre>
+     *
+     * <code>optional int32 frequency = 11;</code>
+     */
+    int getFrequency();
+
+    /**
+     * <pre>
+     * 连接类型,二进制,从右到左(低位起) wifi,2G,3G,4G
+     * </pre>
+     *
+     * <code>optional int32 con_type = 12;</code>
+     */
+    int getConType();
+
+    /**
+     * <code>repeated string brand_whitelist = 13;</code>
+     */
+    java.util.List<java.lang.String>
+        getBrandWhitelistList();
+    /**
+     * <code>repeated string brand_whitelist = 13;</code>
+     */
+    int getBrandWhitelistCount();
+    /**
+     * <code>repeated string brand_whitelist = 13;</code>
+     */
+    java.lang.String getBrandWhitelist(int index);
+    /**
+     * <code>repeated string brand_whitelist = 13;</code>
+     */
+    com.google.protobuf.ByteString
+        getBrandWhitelistBytes(int index);
+
+    /**
+     * <code>repeated string brand_blacklist = 14;</code>
+     */
+    java.util.List<java.lang.String>
+        getBrandBlacklistList();
+    /**
+     * <code>repeated string brand_blacklist = 14;</code>
+     */
+    int getBrandBlacklistCount();
+    /**
+     * <code>repeated string brand_blacklist = 14;</code>
+     */
+    java.lang.String getBrandBlacklist(int index);
+    /**
+     * <code>repeated string brand_blacklist = 14;</code>
+     */
+    com.google.protobuf.ByteString
+        getBrandBlacklistBytes(int index);
+
+    /**
+     * <code>repeated string model_whitelist = 15;</code>
+     */
+    java.util.List<java.lang.String>
+        getModelWhitelistList();
+    /**
+     * <code>repeated string model_whitelist = 15;</code>
+     */
+    int getModelWhitelistCount();
+    /**
+     * <code>repeated string model_whitelist = 15;</code>
+     */
+    java.lang.String getModelWhitelist(int index);
+    /**
+     * <code>repeated string model_whitelist = 15;</code>
+     */
+    com.google.protobuf.ByteString
+        getModelWhitelistBytes(int index);
+
+    /**
+     * <code>repeated string model_blacklist = 16;</code>
+     */
+    java.util.List<java.lang.String>
+        getModelBlacklistList();
+    /**
+     * <code>repeated string model_blacklist = 16;</code>
+     */
+    int getModelBlacklistCount();
+    /**
+     * <code>repeated string model_blacklist = 16;</code>
+     */
+    java.lang.String getModelBlacklist(int index);
+    /**
+     * <code>repeated string model_blacklist = 16;</code>
+     */
+    com.google.protobuf.ByteString
+        getModelBlacklistBytes(int index);
+
+    /**
+     * <code>optional float iap_min = 17;</code>
+     */
+    float getIapMin();
+
+    /**
+     * <code>optional float iap_max = 18;</code>
+     */
+    float getIapMax();
+
+    /**
+     * <pre>
+     * 2020-05-14
+     * </pre>
+     *
+     * <code>optional int32 model_type = 19;</code>
+     */
+    int getModelType();
+
+    /**
+     * <pre>
+     * channel 定向方式, 0:黑名单,1:白名单
+     * </pre>
+     *
+     * <code>optional bool channel_bow = 20;</code>
+     */
+    boolean getChannelBow();
+
+    /**
+     * <pre>
+     *  国内Android channel 定向, 换行分隔
+     * </pre>
+     *
+     * <code>repeated string channel = 21;</code>
+     */
+    java.util.List<java.lang.String>
+        getChannelList();
+    /**
+     * <pre>
+     *  国内Android channel 定向, 换行分隔
+     * </pre>
+     *
+     * <code>repeated string channel = 21;</code>
+     */
+    int getChannelCount();
+    /**
+     * <pre>
+     *  国内Android channel 定向, 换行分隔
+     * </pre>
+     *
+     * <code>repeated string channel = 21;</code>
+     */
+    java.lang.String getChannel(int index);
+    /**
+     * <pre>
+     *  国内Android channel 定向, 换行分隔
+     * </pre>
+     *
+     * <code>repeated string channel = 21;</code>
+     */
+    com.google.protobuf.ByteString
+        getChannelBytes(int index);
+
+    /**
+     * <code>optional int32 gender = 22;</code>
+     */
+    int getGender();
+
+    /**
+     * <code>repeated string interest = 23;</code>
+     */
+    java.util.List<java.lang.String>
+        getInterestList();
+    /**
+     * <code>repeated string interest = 23;</code>
+     */
+    int getInterestCount();
+    /**
+     * <code>repeated string interest = 23;</code>
+     */
+    java.lang.String getInterest(int index);
+    /**
+     * <code>repeated string interest = 23;</code>
+     */
+    com.google.protobuf.ByteString
+        getInterestBytes(int index);
   }
   /**
    * Protobuf type {@code InstanceRule}
@@ -7597,12 +7955,24 @@ public final class AdNetworkPB {
       publisherId_ = 0;
       pubAppId_ = 0;
       placementId_ = 0;
-      country_ = "";
+      country_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       sortType_ = 0;
       abt_ = 0;
-      segmentId_ = 0;
       autoSwitch_ = 0;
       priority_ = 0;
+      frequency_ = 0;
+      conType_ = 0;
+      brandWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      brandBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      modelWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      modelBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      iapMin_ = 0F;
+      iapMax_ = 0F;
+      modelType_ = 0;
+      channelBow_ = false;
+      channel_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      gender_ = 0;
+      interest_ = com.google.protobuf.LazyStringArrayList.EMPTY;
     }
 
     @java.lang.Override
@@ -7652,8 +8022,11 @@ public final class AdNetworkPB {
             }
             case 42: {
               java.lang.String s = input.readStringRequireUtf8();
-
-              country_ = s;
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                country_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              country_.add(s);
               break;
             }
             case 48: {
@@ -7669,19 +8042,14 @@ public final class AdNetworkPB {
             }
             case 64: {
 
-              segmentId_ = input.readInt32();
-              break;
-            }
-            case 72: {
-
               autoSwitch_ = input.readInt32();
               break;
             }
-            case 82: {
-              if (!((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
+            case 74: {
+              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
                 instanceWeight_ = com.google.protobuf.MapField.newMapField(
                     InstanceWeightDefaultEntryHolder.defaultEntry);
-                mutable_bitField0_ |= 0x00000200;
+                mutable_bitField0_ |= 0x00000100;
               }
               com.google.protobuf.MapEntry<java.lang.Integer, java.lang.Integer>
               instanceWeight = input.readMessage(
@@ -7689,9 +8057,98 @@ public final class AdNetworkPB {
               instanceWeight_.getMutableMap().put(instanceWeight.getKey(), instanceWeight.getValue());
               break;
             }
-            case 88: {
+            case 80: {
 
               priority_ = input.readInt32();
+              break;
+            }
+            case 88: {
+
+              frequency_ = input.readInt32();
+              break;
+            }
+            case 96: {
+
+              conType_ = input.readInt32();
+              break;
+            }
+            case 106: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+                brandWhitelist_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00001000;
+              }
+              brandWhitelist_.add(s);
+              break;
+            }
+            case 114: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+                brandBlacklist_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00002000;
+              }
+              brandBlacklist_.add(s);
+              break;
+            }
+            case 122: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+                modelWhitelist_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00004000;
+              }
+              modelWhitelist_.add(s);
+              break;
+            }
+            case 130: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
+                modelBlacklist_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00008000;
+              }
+              modelBlacklist_.add(s);
+              break;
+            }
+            case 141: {
+
+              iapMin_ = input.readFloat();
+              break;
+            }
+            case 149: {
+
+              iapMax_ = input.readFloat();
+              break;
+            }
+            case 152: {
+
+              modelType_ = input.readInt32();
+              break;
+            }
+            case 160: {
+
+              channelBow_ = input.readBool();
+              break;
+            }
+            case 170: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00100000) == 0x00100000)) {
+                channel_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00100000;
+              }
+              channel_.add(s);
+              break;
+            }
+            case 176: {
+
+              gender_ = input.readInt32();
+              break;
+            }
+            case 186: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00400000) == 0x00400000)) {
+                interest_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00400000;
+              }
+              interest_.add(s);
               break;
             }
           }
@@ -7702,6 +8159,27 @@ public final class AdNetworkPB {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          country_ = country_.getUnmodifiableView();
+        }
+        if (((mutable_bitField0_ & 0x00001000) == 0x00001000)) {
+          brandWhitelist_ = brandWhitelist_.getUnmodifiableView();
+        }
+        if (((mutable_bitField0_ & 0x00002000) == 0x00002000)) {
+          brandBlacklist_ = brandBlacklist_.getUnmodifiableView();
+        }
+        if (((mutable_bitField0_ & 0x00004000) == 0x00004000)) {
+          modelWhitelist_ = modelWhitelist_.getUnmodifiableView();
+        }
+        if (((mutable_bitField0_ & 0x00008000) == 0x00008000)) {
+          modelBlacklist_ = modelBlacklist_.getUnmodifiableView();
+        }
+        if (((mutable_bitField0_ & 0x00100000) == 0x00100000)) {
+          channel_ = channel_.getUnmodifiableView();
+        }
+        if (((mutable_bitField0_ & 0x00400000) == 0x00400000)) {
+          interest_ = interest_.getUnmodifiableView();
+        }
         makeExtensionsImmutable();
       }
     }
@@ -7714,7 +8192,7 @@ public final class AdNetworkPB {
     protected com.google.protobuf.MapField internalGetMapField(
         int number) {
       switch (number) {
-        case 10:
+        case 9:
           return internalGetInstanceWeight();
         default:
           throw new RuntimeException(
@@ -7766,37 +8244,32 @@ public final class AdNetworkPB {
     }
 
     public static final int COUNTRY_FIELD_NUMBER = 5;
-    private volatile java.lang.Object country_;
+    private com.google.protobuf.LazyStringList country_;
     /**
-     * <code>optional string country = 5;</code>
+     * <code>repeated string country = 5;</code>
      */
-    public java.lang.String getCountry() {
-      java.lang.Object ref = country_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        country_ = s;
-        return s;
-      }
+    public com.google.protobuf.ProtocolStringList
+        getCountryList() {
+      return country_;
     }
     /**
-     * <code>optional string country = 5;</code>
+     * <code>repeated string country = 5;</code>
+     */
+    public int getCountryCount() {
+      return country_.size();
+    }
+    /**
+     * <code>repeated string country = 5;</code>
+     */
+    public java.lang.String getCountry(int index) {
+      return country_.get(index);
+    }
+    /**
+     * <code>repeated string country = 5;</code>
      */
     public com.google.protobuf.ByteString
-        getCountryBytes() {
-      java.lang.Object ref = country_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        country_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
+        getCountryBytes(int index) {
+      return country_.getByteString(index);
     }
 
     public static final int SORT_TYPE_FIELD_NUMBER = 6;
@@ -7828,29 +8301,20 @@ public final class AdNetworkPB {
       return result == null ? com.adtiming.om.pb.CommonPB.ABTest.UNRECOGNIZED : result;
     }
 
-    public static final int SEGMENT_ID_FIELD_NUMBER = 8;
-    private int segmentId_;
-    /**
-     * <code>optional int32 segment_id = 8;</code>
-     */
-    public int getSegmentId() {
-      return segmentId_;
-    }
-
-    public static final int AUTO_SWITCH_FIELD_NUMBER = 9;
+    public static final int AUTO_SWITCH_FIELD_NUMBER = 8;
     private int autoSwitch_;
     /**
      * <pre>
      *自动优化开关
      * </pre>
      *
-     * <code>optional int32 auto_switch = 9;</code>
+     * <code>optional int32 auto_switch = 8;</code>
      */
     public int getAutoSwitch() {
       return autoSwitch_;
     }
 
-    public static final int INSTANCE_WEIGHT_FIELD_NUMBER = 10;
+    public static final int INSTANCE_WEIGHT_FIELD_NUMBER = 9;
     private static final class InstanceWeightDefaultEntryHolder {
       static final com.google.protobuf.MapEntry<
           java.lang.Integer, java.lang.Integer> defaultEntry =
@@ -7877,7 +8341,7 @@ public final class AdNetworkPB {
       return internalGetInstanceWeight().getMap().size();
     }
     /**
-     * <code>map&lt;int32, int32&gt; instance_weight = 10;</code>
+     * <code>map&lt;int32, int32&gt; instance_weight = 9;</code>
      */
 
     public boolean containsInstanceWeight(
@@ -7893,14 +8357,14 @@ public final class AdNetworkPB {
       return getInstanceWeightMap();
     }
     /**
-     * <code>map&lt;int32, int32&gt; instance_weight = 10;</code>
+     * <code>map&lt;int32, int32&gt; instance_weight = 9;</code>
      */
 
     public java.util.Map<java.lang.Integer, java.lang.Integer> getInstanceWeightMap() {
       return internalGetInstanceWeight().getMap();
     }
     /**
-     * <code>map&lt;int32, int32&gt; instance_weight = 10;</code>
+     * <code>map&lt;int32, int32&gt; instance_weight = 9;</code>
      */
 
     public int getInstanceWeightOrDefault(
@@ -7912,7 +8376,7 @@ public final class AdNetworkPB {
       return map.containsKey(key) ? map.get(key) : defaultValue;
     }
     /**
-     * <code>map&lt;int32, int32&gt; instance_weight = 10;</code>
+     * <code>map&lt;int32, int32&gt; instance_weight = 9;</code>
      */
 
     public int getInstanceWeightOrThrow(
@@ -7926,13 +8390,282 @@ public final class AdNetworkPB {
       return map.get(key);
     }
 
-    public static final int PRIORITY_FIELD_NUMBER = 11;
+    public static final int PRIORITY_FIELD_NUMBER = 10;
     private int priority_;
     /**
-     * <code>optional int32 priority = 11;</code>
+     * <code>optional int32 priority = 10;</code>
      */
     public int getPriority() {
       return priority_;
+    }
+
+    public static final int FREQUENCY_FIELD_NUMBER = 11;
+    private int frequency_;
+    /**
+     * <pre>
+     * Segment Conditions
+     * </pre>
+     *
+     * <code>optional int32 frequency = 11;</code>
+     */
+    public int getFrequency() {
+      return frequency_;
+    }
+
+    public static final int CON_TYPE_FIELD_NUMBER = 12;
+    private int conType_;
+    /**
+     * <pre>
+     * 连接类型,二进制,从右到左(低位起) wifi,2G,3G,4G
+     * </pre>
+     *
+     * <code>optional int32 con_type = 12;</code>
+     */
+    public int getConType() {
+      return conType_;
+    }
+
+    public static final int BRAND_WHITELIST_FIELD_NUMBER = 13;
+    private com.google.protobuf.LazyStringList brandWhitelist_;
+    /**
+     * <code>repeated string brand_whitelist = 13;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getBrandWhitelistList() {
+      return brandWhitelist_;
+    }
+    /**
+     * <code>repeated string brand_whitelist = 13;</code>
+     */
+    public int getBrandWhitelistCount() {
+      return brandWhitelist_.size();
+    }
+    /**
+     * <code>repeated string brand_whitelist = 13;</code>
+     */
+    public java.lang.String getBrandWhitelist(int index) {
+      return brandWhitelist_.get(index);
+    }
+    /**
+     * <code>repeated string brand_whitelist = 13;</code>
+     */
+    public com.google.protobuf.ByteString
+        getBrandWhitelistBytes(int index) {
+      return brandWhitelist_.getByteString(index);
+    }
+
+    public static final int BRAND_BLACKLIST_FIELD_NUMBER = 14;
+    private com.google.protobuf.LazyStringList brandBlacklist_;
+    /**
+     * <code>repeated string brand_blacklist = 14;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getBrandBlacklistList() {
+      return brandBlacklist_;
+    }
+    /**
+     * <code>repeated string brand_blacklist = 14;</code>
+     */
+    public int getBrandBlacklistCount() {
+      return brandBlacklist_.size();
+    }
+    /**
+     * <code>repeated string brand_blacklist = 14;</code>
+     */
+    public java.lang.String getBrandBlacklist(int index) {
+      return brandBlacklist_.get(index);
+    }
+    /**
+     * <code>repeated string brand_blacklist = 14;</code>
+     */
+    public com.google.protobuf.ByteString
+        getBrandBlacklistBytes(int index) {
+      return brandBlacklist_.getByteString(index);
+    }
+
+    public static final int MODEL_WHITELIST_FIELD_NUMBER = 15;
+    private com.google.protobuf.LazyStringList modelWhitelist_;
+    /**
+     * <code>repeated string model_whitelist = 15;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getModelWhitelistList() {
+      return modelWhitelist_;
+    }
+    /**
+     * <code>repeated string model_whitelist = 15;</code>
+     */
+    public int getModelWhitelistCount() {
+      return modelWhitelist_.size();
+    }
+    /**
+     * <code>repeated string model_whitelist = 15;</code>
+     */
+    public java.lang.String getModelWhitelist(int index) {
+      return modelWhitelist_.get(index);
+    }
+    /**
+     * <code>repeated string model_whitelist = 15;</code>
+     */
+    public com.google.protobuf.ByteString
+        getModelWhitelistBytes(int index) {
+      return modelWhitelist_.getByteString(index);
+    }
+
+    public static final int MODEL_BLACKLIST_FIELD_NUMBER = 16;
+    private com.google.protobuf.LazyStringList modelBlacklist_;
+    /**
+     * <code>repeated string model_blacklist = 16;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getModelBlacklistList() {
+      return modelBlacklist_;
+    }
+    /**
+     * <code>repeated string model_blacklist = 16;</code>
+     */
+    public int getModelBlacklistCount() {
+      return modelBlacklist_.size();
+    }
+    /**
+     * <code>repeated string model_blacklist = 16;</code>
+     */
+    public java.lang.String getModelBlacklist(int index) {
+      return modelBlacklist_.get(index);
+    }
+    /**
+     * <code>repeated string model_blacklist = 16;</code>
+     */
+    public com.google.protobuf.ByteString
+        getModelBlacklistBytes(int index) {
+      return modelBlacklist_.getByteString(index);
+    }
+
+    public static final int IAP_MIN_FIELD_NUMBER = 17;
+    private float iapMin_;
+    /**
+     * <code>optional float iap_min = 17;</code>
+     */
+    public float getIapMin() {
+      return iapMin_;
+    }
+
+    public static final int IAP_MAX_FIELD_NUMBER = 18;
+    private float iapMax_;
+    /**
+     * <code>optional float iap_max = 18;</code>
+     */
+    public float getIapMax() {
+      return iapMax_;
+    }
+
+    public static final int MODEL_TYPE_FIELD_NUMBER = 19;
+    private int modelType_;
+    /**
+     * <pre>
+     * 2020-05-14
+     * </pre>
+     *
+     * <code>optional int32 model_type = 19;</code>
+     */
+    public int getModelType() {
+      return modelType_;
+    }
+
+    public static final int CHANNEL_BOW_FIELD_NUMBER = 20;
+    private boolean channelBow_;
+    /**
+     * <pre>
+     * channel 定向方式, 0:黑名单,1:白名单
+     * </pre>
+     *
+     * <code>optional bool channel_bow = 20;</code>
+     */
+    public boolean getChannelBow() {
+      return channelBow_;
+    }
+
+    public static final int CHANNEL_FIELD_NUMBER = 21;
+    private com.google.protobuf.LazyStringList channel_;
+    /**
+     * <pre>
+     *  国内Android channel 定向, 换行分隔
+     * </pre>
+     *
+     * <code>repeated string channel = 21;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getChannelList() {
+      return channel_;
+    }
+    /**
+     * <pre>
+     *  国内Android channel 定向, 换行分隔
+     * </pre>
+     *
+     * <code>repeated string channel = 21;</code>
+     */
+    public int getChannelCount() {
+      return channel_.size();
+    }
+    /**
+     * <pre>
+     *  国内Android channel 定向, 换行分隔
+     * </pre>
+     *
+     * <code>repeated string channel = 21;</code>
+     */
+    public java.lang.String getChannel(int index) {
+      return channel_.get(index);
+    }
+    /**
+     * <pre>
+     *  国内Android channel 定向, 换行分隔
+     * </pre>
+     *
+     * <code>repeated string channel = 21;</code>
+     */
+    public com.google.protobuf.ByteString
+        getChannelBytes(int index) {
+      return channel_.getByteString(index);
+    }
+
+    public static final int GENDER_FIELD_NUMBER = 22;
+    private int gender_;
+    /**
+     * <code>optional int32 gender = 22;</code>
+     */
+    public int getGender() {
+      return gender_;
+    }
+
+    public static final int INTEREST_FIELD_NUMBER = 23;
+    private com.google.protobuf.LazyStringList interest_;
+    /**
+     * <code>repeated string interest = 23;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getInterestList() {
+      return interest_;
+    }
+    /**
+     * <code>repeated string interest = 23;</code>
+     */
+    public int getInterestCount() {
+      return interest_.size();
+    }
+    /**
+     * <code>repeated string interest = 23;</code>
+     */
+    public java.lang.String getInterest(int index) {
+      return interest_.get(index);
+    }
+    /**
+     * <code>repeated string interest = 23;</code>
+     */
+    public com.google.protobuf.ByteString
+        getInterestBytes(int index) {
+      return interest_.getByteString(index);
     }
 
     private byte memoizedIsInitialized = -1;
@@ -7959,8 +8692,8 @@ public final class AdNetworkPB {
       if (placementId_ != 0) {
         output.writeInt32(4, placementId_);
       }
-      if (!getCountryBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, country_);
+      for (int i = 0; i < country_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, country_.getRaw(i));
       }
       if (sortType_ != 0) {
         output.writeInt32(6, sortType_);
@@ -7968,11 +8701,8 @@ public final class AdNetworkPB {
       if (abt_ != com.adtiming.om.pb.CommonPB.ABTest.None.getNumber()) {
         output.writeEnum(7, abt_);
       }
-      if (segmentId_ != 0) {
-        output.writeInt32(8, segmentId_);
-      }
       if (autoSwitch_ != 0) {
-        output.writeInt32(9, autoSwitch_);
+        output.writeInt32(8, autoSwitch_);
       }
       for (java.util.Map.Entry<java.lang.Integer, java.lang.Integer> entry
            : internalGetInstanceWeight().getMap().entrySet()) {
@@ -7981,10 +8711,49 @@ public final class AdNetworkPB {
             .setKey(entry.getKey())
             .setValue(entry.getValue())
             .build();
-        output.writeMessage(10, instanceWeight);
+        output.writeMessage(9, instanceWeight);
       }
       if (priority_ != 0) {
-        output.writeInt32(11, priority_);
+        output.writeInt32(10, priority_);
+      }
+      if (frequency_ != 0) {
+        output.writeInt32(11, frequency_);
+      }
+      if (conType_ != 0) {
+        output.writeInt32(12, conType_);
+      }
+      for (int i = 0; i < brandWhitelist_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 13, brandWhitelist_.getRaw(i));
+      }
+      for (int i = 0; i < brandBlacklist_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 14, brandBlacklist_.getRaw(i));
+      }
+      for (int i = 0; i < modelWhitelist_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 15, modelWhitelist_.getRaw(i));
+      }
+      for (int i = 0; i < modelBlacklist_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 16, modelBlacklist_.getRaw(i));
+      }
+      if (iapMin_ != 0F) {
+        output.writeFloat(17, iapMin_);
+      }
+      if (iapMax_ != 0F) {
+        output.writeFloat(18, iapMax_);
+      }
+      if (modelType_ != 0) {
+        output.writeInt32(19, modelType_);
+      }
+      if (channelBow_ != false) {
+        output.writeBool(20, channelBow_);
+      }
+      for (int i = 0; i < channel_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 21, channel_.getRaw(i));
+      }
+      if (gender_ != 0) {
+        output.writeInt32(22, gender_);
+      }
+      for (int i = 0; i < interest_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 23, interest_.getRaw(i));
       }
     }
 
@@ -8009,8 +8778,13 @@ public final class AdNetworkPB {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(4, placementId_);
       }
-      if (!getCountryBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, country_);
+      {
+        int dataSize = 0;
+        for (int i = 0; i < country_.size(); i++) {
+          dataSize += computeStringSizeNoTag(country_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getCountryList().size();
       }
       if (sortType_ != 0) {
         size += com.google.protobuf.CodedOutputStream
@@ -8020,13 +8794,9 @@ public final class AdNetworkPB {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(7, abt_);
       }
-      if (segmentId_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(8, segmentId_);
-      }
       if (autoSwitch_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(9, autoSwitch_);
+          .computeInt32Size(8, autoSwitch_);
       }
       for (java.util.Map.Entry<java.lang.Integer, java.lang.Integer> entry
            : internalGetInstanceWeight().getMap().entrySet()) {
@@ -8036,11 +8806,87 @@ public final class AdNetworkPB {
             .setValue(entry.getValue())
             .build();
         size += com.google.protobuf.CodedOutputStream
-            .computeMessageSize(10, instanceWeight);
+            .computeMessageSize(9, instanceWeight);
       }
       if (priority_ != 0) {
         size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(11, priority_);
+          .computeInt32Size(10, priority_);
+      }
+      if (frequency_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(11, frequency_);
+      }
+      if (conType_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(12, conType_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < brandWhitelist_.size(); i++) {
+          dataSize += computeStringSizeNoTag(brandWhitelist_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getBrandWhitelistList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < brandBlacklist_.size(); i++) {
+          dataSize += computeStringSizeNoTag(brandBlacklist_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getBrandBlacklistList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < modelWhitelist_.size(); i++) {
+          dataSize += computeStringSizeNoTag(modelWhitelist_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getModelWhitelistList().size();
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < modelBlacklist_.size(); i++) {
+          dataSize += computeStringSizeNoTag(modelBlacklist_.getRaw(i));
+        }
+        size += dataSize;
+        size += 2 * getModelBlacklistList().size();
+      }
+      if (iapMin_ != 0F) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(17, iapMin_);
+      }
+      if (iapMax_ != 0F) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(18, iapMax_);
+      }
+      if (modelType_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(19, modelType_);
+      }
+      if (channelBow_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(20, channelBow_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < channel_.size(); i++) {
+          dataSize += computeStringSizeNoTag(channel_.getRaw(i));
+        }
+        size += dataSize;
+        size += 2 * getChannelList().size();
+      }
+      if (gender_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(22, gender_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < interest_.size(); i++) {
+          dataSize += computeStringSizeNoTag(interest_.getRaw(i));
+        }
+        size += dataSize;
+        size += 2 * getInterestList().size();
       }
       memoizedSize = size;
       return size;
@@ -8066,19 +8912,47 @@ public final class AdNetworkPB {
           == other.getPubAppId());
       result = result && (getPlacementId()
           == other.getPlacementId());
-      result = result && getCountry()
-          .equals(other.getCountry());
+      result = result && getCountryList()
+          .equals(other.getCountryList());
       result = result && (getSortType()
           == other.getSortType());
       result = result && abt_ == other.abt_;
-      result = result && (getSegmentId()
-          == other.getSegmentId());
       result = result && (getAutoSwitch()
           == other.getAutoSwitch());
       result = result && internalGetInstanceWeight().equals(
           other.internalGetInstanceWeight());
       result = result && (getPriority()
           == other.getPriority());
+      result = result && (getFrequency()
+          == other.getFrequency());
+      result = result && (getConType()
+          == other.getConType());
+      result = result && getBrandWhitelistList()
+          .equals(other.getBrandWhitelistList());
+      result = result && getBrandBlacklistList()
+          .equals(other.getBrandBlacklistList());
+      result = result && getModelWhitelistList()
+          .equals(other.getModelWhitelistList());
+      result = result && getModelBlacklistList()
+          .equals(other.getModelBlacklistList());
+      result = result && (
+          java.lang.Float.floatToIntBits(getIapMin())
+          == java.lang.Float.floatToIntBits(
+              other.getIapMin()));
+      result = result && (
+          java.lang.Float.floatToIntBits(getIapMax())
+          == java.lang.Float.floatToIntBits(
+              other.getIapMax()));
+      result = result && (getModelType()
+          == other.getModelType());
+      result = result && (getChannelBow()
+          == other.getChannelBow());
+      result = result && getChannelList()
+          .equals(other.getChannelList());
+      result = result && (getGender()
+          == other.getGender());
+      result = result && getInterestList()
+          .equals(other.getInterestList());
       return result;
     }
 
@@ -8097,14 +8971,14 @@ public final class AdNetworkPB {
       hash = (53 * hash) + getPubAppId();
       hash = (37 * hash) + PLACEMENT_ID_FIELD_NUMBER;
       hash = (53 * hash) + getPlacementId();
-      hash = (37 * hash) + COUNTRY_FIELD_NUMBER;
-      hash = (53 * hash) + getCountry().hashCode();
+      if (getCountryCount() > 0) {
+        hash = (37 * hash) + COUNTRY_FIELD_NUMBER;
+        hash = (53 * hash) + getCountryList().hashCode();
+      }
       hash = (37 * hash) + SORT_TYPE_FIELD_NUMBER;
       hash = (53 * hash) + getSortType();
       hash = (37 * hash) + ABT_FIELD_NUMBER;
       hash = (53 * hash) + abt_;
-      hash = (37 * hash) + SEGMENT_ID_FIELD_NUMBER;
-      hash = (53 * hash) + getSegmentId();
       hash = (37 * hash) + AUTO_SWITCH_FIELD_NUMBER;
       hash = (53 * hash) + getAutoSwitch();
       if (!internalGetInstanceWeight().getMap().isEmpty()) {
@@ -8113,6 +8987,47 @@ public final class AdNetworkPB {
       }
       hash = (37 * hash) + PRIORITY_FIELD_NUMBER;
       hash = (53 * hash) + getPriority();
+      hash = (37 * hash) + FREQUENCY_FIELD_NUMBER;
+      hash = (53 * hash) + getFrequency();
+      hash = (37 * hash) + CON_TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getConType();
+      if (getBrandWhitelistCount() > 0) {
+        hash = (37 * hash) + BRAND_WHITELIST_FIELD_NUMBER;
+        hash = (53 * hash) + getBrandWhitelistList().hashCode();
+      }
+      if (getBrandBlacklistCount() > 0) {
+        hash = (37 * hash) + BRAND_BLACKLIST_FIELD_NUMBER;
+        hash = (53 * hash) + getBrandBlacklistList().hashCode();
+      }
+      if (getModelWhitelistCount() > 0) {
+        hash = (37 * hash) + MODEL_WHITELIST_FIELD_NUMBER;
+        hash = (53 * hash) + getModelWhitelistList().hashCode();
+      }
+      if (getModelBlacklistCount() > 0) {
+        hash = (37 * hash) + MODEL_BLACKLIST_FIELD_NUMBER;
+        hash = (53 * hash) + getModelBlacklistList().hashCode();
+      }
+      hash = (37 * hash) + IAP_MIN_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getIapMin());
+      hash = (37 * hash) + IAP_MAX_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getIapMax());
+      hash = (37 * hash) + MODEL_TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getModelType();
+      hash = (37 * hash) + CHANNEL_BOW_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getChannelBow());
+      if (getChannelCount() > 0) {
+        hash = (37 * hash) + CHANNEL_FIELD_NUMBER;
+        hash = (53 * hash) + getChannelList().hashCode();
+      }
+      hash = (37 * hash) + GENDER_FIELD_NUMBER;
+      hash = (53 * hash) + getGender();
+      if (getInterestCount() > 0) {
+        hash = (37 * hash) + INTEREST_FIELD_NUMBER;
+        hash = (53 * hash) + getInterestList().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -8211,7 +9126,7 @@ public final class AdNetworkPB {
       protected com.google.protobuf.MapField internalGetMapField(
           int number) {
         switch (number) {
-          case 10:
+          case 9:
             return internalGetInstanceWeight();
           default:
             throw new RuntimeException(
@@ -8222,7 +9137,7 @@ public final class AdNetworkPB {
       protected com.google.protobuf.MapField internalGetMutableMapField(
           int number) {
         switch (number) {
-          case 10:
+          case 9:
             return internalGetMutableInstanceWeight();
           default:
             throw new RuntimeException(
@@ -8261,19 +9176,43 @@ public final class AdNetworkPB {
 
         placementId_ = 0;
 
-        country_ = "";
-
+        country_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000010);
         sortType_ = 0;
 
         abt_ = 0;
-
-        segmentId_ = 0;
 
         autoSwitch_ = 0;
 
         internalGetMutableInstanceWeight().clear();
         priority_ = 0;
 
+        frequency_ = 0;
+
+        conType_ = 0;
+
+        brandWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00001000);
+        brandBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00002000);
+        modelWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00004000);
+        modelBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00008000);
+        iapMin_ = 0F;
+
+        iapMax_ = 0F;
+
+        modelType_ = 0;
+
+        channelBow_ = false;
+
+        channel_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00100000);
+        gender_ = 0;
+
+        interest_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00400000);
         return this;
       }
 
@@ -8302,14 +9241,54 @@ public final class AdNetworkPB {
         result.publisherId_ = publisherId_;
         result.pubAppId_ = pubAppId_;
         result.placementId_ = placementId_;
+        if (((bitField0_ & 0x00000010) == 0x00000010)) {
+          country_ = country_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000010);
+        }
         result.country_ = country_;
         result.sortType_ = sortType_;
         result.abt_ = abt_;
-        result.segmentId_ = segmentId_;
         result.autoSwitch_ = autoSwitch_;
         result.instanceWeight_ = internalGetInstanceWeight();
         result.instanceWeight_.makeImmutable();
         result.priority_ = priority_;
+        result.frequency_ = frequency_;
+        result.conType_ = conType_;
+        if (((bitField0_ & 0x00001000) == 0x00001000)) {
+          brandWhitelist_ = brandWhitelist_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00001000);
+        }
+        result.brandWhitelist_ = brandWhitelist_;
+        if (((bitField0_ & 0x00002000) == 0x00002000)) {
+          brandBlacklist_ = brandBlacklist_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00002000);
+        }
+        result.brandBlacklist_ = brandBlacklist_;
+        if (((bitField0_ & 0x00004000) == 0x00004000)) {
+          modelWhitelist_ = modelWhitelist_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00004000);
+        }
+        result.modelWhitelist_ = modelWhitelist_;
+        if (((bitField0_ & 0x00008000) == 0x00008000)) {
+          modelBlacklist_ = modelBlacklist_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00008000);
+        }
+        result.modelBlacklist_ = modelBlacklist_;
+        result.iapMin_ = iapMin_;
+        result.iapMax_ = iapMax_;
+        result.modelType_ = modelType_;
+        result.channelBow_ = channelBow_;
+        if (((bitField0_ & 0x00100000) == 0x00100000)) {
+          channel_ = channel_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00100000);
+        }
+        result.channel_ = channel_;
+        result.gender_ = gender_;
+        if (((bitField0_ & 0x00400000) == 0x00400000)) {
+          interest_ = interest_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00400000);
+        }
+        result.interest_ = interest_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -8364,8 +9343,14 @@ public final class AdNetworkPB {
         if (other.getPlacementId() != 0) {
           setPlacementId(other.getPlacementId());
         }
-        if (!other.getCountry().isEmpty()) {
-          country_ = other.country_;
+        if (!other.country_.isEmpty()) {
+          if (country_.isEmpty()) {
+            country_ = other.country_;
+            bitField0_ = (bitField0_ & ~0x00000010);
+          } else {
+            ensureCountryIsMutable();
+            country_.addAll(other.country_);
+          }
           onChanged();
         }
         if (other.getSortType() != 0) {
@@ -8374,9 +9359,6 @@ public final class AdNetworkPB {
         if (other.abt_ != 0) {
           setAbtValue(other.getAbtValue());
         }
-        if (other.getSegmentId() != 0) {
-          setSegmentId(other.getSegmentId());
-        }
         if (other.getAutoSwitch() != 0) {
           setAutoSwitch(other.getAutoSwitch());
         }
@@ -8384,6 +9366,87 @@ public final class AdNetworkPB {
             other.internalGetInstanceWeight());
         if (other.getPriority() != 0) {
           setPriority(other.getPriority());
+        }
+        if (other.getFrequency() != 0) {
+          setFrequency(other.getFrequency());
+        }
+        if (other.getConType() != 0) {
+          setConType(other.getConType());
+        }
+        if (!other.brandWhitelist_.isEmpty()) {
+          if (brandWhitelist_.isEmpty()) {
+            brandWhitelist_ = other.brandWhitelist_;
+            bitField0_ = (bitField0_ & ~0x00001000);
+          } else {
+            ensureBrandWhitelistIsMutable();
+            brandWhitelist_.addAll(other.brandWhitelist_);
+          }
+          onChanged();
+        }
+        if (!other.brandBlacklist_.isEmpty()) {
+          if (brandBlacklist_.isEmpty()) {
+            brandBlacklist_ = other.brandBlacklist_;
+            bitField0_ = (bitField0_ & ~0x00002000);
+          } else {
+            ensureBrandBlacklistIsMutable();
+            brandBlacklist_.addAll(other.brandBlacklist_);
+          }
+          onChanged();
+        }
+        if (!other.modelWhitelist_.isEmpty()) {
+          if (modelWhitelist_.isEmpty()) {
+            modelWhitelist_ = other.modelWhitelist_;
+            bitField0_ = (bitField0_ & ~0x00004000);
+          } else {
+            ensureModelWhitelistIsMutable();
+            modelWhitelist_.addAll(other.modelWhitelist_);
+          }
+          onChanged();
+        }
+        if (!other.modelBlacklist_.isEmpty()) {
+          if (modelBlacklist_.isEmpty()) {
+            modelBlacklist_ = other.modelBlacklist_;
+            bitField0_ = (bitField0_ & ~0x00008000);
+          } else {
+            ensureModelBlacklistIsMutable();
+            modelBlacklist_.addAll(other.modelBlacklist_);
+          }
+          onChanged();
+        }
+        if (other.getIapMin() != 0F) {
+          setIapMin(other.getIapMin());
+        }
+        if (other.getIapMax() != 0F) {
+          setIapMax(other.getIapMax());
+        }
+        if (other.getModelType() != 0) {
+          setModelType(other.getModelType());
+        }
+        if (other.getChannelBow() != false) {
+          setChannelBow(other.getChannelBow());
+        }
+        if (!other.channel_.isEmpty()) {
+          if (channel_.isEmpty()) {
+            channel_ = other.channel_;
+            bitField0_ = (bitField0_ & ~0x00100000);
+          } else {
+            ensureChannelIsMutable();
+            channel_.addAll(other.channel_);
+          }
+          onChanged();
+        }
+        if (other.getGender() != 0) {
+          setGender(other.getGender());
+        }
+        if (!other.interest_.isEmpty()) {
+          if (interest_.isEmpty()) {
+            interest_ = other.interest_;
+            bitField0_ = (bitField0_ & ~0x00400000);
+          } else {
+            ensureInterestIsMutable();
+            interest_.addAll(other.interest_);
+          }
+          onChanged();
         }
         onChanged();
         return this;
@@ -8516,71 +9579,96 @@ public final class AdNetworkPB {
         return this;
       }
 
-      private java.lang.Object country_ = "";
-      /**
-       * <code>optional string country = 5;</code>
-       */
-      public java.lang.String getCountry() {
-        java.lang.Object ref = country_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          country_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
+      private com.google.protobuf.LazyStringList country_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureCountryIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          country_ = new com.google.protobuf.LazyStringArrayList(country_);
+          bitField0_ |= 0x00000010;
+         }
       }
       /**
-       * <code>optional string country = 5;</code>
+       * <code>repeated string country = 5;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getCountryList() {
+        return country_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string country = 5;</code>
+       */
+      public int getCountryCount() {
+        return country_.size();
+      }
+      /**
+       * <code>repeated string country = 5;</code>
+       */
+      public java.lang.String getCountry(int index) {
+        return country_.get(index);
+      }
+      /**
+       * <code>repeated string country = 5;</code>
        */
       public com.google.protobuf.ByteString
-          getCountryBytes() {
-        java.lang.Object ref = country_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          country_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
+          getCountryBytes(int index) {
+        return country_.getByteString(index);
       }
       /**
-       * <code>optional string country = 5;</code>
+       * <code>repeated string country = 5;</code>
        */
       public Builder setCountry(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureCountryIsMutable();
+        country_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string country = 5;</code>
+       */
+      public Builder addCountry(
           java.lang.String value) {
         if (value == null) {
     throw new NullPointerException();
   }
-  
-        country_ = value;
+  ensureCountryIsMutable();
+        country_.add(value);
         onChanged();
         return this;
       }
       /**
-       * <code>optional string country = 5;</code>
+       * <code>repeated string country = 5;</code>
+       */
+      public Builder addAllCountry(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureCountryIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, country_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string country = 5;</code>
        */
       public Builder clearCountry() {
-        
-        country_ = getDefaultInstance().getCountry();
+        country_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000010);
         onChanged();
         return this;
       }
       /**
-       * <code>optional string country = 5;</code>
+       * <code>repeated string country = 5;</code>
        */
-      public Builder setCountryBytes(
+      public Builder addCountryBytes(
           com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   checkByteStringIsUtf8(value);
-        
-        country_ = value;
+        ensureCountryIsMutable();
+        country_.add(value);
         onChanged();
         return this;
       }
@@ -8667,39 +9755,13 @@ public final class AdNetworkPB {
         return this;
       }
 
-      private int segmentId_ ;
-      /**
-       * <code>optional int32 segment_id = 8;</code>
-       */
-      public int getSegmentId() {
-        return segmentId_;
-      }
-      /**
-       * <code>optional int32 segment_id = 8;</code>
-       */
-      public Builder setSegmentId(int value) {
-        
-        segmentId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 segment_id = 8;</code>
-       */
-      public Builder clearSegmentId() {
-        
-        segmentId_ = 0;
-        onChanged();
-        return this;
-      }
-
       private int autoSwitch_ ;
       /**
        * <pre>
        *自动优化开关
        * </pre>
        *
-       * <code>optional int32 auto_switch = 9;</code>
+       * <code>optional int32 auto_switch = 8;</code>
        */
       public int getAutoSwitch() {
         return autoSwitch_;
@@ -8709,7 +9771,7 @@ public final class AdNetworkPB {
        *自动优化开关
        * </pre>
        *
-       * <code>optional int32 auto_switch = 9;</code>
+       * <code>optional int32 auto_switch = 8;</code>
        */
       public Builder setAutoSwitch(int value) {
         
@@ -8722,7 +9784,7 @@ public final class AdNetworkPB {
        *自动优化开关
        * </pre>
        *
-       * <code>optional int32 auto_switch = 9;</code>
+       * <code>optional int32 auto_switch = 8;</code>
        */
       public Builder clearAutoSwitch() {
         
@@ -8758,7 +9820,7 @@ public final class AdNetworkPB {
         return internalGetInstanceWeight().getMap().size();
       }
       /**
-       * <code>map&lt;int32, int32&gt; instance_weight = 10;</code>
+       * <code>map&lt;int32, int32&gt; instance_weight = 9;</code>
        */
 
       public boolean containsInstanceWeight(
@@ -8774,14 +9836,14 @@ public final class AdNetworkPB {
         return getInstanceWeightMap();
       }
       /**
-       * <code>map&lt;int32, int32&gt; instance_weight = 10;</code>
+       * <code>map&lt;int32, int32&gt; instance_weight = 9;</code>
        */
 
       public java.util.Map<java.lang.Integer, java.lang.Integer> getInstanceWeightMap() {
         return internalGetInstanceWeight().getMap();
       }
       /**
-       * <code>map&lt;int32, int32&gt; instance_weight = 10;</code>
+       * <code>map&lt;int32, int32&gt; instance_weight = 9;</code>
        */
 
       public int getInstanceWeightOrDefault(
@@ -8793,7 +9855,7 @@ public final class AdNetworkPB {
         return map.containsKey(key) ? map.get(key) : defaultValue;
       }
       /**
-       * <code>map&lt;int32, int32&gt; instance_weight = 10;</code>
+       * <code>map&lt;int32, int32&gt; instance_weight = 9;</code>
        */
 
       public int getInstanceWeightOrThrow(
@@ -8812,7 +9874,7 @@ public final class AdNetworkPB {
         return this;
       }
       /**
-       * <code>map&lt;int32, int32&gt; instance_weight = 10;</code>
+       * <code>map&lt;int32, int32&gt; instance_weight = 9;</code>
        */
 
       public Builder removeInstanceWeight(
@@ -8830,7 +9892,7 @@ public final class AdNetworkPB {
         return internalGetMutableInstanceWeight().getMutableMap();
       }
       /**
-       * <code>map&lt;int32, int32&gt; instance_weight = 10;</code>
+       * <code>map&lt;int32, int32&gt; instance_weight = 9;</code>
        */
       public Builder putInstanceWeight(
           int key,
@@ -8841,7 +9903,7 @@ public final class AdNetworkPB {
         return this;
       }
       /**
-       * <code>map&lt;int32, int32&gt; instance_weight = 10;</code>
+       * <code>map&lt;int32, int32&gt; instance_weight = 9;</code>
        */
 
       public Builder putAllInstanceWeight(
@@ -8852,13 +9914,13 @@ public final class AdNetworkPB {
 
       private int priority_ ;
       /**
-       * <code>optional int32 priority = 11;</code>
+       * <code>optional int32 priority = 10;</code>
        */
       public int getPriority() {
         return priority_;
       }
       /**
-       * <code>optional int32 priority = 11;</code>
+       * <code>optional int32 priority = 10;</code>
        */
       public Builder setPriority(int value) {
         
@@ -8867,11 +9929,841 @@ public final class AdNetworkPB {
         return this;
       }
       /**
-       * <code>optional int32 priority = 11;</code>
+       * <code>optional int32 priority = 10;</code>
        */
       public Builder clearPriority() {
         
         priority_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int frequency_ ;
+      /**
+       * <pre>
+       * Segment Conditions
+       * </pre>
+       *
+       * <code>optional int32 frequency = 11;</code>
+       */
+      public int getFrequency() {
+        return frequency_;
+      }
+      /**
+       * <pre>
+       * Segment Conditions
+       * </pre>
+       *
+       * <code>optional int32 frequency = 11;</code>
+       */
+      public Builder setFrequency(int value) {
+        
+        frequency_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Segment Conditions
+       * </pre>
+       *
+       * <code>optional int32 frequency = 11;</code>
+       */
+      public Builder clearFrequency() {
+        
+        frequency_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int conType_ ;
+      /**
+       * <pre>
+       * 连接类型,二进制,从右到左(低位起) wifi,2G,3G,4G
+       * </pre>
+       *
+       * <code>optional int32 con_type = 12;</code>
+       */
+      public int getConType() {
+        return conType_;
+      }
+      /**
+       * <pre>
+       * 连接类型,二进制,从右到左(低位起) wifi,2G,3G,4G
+       * </pre>
+       *
+       * <code>optional int32 con_type = 12;</code>
+       */
+      public Builder setConType(int value) {
+        
+        conType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 连接类型,二进制,从右到左(低位起) wifi,2G,3G,4G
+       * </pre>
+       *
+       * <code>optional int32 con_type = 12;</code>
+       */
+      public Builder clearConType() {
+        
+        conType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList brandWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureBrandWhitelistIsMutable() {
+        if (!((bitField0_ & 0x00001000) == 0x00001000)) {
+          brandWhitelist_ = new com.google.protobuf.LazyStringArrayList(brandWhitelist_);
+          bitField0_ |= 0x00001000;
+         }
+      }
+      /**
+       * <code>repeated string brand_whitelist = 13;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getBrandWhitelistList() {
+        return brandWhitelist_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string brand_whitelist = 13;</code>
+       */
+      public int getBrandWhitelistCount() {
+        return brandWhitelist_.size();
+      }
+      /**
+       * <code>repeated string brand_whitelist = 13;</code>
+       */
+      public java.lang.String getBrandWhitelist(int index) {
+        return brandWhitelist_.get(index);
+      }
+      /**
+       * <code>repeated string brand_whitelist = 13;</code>
+       */
+      public com.google.protobuf.ByteString
+          getBrandWhitelistBytes(int index) {
+        return brandWhitelist_.getByteString(index);
+      }
+      /**
+       * <code>repeated string brand_whitelist = 13;</code>
+       */
+      public Builder setBrandWhitelist(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureBrandWhitelistIsMutable();
+        brandWhitelist_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string brand_whitelist = 13;</code>
+       */
+      public Builder addBrandWhitelist(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureBrandWhitelistIsMutable();
+        brandWhitelist_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string brand_whitelist = 13;</code>
+       */
+      public Builder addAllBrandWhitelist(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureBrandWhitelistIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, brandWhitelist_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string brand_whitelist = 13;</code>
+       */
+      public Builder clearBrandWhitelist() {
+        brandWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00001000);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string brand_whitelist = 13;</code>
+       */
+      public Builder addBrandWhitelistBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureBrandWhitelistIsMutable();
+        brandWhitelist_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList brandBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureBrandBlacklistIsMutable() {
+        if (!((bitField0_ & 0x00002000) == 0x00002000)) {
+          brandBlacklist_ = new com.google.protobuf.LazyStringArrayList(brandBlacklist_);
+          bitField0_ |= 0x00002000;
+         }
+      }
+      /**
+       * <code>repeated string brand_blacklist = 14;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getBrandBlacklistList() {
+        return brandBlacklist_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string brand_blacklist = 14;</code>
+       */
+      public int getBrandBlacklistCount() {
+        return brandBlacklist_.size();
+      }
+      /**
+       * <code>repeated string brand_blacklist = 14;</code>
+       */
+      public java.lang.String getBrandBlacklist(int index) {
+        return brandBlacklist_.get(index);
+      }
+      /**
+       * <code>repeated string brand_blacklist = 14;</code>
+       */
+      public com.google.protobuf.ByteString
+          getBrandBlacklistBytes(int index) {
+        return brandBlacklist_.getByteString(index);
+      }
+      /**
+       * <code>repeated string brand_blacklist = 14;</code>
+       */
+      public Builder setBrandBlacklist(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureBrandBlacklistIsMutable();
+        brandBlacklist_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string brand_blacklist = 14;</code>
+       */
+      public Builder addBrandBlacklist(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureBrandBlacklistIsMutable();
+        brandBlacklist_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string brand_blacklist = 14;</code>
+       */
+      public Builder addAllBrandBlacklist(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureBrandBlacklistIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, brandBlacklist_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string brand_blacklist = 14;</code>
+       */
+      public Builder clearBrandBlacklist() {
+        brandBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00002000);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string brand_blacklist = 14;</code>
+       */
+      public Builder addBrandBlacklistBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureBrandBlacklistIsMutable();
+        brandBlacklist_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList modelWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureModelWhitelistIsMutable() {
+        if (!((bitField0_ & 0x00004000) == 0x00004000)) {
+          modelWhitelist_ = new com.google.protobuf.LazyStringArrayList(modelWhitelist_);
+          bitField0_ |= 0x00004000;
+         }
+      }
+      /**
+       * <code>repeated string model_whitelist = 15;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getModelWhitelistList() {
+        return modelWhitelist_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string model_whitelist = 15;</code>
+       */
+      public int getModelWhitelistCount() {
+        return modelWhitelist_.size();
+      }
+      /**
+       * <code>repeated string model_whitelist = 15;</code>
+       */
+      public java.lang.String getModelWhitelist(int index) {
+        return modelWhitelist_.get(index);
+      }
+      /**
+       * <code>repeated string model_whitelist = 15;</code>
+       */
+      public com.google.protobuf.ByteString
+          getModelWhitelistBytes(int index) {
+        return modelWhitelist_.getByteString(index);
+      }
+      /**
+       * <code>repeated string model_whitelist = 15;</code>
+       */
+      public Builder setModelWhitelist(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureModelWhitelistIsMutable();
+        modelWhitelist_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string model_whitelist = 15;</code>
+       */
+      public Builder addModelWhitelist(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureModelWhitelistIsMutable();
+        modelWhitelist_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string model_whitelist = 15;</code>
+       */
+      public Builder addAllModelWhitelist(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureModelWhitelistIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, modelWhitelist_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string model_whitelist = 15;</code>
+       */
+      public Builder clearModelWhitelist() {
+        modelWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00004000);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string model_whitelist = 15;</code>
+       */
+      public Builder addModelWhitelistBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureModelWhitelistIsMutable();
+        modelWhitelist_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList modelBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureModelBlacklistIsMutable() {
+        if (!((bitField0_ & 0x00008000) == 0x00008000)) {
+          modelBlacklist_ = new com.google.protobuf.LazyStringArrayList(modelBlacklist_);
+          bitField0_ |= 0x00008000;
+         }
+      }
+      /**
+       * <code>repeated string model_blacklist = 16;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getModelBlacklistList() {
+        return modelBlacklist_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string model_blacklist = 16;</code>
+       */
+      public int getModelBlacklistCount() {
+        return modelBlacklist_.size();
+      }
+      /**
+       * <code>repeated string model_blacklist = 16;</code>
+       */
+      public java.lang.String getModelBlacklist(int index) {
+        return modelBlacklist_.get(index);
+      }
+      /**
+       * <code>repeated string model_blacklist = 16;</code>
+       */
+      public com.google.protobuf.ByteString
+          getModelBlacklistBytes(int index) {
+        return modelBlacklist_.getByteString(index);
+      }
+      /**
+       * <code>repeated string model_blacklist = 16;</code>
+       */
+      public Builder setModelBlacklist(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureModelBlacklistIsMutable();
+        modelBlacklist_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string model_blacklist = 16;</code>
+       */
+      public Builder addModelBlacklist(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureModelBlacklistIsMutable();
+        modelBlacklist_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string model_blacklist = 16;</code>
+       */
+      public Builder addAllModelBlacklist(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureModelBlacklistIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, modelBlacklist_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string model_blacklist = 16;</code>
+       */
+      public Builder clearModelBlacklist() {
+        modelBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00008000);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string model_blacklist = 16;</code>
+       */
+      public Builder addModelBlacklistBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureModelBlacklistIsMutable();
+        modelBlacklist_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private float iapMin_ ;
+      /**
+       * <code>optional float iap_min = 17;</code>
+       */
+      public float getIapMin() {
+        return iapMin_;
+      }
+      /**
+       * <code>optional float iap_min = 17;</code>
+       */
+      public Builder setIapMin(float value) {
+        
+        iapMin_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float iap_min = 17;</code>
+       */
+      public Builder clearIapMin() {
+        
+        iapMin_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private float iapMax_ ;
+      /**
+       * <code>optional float iap_max = 18;</code>
+       */
+      public float getIapMax() {
+        return iapMax_;
+      }
+      /**
+       * <code>optional float iap_max = 18;</code>
+       */
+      public Builder setIapMax(float value) {
+        
+        iapMax_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float iap_max = 18;</code>
+       */
+      public Builder clearIapMax() {
+        
+        iapMax_ = 0F;
+        onChanged();
+        return this;
+      }
+
+      private int modelType_ ;
+      /**
+       * <pre>
+       * 2020-05-14
+       * </pre>
+       *
+       * <code>optional int32 model_type = 19;</code>
+       */
+      public int getModelType() {
+        return modelType_;
+      }
+      /**
+       * <pre>
+       * 2020-05-14
+       * </pre>
+       *
+       * <code>optional int32 model_type = 19;</code>
+       */
+      public Builder setModelType(int value) {
+        
+        modelType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 2020-05-14
+       * </pre>
+       *
+       * <code>optional int32 model_type = 19;</code>
+       */
+      public Builder clearModelType() {
+        
+        modelType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private boolean channelBow_ ;
+      /**
+       * <pre>
+       * channel 定向方式, 0:黑名单,1:白名单
+       * </pre>
+       *
+       * <code>optional bool channel_bow = 20;</code>
+       */
+      public boolean getChannelBow() {
+        return channelBow_;
+      }
+      /**
+       * <pre>
+       * channel 定向方式, 0:黑名单,1:白名单
+       * </pre>
+       *
+       * <code>optional bool channel_bow = 20;</code>
+       */
+      public Builder setChannelBow(boolean value) {
+        
+        channelBow_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * channel 定向方式, 0:黑名单,1:白名单
+       * </pre>
+       *
+       * <code>optional bool channel_bow = 20;</code>
+       */
+      public Builder clearChannelBow() {
+        
+        channelBow_ = false;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList channel_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureChannelIsMutable() {
+        if (!((bitField0_ & 0x00100000) == 0x00100000)) {
+          channel_ = new com.google.protobuf.LazyStringArrayList(channel_);
+          bitField0_ |= 0x00100000;
+         }
+      }
+      /**
+       * <pre>
+       *  国内Android channel 定向, 换行分隔
+       * </pre>
+       *
+       * <code>repeated string channel = 21;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getChannelList() {
+        return channel_.getUnmodifiableView();
+      }
+      /**
+       * <pre>
+       *  国内Android channel 定向, 换行分隔
+       * </pre>
+       *
+       * <code>repeated string channel = 21;</code>
+       */
+      public int getChannelCount() {
+        return channel_.size();
+      }
+      /**
+       * <pre>
+       *  国内Android channel 定向, 换行分隔
+       * </pre>
+       *
+       * <code>repeated string channel = 21;</code>
+       */
+      public java.lang.String getChannel(int index) {
+        return channel_.get(index);
+      }
+      /**
+       * <pre>
+       *  国内Android channel 定向, 换行分隔
+       * </pre>
+       *
+       * <code>repeated string channel = 21;</code>
+       */
+      public com.google.protobuf.ByteString
+          getChannelBytes(int index) {
+        return channel_.getByteString(index);
+      }
+      /**
+       * <pre>
+       *  国内Android channel 定向, 换行分隔
+       * </pre>
+       *
+       * <code>repeated string channel = 21;</code>
+       */
+      public Builder setChannel(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureChannelIsMutable();
+        channel_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *  国内Android channel 定向, 换行分隔
+       * </pre>
+       *
+       * <code>repeated string channel = 21;</code>
+       */
+      public Builder addChannel(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureChannelIsMutable();
+        channel_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *  国内Android channel 定向, 换行分隔
+       * </pre>
+       *
+       * <code>repeated string channel = 21;</code>
+       */
+      public Builder addAllChannel(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureChannelIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, channel_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *  国内Android channel 定向, 换行分隔
+       * </pre>
+       *
+       * <code>repeated string channel = 21;</code>
+       */
+      public Builder clearChannel() {
+        channel_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00100000);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *  国内Android channel 定向, 换行分隔
+       * </pre>
+       *
+       * <code>repeated string channel = 21;</code>
+       */
+      public Builder addChannelBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureChannelIsMutable();
+        channel_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private int gender_ ;
+      /**
+       * <code>optional int32 gender = 22;</code>
+       */
+      public int getGender() {
+        return gender_;
+      }
+      /**
+       * <code>optional int32 gender = 22;</code>
+       */
+      public Builder setGender(int value) {
+        
+        gender_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 gender = 22;</code>
+       */
+      public Builder clearGender() {
+        
+        gender_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList interest_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureInterestIsMutable() {
+        if (!((bitField0_ & 0x00400000) == 0x00400000)) {
+          interest_ = new com.google.protobuf.LazyStringArrayList(interest_);
+          bitField0_ |= 0x00400000;
+         }
+      }
+      /**
+       * <code>repeated string interest = 23;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getInterestList() {
+        return interest_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string interest = 23;</code>
+       */
+      public int getInterestCount() {
+        return interest_.size();
+      }
+      /**
+       * <code>repeated string interest = 23;</code>
+       */
+      public java.lang.String getInterest(int index) {
+        return interest_.get(index);
+      }
+      /**
+       * <code>repeated string interest = 23;</code>
+       */
+      public com.google.protobuf.ByteString
+          getInterestBytes(int index) {
+        return interest_.getByteString(index);
+      }
+      /**
+       * <code>repeated string interest = 23;</code>
+       */
+      public Builder setInterest(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureInterestIsMutable();
+        interest_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string interest = 23;</code>
+       */
+      public Builder addInterest(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureInterestIsMutable();
+        interest_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string interest = 23;</code>
+       */
+      public Builder addAllInterest(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureInterestIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, interest_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string interest = 23;</code>
+       */
+      public Builder clearInterest() {
+        interest_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00400000);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string interest = 23;</code>
+       */
+      public Builder addInterestBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureInterestIsMutable();
+        interest_.add(value);
         onChanged();
         return this;
       }
@@ -8924,1694 +10816,6 @@ public final class AdNetworkPB {
 
   }
 
-  public interface SegmentOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:Segment)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional int32 id = 1;</code>
-     */
-    int getId();
-
-    /**
-     * <code>optional int32 placement_id = 2;</code>
-     */
-    int getPlacementId();
-
-    /**
-     * <code>optional string country = 3;</code>
-     */
-    java.lang.String getCountry();
-    /**
-     * <code>optional string country = 3;</code>
-     */
-    com.google.protobuf.ByteString
-        getCountryBytes();
-
-    /**
-     * <pre>
-     * 用户当天展现次数
-     * </pre>
-     *
-     * <code>optional int32 frequency = 4;</code>
-     */
-    int getFrequency();
-
-    /**
-     * <pre>
-     * 连接类型,二进制,从右到左(低位起) wifi,2G,3G,4G
-     * </pre>
-     *
-     * <code>optional int32 con_type = 5;</code>
-     */
-    int getConType();
-
-    /**
-     * <code>repeated string brand_whitelist = 6;</code>
-     */
-    java.util.List<java.lang.String>
-        getBrandWhitelistList();
-    /**
-     * <code>repeated string brand_whitelist = 6;</code>
-     */
-    int getBrandWhitelistCount();
-    /**
-     * <code>repeated string brand_whitelist = 6;</code>
-     */
-    java.lang.String getBrandWhitelist(int index);
-    /**
-     * <code>repeated string brand_whitelist = 6;</code>
-     */
-    com.google.protobuf.ByteString
-        getBrandWhitelistBytes(int index);
-
-    /**
-     * <code>repeated string brand_blacklist = 7;</code>
-     */
-    java.util.List<java.lang.String>
-        getBrandBlacklistList();
-    /**
-     * <code>repeated string brand_blacklist = 7;</code>
-     */
-    int getBrandBlacklistCount();
-    /**
-     * <code>repeated string brand_blacklist = 7;</code>
-     */
-    java.lang.String getBrandBlacklist(int index);
-    /**
-     * <code>repeated string brand_blacklist = 7;</code>
-     */
-    com.google.protobuf.ByteString
-        getBrandBlacklistBytes(int index);
-
-    /**
-     * <code>repeated string model_whitelist = 8;</code>
-     */
-    java.util.List<java.lang.String>
-        getModelWhitelistList();
-    /**
-     * <code>repeated string model_whitelist = 8;</code>
-     */
-    int getModelWhitelistCount();
-    /**
-     * <code>repeated string model_whitelist = 8;</code>
-     */
-    java.lang.String getModelWhitelist(int index);
-    /**
-     * <code>repeated string model_whitelist = 8;</code>
-     */
-    com.google.protobuf.ByteString
-        getModelWhitelistBytes(int index);
-
-    /**
-     * <code>repeated string model_blacklist = 9;</code>
-     */
-    java.util.List<java.lang.String>
-        getModelBlacklistList();
-    /**
-     * <code>repeated string model_blacklist = 9;</code>
-     */
-    int getModelBlacklistCount();
-    /**
-     * <code>repeated string model_blacklist = 9;</code>
-     */
-    java.lang.String getModelBlacklist(int index);
-    /**
-     * <code>repeated string model_blacklist = 9;</code>
-     */
-    com.google.protobuf.ByteString
-        getModelBlacklistBytes(int index);
-
-    /**
-     * <code>optional float iap_min = 10;</code>
-     */
-    float getIapMin();
-
-    /**
-     * <code>optional float iap_max = 11;</code>
-     */
-    float getIapMax();
-  }
-  /**
-   * Protobuf type {@code Segment}
-   */
-  public  static final class Segment extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:Segment)
-      SegmentOrBuilder {
-    // Use Segment.newBuilder() to construct.
-    private Segment(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private Segment() {
-      id_ = 0;
-      placementId_ = 0;
-      country_ = "";
-      frequency_ = 0;
-      conType_ = 0;
-      brandWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      brandBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      modelWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      modelBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      iapMin_ = 0F;
-      iapMax_ = 0F;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private Segment(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-
-              id_ = input.readInt32();
-              break;
-            }
-            case 16: {
-
-              placementId_ = input.readInt32();
-              break;
-            }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              country_ = s;
-              break;
-            }
-            case 32: {
-
-              frequency_ = input.readInt32();
-              break;
-            }
-            case 40: {
-
-              conType_ = input.readInt32();
-              break;
-            }
-            case 50: {
-              java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
-                brandWhitelist_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000020;
-              }
-              brandWhitelist_.add(s);
-              break;
-            }
-            case 58: {
-              java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
-                brandBlacklist_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000040;
-              }
-              brandBlacklist_.add(s);
-              break;
-            }
-            case 66: {
-              java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
-                modelWhitelist_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000080;
-              }
-              modelWhitelist_.add(s);
-              break;
-            }
-            case 74: {
-              java.lang.String s = input.readStringRequireUtf8();
-              if (!((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
-                modelBlacklist_ = new com.google.protobuf.LazyStringArrayList();
-                mutable_bitField0_ |= 0x00000100;
-              }
-              modelBlacklist_.add(s);
-              break;
-            }
-            case 85: {
-
-              iapMin_ = input.readFloat();
-              break;
-            }
-            case 93: {
-
-              iapMax_ = input.readFloat();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        if (((mutable_bitField0_ & 0x00000020) == 0x00000020)) {
-          brandWhitelist_ = brandWhitelist_.getUnmodifiableView();
-        }
-        if (((mutable_bitField0_ & 0x00000040) == 0x00000040)) {
-          brandBlacklist_ = brandBlacklist_.getUnmodifiableView();
-        }
-        if (((mutable_bitField0_ & 0x00000080) == 0x00000080)) {
-          modelWhitelist_ = modelWhitelist_.getUnmodifiableView();
-        }
-        if (((mutable_bitField0_ & 0x00000100) == 0x00000100)) {
-          modelBlacklist_ = modelBlacklist_.getUnmodifiableView();
-        }
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.adtiming.om.pb.AdNetworkPB.internal_static_Segment_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.adtiming.om.pb.AdNetworkPB.internal_static_Segment_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.adtiming.om.pb.AdNetworkPB.Segment.class, com.adtiming.om.pb.AdNetworkPB.Segment.Builder.class);
-    }
-
-    private int bitField0_;
-    public static final int ID_FIELD_NUMBER = 1;
-    private int id_;
-    /**
-     * <code>optional int32 id = 1;</code>
-     */
-    public int getId() {
-      return id_;
-    }
-
-    public static final int PLACEMENT_ID_FIELD_NUMBER = 2;
-    private int placementId_;
-    /**
-     * <code>optional int32 placement_id = 2;</code>
-     */
-    public int getPlacementId() {
-      return placementId_;
-    }
-
-    public static final int COUNTRY_FIELD_NUMBER = 3;
-    private volatile java.lang.Object country_;
-    /**
-     * <code>optional string country = 3;</code>
-     */
-    public java.lang.String getCountry() {
-      java.lang.Object ref = country_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        country_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>optional string country = 3;</code>
-     */
-    public com.google.protobuf.ByteString
-        getCountryBytes() {
-      java.lang.Object ref = country_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        country_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int FREQUENCY_FIELD_NUMBER = 4;
-    private int frequency_;
-    /**
-     * <pre>
-     * 用户当天展现次数
-     * </pre>
-     *
-     * <code>optional int32 frequency = 4;</code>
-     */
-    public int getFrequency() {
-      return frequency_;
-    }
-
-    public static final int CON_TYPE_FIELD_NUMBER = 5;
-    private int conType_;
-    /**
-     * <pre>
-     * 连接类型,二进制,从右到左(低位起) wifi,2G,3G,4G
-     * </pre>
-     *
-     * <code>optional int32 con_type = 5;</code>
-     */
-    public int getConType() {
-      return conType_;
-    }
-
-    public static final int BRAND_WHITELIST_FIELD_NUMBER = 6;
-    private com.google.protobuf.LazyStringList brandWhitelist_;
-    /**
-     * <code>repeated string brand_whitelist = 6;</code>
-     */
-    public com.google.protobuf.ProtocolStringList
-        getBrandWhitelistList() {
-      return brandWhitelist_;
-    }
-    /**
-     * <code>repeated string brand_whitelist = 6;</code>
-     */
-    public int getBrandWhitelistCount() {
-      return brandWhitelist_.size();
-    }
-    /**
-     * <code>repeated string brand_whitelist = 6;</code>
-     */
-    public java.lang.String getBrandWhitelist(int index) {
-      return brandWhitelist_.get(index);
-    }
-    /**
-     * <code>repeated string brand_whitelist = 6;</code>
-     */
-    public com.google.protobuf.ByteString
-        getBrandWhitelistBytes(int index) {
-      return brandWhitelist_.getByteString(index);
-    }
-
-    public static final int BRAND_BLACKLIST_FIELD_NUMBER = 7;
-    private com.google.protobuf.LazyStringList brandBlacklist_;
-    /**
-     * <code>repeated string brand_blacklist = 7;</code>
-     */
-    public com.google.protobuf.ProtocolStringList
-        getBrandBlacklistList() {
-      return brandBlacklist_;
-    }
-    /**
-     * <code>repeated string brand_blacklist = 7;</code>
-     */
-    public int getBrandBlacklistCount() {
-      return brandBlacklist_.size();
-    }
-    /**
-     * <code>repeated string brand_blacklist = 7;</code>
-     */
-    public java.lang.String getBrandBlacklist(int index) {
-      return brandBlacklist_.get(index);
-    }
-    /**
-     * <code>repeated string brand_blacklist = 7;</code>
-     */
-    public com.google.protobuf.ByteString
-        getBrandBlacklistBytes(int index) {
-      return brandBlacklist_.getByteString(index);
-    }
-
-    public static final int MODEL_WHITELIST_FIELD_NUMBER = 8;
-    private com.google.protobuf.LazyStringList modelWhitelist_;
-    /**
-     * <code>repeated string model_whitelist = 8;</code>
-     */
-    public com.google.protobuf.ProtocolStringList
-        getModelWhitelistList() {
-      return modelWhitelist_;
-    }
-    /**
-     * <code>repeated string model_whitelist = 8;</code>
-     */
-    public int getModelWhitelistCount() {
-      return modelWhitelist_.size();
-    }
-    /**
-     * <code>repeated string model_whitelist = 8;</code>
-     */
-    public java.lang.String getModelWhitelist(int index) {
-      return modelWhitelist_.get(index);
-    }
-    /**
-     * <code>repeated string model_whitelist = 8;</code>
-     */
-    public com.google.protobuf.ByteString
-        getModelWhitelistBytes(int index) {
-      return modelWhitelist_.getByteString(index);
-    }
-
-    public static final int MODEL_BLACKLIST_FIELD_NUMBER = 9;
-    private com.google.protobuf.LazyStringList modelBlacklist_;
-    /**
-     * <code>repeated string model_blacklist = 9;</code>
-     */
-    public com.google.protobuf.ProtocolStringList
-        getModelBlacklistList() {
-      return modelBlacklist_;
-    }
-    /**
-     * <code>repeated string model_blacklist = 9;</code>
-     */
-    public int getModelBlacklistCount() {
-      return modelBlacklist_.size();
-    }
-    /**
-     * <code>repeated string model_blacklist = 9;</code>
-     */
-    public java.lang.String getModelBlacklist(int index) {
-      return modelBlacklist_.get(index);
-    }
-    /**
-     * <code>repeated string model_blacklist = 9;</code>
-     */
-    public com.google.protobuf.ByteString
-        getModelBlacklistBytes(int index) {
-      return modelBlacklist_.getByteString(index);
-    }
-
-    public static final int IAP_MIN_FIELD_NUMBER = 10;
-    private float iapMin_;
-    /**
-     * <code>optional float iap_min = 10;</code>
-     */
-    public float getIapMin() {
-      return iapMin_;
-    }
-
-    public static final int IAP_MAX_FIELD_NUMBER = 11;
-    private float iapMax_;
-    /**
-     * <code>optional float iap_max = 11;</code>
-     */
-    public float getIapMax() {
-      return iapMax_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (id_ != 0) {
-        output.writeInt32(1, id_);
-      }
-      if (placementId_ != 0) {
-        output.writeInt32(2, placementId_);
-      }
-      if (!getCountryBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, country_);
-      }
-      if (frequency_ != 0) {
-        output.writeInt32(4, frequency_);
-      }
-      if (conType_ != 0) {
-        output.writeInt32(5, conType_);
-      }
-      for (int i = 0; i < brandWhitelist_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 6, brandWhitelist_.getRaw(i));
-      }
-      for (int i = 0; i < brandBlacklist_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, brandBlacklist_.getRaw(i));
-      }
-      for (int i = 0; i < modelWhitelist_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, modelWhitelist_.getRaw(i));
-      }
-      for (int i = 0; i < modelBlacklist_.size(); i++) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 9, modelBlacklist_.getRaw(i));
-      }
-      if (iapMin_ != 0F) {
-        output.writeFloat(10, iapMin_);
-      }
-      if (iapMax_ != 0F) {
-        output.writeFloat(11, iapMax_);
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (id_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, id_);
-      }
-      if (placementId_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, placementId_);
-      }
-      if (!getCountryBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, country_);
-      }
-      if (frequency_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(4, frequency_);
-      }
-      if (conType_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(5, conType_);
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < brandWhitelist_.size(); i++) {
-          dataSize += computeStringSizeNoTag(brandWhitelist_.getRaw(i));
-        }
-        size += dataSize;
-        size += 1 * getBrandWhitelistList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < brandBlacklist_.size(); i++) {
-          dataSize += computeStringSizeNoTag(brandBlacklist_.getRaw(i));
-        }
-        size += dataSize;
-        size += 1 * getBrandBlacklistList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < modelWhitelist_.size(); i++) {
-          dataSize += computeStringSizeNoTag(modelWhitelist_.getRaw(i));
-        }
-        size += dataSize;
-        size += 1 * getModelWhitelistList().size();
-      }
-      {
-        int dataSize = 0;
-        for (int i = 0; i < modelBlacklist_.size(); i++) {
-          dataSize += computeStringSizeNoTag(modelBlacklist_.getRaw(i));
-        }
-        size += dataSize;
-        size += 1 * getModelBlacklistList().size();
-      }
-      if (iapMin_ != 0F) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(10, iapMin_);
-      }
-      if (iapMax_ != 0F) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(11, iapMax_);
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof com.adtiming.om.pb.AdNetworkPB.Segment)) {
-        return super.equals(obj);
-      }
-      com.adtiming.om.pb.AdNetworkPB.Segment other = (com.adtiming.om.pb.AdNetworkPB.Segment) obj;
-
-      boolean result = true;
-      result = result && (getId()
-          == other.getId());
-      result = result && (getPlacementId()
-          == other.getPlacementId());
-      result = result && getCountry()
-          .equals(other.getCountry());
-      result = result && (getFrequency()
-          == other.getFrequency());
-      result = result && (getConType()
-          == other.getConType());
-      result = result && getBrandWhitelistList()
-          .equals(other.getBrandWhitelistList());
-      result = result && getBrandBlacklistList()
-          .equals(other.getBrandBlacklistList());
-      result = result && getModelWhitelistList()
-          .equals(other.getModelWhitelistList());
-      result = result && getModelBlacklistList()
-          .equals(other.getModelBlacklistList());
-      result = result && (
-          java.lang.Float.floatToIntBits(getIapMin())
-          == java.lang.Float.floatToIntBits(
-              other.getIapMin()));
-      result = result && (
-          java.lang.Float.floatToIntBits(getIapMax())
-          == java.lang.Float.floatToIntBits(
-              other.getIapMax()));
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
-      hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getId();
-      hash = (37 * hash) + PLACEMENT_ID_FIELD_NUMBER;
-      hash = (53 * hash) + getPlacementId();
-      hash = (37 * hash) + COUNTRY_FIELD_NUMBER;
-      hash = (53 * hash) + getCountry().hashCode();
-      hash = (37 * hash) + FREQUENCY_FIELD_NUMBER;
-      hash = (53 * hash) + getFrequency();
-      hash = (37 * hash) + CON_TYPE_FIELD_NUMBER;
-      hash = (53 * hash) + getConType();
-      if (getBrandWhitelistCount() > 0) {
-        hash = (37 * hash) + BRAND_WHITELIST_FIELD_NUMBER;
-        hash = (53 * hash) + getBrandWhitelistList().hashCode();
-      }
-      if (getBrandBlacklistCount() > 0) {
-        hash = (37 * hash) + BRAND_BLACKLIST_FIELD_NUMBER;
-        hash = (53 * hash) + getBrandBlacklistList().hashCode();
-      }
-      if (getModelWhitelistCount() > 0) {
-        hash = (37 * hash) + MODEL_WHITELIST_FIELD_NUMBER;
-        hash = (53 * hash) + getModelWhitelistList().hashCode();
-      }
-      if (getModelBlacklistCount() > 0) {
-        hash = (37 * hash) + MODEL_BLACKLIST_FIELD_NUMBER;
-        hash = (53 * hash) + getModelBlacklistList().hashCode();
-      }
-      hash = (37 * hash) + IAP_MIN_FIELD_NUMBER;
-      hash = (53 * hash) + java.lang.Float.floatToIntBits(
-          getIapMin());
-      hash = (37 * hash) + IAP_MAX_FIELD_NUMBER;
-      hash = (53 * hash) + java.lang.Float.floatToIntBits(
-          getIapMax());
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static com.adtiming.om.pb.AdNetworkPB.Segment parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.adtiming.om.pb.AdNetworkPB.Segment parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.adtiming.om.pb.AdNetworkPB.Segment parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.adtiming.om.pb.AdNetworkPB.Segment parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.adtiming.om.pb.AdNetworkPB.Segment parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.adtiming.om.pb.AdNetworkPB.Segment parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.adtiming.om.pb.AdNetworkPB.Segment parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static com.adtiming.om.pb.AdNetworkPB.Segment parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.adtiming.om.pb.AdNetworkPB.Segment parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.adtiming.om.pb.AdNetworkPB.Segment parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.adtiming.om.pb.AdNetworkPB.Segment prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code Segment}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:Segment)
-        com.adtiming.om.pb.AdNetworkPB.SegmentOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.adtiming.om.pb.AdNetworkPB.internal_static_Segment_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.adtiming.om.pb.AdNetworkPB.internal_static_Segment_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.adtiming.om.pb.AdNetworkPB.Segment.class, com.adtiming.om.pb.AdNetworkPB.Segment.Builder.class);
-      }
-
-      // Construct using com.adtiming.om.pb.AdNetworkPB.Segment.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        id_ = 0;
-
-        placementId_ = 0;
-
-        country_ = "";
-
-        frequency_ = 0;
-
-        conType_ = 0;
-
-        brandWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        brandBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        modelWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000080);
-        modelBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000100);
-        iapMin_ = 0F;
-
-        iapMax_ = 0F;
-
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.adtiming.om.pb.AdNetworkPB.internal_static_Segment_descriptor;
-      }
-
-      public com.adtiming.om.pb.AdNetworkPB.Segment getDefaultInstanceForType() {
-        return com.adtiming.om.pb.AdNetworkPB.Segment.getDefaultInstance();
-      }
-
-      public com.adtiming.om.pb.AdNetworkPB.Segment build() {
-        com.adtiming.om.pb.AdNetworkPB.Segment result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.adtiming.om.pb.AdNetworkPB.Segment buildPartial() {
-        com.adtiming.om.pb.AdNetworkPB.Segment result = new com.adtiming.om.pb.AdNetworkPB.Segment(this);
-        int from_bitField0_ = bitField0_;
-        int to_bitField0_ = 0;
-        result.id_ = id_;
-        result.placementId_ = placementId_;
-        result.country_ = country_;
-        result.frequency_ = frequency_;
-        result.conType_ = conType_;
-        if (((bitField0_ & 0x00000020) == 0x00000020)) {
-          brandWhitelist_ = brandWhitelist_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000020);
-        }
-        result.brandWhitelist_ = brandWhitelist_;
-        if (((bitField0_ & 0x00000040) == 0x00000040)) {
-          brandBlacklist_ = brandBlacklist_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000040);
-        }
-        result.brandBlacklist_ = brandBlacklist_;
-        if (((bitField0_ & 0x00000080) == 0x00000080)) {
-          modelWhitelist_ = modelWhitelist_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000080);
-        }
-        result.modelWhitelist_ = modelWhitelist_;
-        if (((bitField0_ & 0x00000100) == 0x00000100)) {
-          modelBlacklist_ = modelBlacklist_.getUnmodifiableView();
-          bitField0_ = (bitField0_ & ~0x00000100);
-        }
-        result.modelBlacklist_ = modelBlacklist_;
-        result.iapMin_ = iapMin_;
-        result.iapMax_ = iapMax_;
-        result.bitField0_ = to_bitField0_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.adtiming.om.pb.AdNetworkPB.Segment) {
-          return mergeFrom((com.adtiming.om.pb.AdNetworkPB.Segment)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.adtiming.om.pb.AdNetworkPB.Segment other) {
-        if (other == com.adtiming.om.pb.AdNetworkPB.Segment.getDefaultInstance()) return this;
-        if (other.getId() != 0) {
-          setId(other.getId());
-        }
-        if (other.getPlacementId() != 0) {
-          setPlacementId(other.getPlacementId());
-        }
-        if (!other.getCountry().isEmpty()) {
-          country_ = other.country_;
-          onChanged();
-        }
-        if (other.getFrequency() != 0) {
-          setFrequency(other.getFrequency());
-        }
-        if (other.getConType() != 0) {
-          setConType(other.getConType());
-        }
-        if (!other.brandWhitelist_.isEmpty()) {
-          if (brandWhitelist_.isEmpty()) {
-            brandWhitelist_ = other.brandWhitelist_;
-            bitField0_ = (bitField0_ & ~0x00000020);
-          } else {
-            ensureBrandWhitelistIsMutable();
-            brandWhitelist_.addAll(other.brandWhitelist_);
-          }
-          onChanged();
-        }
-        if (!other.brandBlacklist_.isEmpty()) {
-          if (brandBlacklist_.isEmpty()) {
-            brandBlacklist_ = other.brandBlacklist_;
-            bitField0_ = (bitField0_ & ~0x00000040);
-          } else {
-            ensureBrandBlacklistIsMutable();
-            brandBlacklist_.addAll(other.brandBlacklist_);
-          }
-          onChanged();
-        }
-        if (!other.modelWhitelist_.isEmpty()) {
-          if (modelWhitelist_.isEmpty()) {
-            modelWhitelist_ = other.modelWhitelist_;
-            bitField0_ = (bitField0_ & ~0x00000080);
-          } else {
-            ensureModelWhitelistIsMutable();
-            modelWhitelist_.addAll(other.modelWhitelist_);
-          }
-          onChanged();
-        }
-        if (!other.modelBlacklist_.isEmpty()) {
-          if (modelBlacklist_.isEmpty()) {
-            modelBlacklist_ = other.modelBlacklist_;
-            bitField0_ = (bitField0_ & ~0x00000100);
-          } else {
-            ensureModelBlacklistIsMutable();
-            modelBlacklist_.addAll(other.modelBlacklist_);
-          }
-          onChanged();
-        }
-        if (other.getIapMin() != 0F) {
-          setIapMin(other.getIapMin());
-        }
-        if (other.getIapMax() != 0F) {
-          setIapMax(other.getIapMax());
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.adtiming.om.pb.AdNetworkPB.Segment parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.adtiming.om.pb.AdNetworkPB.Segment) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-      private int bitField0_;
-
-      private int id_ ;
-      /**
-       * <code>optional int32 id = 1;</code>
-       */
-      public int getId() {
-        return id_;
-      }
-      /**
-       * <code>optional int32 id = 1;</code>
-       */
-      public Builder setId(int value) {
-        
-        id_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 id = 1;</code>
-       */
-      public Builder clearId() {
-        
-        id_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int placementId_ ;
-      /**
-       * <code>optional int32 placement_id = 2;</code>
-       */
-      public int getPlacementId() {
-        return placementId_;
-      }
-      /**
-       * <code>optional int32 placement_id = 2;</code>
-       */
-      public Builder setPlacementId(int value) {
-        
-        placementId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional int32 placement_id = 2;</code>
-       */
-      public Builder clearPlacementId() {
-        
-        placementId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object country_ = "";
-      /**
-       * <code>optional string country = 3;</code>
-       */
-      public java.lang.String getCountry() {
-        java.lang.Object ref = country_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          country_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string country = 3;</code>
-       */
-      public com.google.protobuf.ByteString
-          getCountryBytes() {
-        java.lang.Object ref = country_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          country_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string country = 3;</code>
-       */
-      public Builder setCountry(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        country_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string country = 3;</code>
-       */
-      public Builder clearCountry() {
-        
-        country_ = getDefaultInstance().getCountry();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string country = 3;</code>
-       */
-      public Builder setCountryBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        country_ = value;
-        onChanged();
-        return this;
-      }
-
-      private int frequency_ ;
-      /**
-       * <pre>
-       * 用户当天展现次数
-       * </pre>
-       *
-       * <code>optional int32 frequency = 4;</code>
-       */
-      public int getFrequency() {
-        return frequency_;
-      }
-      /**
-       * <pre>
-       * 用户当天展现次数
-       * </pre>
-       *
-       * <code>optional int32 frequency = 4;</code>
-       */
-      public Builder setFrequency(int value) {
-        
-        frequency_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * 用户当天展现次数
-       * </pre>
-       *
-       * <code>optional int32 frequency = 4;</code>
-       */
-      public Builder clearFrequency() {
-        
-        frequency_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int conType_ ;
-      /**
-       * <pre>
-       * 连接类型,二进制,从右到左(低位起) wifi,2G,3G,4G
-       * </pre>
-       *
-       * <code>optional int32 con_type = 5;</code>
-       */
-      public int getConType() {
-        return conType_;
-      }
-      /**
-       * <pre>
-       * 连接类型,二进制,从右到左(低位起) wifi,2G,3G,4G
-       * </pre>
-       *
-       * <code>optional int32 con_type = 5;</code>
-       */
-      public Builder setConType(int value) {
-        
-        conType_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * 连接类型,二进制,从右到左(低位起) wifi,2G,3G,4G
-       * </pre>
-       *
-       * <code>optional int32 con_type = 5;</code>
-       */
-      public Builder clearConType() {
-        
-        conType_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private com.google.protobuf.LazyStringList brandWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureBrandWhitelistIsMutable() {
-        if (!((bitField0_ & 0x00000020) == 0x00000020)) {
-          brandWhitelist_ = new com.google.protobuf.LazyStringArrayList(brandWhitelist_);
-          bitField0_ |= 0x00000020;
-         }
-      }
-      /**
-       * <code>repeated string brand_whitelist = 6;</code>
-       */
-      public com.google.protobuf.ProtocolStringList
-          getBrandWhitelistList() {
-        return brandWhitelist_.getUnmodifiableView();
-      }
-      /**
-       * <code>repeated string brand_whitelist = 6;</code>
-       */
-      public int getBrandWhitelistCount() {
-        return brandWhitelist_.size();
-      }
-      /**
-       * <code>repeated string brand_whitelist = 6;</code>
-       */
-      public java.lang.String getBrandWhitelist(int index) {
-        return brandWhitelist_.get(index);
-      }
-      /**
-       * <code>repeated string brand_whitelist = 6;</code>
-       */
-      public com.google.protobuf.ByteString
-          getBrandWhitelistBytes(int index) {
-        return brandWhitelist_.getByteString(index);
-      }
-      /**
-       * <code>repeated string brand_whitelist = 6;</code>
-       */
-      public Builder setBrandWhitelist(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureBrandWhitelistIsMutable();
-        brandWhitelist_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string brand_whitelist = 6;</code>
-       */
-      public Builder addBrandWhitelist(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureBrandWhitelistIsMutable();
-        brandWhitelist_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string brand_whitelist = 6;</code>
-       */
-      public Builder addAllBrandWhitelist(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureBrandWhitelistIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, brandWhitelist_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string brand_whitelist = 6;</code>
-       */
-      public Builder clearBrandWhitelist() {
-        brandWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000020);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string brand_whitelist = 6;</code>
-       */
-      public Builder addBrandWhitelistBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        ensureBrandWhitelistIsMutable();
-        brandWhitelist_.add(value);
-        onChanged();
-        return this;
-      }
-
-      private com.google.protobuf.LazyStringList brandBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureBrandBlacklistIsMutable() {
-        if (!((bitField0_ & 0x00000040) == 0x00000040)) {
-          brandBlacklist_ = new com.google.protobuf.LazyStringArrayList(brandBlacklist_);
-          bitField0_ |= 0x00000040;
-         }
-      }
-      /**
-       * <code>repeated string brand_blacklist = 7;</code>
-       */
-      public com.google.protobuf.ProtocolStringList
-          getBrandBlacklistList() {
-        return brandBlacklist_.getUnmodifiableView();
-      }
-      /**
-       * <code>repeated string brand_blacklist = 7;</code>
-       */
-      public int getBrandBlacklistCount() {
-        return brandBlacklist_.size();
-      }
-      /**
-       * <code>repeated string brand_blacklist = 7;</code>
-       */
-      public java.lang.String getBrandBlacklist(int index) {
-        return brandBlacklist_.get(index);
-      }
-      /**
-       * <code>repeated string brand_blacklist = 7;</code>
-       */
-      public com.google.protobuf.ByteString
-          getBrandBlacklistBytes(int index) {
-        return brandBlacklist_.getByteString(index);
-      }
-      /**
-       * <code>repeated string brand_blacklist = 7;</code>
-       */
-      public Builder setBrandBlacklist(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureBrandBlacklistIsMutable();
-        brandBlacklist_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string brand_blacklist = 7;</code>
-       */
-      public Builder addBrandBlacklist(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureBrandBlacklistIsMutable();
-        brandBlacklist_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string brand_blacklist = 7;</code>
-       */
-      public Builder addAllBrandBlacklist(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureBrandBlacklistIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, brandBlacklist_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string brand_blacklist = 7;</code>
-       */
-      public Builder clearBrandBlacklist() {
-        brandBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000040);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string brand_blacklist = 7;</code>
-       */
-      public Builder addBrandBlacklistBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        ensureBrandBlacklistIsMutable();
-        brandBlacklist_.add(value);
-        onChanged();
-        return this;
-      }
-
-      private com.google.protobuf.LazyStringList modelWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureModelWhitelistIsMutable() {
-        if (!((bitField0_ & 0x00000080) == 0x00000080)) {
-          modelWhitelist_ = new com.google.protobuf.LazyStringArrayList(modelWhitelist_);
-          bitField0_ |= 0x00000080;
-         }
-      }
-      /**
-       * <code>repeated string model_whitelist = 8;</code>
-       */
-      public com.google.protobuf.ProtocolStringList
-          getModelWhitelistList() {
-        return modelWhitelist_.getUnmodifiableView();
-      }
-      /**
-       * <code>repeated string model_whitelist = 8;</code>
-       */
-      public int getModelWhitelistCount() {
-        return modelWhitelist_.size();
-      }
-      /**
-       * <code>repeated string model_whitelist = 8;</code>
-       */
-      public java.lang.String getModelWhitelist(int index) {
-        return modelWhitelist_.get(index);
-      }
-      /**
-       * <code>repeated string model_whitelist = 8;</code>
-       */
-      public com.google.protobuf.ByteString
-          getModelWhitelistBytes(int index) {
-        return modelWhitelist_.getByteString(index);
-      }
-      /**
-       * <code>repeated string model_whitelist = 8;</code>
-       */
-      public Builder setModelWhitelist(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureModelWhitelistIsMutable();
-        modelWhitelist_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string model_whitelist = 8;</code>
-       */
-      public Builder addModelWhitelist(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureModelWhitelistIsMutable();
-        modelWhitelist_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string model_whitelist = 8;</code>
-       */
-      public Builder addAllModelWhitelist(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureModelWhitelistIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, modelWhitelist_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string model_whitelist = 8;</code>
-       */
-      public Builder clearModelWhitelist() {
-        modelWhitelist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000080);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string model_whitelist = 8;</code>
-       */
-      public Builder addModelWhitelistBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        ensureModelWhitelistIsMutable();
-        modelWhitelist_.add(value);
-        onChanged();
-        return this;
-      }
-
-      private com.google.protobuf.LazyStringList modelBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-      private void ensureModelBlacklistIsMutable() {
-        if (!((bitField0_ & 0x00000100) == 0x00000100)) {
-          modelBlacklist_ = new com.google.protobuf.LazyStringArrayList(modelBlacklist_);
-          bitField0_ |= 0x00000100;
-         }
-      }
-      /**
-       * <code>repeated string model_blacklist = 9;</code>
-       */
-      public com.google.protobuf.ProtocolStringList
-          getModelBlacklistList() {
-        return modelBlacklist_.getUnmodifiableView();
-      }
-      /**
-       * <code>repeated string model_blacklist = 9;</code>
-       */
-      public int getModelBlacklistCount() {
-        return modelBlacklist_.size();
-      }
-      /**
-       * <code>repeated string model_blacklist = 9;</code>
-       */
-      public java.lang.String getModelBlacklist(int index) {
-        return modelBlacklist_.get(index);
-      }
-      /**
-       * <code>repeated string model_blacklist = 9;</code>
-       */
-      public com.google.protobuf.ByteString
-          getModelBlacklistBytes(int index) {
-        return modelBlacklist_.getByteString(index);
-      }
-      /**
-       * <code>repeated string model_blacklist = 9;</code>
-       */
-      public Builder setModelBlacklist(
-          int index, java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureModelBlacklistIsMutable();
-        modelBlacklist_.set(index, value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string model_blacklist = 9;</code>
-       */
-      public Builder addModelBlacklist(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  ensureModelBlacklistIsMutable();
-        modelBlacklist_.add(value);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string model_blacklist = 9;</code>
-       */
-      public Builder addAllModelBlacklist(
-          java.lang.Iterable<java.lang.String> values) {
-        ensureModelBlacklistIsMutable();
-        com.google.protobuf.AbstractMessageLite.Builder.addAll(
-            values, modelBlacklist_);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string model_blacklist = 9;</code>
-       */
-      public Builder clearModelBlacklist() {
-        modelBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
-        bitField0_ = (bitField0_ & ~0x00000100);
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>repeated string model_blacklist = 9;</code>
-       */
-      public Builder addModelBlacklistBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        ensureModelBlacklistIsMutable();
-        modelBlacklist_.add(value);
-        onChanged();
-        return this;
-      }
-
-      private float iapMin_ ;
-      /**
-       * <code>optional float iap_min = 10;</code>
-       */
-      public float getIapMin() {
-        return iapMin_;
-      }
-      /**
-       * <code>optional float iap_min = 10;</code>
-       */
-      public Builder setIapMin(float value) {
-        
-        iapMin_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional float iap_min = 10;</code>
-       */
-      public Builder clearIapMin() {
-        
-        iapMin_ = 0F;
-        onChanged();
-        return this;
-      }
-
-      private float iapMax_ ;
-      /**
-       * <code>optional float iap_max = 11;</code>
-       */
-      public float getIapMax() {
-        return iapMax_;
-      }
-      /**
-       * <code>optional float iap_max = 11;</code>
-       */
-      public Builder setIapMax(float value) {
-        
-        iapMax_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional float iap_max = 11;</code>
-       */
-      public Builder clearIapMax() {
-        
-        iapMax_ = 0F;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:Segment)
-    }
-
-    // @@protoc_insertion_point(class_scope:Segment)
-    private static final com.adtiming.om.pb.AdNetworkPB.Segment DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.adtiming.om.pb.AdNetworkPB.Segment();
-    }
-
-    public static com.adtiming.om.pb.AdNetworkPB.Segment getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<Segment>
-        PARSER = new com.google.protobuf.AbstractParser<Segment>() {
-      public Segment parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Segment(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<Segment> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<Segment> getParserForType() {
-      return PARSER;
-    }
-
-    public com.adtiming.om.pb.AdNetworkPB.Segment getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_AdNetwork_descriptor;
   private static final 
@@ -10657,11 +10861,6 @@ public final class AdNetworkPB {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_InstanceRule_InstanceWeightEntry_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Segment_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Segment_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -10671,50 +10870,51 @@ public final class AdNetworkPB {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\tadn.proto\032\014common.proto\"\\\n\tAdNetwork\022\n" +
+      "\n\tadn.proto\032\014common.proto\"r\n\tAdNetwork\022\n" +
       "\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nclass_name\030\003" +
-      " \001(\t\022\014\n\004type\030\004 \001(\005\022\023\n\013sdk_version\030\005 \001(\t\"" +
-      "|\n\014AdNetworkApp\022\n\n\002id\030\001 \001(\005\022\016\n\006adn_id\030\002 " +
-      "\001(\005\022\022\n\npub_app_id\030\003 \001(\005\022\017\n\007app_key\030\004 \001(\t" +
-      "\022+\n\013block_rules\030\006 \003(\0132\026.AdNetworkAppBloc" +
-      "kRule\"\321\001\n\025AdNetworkAppBlockRule\022\n\n\002id\030\001 " +
-      "\001(\005\022\022\n\npub_app_id\030\002 \001(\005\022\016\n\006adn_id\030\003 \001(\005\022" +
-      "\023\n\013sdk_version\030\004 \001(\t\022\017\n\007osv_max\030\005 \001(\t\022\017\n" +
-      "\007osv_min\030\006 \001(\t\022\035\n\025make_device_blacklist\030",
-      "\007 \003(\t\022\035\n\025brand_model_blacklist\030\010 \003(\t\022\023\n\013" +
-      "app_version\030\t \001(\t\"\244\005\n\010Instance\022\n\n\002id\030\001 \001" +
-      "(\005\022\022\n\npub_app_id\030\002 \001(\005\022\024\n\014placement_id\030\003" +
-      " \001(\005\022\016\n\006adn_id\030\004 \001(\005\022\025\n\rplacement_key\030\005 " +
-      "\001(\t\022\023\n\013app_unit_id\030\006 \001(\t\022\017\n\007osv_max\030\007 \001(" +
-      "\t\022\017\n\007osv_min\030\010 \001(\t\022\026\n\016make_whitelist\030\t \003" +
-      "(\t\022\026\n\016make_blacklist\030\n \003(\t\022\027\n\017brand_whit" +
-      "elist\030\013 \003(\t\022\027\n\017brand_blacklist\030\014 \003(\t\022\027\n\017" +
-      "model_whitelist\030\r \003(\t\022\027\n\017model_blacklist" +
-      "\030\016 \003(\t\022\025\n\rfrequency_cap\030\017 \001(\005\022\026\n\016frequen",
-      "cy_unit\030\020 \001(\005\022\032\n\022frequency_interval\030\021 \001(" +
-      "\005\022\021\n\thb_status\030\022 \001(\010\022\014\n\004ecpm\030\023 \001(\002\0228\n\020co" +
-      "untry_settings\030\024 \003(\0132\036.Instance.CountryS" +
-      "ettingsEntry\032Q\n\024CountrySettingsEntry\022\013\n\003" +
-      "key\030\001 \001(\t\022(\n\005value\030\002 \001(\0132\031.Instance.Coun" +
-      "trySettings:\0028\001\032w\n\017CountrySettings\0225\n\006pe" +
-      "riod\030\001 \003(\0132%.Instance.CountrySettings.Pe" +
-      "riodEntry\032-\n\013PeriodEntry\022\013\n\003key\030\001 \001(\005\022\r\n" +
-      "\005value\030\002 \001(\005:\0028\001\"\302\002\n\014InstanceRule\022\n\n\002id\030" +
-      "\001 \001(\005\022\024\n\014publisher_id\030\002 \001(\005\022\022\n\npub_app_i",
-      "d\030\003 \001(\005\022\024\n\014placement_id\030\004 \001(\005\022\017\n\007country" +
-      "\030\005 \001(\t\022\021\n\tsort_type\030\006 \001(\005\022\024\n\003abt\030\007 \001(\0162\007" +
-      ".ABTest\022\022\n\nsegment_id\030\010 \001(\005\022\023\n\013auto_swit" +
-      "ch\030\t \001(\005\022:\n\017instance_weight\030\n \003(\0132!.Inst" +
-      "anceRule.InstanceWeightEntry\022\020\n\010priority" +
-      "\030\013 \001(\005\0325\n\023InstanceWeightEntry\022\013\n\003key\030\001 \001" +
-      "(\005\022\r\n\005value\030\002 \001(\005:\0028\001\"\347\001\n\007Segment\022\n\n\002id\030" +
-      "\001 \001(\005\022\024\n\014placement_id\030\002 \001(\005\022\017\n\007country\030\003" +
-      " \001(\t\022\021\n\tfrequency\030\004 \001(\005\022\020\n\010con_type\030\005 \001(" +
-      "\005\022\027\n\017brand_whitelist\030\006 \003(\t\022\027\n\017brand_blac",
-      "klist\030\007 \003(\t\022\027\n\017model_whitelist\030\010 \003(\t\022\027\n\017" +
-      "model_blacklist\030\t \003(\t\022\017\n\007iap_min\030\n \001(\002\022\017" +
-      "\n\007iap_max\030\013 \001(\002B!\n\022com.adtiming.om.pbB\013A" +
-      "dNetworkPBb\006proto3"
+      " \001(\t\022\014\n\004type\030\004 \001(\005\022\023\n\013sdk_version\030\005 \001(\t\022" +
+      "\024\n\014bid_endpoint\030\006 \001(\t\"|\n\014AdNetworkApp\022\n\n" +
+      "\002id\030\001 \001(\005\022\016\n\006adn_id\030\002 \001(\005\022\022\n\npub_app_id\030" +
+      "\003 \001(\005\022\017\n\007app_key\030\004 \001(\t\022+\n\013block_rules\030\006 " +
+      "\003(\0132\026.AdNetworkAppBlockRule\"\321\001\n\025AdNetwor" +
+      "kAppBlockRule\022\n\n\002id\030\001 \001(\005\022\022\n\npub_app_id\030" +
+      "\002 \001(\005\022\016\n\006adn_id\030\003 \001(\005\022\023\n\013sdk_version\030\004 \001" +
+      "(\t\022\017\n\007osv_max\030\005 \001(\t\022\017\n\007osv_min\030\006 \001(\t\022\035\n\025",
+      "make_device_blacklist\030\007 \003(\t\022\035\n\025brand_mod" +
+      "el_blacklist\030\010 \003(\t\022\023\n\013app_version\030\t \001(\t\"" +
+      "\244\005\n\010Instance\022\n\n\002id\030\001 \001(\005\022\022\n\npub_app_id\030\002" +
+      " \001(\005\022\024\n\014placement_id\030\003 \001(\005\022\016\n\006adn_id\030\004 \001" +
+      "(\005\022\025\n\rplacement_key\030\005 \001(\t\022\023\n\013app_unit_id" +
+      "\030\006 \001(\t\022\017\n\007osv_max\030\007 \001(\t\022\017\n\007osv_min\030\010 \001(\t" +
+      "\022\026\n\016make_whitelist\030\t \003(\t\022\026\n\016make_blackli" +
+      "st\030\n \003(\t\022\027\n\017brand_whitelist\030\013 \003(\t\022\027\n\017bra" +
+      "nd_blacklist\030\014 \003(\t\022\027\n\017model_whitelist\030\r " +
+      "\003(\t\022\027\n\017model_blacklist\030\016 \003(\t\022\025\n\rfrequenc",
+      "y_cap\030\017 \001(\005\022\026\n\016frequency_unit\030\020 \001(\005\022\032\n\022f" +
+      "requency_interval\030\021 \001(\005\022\021\n\thb_status\030\022 \001" +
+      "(\010\022\014\n\004ecpm\030\023 \001(\002\0228\n\020country_settings\030\024 \003" +
+      "(\0132\036.Instance.CountrySettingsEntry\032Q\n\024Co" +
+      "untrySettingsEntry\022\013\n\003key\030\001 \001(\t\022(\n\005value" +
+      "\030\002 \001(\0132\031.Instance.CountrySettings:\0028\001\032w\n" +
+      "\017CountrySettings\0225\n\006period\030\001 \003(\0132%.Insta" +
+      "nce.CountrySettings.PeriodEntry\032-\n\013Perio" +
+      "dEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\005:\0028\001\"\265" +
+      "\004\n\014InstanceRule\022\n\n\002id\030\001 \001(\005\022\024\n\014publisher",
+      "_id\030\002 \001(\005\022\022\n\npub_app_id\030\003 \001(\005\022\024\n\014placeme" +
+      "nt_id\030\004 \001(\005\022\017\n\007country\030\005 \003(\t\022\021\n\tsort_typ" +
+      "e\030\006 \001(\005\022\024\n\003abt\030\007 \001(\0162\007.ABTest\022\023\n\013auto_sw" +
+      "itch\030\010 \001(\005\022:\n\017instance_weight\030\t \003(\0132!.In" +
+      "stanceRule.InstanceWeightEntry\022\020\n\010priori" +
+      "ty\030\n \001(\005\022\021\n\tfrequency\030\013 \001(\005\022\020\n\010con_type\030" +
+      "\014 \001(\005\022\027\n\017brand_whitelist\030\r \003(\t\022\027\n\017brand_" +
+      "blacklist\030\016 \003(\t\022\027\n\017model_whitelist\030\017 \003(\t" +
+      "\022\027\n\017model_blacklist\030\020 \003(\t\022\017\n\007iap_min\030\021 \001" +
+      "(\002\022\017\n\007iap_max\030\022 \001(\002\022\022\n\nmodel_type\030\023 \001(\005\022",
+      "\023\n\013channel_bow\030\024 \001(\010\022\017\n\007channel\030\025 \003(\t\022\016\n" +
+      "\006gender\030\026 \001(\005\022\020\n\010interest\030\027 \003(\t\0325\n\023Insta" +
+      "nceWeightEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001" +
+      "(\005:\0028\001B!\n\022com.adtiming.om.pbB\013AdNetworkP" +
+      "Bb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -10734,7 +10934,7 @@ public final class AdNetworkPB {
     internal_static_AdNetwork_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_AdNetwork_descriptor,
-        new java.lang.String[] { "Id", "Name", "ClassName", "Type", "SdkVersion", });
+        new java.lang.String[] { "Id", "Name", "ClassName", "Type", "SdkVersion", "BidEndpoint", });
     internal_static_AdNetworkApp_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_AdNetworkApp_fieldAccessorTable = new
@@ -10776,19 +10976,13 @@ public final class AdNetworkPB {
     internal_static_InstanceRule_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_InstanceRule_descriptor,
-        new java.lang.String[] { "Id", "PublisherId", "PubAppId", "PlacementId", "Country", "SortType", "Abt", "SegmentId", "AutoSwitch", "InstanceWeight", "Priority", });
+        new java.lang.String[] { "Id", "PublisherId", "PubAppId", "PlacementId", "Country", "SortType", "Abt", "AutoSwitch", "InstanceWeight", "Priority", "Frequency", "ConType", "BrandWhitelist", "BrandBlacklist", "ModelWhitelist", "ModelBlacklist", "IapMin", "IapMax", "ModelType", "ChannelBow", "Channel", "Gender", "Interest", });
     internal_static_InstanceRule_InstanceWeightEntry_descriptor =
       internal_static_InstanceRule_descriptor.getNestedTypes().get(0);
     internal_static_InstanceRule_InstanceWeightEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_InstanceRule_InstanceWeightEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
-    internal_static_Segment_descriptor =
-      getDescriptor().getMessageTypes().get(5);
-    internal_static_Segment_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Segment_descriptor,
-        new java.lang.String[] { "Id", "PlacementId", "Country", "Frequency", "ConType", "BrandWhitelist", "BrandBlacklist", "ModelWhitelist", "ModelBlacklist", "IapMin", "IapMax", });
     com.adtiming.om.pb.CommonPB.getDescriptor();
   }
 

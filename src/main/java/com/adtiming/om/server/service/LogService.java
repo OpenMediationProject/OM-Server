@@ -3,6 +3,7 @@
 
 package com.adtiming.om.server.service;
 
+import com.adtiming.om.server.dto.NodeConfig;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -50,7 +51,7 @@ public class LogService {
     private AwsClient awsClient;
 
     @Resource
-    private AppConfig cfg;
+    private NodeConfig nodeConfig;
 
     @Resource
     private ObjectMapper objectMapper;
@@ -112,7 +113,7 @@ public class LogService {
                 continue;
             }
             String key = name.replace('.', '/') + '/' + keyTimePath + '/'
-                    + fileNamePrefix + '.' + cfg.getSnode() + ".log.gz";
+                    + fileNamePrefix + '.' + nodeConfig.id + ".log.gz";
             awsClient.putObject(key, file);
         }
 
