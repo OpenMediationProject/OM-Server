@@ -59,6 +59,7 @@ public class WaterfallController extends WaterfallBase {
 
     private static final int ADN_ADTIMING = 1;
     private static final int ADN_FACEBOOK = 3;
+    private static final int ADN_MINTEGRAL = 14;
 
     @Resource
     private AppConfig cfg;
@@ -504,6 +505,8 @@ public class WaterfallController extends WaterfallBase {
             bidreq.setHeader(bidReqAe);
             if (bidderToken.adn == ADN_FACEBOOK) {
                 bidreq.setHeader("X-FB-Pool-Routing-Token", bidderToken.token);
+            } else if (bidderToken.adn == ADN_MINTEGRAL) {
+                bidreq.setHeader("openrtb", "2.5");
             }
             String reqData = buildBidReqData(o, isTest, placement, bidderToken).toJSONString();
             bidreq.setEntity(new StringEntity(reqData, ContentType.APPLICATION_JSON));
@@ -594,7 +597,6 @@ public class WaterfallController extends WaterfallBase {
 
     private JSONObject buildBidReqData(WaterfallRequest ps, boolean isTest, Placement placement, WaterfallRequest.S2SBidderToken bidderToken) {
         JSONObject bid = new JSONObject().fluentPut("id", ps.getReqId());
-//                .fluentPut("regs", new JSONObject().fluentPut("coppa", 1));
         if (isTest) { // Test mode
             bid.put("test", 1);
         }
@@ -603,18 +605,22 @@ public class WaterfallController extends WaterfallBase {
 
         if (bidderToken.adn == ADN_ADTIMING) {
             bid.put("user", new JSONObject().fluentPut("id", bidderToken.token));
-        } else if (bidderToken.adn == ADN_FACEBOOK) {
+        } else if (bidderToken.adn == ADN_FACEBOOK || bidderToken.adn == ADN_MINTEGRAL) {
             bid.put("user", new JSONObject().fluentPut("buyeruid", bidderToken.token));
         }
 
         JSONObject app = new JSONObject()
                 .fluentPut("ver", ps.getAppv())
                 .fluentPut("bundle", ps.getBundle());
-        if (bidderToken.adn == ADN_ADTIMING) {
-            app.put("id", bidderToken.appId);
-        } else if (bidderToken.adn == ADN_FACEBOOK) {
+
+        if (bidderToken.adn == ADN_FACEBOOK) {
             app.put("publisher", new JSONObject().fluentPut("id", bidderToken.appId));
             bid.put("ext", new JSONObject().fluentPut("platformid", bidderToken.appId));
+        } else if (bidderToken.adn == ADN_MINTEGRAL) {
+            int i = bidderToken.appId.indexOf('#');
+            app.put("id", i == -1 ? bidderToken.appId : bidderToken.appId.substring(0, i));
+        } else {
+            app.put("id", bidderToken.appId);
         }
         bid.put("app", app);
 
@@ -628,11 +634,15 @@ public class WaterfallController extends WaterfallBase {
                 .fluentPut("osv", ps.getOsv())
                 .fluentPut("language", ps.getLang())
                 .fluentPut("carrier", ps.getCarrier())
+                .fluentPut("mccmnc", ps.getMccmnc())
                 .fluentPut("connectiontype", ps.getContype());
+        if (bidderToken.adn == ADN_MINTEGRAL) {
+            device.fluentPut("w", ps.getWidth()).fluentPut("h", ps.getHeight());
+        }
         bid.put("device", device);
 
         JSONObject imp = new JSONObject()
-                .fluentPut("id", "0")
+                .fluentPut("id", "1")
                 .fluentPut("tagid", bidderToken.pkey);
 
         JSONObject size = new JSONObject()
@@ -672,6 +682,23 @@ public class WaterfallController extends WaterfallBase {
                 break;
         }
         bid.put("imp", Collections.singletonList(imp));
+
+        Regs dRegs = ps.getRegs();
+        if (dRegs != null) {
+            JSONObject regs = new JSONObject();
+            if (dRegs.getCoppa() != null) {
+                regs.put("coppa", dRegs.getCoppa());
+            }
+            if (dRegs.getGdpr() != null) {
+                ((JSONObject) regs.computeIfAbsent("ext", k -> new JSONObject())).put("gdpr", dRegs.getGdpr());
+            }
+            if (dRegs.getCcpa() != null) {
+                ((JSONObject) regs.computeIfAbsent("ext", k -> new JSONObject())).put("ccpa", dRegs.getCcpa());
+            }
+            if (!regs.isEmpty()) {
+                bid.put("regs", regs);
+            }
+        }
 
         return bid;
     }
