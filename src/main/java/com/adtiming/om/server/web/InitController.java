@@ -3,7 +3,10 @@
 
 package com.adtiming.om.server.web;
 
-import com.adtiming.om.server.dto.*;
+import com.adtiming.om.server.dto.InitRequest;
+import com.adtiming.om.server.dto.InitResponse;
+import com.adtiming.om.server.dto.LrRequest;
+import com.adtiming.om.server.dto.PublisherApp;
 import com.adtiming.om.server.service.AppConfig;
 import com.adtiming.om.server.service.CacheService;
 import com.adtiming.om.server.service.GeoService;
@@ -58,7 +61,6 @@ public class InitController extends BaseController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("appKey invaild");
         }
 
-        GeoData geo = geoService.getGeoData(req);
         InitRequest o;
         try {
             o = objectMapper.readValue(Compressor.gunzip2s(data), InitRequest.class);
@@ -66,7 +68,7 @@ public class InitController extends BaseController {
             o.setApiv(version);
             o.setPlat(plat);
             o.setSdkv(sdkv);
-            o.setGeo(geo);
+            o.setGeo(geoService.getGeoData(req, o));
             o.setUa(ua);
             o.setReqHost(reqHost);
             o.setAppConfig(cfg);

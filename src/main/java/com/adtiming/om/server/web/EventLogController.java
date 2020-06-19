@@ -68,7 +68,7 @@ public class EventLogController extends BaseController {
             o.setApiv(version);
             o.setSdkv(sdkv);
             o.setPlat(plat);
-            o.setGeo(geoService.getGeoData(req));
+            o.setGeo(geoService.getGeoData(req, o));
             o.setAppConfig(cfg);
         } catch (java.util.zip.ZipException | JsonProcessingException e) {
             LOG.warn("log decode fail {}, {}", req.getQueryString(), e.toString());

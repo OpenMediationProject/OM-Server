@@ -23,7 +23,7 @@ public class TestController {
     @RequestMapping("/ip")
     public Object ip(HttpServletRequest req, String hs) {
         Map<String, Object> v = new HashMap<>(2);
-        v.put("geo", geoService.getGeoData(req));
+        v.put("geo", geoService.getGeoData(req, null));
         if (hs != null) {
             List<String> headers = new ArrayList<>();
             Enumeration<String> names = req.getHeaderNames();

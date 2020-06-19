@@ -37,9 +37,6 @@ public class CacheService {
     @Resource
     private AppConfig appConfig;
 
-    @Resource
-    private GeoService geoService;
-
     private final File cacheDir = new File("cache");
 
     // key: pubAppKey
@@ -105,7 +102,6 @@ public class CacheService {
             LOG.debug("mkdir {}", cacheDir);
         rsyncCache();
         reloadCache();
-        geoService.init();
     }
 
     @Scheduled(fixedDelay = 60000, initialDelay = 60000)

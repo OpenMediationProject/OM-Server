@@ -42,7 +42,7 @@ public class WaterfallBase extends BaseController {
             o.setPlat(plat);
             o.setUa(ua);
             o.setReqHost(reqHost);
-            o.setGeo(geoService.getGeoData(req));
+            o.setGeo(geoService.getGeoData(req, o));
             o.setAppConfig(cfg);
             o.processBidPrices(cacheService);
             o.setMtype(Util.getModelType(plat, o.getModel(), ua));

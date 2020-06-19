@@ -4,7 +4,6 @@
 package com.adtiming.om.server.web;
 
 import com.adtiming.om.pb.CommonPB;
-import com.adtiming.om.server.dto.GeoData;
 import com.adtiming.om.server.dto.LrRequest;
 import com.adtiming.om.server.dto.Placement;
 import com.adtiming.om.server.service.AppConfig;
@@ -50,14 +49,13 @@ public class LoadReadyController extends BaseController {
                    @RequestParam("plat") int plat,    // platform (0:iOS,1:Android)
                    @RequestParam("sdkv") String sdkv, // sdk version
                    @RequestBody byte[] data) {
-        GeoData geo = geoService.getGeoData(req);
         LrRequest o;
         try {
             o = objectMapper.readValue(Compressor.gunzip2s(data), LrRequest.class);
             o.setApiv(version);
             o.setPlat(plat);
             o.setSdkv(sdkv);
-            o.setGeo(geo);
+            o.setGeo(geoService.getGeoData(req, o));
             o.setAppConfig(cfg);
         } catch (Exception e) {
             LOG.warn("lr v{} decode fail", version, e);

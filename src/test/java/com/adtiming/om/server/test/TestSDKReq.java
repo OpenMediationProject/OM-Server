@@ -4,6 +4,7 @@
 package com.adtiming.om.server.test;
 
 import com.adtiming.om.server.util.Compressor;
+import com.adtiming.om.server.util.CountryCode;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.io.IOUtils;
@@ -18,6 +19,14 @@ import java.util.UUID;
 import java.util.zip.GZIPInputStream;
 
 public class TestSDKReq {
+
+    @Test
+    public void testCountryCode() {
+        String[] list = {"CN", "USA", "GBR", "UK", "JP", null, "221", "Hello"};
+        for (String code : list) {
+            System.out.printf("%s: \t%s\n", code, CountryCode.convertToA2(code));
+        }
+    }
 
     private JSONObject buildCommonReqeust() {
         return new JSONObject(30)
@@ -42,6 +51,7 @@ public class TestSDKReq {
                 .fluentPut("width", 320)
                 .fluentPut("height", 50)
                 .fluentPut("lip", "192.168.100.103")
+                .fluentPut("lcountry", "CN")
                 .fluentPut("contype", 6)
                 .fluentPut("carrier", "46002中国移动")
                 .fluentPut("fm", 17799)
