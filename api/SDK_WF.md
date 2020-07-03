@@ -49,7 +49,7 @@
 
 | Name | Type | Description | Example | Necessary |
 | --- | ---| --- | --- | --- |
-| code | int32 | <a href="#respcode">RespCode</a>| 0 |✔︎|
+| code | int32 | [RespCode](#respcode)| 0 |✔︎|
 | msg | string | ErrorInfo| 0 |✖︎|
 | abt | int32 | ABTest Mode | 0 |✖︎|
 | ins | Array of int32 | Instance ID List | [111,222] | ✔︎ |

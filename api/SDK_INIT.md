@@ -1,11 +1,10 @@
-## SDK /init v1 API
 
 ### History
 |Version|Description|
 |---------|------|
 | 1 |  |
 
-### https://om.adtiming.com/init 
+### https://om.adtiming.com/init
 
 * POST, The following parameters are put into the url req, and request content should be compressed into post body
 
@@ -21,12 +20,12 @@
 
 | Name | Type | Description | Example | iOS | Android |
 | --- | ---| --- | --- | --- | --- |
-|...||<a href="SDK_COMMON.md#baserequestfields">BaseRequestFields</a>||✔︎|✔︎|
+|...||[BaseRequestFields](SDK_COMMON.md#baserequestfields)||✔︎|✔︎|
 | btime | int64 | device boot time, millisecond | 1567479919643 |✔︎|✔︎|
 | ram | int64 | total RAM size, Byte | 3456642 |✔︎|✔︎|
-| adns | Array of <a href='#adnetwork'>AdNetwork</a> | integrated AdNetworks | |✔︎|✔︎|
-| ios| Object of <a href='#ios'>iOS</a> | iOS-specific parameters| |✔︎|✖︎|
-| android| Object of <a href='#android'>Android</a> | Android-specific parameters| |✖︎|✔︎|
+| adns | Array of [AdNetwork](#adnetwork) | integrated AdNetworks | |✔︎|✔︎|
+| ios| Object of [iOS](#ios) | iOS-specific parameters| |✔︎|✖︎|
+| android| Object of [Android](#android) | Android-specific parameters| |✖︎|✔︎|
 
 
 #### iOS
@@ -51,7 +50,7 @@
 | rdsg| string | available storage, GB|62.18|✔︎|
 
 
-#### Android 
+#### Android
 
 | Name | Type | Description | Example | Required |
 | --- | ---| --- | --- | --- |
@@ -89,8 +88,8 @@
 | kernel_qemu| string |ro.kernel.qemu | |✔︎|
 | hardware| string | ro.hardware| |✔︎|
 | sensor_size| int32 | sensor numbers |18|✔︎|
-| sensors| Array of <a href='#sensor'>Sensor</a> |sensor list||✔︎|
-| as| Object of <a href='#appsource'>AppSource</a> |app install source||✔︎|
+| sensors| Array of [Sensor](#sensor) |sensor list||✔︎|
+| as| Object of [AppSource](#appsource) |app install source||✔︎|
 | fb_id| string | FacebookID | |✔︎|
 | tdm| int32 | device total storage capacity, MB (without SD Card) | 5837498317 |✔︎|
 
@@ -99,7 +98,7 @@
 
 | Name | Type | Description | Example | Required |
 | --- | ---| --- | --- | --- |
-| id | int32 | <a href="SDK_COMMON.md#adnetwork">AdNetwork ID</a>| 1 | ✔︎ |
+| id | int32 | [AdNetwork ID](SDK_COMMON.md#adnetwork)| 1 | ✔︎ |
 | adapterv | string | AdNetwork Adapter Version| 1.0.1 |✔︎|
 | sdkv | string | AdNetwork SDK Version | 3.2.1 |✔︎|
 
@@ -128,10 +127,10 @@
 | Name | Type | Description | Example | Necessary |
 | --- | ---| --- | --- | --- |
 | d | int8 | debug model, 0-close, 1-open | 1 | ✔︎ |
-| api | Object of <a href="#apis">APIs</a> | API URLs |  | ✔︎ |
-| events | Object of <a href="#events">Events</a> | events need to report, events with no value have no need to report| |✖︎|
-| ms | Array of <a href="#mediation">Mediation</a> | Mediation list,<br> **when SDK initialization and load. Do not initial all mediations, The principle is to initialize on demand** |  |✔︎|
-| pls | Array of <a href="#placement">Placement</a> | Placement list |  |✔︎|
+| api | Object of [APIs](#apis) | API URLs |  | ✔︎ |
+| events | Object of [Events](#events) | events need to report, events with no value have no need to report| |✖︎|
+| ms | Array of [Mediation](#mediation) | Mediation list,<br> **when SDK initialization and load. Do not initial all mediations, The principle is to initialize on demand** |  |✔︎|
+| pls | Array of [Placement](#placement) | Placement list |  |✔︎|
 
 #### APIs
 
@@ -153,13 +152,13 @@
 | url | string | report url | https://om.adtiming.com/l | ✔︎ |
 | mn | int32 | maxNumOfEventsToUpload The maximum number of packet reporting events, once when the queue length reaches mn| 5 |✔︎|
 | ci | int32 | checkInterval Check the event queue interval regularly, in seconds, and report it once when there are events in the queue| 10 |✔︎|
-| ids | Array of <a href="SDK_EVENT.md#eventid" target="_eventid">EventID</a> | List of EventIDs to be reported| [100,101] |✖︎|
+| ids | Array of [EventID](SDK_EVENT.md#eventid) | List of EventIDs to be reported| [100,101] |✖︎|
 
 #### Mediation
 
 | Name | Type | Description | Example | Necessary |
 | --- | ---| --- | --- | --- |
-| id| int32 | <a href="SDK_COMMON.md#adnetwork">AdNetwork ID</a> | 1 | ✔︎ |
+| id| int32 | [AdNetwork ID](SDK_COMMON.md#adnetwork) | 1 | ✔︎ |
 | n | string | AdNetwork Name| AdMob |✔︎|
 | k | string | AdNetwork Key| 1234567 |✔︎|
 
@@ -168,12 +167,12 @@
 | Name | Type | Description | Example | Necessary |
 | --- | ---| --- | --- | --- |
 | id | int32 | Placement ID | 2341 | ✔︎ |
-| t | int8 | <a href="SDK_COMMON.md#adtype" target="_blank">AdType</a>| 3 |✔︎|
+| t | int8 | [AdType](SDK_COMMON.md#adtype)| 3 |✔︎|
 | main | int8 | Main Placement mark, 0:No, 1:Yes| 1 |✖︎|
 | fi | int32 | frequencryInterval, Minimum load interval in seconds | 0 |✖︎|
 | fc | int32 | frequencryCap, 0 or None This attribute means not controlled, n means that the user can show up to n ads in this ad placement within <fu> hours<br>(`Only valid for Banner & Native`)| 0 |✖︎|
 | fu | int32 | frequencryUnit, Time interval for parameter fc in hours<br>(`Only valid for Banner & Native`)| 0 |✖︎|
-| scenes | Array of <a href="#scene">Scene</a> | Scene list||✔︎|
+| scenes | Array of [Scene](#scene) | Scene list||✔︎|
 | bs | int32 | batchSize, Instance group size, means how many instances in a group.<br>(`Only valid for Banner & Native`)<br>Max Parallel load count. |2|✖︎|
 | fo | int8 | Fan Out switch, Whether to turn on the Ready mode immediately <br>(`Only valid for Banner & Native`)| 1 |✖︎|
 | pt | int32 | Load timeout, the maximum time allowed for a single AdNetwork during loading, in seconds | 30 |✔︎|
@@ -181,7 +180,7 @@
 | rf | int32 | refresh, RewardVideo&Interstitial Timed automatic refresh inventory replenishment interval in seconds| 30 |✖︎|
 | rlw | int32 | reload Waterfall, Banner auto refresh interval in display state, unit is second|60 |✖︎|
 | hb | int8 | HeadBidding switch, 0:close,1:open| 1 |✖︎|
-| ins | Array of <a href="#instance">Instance</a> | Instance list||✔︎|
+| ins | Array of [Instance](#instance)| Instance list||✔︎|
 
 #### Scene
 
@@ -198,7 +197,7 @@
 | Name | Type | Description | Example | Necessary |
 | --- | ---| --- | --- | --- |
 | id | int32 | Instance ID | 2341 | ✔︎ |
-| m | int32 | <a href="SDK_COMMON.md#adnetwork">AdNetwork ID</a>| 2 |✔︎|
+| m | int32 | [AdNetwork ID](SDK_COMMON.md#adnetwork)| 2 |✔︎|
 | k | string | Mediation Placement ID/Key/ZoneId|  |✔︎|
 | fc | int32 | frequencry_cap, 0 or no this attribute means no control, n means that this user can show up to n ads at most within <fu> hour| 0 |✖︎|
 | fu | int32 | frequencry_unit, Time interval for parameter fc in hours| 0 |✖︎|
@@ -216,7 +215,7 @@
   "events": {
     "url": "https://sdk.adtiming.com/l",
     "mn": 10,
-    "ci": 10, 
+    "ci": 10,
     "ids": [100, 101, 102, 103, 110, 111, 112, 113, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 360, 361, 362, 363, 400, 401, 402, 403, 404, 405, 406, 407, 408, 409, 410, 411, 412, 413, 500, 501, 502, 503, 600, 601, 602, 603, 604, 605, 700, 701, 702, 703, 704, 705, 706, 707]
    },
 
@@ -261,7 +260,7 @@
       "fu": 0,
       "fi": 0
     }]
-  
+
   }]
 }
 ```

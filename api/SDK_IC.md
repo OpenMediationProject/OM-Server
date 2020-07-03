@@ -21,9 +21,9 @@ This interface is used for Rewarded Callback
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
-|...||<a href="SDK_COMMON.md#baserequestfields">BaseRequestFields</a>||✔︎|
+|...||[BaseRequestFields](SDK_COMMON.md#baserequestfields)||✔︎|
 | pid | int32 | Placement ID | 2345|✔︎|
-| mid | int32 | <a href="SDK_COMMON.md#adnetwork">AdNetwork ID</a> | 1|✔︎|
+| mid | int32 | [AdNetwork ID](SDK_COMMON.md#adnetwork)| 1|✖︎|
 | iid | int32 | InstanceID | 1111|✔︎|
 | scene | int32 | sceneID |1123|✖︎|
 | content | string | User data |{"uid": "aaaaa"}|✔︎|
