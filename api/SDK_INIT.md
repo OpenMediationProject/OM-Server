@@ -178,6 +178,7 @@
 | pt | int32 | Load timeout, the maximum time allowed for a single AdNetwork during loading, in seconds | 30 |✔︎|
 | cs | int8 | caches, Inventory size, number of cached Ready | 3 |✔︎|
 | rf | int32 | refresh, RewardVideo&Interstitial Timed automatic refresh inventory replenishment interval in seconds| 30 |✖︎|
+| rfs | map<int32, int32> | Automatic restocking threshold interval, key: continuous failure times, value: interval seconds | {3: 30, 7: 300, 10: 3600} |✖︎|
 | rlw | int32 | reload Waterfall, Banner auto refresh interval in display state, unit is second|60 |✖︎|
 | hb | int8 | HeadBidding switch, 0:close,1:open| 1 |✖︎|
 | ins | Array of [Instance](#instance)| Instance list||✔︎|
