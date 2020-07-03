@@ -184,6 +184,7 @@ public class InitResponse {
         public Integer bs, fo; // batchSize & fanOut
         public Integer fc, fu; // frequencryCap & frequencryUnit
         public Integer cs, rf; // RewardVideo & Interstitial
+        public Map<Integer, Integer> rfs; //
         public Integer rlw;    // Banner reload waterfall
         public Integer hb;     // headbidding switch [0,1]
         public List<MInstance> ins;
@@ -212,6 +213,7 @@ public class InitResponse {
             if (adType == CommonPB.AdType.RewardVideo || adType == CommonPB.AdType.Interstitial) {
                 this.cs = p.getInventoryCount();
                 this.rf = p.getInventoryInterval();
+                this.rfs = p.getInventoryIntervalStepMap();
                 if (p.isMainPlacement())
                     this.main = 1;
             } else if (adType == CommonPB.AdType.Banner) {
