@@ -508,6 +508,15 @@ public class WaterfallController extends WaterfallBase {
             } else if (bidderToken.adn == ADN_MINTEGRAL) {
                 bidreq.setHeader("openrtb", "2.5");
             }
+
+            // write bid request log
+            LrRequest lr = o.copyTo(new LrRequest());
+            lr.setType(EventLogRequest.INSTANCE_BID_REQUEST);
+            lr.setMid(bidderToken.adn);
+            lr.setPlacement(placement);
+            lr.setIid(bidderToken.iid);
+            lr.writeToLog(logService);
+
             String reqData = buildBidReqData(o, isTest, placement, bidderToken).toJSONString();
             bidreq.setEntity(new StringEntity(reqData, ContentType.APPLICATION_JSON));
             HttpClientContext hcc = HttpClientContext.create();
@@ -543,19 +552,19 @@ public class WaterfallController extends WaterfallBase {
                     } finally {
                         EntityUtils.consumeQuietly(entity);
                     }
-                    handleS2SBidResponse(count, bidderToken, bidresp, err, o, resp, callback, dr);
+                    handleS2SBidResponse(count, bidderToken, bidresp, err, o, resp, placement, callback, dr);
                 }
 
                 @Override
                 public void failed(Exception ex) {
                     String msg = ex.toString();
                     LOG.debug("adn {} failed: {}", bidderToken.adn, msg);
-                    handleS2SBidResponse(count, bidderToken, null, msg, o, resp, callback, dr);
+                    handleS2SBidResponse(count, bidderToken, null, msg, o, resp, placement, callback, dr);
                 }
 
                 @Override
                 public void cancelled() {
-                    handleS2SBidResponse(count, bidderToken, null, "cancelled", o, resp, callback, dr);
+                    handleS2SBidResponse(count, bidderToken, null, "cancelled", o, resp, placement, callback, dr);
                 }
             });
         }
@@ -563,7 +572,8 @@ public class WaterfallController extends WaterfallBase {
     }
 
     private void handleS2SBidResponse(AtomicInteger count, WaterfallRequest.S2SBidderToken bidderToken, JSONObject bidresp,
-                                      String err, WaterfallRequest o, WaterfallResponse resp, S2SBidCallback callback, DeferredResult<Object> dr) {
+                                      String err, WaterfallRequest o, WaterfallResponse resp, Placement placement,
+                                      S2SBidCallback callback, DeferredResult<Object> dr) {
         try {
             WaterfallResponse.S2SBidResponse bres = new WaterfallResponse.S2SBidResponse();
             bres.iid = bidderToken.iid;
@@ -585,6 +595,15 @@ public class WaterfallController extends WaterfallBase {
                 bres.nurl = bid.getString("nurl");
                 bres.lurl = bid.getString("lurl");
                 o.setBidPrice(bidderToken.iid, price);
+
+                // write bid response log
+                LrRequest lr = o.copyTo(new LrRequest());
+                lr.setType(EventLogRequest.INSTANCE_BID_RESPONSE);
+                lr.setMid(bidderToken.adn);
+                lr.setPlacement(placement);
+                lr.setIid(bidderToken.iid);
+                lr.setPrice(price);
+                lr.writeToLog(logService);
             }
         } catch (Exception e) {
             LOG.error("set s2s bidresp error", e);

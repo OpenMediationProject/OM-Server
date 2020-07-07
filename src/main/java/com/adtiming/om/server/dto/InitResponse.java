@@ -11,6 +11,8 @@ import com.adtiming.om.server.service.CacheService;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static com.adtiming.om.server.dto.EventLogRequest.REQUIRED_EVENT_IDS;
+
 public class InitResponse {
 
     private final PublisherApp pubApp;
@@ -23,7 +25,7 @@ public class InitResponse {
     private final CacheService cs;
     private final InitRequest req;
     private final API api;
-    private Events events;
+    private final Events events;
 
     public InitResponse(InitRequest req, CacheService cs, PublisherApp pubApp, Integer devDevicePubId, Integer devAdnId) {
         this.req = req;
@@ -41,11 +43,15 @@ public class InitResponse {
         this.api.iap = "https://" + req.getReqHost() + "/iap";
         this.api.er = "https://" + req.getReqHost() + "/err";
 
-        List<Integer> eIds = pubApp.getEventIds();
-        if (!eIds.isEmpty()) {
-            events = new Events();
-            events.url = "https://" + req.getReqHost() + "/log";
-            events.ids = eIds;
+        events = new Events();
+        events.url = "https://" + req.getReqHost() + "/log";
+        List<Integer> eids = pubApp.getEventIds();
+        if (eids.isEmpty()) {
+            events.ids = REQUIRED_EVENT_IDS;
+        } else {
+            events.ids = new HashSet<>(eids.size() + REQUIRED_EVENT_IDS.size());
+            events.ids.addAll(eids);
+            events.ids.addAll(REQUIRED_EVENT_IDS);
         }
 
         addAdnToResponseList(devAdnId);

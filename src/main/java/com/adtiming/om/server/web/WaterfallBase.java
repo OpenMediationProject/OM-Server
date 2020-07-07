@@ -117,7 +117,7 @@ public class WaterfallBase extends BaseController {
         if (rules == null || rules.isEmpty())
             return null;
         for (InstanceRule rule : rules) {
-            if (rule.isMatched(o.getContype(), o.getBrand(), o.getModel(), o.getIap(), o.getImprTimes(), o.getCnl(), o.getMtype())) {
+            if (rule.isMatched(o)) {
                 return rule;
             }
         }

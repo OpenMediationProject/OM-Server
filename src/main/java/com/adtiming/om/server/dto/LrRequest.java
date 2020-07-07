@@ -29,6 +29,10 @@ public class LrRequest extends CommonRequest {
     private int status;
     private String msg;
 
+    // 2020-07-07
+    private Float price;  // for bid response & win
+    private int adType;
+
     public int getType() {
         return type;
     }
@@ -93,6 +97,22 @@ public class LrRequest extends CommonRequest {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+    public int getAdType() {
+        return adType;
+    }
+
+    public void setAdType(int adType) {
+        this.adType = adType;
     }
 
     public void writeToLog(LogService logService) {

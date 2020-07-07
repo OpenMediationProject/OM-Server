@@ -26,15 +26,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Controller
 public class EventLogController extends BaseController {
 
     private static final Logger LOG = LogManager.getLogger();
-    private static final Set<Integer> NEED_CONVERT_EID_SET = Stream.of(501, 502, 503).collect(Collectors.toSet());
 
     @Resource
     private AppConfig cfg;
@@ -99,15 +95,18 @@ public class EventLogController extends BaseController {
                 event.price = cacheService.getUsdMoney(event.cur, event.price);
             }
 
-            // add below event to lr log
-            // CALLED_SHOW            501
-            // CALLED_IS_READY_TRUE   502
-            // CALLED_IS_READY_FALSE  503
-            if (NEED_CONVERT_EID_SET.contains(event.eid)) {
+            // add REQUIRED_EVENT_IDS event to lr log
+            if (EventLogRequest.REQUIRED_EVENT_IDS.contains(event.eid)) {
                 LrRequest lr = o.copyTo(new LrRequest());
+                lr.setTs(event.ts);
+                lr.setServerTs(event.serverTs);
                 lr.setType(event.eid);
                 lr.setMid(event.mid);
                 lr.setPid(event.pid);
+                if (placement != null) {
+                    lr.setPlacement(placement);
+                    lr.setAdType(event.adType);
+                }
                 lr.setIid(event.iid);
                 lr.setScene(event.scene);
                 lr.setAbt(event.abt);
