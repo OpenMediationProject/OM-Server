@@ -286,7 +286,7 @@ public class WaterfallController extends WaterfallBase {
 
         List<Instance> pmInstances = new ArrayList<>(mps);
         List<Integer> sortIns;
-        Map<Integer, Integer> insMediation = new HashMap<>(pmInstances.size());
+        Map<Integer, Integer> insAdnIdMap = new HashMap<>(pmInstances.size());
         if (matchedRule != null) {//has rule
             Set<Integer> insIdSet = matchedRule.getInstanceList();
             if (DEBUG) {
@@ -300,10 +300,17 @@ public class WaterfallController extends WaterfallBase {
                 float totalEcpm = 0;
                 Map<Float, List<Integer>> priorityIns = new HashMap<>(insIdSet.size());
                 for (Instance ins : pmInstances) {
-                    if (!insIdSet.contains(ins.getId())) continue;
-                    if (blockAdnIds.contains(ins.getAdnId()) || !ins.matchInstance(o))
+                    if (!insIdSet.contains(ins.getId())) {
                         continue;
-                    insMediation.put(ins.getId(), ins.getAdnId());
+                    }
+                    if (blockAdnIds.contains(ins.getAdnId()) || !ins.matchInstance(o)) {
+                        continue;
+                    }
+                    if (ins.isHeadBidding() && o.getBidPrice(ins.getId()) == null) {
+                        // Remove bid instance of nobid
+                        continue;
+                    }
+                    insAdnIdMap.put(ins.getId(), ins.getAdnId());
                     totalEcpm += setInstanceEcpm(o, ins, priorityIns, insEcpm, totalEcpm, DEBUG, dmsg, p.getAdTypeValue(), cacheService);
                 }
                 if (priorityIns.isEmpty()) {
@@ -334,13 +341,20 @@ public class WaterfallController extends WaterfallBase {
                 Map<Integer, Integer> insConfigWeight = matchedRule.getInstanceWeightMap();
                 Map<Integer, Integer> insWeight = new HashMap<>(insIdSet.size());
                 for (Instance ins : pmInstances) {
-                    if (!insIdSet.contains(ins.getId())) continue;
-                    if (blockAdnIds.contains(ins.getAdnId()) || !ins.matchInstance(o))
+                    if (!insIdSet.contains(ins.getId())) {
                         continue;
-                    insMediation.put(ins.getId(), ins.getAdnId());
+                    }
+                    if (blockAdnIds.contains(ins.getAdnId()) || !ins.matchInstance(o)) {
+                        continue;
+                    }
+                    if (ins.isHeadBidding() && o.getBidPrice(ins.getId()) == null) {
+                        // Remove bid instance of nobid
+                        continue;
+                    }
+                    insAdnIdMap.put(ins.getId(), ins.getAdnId());
 
                     if (instanceEcpm != null) {
-                        if (o.getBidPrice(ins.getId()) != null) {
+                        if (ins.isHeadBidding()) {
                             continue; // HeadBidding does not participate in manual sorting
                         }
                         InstanceEcpm ecpm = cacheService.getInstanceEcpm(ins.getAdnId(), ins.getId(), o.getCountry(), p.getAdTypeValue());
@@ -354,7 +368,7 @@ public class WaterfallController extends WaterfallBase {
                         insWeight.put(ins.getId(), weight);
                     }
                 }
-                if (insMediation.isEmpty()) {
+                if (insAdnIdMap.isEmpty()) {
                     if (DEBUG) {
                         dmsg.add("Has no instance match");
                     }
@@ -376,11 +390,11 @@ public class WaterfallController extends WaterfallBase {
                 }
 
                 if (instanceEcpm != null) {// Insert HeadBidding Instance
-                    if (!sortIns.isEmpty()) {// There are instances other than fb headerbidding
+                    if (!sortIns.isEmpty()) {// There are instances other than headerbidding
                         sortIns = new ArrayList<>(sortIns);
                         List<Integer> finalSortIns = sortIns;
                         Map<Integer, Float> finalInstanceEcpm = instanceEcpm;
-                        if (!o.getBidPriceMap().isEmpty() && DEBUG) {
+                        if (DEBUG && !o.getBidPriceMap().isEmpty()) {
                             dmsg.add(String.format("instance bid info:%s", objectMapper.writeValueAsString(o.getBidPriceMap())));
                             dmsg.add(String.format("instance ecpm info:%s", objectMapper.writeValueAsString(instanceEcpm)));
                         }
@@ -394,7 +408,7 @@ public class WaterfallController extends WaterfallBase {
                             }
                         });
                     } else {
-                        // Only configured with fb headerbidding instance
+                        // Only configured with headerbidding instances
                         sortIns = Util.sortByPrice(o.getBidPriceMap());
                     }
                     if (DEBUG) {
@@ -407,9 +421,14 @@ public class WaterfallController extends WaterfallBase {
             float totalEcpm = 0;
             Map<Float, List<Integer>> priorityIns = new HashMap<>(pmInstances.size());
             for (Instance ins : pmInstances) {
-                if (blockAdnIds.contains(ins.getAdnId()) || !ins.matchInstance(o))
+                if (blockAdnIds.contains(ins.getAdnId()) || !ins.matchInstance(o)) {
                     continue;
-                insMediation.put(ins.getId(), ins.getAdnId());
+                }
+                if (ins.isHeadBidding() && o.getBidPrice(ins.getId()) == null) {
+                    // Remove bid instance of nobid
+                    continue;
+                }
+                insAdnIdMap.put(ins.getId(), ins.getAdnId());
 
                 totalEcpm += setInstanceEcpm(o, ins, priorityIns, insEcpm, totalEcpm, DEBUG, dmsg,
                         p.getAdTypeValue(), cacheService);
@@ -509,14 +528,6 @@ public class WaterfallController extends WaterfallBase {
                 bidreq.setHeader("openrtb", "2.5");
             }
 
-            // write bid request log
-            LrRequest lr = o.copyTo(new LrRequest());
-            lr.setType(EventLogRequest.INSTANCE_BID_REQUEST);
-            lr.setMid(bidderToken.adn);
-            lr.setPlacement(placement);
-            lr.setIid(bidderToken.iid);
-            lr.writeToLog(logService);
-
             String reqData = buildBidReqData(o, isTest, placement, bidderToken).toJSONString();
             bidreq.setEntity(new StringEntity(reqData, ContentType.APPLICATION_JSON));
             HttpClientContext hcc = HttpClientContext.create();
@@ -567,6 +578,14 @@ public class WaterfallController extends WaterfallBase {
                     handleS2SBidResponse(count, bidderToken, null, "cancelled", o, resp, placement, callback, dr);
                 }
             });
+
+            // write bid request log
+            LrRequest lr = o.copyTo(new LrRequest());
+            lr.setType(EventLogRequest.INSTANCE_BID_REQUEST);
+            lr.setMid(bidderToken.adn);
+            lr.setPlacement(placement);
+            lr.setIid(bidderToken.iid);
+            lr.writeToLog(logService);
         }
         return dr;
     }
