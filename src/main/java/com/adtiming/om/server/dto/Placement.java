@@ -97,9 +97,9 @@ public class Placement {
         return p.getIcUrl();
     }
 
-    public boolean isAllowHb() {
-        return p.getAllowHb();
-    }
+//    public boolean isAllowHb() {
+//        return p.getAllowHb();
+//    }
 
     public boolean isBlockSdkVersion(String sdkv) {
         return sdkVersionBlacklist != null && sdkVersionBlacklist.contains(sdkv);

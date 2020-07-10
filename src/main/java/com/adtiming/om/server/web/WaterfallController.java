@@ -17,10 +17,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.Header;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.StatusLine;
+import org.apache.http.*;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.protocol.HttpClientContext;
@@ -42,6 +39,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.AsyncRequestTimeoutException;
 import org.springframework.web.context.request.async.DeferredResult;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -81,6 +79,23 @@ public class WaterfallController extends WaterfallBase {
 
     @Resource
     private ResponseContentEncoding responseContentEncoding;
+
+    private RequestConfig bidReqCfg;
+    private final Header bidReqUa = new BasicHeader("User-Agent", "om-bid-s2s");
+    private final Header bidReqAe = new BasicHeader("Accept-Encoding", "gzip, deflate");
+
+    @PostConstruct
+    private void init() {
+        RequestConfig.Builder cfgBuilder = RequestConfig.custom()
+                .setConnectTimeout(2000)
+                .setSocketTimeout(1000)
+                .setRedirectsEnabled(false);
+        String proxy = System.getProperty("bid.proxy");
+        if (StringUtils.isNotBlank(proxy)) {
+            cfgBuilder.setProxy(HttpHost.create(proxy));
+        }
+        bidReqCfg = cfgBuilder.build();
+    }
 
     /**
      * waterfall
@@ -499,20 +514,13 @@ public class WaterfallController extends WaterfallBase {
         }
     }*/
 
-    private final RequestConfig bidReqCfg = RequestConfig.custom()
-            .setConnectTimeout(2000)
-            .setSocketTimeout(1000)
-            .setRedirectsEnabled(false)
-            .build();
-    private final Header bidReqUa = new BasicHeader("User-Agent", "om-bid-s2s");
-    private final Header bidReqAe = new BasicHeader("Accept-Encoding", "gzip, deflate");
-
     @FunctionalInterface
     public interface S2SBidCallback {
         void cb(DeferredResult<Object> dr);
     }
 
     private DeferredResult<Object> bid(WaterfallRequest o, boolean isTest, Placement placement, WaterfallResponse resp, S2SBidCallback callback) {
+        final boolean DEBUG = resp.getDebug() != null;
         resp.bidresp = new ArrayList<>(o.getBids2s().size());
         DeferredResult<Object> dr = new DeferredResult<>(1500L);
 
@@ -530,6 +538,11 @@ public class WaterfallController extends WaterfallBase {
 
             String reqData = buildBidReqData(o, isTest, placement, bidderToken).toJSONString();
             bidreq.setEntity(new StringEntity(reqData, ContentType.APPLICATION_JSON));
+
+            if (DEBUG) {
+                resp.getDebug().add(String.format("bidreq to %d, %s, bid: %s", bidderToken.iid, bidderToken.endpoint, reqData));
+            }
+
             HttpClientContext hcc = HttpClientContext.create();
             httpAsyncClient.execute(bidreq, hcc, new FutureCallback<HttpResponse>() {
                 @Override
@@ -538,7 +551,11 @@ public class WaterfallController extends WaterfallBase {
                     String content = null;
                     JSONObject bidresp = null;
                     String err = null;
+                    String headers = null;
                     try {
+                        if (DEBUG) {
+                            headers = StringUtils.join(result.getAllHeaders(), '\n');
+                        }
                         responseContentEncoding.process(result, hcc);
                         entity = result.getEntity();
                         StatusLine sl = result.getStatusLine();
@@ -558,24 +575,35 @@ public class WaterfallController extends WaterfallBase {
                                 bidresp = JSONObject.parseObject(content);
                             }
                         }
+                        if (DEBUG) {
+                            resp.getDebug().add(String.format("bidresp from %d, headers: %s, body: %s",
+                                    bidderToken.iid, headers, content));
+                        }
                     } catch (Exception e) {
+                        if (DEBUG) {
+                            resp.getDebug().add(String.format("bidresp from %d error, %s, headers: %s, body: %s",
+                                    bidderToken.iid, e.toString(), headers, content));
+                        }
                         LOG.error("adn {} parse error, req: {}, resp: {}", bidderToken.adn, reqData, content, e);
                     } finally {
                         EntityUtils.consumeQuietly(entity);
                     }
-                    handleS2SBidResponse(count, bidderToken, bidresp, err, o, resp, placement, callback, dr);
+                    handleS2SBidResponse(count, bidderToken, isTest, bidresp, err, o, resp, placement, callback, dr);
                 }
 
                 @Override
                 public void failed(Exception ex) {
                     String msg = ex.toString();
                     LOG.debug("adn {} failed: {}", bidderToken.adn, msg);
-                    handleS2SBidResponse(count, bidderToken, null, msg, o, resp, placement, callback, dr);
+                    if (DEBUG) {
+                        resp.getDebug().add(String.format("bidresp from %d failed: %s", bidderToken.iid, ex.toString()));
+                    }
+                    handleS2SBidResponse(count, bidderToken, isTest, null, msg, o, resp, placement, callback, dr);
                 }
 
                 @Override
                 public void cancelled() {
-                    handleS2SBidResponse(count, bidderToken, null, "cancelled", o, resp, placement, callback, dr);
+                    handleS2SBidResponse(count, bidderToken, isTest, null, "cancelled", o, resp, placement, callback, dr);
                 }
             });
 
@@ -590,9 +618,10 @@ public class WaterfallController extends WaterfallBase {
         return dr;
     }
 
-    private void handleS2SBidResponse(AtomicInteger count, WaterfallRequest.S2SBidderToken bidderToken, JSONObject bidresp,
-                                      String err, WaterfallRequest o, WaterfallResponse resp, Placement placement,
-                                      S2SBidCallback callback, DeferredResult<Object> dr) {
+    private void handleS2SBidResponse(
+            AtomicInteger count, WaterfallRequest.S2SBidderToken bidderToken, boolean isTest,
+            JSONObject bidresp, String err, WaterfallRequest o, WaterfallResponse resp, Placement placement,
+            S2SBidCallback callback, DeferredResult<Object> dr) {
         try {
             WaterfallResponse.S2SBidResponse bres = new WaterfallResponse.S2SBidResponse();
             bres.iid = bidderToken.iid;
@@ -621,7 +650,9 @@ public class WaterfallController extends WaterfallBase {
                 lr.setMid(bidderToken.adn);
                 lr.setPlacement(placement);
                 lr.setIid(bidderToken.iid);
-                lr.setPrice(price);
+                if (!isTest) {
+                    lr.setPrice(price);
+                }
                 lr.writeToLog(logService);
             }
         } catch (Exception e) {

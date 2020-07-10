@@ -108,11 +108,11 @@ public class InitResponse {
                 if (devAdnId == null) {
                     List<Instance> insList = cs.getPlacementInstancesAfterRuleMatch(p.getId(), this.adnApps.keySet(),
                             req.getCountry(), req.getBrand(), req.getModel(), req.getCnl(), req.getMtype());
-                    addInstances(p, pIns, insList, hasHb);
+                    addInstances(pIns, insList, hasHb);
                 } else {//dev模式
                     if (this.adnApps.containsKey(devAdnId)) {
                         List<Instance> insList = cs.getPlacementAdnInstanceList(p.getId(), devAdnId);
-                        addInstances(p, pIns, insList, hasHb);
+                        addInstances(pIns, insList, hasHb);
                     }
                 }
                 this.placements.add(new InitPlacement(p, pIns, hasHb));
@@ -123,20 +123,17 @@ public class InitResponse {
     /**
      * add instances to placement response
      *
-     * @param p       placement
      * @param pIns    added to
      * @param insList make sure this list are from the same AdNetwork
      */
-    private void addInstances(Placement p, List<MInstance> pIns, List<Instance> insList, AtomicBoolean hasHb) {
+    private void addInstances(List<MInstance> pIns, List<Instance> insList, AtomicBoolean hasHb) {
         if (insList == null || insList.isEmpty())
             return;
-        boolean allowHb = p.isAllowHb();
         for (Instance i : insList) {
-            boolean hb = false;
-            if (allowHb && !hasHb.get() && i.isHeadBidding()) {
-                hasHb.set(hb = true);
+            if (!hasHb.get() && i.isHeadBidding()) {
+                hasHb.set(true);
             }
-            pIns.add(new MInstance(i, hb));
+            pIns.add(new MInstance(i));
         }
     }
 
@@ -272,11 +269,9 @@ public class InitResponse {
 
     public static class MInstance {
         private Instance o;
-        private boolean hb;
 
-        MInstance(Instance o, boolean hb) {
+        MInstance(Instance o) {
             this.o = o;
-            this.hb = hb;
         }
 
         public String getK() {
@@ -304,11 +299,11 @@ public class InitResponse {
         }
 
         public Integer getHb() {
-            return hb ? 1 : null;
+            return o.isHeadBidding() ? 1 : null;
         }
 
         public Integer getHbt() {
-            return hb ? 5000 : null;
+            return o.isHeadBidding() ? 5000 : null;
         }
 
     }

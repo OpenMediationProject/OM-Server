@@ -26,10 +26,10 @@
 | iap | float | IAP, inAppPurchase |1|✖︎|
 | `imprTimes` | int32 | placementImprTimes The number of times the placement was displayed by the user on that day|5|✖︎|
 | act | int8 | Trigger type for loading ads, [1:init,2:interval,3:adclose,4:manual] |3|✔︎|
-| bid | Array of [C2SBidPrice](#c2sbidprice) | C2S BidResponse Price ||✖︎|
+| bid | Array of [BidPrice](#bidprice) | BidPrice, include C2S & S2S ||✖︎|
 | bids2s | Array of [BidderToken](#biddertoken) | S2S HeadBidding BidderTokens ||✖︎|
 
-### C2SBidPrice
+### BidPrice
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
