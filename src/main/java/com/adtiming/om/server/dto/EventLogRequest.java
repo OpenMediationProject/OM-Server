@@ -42,7 +42,8 @@ public class EventLogRequest extends CommonRequest {
 
         // parsed from json
         public long ts;                 // Client time in milliseconds
-        public int eid;                 // EventID<
+        public int eid;                 // EventID
+        public String code;             // ErrorCode
         public String msg;              // Event message
         public int pid;                 // Placement ID
         public int mid;                 // AdNetwork ID
