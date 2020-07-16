@@ -28,7 +28,6 @@ MODE=service
 APP_NAME=om-server
 #JAVA_HOME=/usr/local/java/jdk
 JAVA_OPTS="-Dapp=$APP_NAME\
- -Dapp.snode=1\
  -Dapp.dcenter=1\
  -Dapp.dtask=replace_dtask_host\
  -Duser.timezone=UTC\

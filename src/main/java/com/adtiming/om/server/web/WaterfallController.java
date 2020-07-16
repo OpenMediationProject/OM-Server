@@ -271,9 +271,16 @@ public class WaterfallController extends WaterfallBase {
     List<Integer> getIns(Integer devDevicePubId, WaterfallRequest o, Placement p,
                          List<CharSequence> dmsg, boolean DEBUG) throws IOException {
         //dev mode
-        List<Integer> devIns = matchDev(devDevicePubId, p, cacheService);
+        List<Instance> devIns = matchDev(devDevicePubId, p, cacheService);
         if (devIns != null && !devIns.isEmpty()) {
-            return devIns;
+            List<Integer> rv = new ArrayList<>(devIns.size());
+            for (Instance ins : devIns) {
+                if (ins.isHeadBidding() && o.getBidPrice(ins.getId()) == null) {
+                    continue;
+                }
+                rv.add(ins.getId());
+            }
+            return rv.isEmpty() ? null : rv;
         }
 
         List<InstanceRule> rules = cacheService.getCountryRules(p.getId(), o.getCountry());
@@ -567,7 +574,7 @@ public class WaterfallController extends WaterfallBase {
                                     err = hErr.getValue();
                                 }
                             }
-                            LOG.debug("adn {} nobid: {}, err: {}", bidderToken.adn, sl, err);
+                            LOG.debug("pid: {}, adn {} nobid: {}, err: {}", o.getPid(), bidderToken.adn, sl, err);
                         }
                         if (entity != null) {
                             content = EntityUtils.toString(entity, UTF_8);
@@ -627,7 +634,9 @@ public class WaterfallController extends WaterfallBase {
             bres.iid = bidderToken.iid;
             bres.err = err;
             resp.bidresp.add(bres);
-            if (bidresp != null) {
+            if (bidresp == null) {
+                bres.nbr = 0;
+            } else {
                 bres.nbr = bidresp.getInteger("nbr");
                 if (bres.nbr != null) {
                     return;
