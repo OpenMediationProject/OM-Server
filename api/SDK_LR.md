@@ -25,12 +25,12 @@ This interface is used to report the counts of sdk load and ready. It returns ht
 |...||[BaseRequestFields](SDK_COMMON.md#baserequestfields)||✔︎|
 | type | int32 | [Type](#type)|3|︎✔︎|
 | pid | int32 | Placement ID | 2345|✔︎|
-| mid | int32 | >[AdNetwork ID](SDK_COMMON.md#adnetwork) | 1|✔︎|
+| mid | int32 | [AdNetwork ID](SDK_COMMON.md#adnetwork) | 1|✔︎|
 | iid | int32 | InstanceID | 1111|✔︎|
 | act | int8 | Trigger type for loading ads, [1:init,2:interval,3:adclose,4:manual] |3|✔︎|
 | scene | int32 | sceneID |1123|✖︎|
 | abt | int32 | ABTest Mode | 0 |✖︎|
-
+| bid | int8 | 是否是Bid相关请求 [0,1] |1|✖︎|
 
 * Resp, Body is empty, Success with http status code=200
 

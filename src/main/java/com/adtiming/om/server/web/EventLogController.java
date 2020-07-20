@@ -110,6 +110,10 @@ public class EventLogController extends BaseController {
                 lr.setIid(event.iid);
                 lr.setScene(event.scene);
                 lr.setAbt(event.abt);
+                lr.setBid(event.bid);
+                if (event.price > 0F) {
+                    lr.setPrice(event.price);
+                }
                 lr.writeToLog(logService);
             }
         }

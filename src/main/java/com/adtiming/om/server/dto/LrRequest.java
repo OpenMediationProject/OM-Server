@@ -33,6 +33,9 @@ public class LrRequest extends CommonRequest {
     private Float price;  // for bid response & win
     private int adType;
 
+    // 2020-07-20
+    private int bid;       // if data is bidding releated: [0,1]
+
     public int getType() {
         return type;
     }
@@ -113,6 +116,14 @@ public class LrRequest extends CommonRequest {
 
     public void setAdType(int adType) {
         this.adType = adType;
+    }
+
+    public int getBid() {
+        return bid;
+    }
+
+    public void setBid(int bid) {
+        this.bid = bid;
     }
 
     public void writeToLog(LogService logService) {

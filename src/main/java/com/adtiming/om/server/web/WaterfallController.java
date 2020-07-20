@@ -616,6 +616,7 @@ public class WaterfallController extends WaterfallBase {
 
             // write bid request log
             LrRequest lr = o.copyTo(new LrRequest());
+            lr.setBid(1);
             lr.setType(EventLogRequest.INSTANCE_BID_REQUEST);
             lr.setMid(bidderToken.adn);
             lr.setPlacement(placement);
@@ -655,6 +656,7 @@ public class WaterfallController extends WaterfallBase {
 
                 // write bid response log
                 LrRequest lr = o.copyTo(new LrRequest());
+                lr.setBid(1);
                 lr.setType(EventLogRequest.INSTANCE_BID_RESPONSE);
                 lr.setMid(bidderToken.adn);
                 lr.setPlacement(placement);
