@@ -648,7 +648,7 @@ public class WaterfallController extends WaterfallBase {
                         .getJSONArray("seatbid").getJSONObject(0)
                         .getJSONArray("bid").getJSONObject(0);
                 float price = cacheService.getUsdMoney(cur, bid.getFloatValue("price"));
-                bres.price = price;
+                bres.price = isTest ? 0F : price; // TestMode, no billing
                 bres.adm = bid.getString("adm");
                 bres.nurl = bid.getString("nurl");
                 bres.lurl = bid.getString("lurl");
