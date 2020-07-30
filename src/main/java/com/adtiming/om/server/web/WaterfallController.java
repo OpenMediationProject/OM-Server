@@ -10,7 +10,6 @@ import com.adtiming.om.server.service.AppConfig;
 import com.adtiming.om.server.service.CacheService;
 import com.adtiming.om.server.service.GeoService;
 import com.adtiming.om.server.service.LogService;
-import com.adtiming.om.server.util.Compressor;
 import com.adtiming.om.server.util.RandomUtil;
 import com.adtiming.om.server.util.Util;
 import com.alibaba.fastjson.JSONObject;
@@ -27,11 +26,9 @@ import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicHeader;
 import org.apache.http.nio.client.HttpAsyncClient;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
@@ -241,21 +238,14 @@ public class WaterfallController extends WaterfallBase {
                     if (ins == null || ins.isEmpty()) {
                         resp.setCode(CODE_INSTANCE_EMPTY);
                         resp.setMsg("instance not found");
-                        dr.setResult(resp);
+                        dr.setResult(response(resp));
                         lr.setStatus(0, "instance not found").writeToLog(logService);
                         return;
                     }
 
                     resp.setIns(ins);
                     lr.setStatus(1, null).writeToLog(logService);
-
-                    ResponseEntity.BodyBuilder b = ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON_UTF8);
-                    byte[] respData = objectMapper.writeValueAsBytes(resp);
-                    if (respData.length > 200) {
-                        b.header(HTTP.CONTENT_ENCODING, "gzip");
-                        respData = Compressor.gzip(respData);
-                    }
-                    dr.setResult(b.contentLength(respData.length).body(respData));
+                    dr.setResult(response(resp));
                 } catch (IllegalArgumentException | IllegalStateException e) {
                     LOG.warn("set dr result error, {}", e.toString());
                 } catch (Exception e) {

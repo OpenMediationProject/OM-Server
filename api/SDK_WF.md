@@ -28,6 +28,7 @@
 | act | int8 | Trigger type for loading ads, [1:init,2:interval,3:adclose,4:manual] |3|✔︎|
 | bid | Array of [BidPrice](#bidprice) | BidPrice, include C2S & S2S ||✖︎|
 | bids2s | Array of [BidderToken](#biddertoken) | S2S HeadBidding BidderTokens ||✖︎|
+| ils | Array of [InstanceLoadStatus](#instanceloadstatus) | report Load error returned by AdNetwork||✖︎|
 
 ### BidPrice
 
@@ -43,6 +44,16 @@
 | --- | ---| --- | --- | --- |
 | iid | int32 | Instance ID | 0 |✔︎|
 | token | string | AdNetwork BidderToken | | ✔︎ |
+
+### InstanceLoadStatus
+
+| Name|Type|Description|Example|Required|
+| --- | ---| --- | --- | --- |
+| iid | int32 | Instance ID | 0 |✔︎|
+| lts | int32 | The unix-timestamp of the last load initiated | 1567479919 |✔︎|
+| dur | int32 | Loading time, in seconds | 10 |✔︎|
+| code | string | Load Callback Event Code |1002 |✔︎ |
+| msg | string | Load Callback Event Message | Ad was re-loaded too frequently| ✖︎ |
 
 
 ### The returned content is a json + gzip structure.The format of the json data before compression is as follows
@@ -88,10 +99,11 @@
 ```json
 {
     "code": 0,
-    "ins": [],
+    "ins": [123],
     "bidresp": [
         {
             "iid": 123, // Instance ID
+            "price": 1.0,
             "adm": "PayloadToken",
             "nurl": "WinNotice URL",
             "lurl": "LossNotice URL"
