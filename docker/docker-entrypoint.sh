@@ -107,7 +107,7 @@ do
             if [[ -d /usr/local/nginx/https ]];then
                 rm -fr /usr/local/nginx/https
             fi
-            ln -sf ${!env_var}/${CONFFILE}/log  /usr/local/nginx/https
+            ln -sf ${!env_var}/${CONFFILE}/https  /usr/local/nginx/https
 
             continue
         fi 
