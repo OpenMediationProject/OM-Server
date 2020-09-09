@@ -43,6 +43,9 @@ public class CommonRequest implements DeviceInfo {
     private int btch;         //  Whether charging, 0: No, 1: Yes
     private int abt;
     private String cnl;       //  Channel
+    private Regs regs;        //  Regs
+    private Integer age;      //  age
+    private Integer gender;   //  gender, {0: unknown, 1: male, 2: female}
 
     // not from request params
     // set by api controller
@@ -429,6 +432,33 @@ public class CommonRequest implements DeviceInfo {
 
     public void setMtype(int mtype) {
         this.mtype = mtype;
+    }
+
+    @Override
+    public Regs getRegs() {
+        return regs;
+    }
+
+    public void setRegs(Regs regs) {
+        this.regs = regs;
+    }
+
+    @Override
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(Integer age) {
+        this.age = age;
+    }
+
+    @Override
+    public Integer getGender() {
+        return gender;
+    }
+
+    public void setGender(Integer gender) {
+        this.gender = gender;
     }
 
     @JsonIgnore

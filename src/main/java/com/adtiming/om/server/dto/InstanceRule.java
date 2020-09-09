@@ -93,27 +93,44 @@ public class InstanceRule {
     /**
      * determin if match rule
      *
-     * @param conType   connection type
-     * @param brand     brand
-     * @param model     model
-     * @param iap       In App purchase
-     * @param pic       Placement Impression Count
-     * @param channel   国内 Android channel
-     * @param modelType model type, {0:Phone,1:Pad,2:TV}
+     * @param o waterfall request
      * @return matched true, otherwise false
      */
-    public boolean isMatched(int conType, String brand, String model, float iap, int pic, String channel, int modelType) {
-        if (!isHardMatched(brand, model, channel, modelType))
+    public boolean isMatched(WaterfallRequest o) {
+        if (!isHardMatched(o.getBrand(), o.getModel(), o.getCnl(), o.getMtype())) {
             return false;
+        }
 
-        if (rule.getConType() > 0 && (rule.getConType() & conType) == 0)
+        if (rule.getConType() > 0 && (rule.getConType() & o.getContype()) == 0) {
             return false;
+        }
 
-        if ((rule.getIapMax() > 0 && iap > rule.getIapMax()) || (rule.getIapMin() > 0 && iap < rule.getIapMin()))
+        if ((rule.getIapMax() > 0 && o.getIap() > rule.getIapMax())
+                || (rule.getIapMin() > 0 && o.getIap() < rule.getIapMin())) {
             return false;
+        }
 
-        if (rule.getFrequency() > 0 && pic < rule.getFrequency())
+        if (rule.getFrequency() > 0 && o.getImprTimes() < rule.getFrequency()) {
             return false;
+        }
+
+        if (rule.getGender() > 0) {
+            Integer gender = o.getGender();
+            if (gender == null || (rule.getGender() & gender) == 0) {
+                return false;
+            }
+        }
+
+        if (rule.getAgeMax() > 0 || rule.getAgeMin() > 0) {
+            Integer age = o.getAge();
+            if (age == null) {
+                return false;
+            }
+            if ((rule.getAgeMax() > 0 && age > rule.getAgeMax())
+                    || (rule.getAgeMin() > 0 && age < rule.getAgeMin())) {
+                return false;
+            }
+        }
 
         return true;
     }

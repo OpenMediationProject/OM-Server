@@ -21,14 +21,16 @@
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
-|...||<a href="SDK_COMMON.md#baserequestfields">BaseRequestFields</a>||✔︎|
+|...||[BaseRequestFields](SDK_COMMON.md#baserequestfields)||✔︎|
 | pid | int32 | Placement ID | 2345|✔︎|
 | iap | float | IAP, inAppPurchase |1|✖︎|
 | `imprTimes` | int32 | placementImprTimes The number of times the placement was displayed by the user on that day|5|✖︎|
 | act | int8 | Trigger type for loading ads, [1:init,2:interval,3:adclose,4:manual] |3|✔︎|
-| bid | Array of <a href="#biddingresponse">BiddingResponse</a> | HeadBidding Response ||✖︎|
+| bid | Array of [BidPrice](#bidprice) | BidPrice, include C2S & S2S ||✖︎|
+| bids2s | Array of [BidderToken](#biddertoken) | S2S HeadBidding BidderTokens ||✖︎|
+| ils | Array of [InstanceLoadStatus](#instanceloadstatus) | report Load error returned by AdNetwork||✖︎|
 
-### BiddingResponse
+### BidPrice
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
@@ -36,16 +38,45 @@
 | price | float | winPrice | 3.6 | ✔︎ |
 | cur | string | Currency Unit, default USD | USD |✖︎|
 
+### BidderToken
+
+| Name|Type|Description|Example|Required|
+| --- | ---| --- | --- | --- |
+| iid | int32 | Instance ID | 0 |✔︎|
+| token | string | AdNetwork BidderToken | | ✔︎ |
+
+### InstanceLoadStatus
+
+| Name|Type|Description|Example|Required|
+| --- | ---| --- | --- | --- |
+| iid | int32 | Instance ID | 0 |✔︎|
+| lts | int32 | The unix-timestamp of the last load initiated | 1567479919 |✔︎|
+| dur | int32 | Loading time, in seconds | 10 |✔︎|
+| code | string | Load Callback Event Code |1002 |✔︎ |
+| msg | string | Load Callback Event Message | Ad was re-loaded too frequently| ✖︎ |
+
 
 ### The returned content is a json + gzip structure.The format of the json data before compression is as follows
 
 | Name | Type | Description | Example | Necessary |
 | --- | ---| --- | --- | --- |
-| code | int32 | <a href="#respcode">RespCode</a>| 0 |✔︎|
+| code | int32 | [RespCode](#respcode)| 0 |✔︎|
 | msg | string | ErrorInfo| 0 |✖︎|
 | abt | int32 | ABTest Mode | 0 |✖︎|
 | ins | Array of int32 | Instance ID List | [111,222] | ✔︎ |
+| bidresp | Array of [S2SBidResponse](#s2sbidresponse) | S2SBidResponse with Payload | | ✖︎ |
 
+### S2SBidResponse
+
+| Name | Type | Description | Example | Necessary |
+| --- | ---| --- | --- | --- |
+| iid | int32 | Instance ID | 0 |✔︎|
+| nbr | int32 | NoBidReason Code | 0 | ✖︎ |
+| err | string | NoBidReason Msg | | ✖︎ |
+| price | float | bidPrice | 3.6 | ✖︎ |
+| adm | string | Payload Token | | ✖︎ |
+| nurl | string | WinNotice URL | | ✖︎ |
+| lurl | string | LossNotice URL | | ✖︎ |
 
 ## RespCode
 | code | key | msg |
@@ -68,7 +99,16 @@
 ```json
 {
     "code": 0,
-    "ins": []
+    "ins": [123],
+    "bidresp": [
+        {
+            "iid": 123, // Instance ID
+            "price": 1.0,
+            "adm": "PayloadToken",
+            "nurl": "WinNotice URL",
+            "lurl": "LossNotice URL"
+        }
+    ]
 }
 ```
 

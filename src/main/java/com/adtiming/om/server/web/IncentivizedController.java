@@ -3,7 +3,6 @@
 
 package com.adtiming.om.server.web;
 
-import com.adtiming.om.server.dto.GeoData;
 import com.adtiming.om.server.dto.IncentivizedRequest;
 import com.adtiming.om.server.dto.Placement;
 import com.adtiming.om.server.service.AppConfig;
@@ -13,16 +12,13 @@ import com.adtiming.om.server.service.LogService;
 import com.adtiming.om.server.util.Compressor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
 import org.apache.http.client.config.CookieSpecs;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.concurrent.FutureCallback;
-import org.apache.http.message.BasicHeader;
 import org.apache.http.nio.client.HttpAsyncClient;
-import org.apache.http.protocol.HTTP;
 import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -67,7 +63,6 @@ public class IncentivizedController extends BaseController {
             .setConnectTimeout(3000)
             .setSocketTimeout(5000)
             .build();
-    private final Header cbUA = new BasicHeader(HTTP.USER_AGENT, "om-server");
 
     @PostMapping(value = "/ic", params = "v=1")
     @ResponseBody
@@ -77,7 +72,6 @@ public class IncentivizedController extends BaseController {
                                 @RequestParam("sdkv") String sdkv,
                                 @RequestParam("plat") int plat,
                                 @RequestBody byte[] body) {
-        GeoData geo = geoService.getGeoData(req);
         IncentivizedRequest o;
         try {
             String json = Compressor.gunzip2s(body);
@@ -85,7 +79,7 @@ public class IncentivizedController extends BaseController {
             o.setApiv(apiv);
             o.setPlat(plat);
             o.setSdkv(sdkv);
-            o.setGeo(geo);
+            o.setGeo(geoService.getGeoData(req, o));
             o.setReqHost(reqHost);
             o.setAppConfig(cfg);
         } catch (Exception e) {
@@ -115,7 +109,6 @@ public class IncentivizedController extends BaseController {
             String url = StringUtils.replace(placement.getIcUrl(), "{content}", cv);
             HttpGet cbReq = new HttpGet(url);
             cbReq.setConfig(cbReqCfg);
-            cbReq.setHeader(cbUA);
             httpAsyncClient.execute(cbReq, new FutureCallback<HttpResponse>() {
                 @Override
                 public void completed(HttpResponse result) {

@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class Placement {
@@ -96,9 +97,9 @@ public class Placement {
         return p.getIcUrl();
     }
 
-    public boolean isAllowHb() {
-        return p.getAllowHb();
-    }
+//    public boolean isAllowHb() {
+//        return p.getAllowHb();
+//    }
 
     public boolean isBlockSdkVersion(String sdkv) {
         return sdkVersionBlacklist != null && sdkVersionBlacklist.contains(sdkv);
@@ -185,6 +186,10 @@ public class Placement {
 
     public int getInventoryInterval() {
         return p.getInventoryInterval();
+    }
+
+    public Map<Integer, Integer> getInventoryIntervalStepMap() {
+        return p.getInventoryIntervalStepMap();
     }
 
     public int getReloadInterval() {

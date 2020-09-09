@@ -23,7 +23,7 @@
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
-|...||<a href="SDK_COMMON.md#baserequestfields">BaseRequestFields</a>||✔︎|
+|...||[BaseRequestFields](SDK_COMMON.md#baserequestfields)||✔︎|
 | events | Array of <a href='#event'>Event</a> |事件集合 |[]|✔︎|
 
 #### Event
@@ -31,10 +31,11 @@
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
 | ts | int64 | Client timestamp(millisecond) | 1567479919643 |✔︎|
-| eid | int32 | <a href='#eventid'>EventID</a>|100 |✔︎|
+| eid | int32 | [EventID](#eventid)|100 |✔︎|
+| code | string | 错误事件的Code, 来自AdNetwork回调 |1001|✖︎|
 | msg | string | 事件消息 ||✖︎|
 | pid | int32 | 广告位ID|1111 |✖︎|
-| mid | int32 | <a href="SDK_COMMON.md#adnetwork">AdNetwork ID</a>|1 |✖︎|
+| mid | int32 | [AdNetwork ID](SDK_COMMON.md#adnetwork)|1 |✖︎|
 | iid | int32 | Instance ID |2222|✖︎|
 | adapterv | string | Adapter Version|3.0.1 |✖︎|
 | msdkv | string | AdNetowrk SDK Version |4.2.0 |✖︎|

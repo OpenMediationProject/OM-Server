@@ -3,7 +3,6 @@
 
 package com.adtiming.om.server.web;
 
-import com.adtiming.om.server.dto.GeoData;
 import com.adtiming.om.server.dto.IapRequest;
 import com.adtiming.om.server.dto.PublisherApp;
 import com.adtiming.om.server.service.CacheService;
@@ -52,11 +51,10 @@ public class IapController extends BaseController {
                     @RequestParam("sdkv") String sdkv,
                     @RequestParam("k") String appKey,
                     @RequestBody byte[] data) {
-        GeoData geo = geoService.getGeoData(req);
         IapRequest o;
         try {
             o = objectMapper.readValue(Compressor.gunzip2s(data), IapRequest.class);
-            o.setGeo(geo);
+            o.setGeo(geoService.getGeoData(req, o));
             o.setApiv(apiv);
             o.setSdkv(sdkv);
             o.setPlat(plat);

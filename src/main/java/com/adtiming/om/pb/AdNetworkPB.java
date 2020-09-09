@@ -7938,6 +7938,20 @@ public final class AdNetworkPB {
      */
     com.google.protobuf.ByteString
         getInterestBytes(int index);
+
+    /**
+     * <pre>
+     * 2020-07-06
+     * </pre>
+     *
+     * <code>optional int32 age_min = 24;</code>
+     */
+    int getAgeMin();
+
+    /**
+     * <code>optional int32 age_max = 25;</code>
+     */
+    int getAgeMax();
   }
   /**
    * Protobuf type {@code InstanceRule}
@@ -7973,6 +7987,8 @@ public final class AdNetworkPB {
       channel_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       gender_ = 0;
       interest_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      ageMin_ = 0;
+      ageMax_ = 0;
     }
 
     @java.lang.Override
@@ -8149,6 +8165,16 @@ public final class AdNetworkPB {
                 mutable_bitField0_ |= 0x00400000;
               }
               interest_.add(s);
+              break;
+            }
+            case 192: {
+
+              ageMin_ = input.readInt32();
+              break;
+            }
+            case 200: {
+
+              ageMax_ = input.readInt32();
               break;
             }
           }
@@ -8668,6 +8694,28 @@ public final class AdNetworkPB {
       return interest_.getByteString(index);
     }
 
+    public static final int AGE_MIN_FIELD_NUMBER = 24;
+    private int ageMin_;
+    /**
+     * <pre>
+     * 2020-07-06
+     * </pre>
+     *
+     * <code>optional int32 age_min = 24;</code>
+     */
+    public int getAgeMin() {
+      return ageMin_;
+    }
+
+    public static final int AGE_MAX_FIELD_NUMBER = 25;
+    private int ageMax_;
+    /**
+     * <code>optional int32 age_max = 25;</code>
+     */
+    public int getAgeMax() {
+      return ageMax_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -8754,6 +8802,12 @@ public final class AdNetworkPB {
       }
       for (int i = 0; i < interest_.size(); i++) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 23, interest_.getRaw(i));
+      }
+      if (ageMin_ != 0) {
+        output.writeInt32(24, ageMin_);
+      }
+      if (ageMax_ != 0) {
+        output.writeInt32(25, ageMax_);
       }
     }
 
@@ -8888,6 +8942,14 @@ public final class AdNetworkPB {
         size += dataSize;
         size += 2 * getInterestList().size();
       }
+      if (ageMin_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(24, ageMin_);
+      }
+      if (ageMax_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(25, ageMax_);
+      }
       memoizedSize = size;
       return size;
     }
@@ -8953,6 +9015,10 @@ public final class AdNetworkPB {
           == other.getGender());
       result = result && getInterestList()
           .equals(other.getInterestList());
+      result = result && (getAgeMin()
+          == other.getAgeMin());
+      result = result && (getAgeMax()
+          == other.getAgeMax());
       return result;
     }
 
@@ -9028,6 +9094,10 @@ public final class AdNetworkPB {
         hash = (37 * hash) + INTEREST_FIELD_NUMBER;
         hash = (53 * hash) + getInterestList().hashCode();
       }
+      hash = (37 * hash) + AGE_MIN_FIELD_NUMBER;
+      hash = (53 * hash) + getAgeMin();
+      hash = (37 * hash) + AGE_MAX_FIELD_NUMBER;
+      hash = (53 * hash) + getAgeMax();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -9213,6 +9283,10 @@ public final class AdNetworkPB {
 
         interest_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00400000);
+        ageMin_ = 0;
+
+        ageMax_ = 0;
+
         return this;
       }
 
@@ -9289,6 +9363,8 @@ public final class AdNetworkPB {
           bitField0_ = (bitField0_ & ~0x00400000);
         }
         result.interest_ = interest_;
+        result.ageMin_ = ageMin_;
+        result.ageMax_ = ageMax_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -9447,6 +9523,12 @@ public final class AdNetworkPB {
             interest_.addAll(other.interest_);
           }
           onChanged();
+        }
+        if (other.getAgeMin() != 0) {
+          setAgeMin(other.getAgeMin());
+        }
+        if (other.getAgeMax() != 0) {
+          setAgeMax(other.getAgeMax());
         }
         onChanged();
         return this;
@@ -10767,6 +10849,70 @@ public final class AdNetworkPB {
         onChanged();
         return this;
       }
+
+      private int ageMin_ ;
+      /**
+       * <pre>
+       * 2020-07-06
+       * </pre>
+       *
+       * <code>optional int32 age_min = 24;</code>
+       */
+      public int getAgeMin() {
+        return ageMin_;
+      }
+      /**
+       * <pre>
+       * 2020-07-06
+       * </pre>
+       *
+       * <code>optional int32 age_min = 24;</code>
+       */
+      public Builder setAgeMin(int value) {
+        
+        ageMin_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 2020-07-06
+       * </pre>
+       *
+       * <code>optional int32 age_min = 24;</code>
+       */
+      public Builder clearAgeMin() {
+        
+        ageMin_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int ageMax_ ;
+      /**
+       * <code>optional int32 age_max = 25;</code>
+       */
+      public int getAgeMax() {
+        return ageMax_;
+      }
+      /**
+       * <code>optional int32 age_max = 25;</code>
+       */
+      public Builder setAgeMax(int value) {
+        
+        ageMax_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 age_max = 25;</code>
+       */
+      public Builder clearAgeMax() {
+        
+        ageMax_ = 0;
+        onChanged();
+        return this;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
@@ -10898,7 +11044,7 @@ public final class AdNetworkPB {
       "\030\002 \001(\0132\031.Instance.CountrySettings:\0028\001\032w\n" +
       "\017CountrySettings\0225\n\006period\030\001 \003(\0132%.Insta" +
       "nce.CountrySettings.PeriodEntry\032-\n\013Perio" +
-      "dEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\005:\0028\001\"\265" +
+      "dEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\005:\0028\001\"\327" +
       "\004\n\014InstanceRule\022\n\n\002id\030\001 \001(\005\022\024\n\014publisher",
       "_id\030\002 \001(\005\022\022\n\npub_app_id\030\003 \001(\005\022\024\n\014placeme" +
       "nt_id\030\004 \001(\005\022\017\n\007country\030\005 \003(\t\022\021\n\tsort_typ" +
@@ -10911,10 +11057,11 @@ public final class AdNetworkPB {
       "\022\027\n\017model_blacklist\030\020 \003(\t\022\017\n\007iap_min\030\021 \001" +
       "(\002\022\017\n\007iap_max\030\022 \001(\002\022\022\n\nmodel_type\030\023 \001(\005\022",
       "\023\n\013channel_bow\030\024 \001(\010\022\017\n\007channel\030\025 \003(\t\022\016\n" +
-      "\006gender\030\026 \001(\005\022\020\n\010interest\030\027 \003(\t\0325\n\023Insta" +
-      "nceWeightEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001" +
-      "(\005:\0028\001B!\n\022com.adtiming.om.pbB\013AdNetworkP" +
-      "Bb\006proto3"
+      "\006gender\030\026 \001(\005\022\020\n\010interest\030\027 \003(\t\022\017\n\007age_m" +
+      "in\030\030 \001(\005\022\017\n\007age_max\030\031 \001(\005\0325\n\023InstanceWei" +
+      "ghtEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\005:\0028\001" +
+      "B!\n\022com.adtiming.om.pbB\013AdNetworkPBb\006pro" +
+      "to3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -10976,7 +11123,7 @@ public final class AdNetworkPB {
     internal_static_InstanceRule_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_InstanceRule_descriptor,
-        new java.lang.String[] { "Id", "PublisherId", "PubAppId", "PlacementId", "Country", "SortType", "Abt", "AutoSwitch", "InstanceWeight", "Priority", "Frequency", "ConType", "BrandWhitelist", "BrandBlacklist", "ModelWhitelist", "ModelBlacklist", "IapMin", "IapMax", "ModelType", "ChannelBow", "Channel", "Gender", "Interest", });
+        new java.lang.String[] { "Id", "PublisherId", "PubAppId", "PlacementId", "Country", "SortType", "Abt", "AutoSwitch", "InstanceWeight", "Priority", "Frequency", "ConType", "BrandWhitelist", "BrandBlacklist", "ModelWhitelist", "ModelBlacklist", "IapMin", "IapMax", "ModelType", "ChannelBow", "Channel", "Gender", "Interest", "AgeMin", "AgeMax", });
     internal_static_InstanceRule_InstanceWeightEntry_descriptor =
       internal_static_InstanceRule_descriptor.getNestedTypes().get(0);
     internal_static_InstanceRule_InstanceWeightEntry_fieldAccessorTable = new

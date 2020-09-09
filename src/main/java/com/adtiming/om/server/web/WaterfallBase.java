@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class WaterfallBase extends BaseController {
 
@@ -42,7 +41,7 @@ public class WaterfallBase extends BaseController {
             o.setPlat(plat);
             o.setUa(ua);
             o.setReqHost(reqHost);
-            o.setGeo(geoService.getGeoData(req));
+            o.setGeo(geoService.getGeoData(req, o));
             o.setAppConfig(cfg);
             o.processBidPrices(cacheService);
             o.setMtype(Util.getModelType(plat, o.getModel(), ua));
@@ -65,16 +64,13 @@ public class WaterfallBase extends BaseController {
         return removeAdnIds;
     }
 
-    List<Integer> matchDev(Integer devDevicePubId, Placement p, CacheService cacheService) {
+    List<Instance> matchDev(Integer devDevicePubId, Placement p, CacheService cacheService) {
         if (devDevicePubId != null) {
             // When devDevicePubId is 0, all apps are remediated in test mode
             if (devDevicePubId == 0 || devDevicePubId == p.getPublisherId()) {
                 Integer adnId = cacheService.getDevAppAdnId(p.getPubAppId());
                 if (adnId != null) {
-                    List<Instance> ins = cacheService.getPlacementAdnInstances(p.getId(), adnId);
-                    if (ins.isEmpty())
-                        return null;
-                    return ins.stream().map(Instance::getId).collect(Collectors.toList());
+                    return cacheService.getPlacementAdnInstances(p.getId(), adnId);
                 }
             }
         }
@@ -117,7 +113,7 @@ public class WaterfallBase extends BaseController {
         if (rules == null || rules.isEmpty())
             return null;
         for (InstanceRule rule : rules) {
-            if (rule.isMatched(o.getContype(), o.getBrand(), o.getModel(), o.getIap(), o.getImprTimes(), o.getCnl(), o.getMtype())) {
+            if (rule.isMatched(o)) {
                 return rule;
             }
         }

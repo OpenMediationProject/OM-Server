@@ -124,17 +124,13 @@ public class HBController extends WaterfallBase {
     private List<Integer> getIns(Integer devDevicePubId, WaterfallRequest o, Placement p,
                                  List<CharSequence> dmsg, boolean DEBUG) {
         //dev mode
-        List<Integer> devIns = matchDev(devDevicePubId, p, cacheService);
+        List<Instance> devIns = matchDev(devDevicePubId, p, cacheService);
         if (devIns != null && !devIns.isEmpty()) {
-            List<Integer> hbList = null;
-            for (int iid : devIns) {
-                Instance ins = cacheService.getInstanceById(iid);
-                if (ins == null) continue;
-                if (hbList == null)
-                    hbList = new ArrayList<>();
-                hbList.add(iid);
+            List<Integer> hbList = new ArrayList<>();
+            for (Instance ins : devIns) {
+                hbList.add(ins.getId());
             }
-            if (hbList != null && hbList.size() > 1) {// Randomly return one in dev mode
+            if (hbList.size() > 1) {// Randomly return one in dev mode
                 return Collections.singletonList(hbList.get(ThreadLocalRandom.current().nextInt(hbList.size())));
             }
             return hbList;
