@@ -27,7 +27,7 @@
 | appv | string | App Version Name | 1.0|✔︎|
 | width| int32 | width of placement or screen |1028 |✔︎|
 | height| int32 | height of placement or screen|2094|✔︎|
-| contype | int32 | <a href="#connectiontype" target="_contype">ConnectionType</a>| 4|✔︎|
+| contype | int32 | [ConnectionType](#connectiontype)| 4|✔︎|
 | carrier | string | NetworkOperatorName with mccmnc | 46002China Mobile |✔︎|
 | lip | string| Local ip | 192.168.1.101 |✖︎|
 | lcountry | string| [[NSLocale currentLocale]localeIdentifier], Locale.getCountry() | CN |✔︎|
@@ -35,7 +35,10 @@
 | battery| int32| Remaining battery percentage | 52 |✔︎|
 | btch| int8| whether charging, 0:否,1:是 | 1 |✖︎|
 | lowp| int8| Whether low battery mode, 0:否,1:是 |0|✖︎|
-
+| cnl | string | Android Channel |  |✖︎|
+| gender | int8 | 0:unknown,1:male,2:female | 1 |✖︎|
+| age | int8 | Age year | 26 |✖︎|
+| regs | Object of [Regs](#regs) | any legal, governmental, or industry regulations |  |✖︎|
 
 #### ConnectionType
 > Copy From "OpenRTB API Specification Version 2.5" Page 52
@@ -52,6 +55,13 @@
 |7|Cellular Network – 5G|
 |8|Cellular Network – 6G|
 
+#### Regs
+
+| Name|Type|Description|Example|Required|
+| --- | ---| --- | --- | --- |
+| gdpr | int8 | GDPR by europe, where 0 = no, 1 = yes | 1 |✖︎ |
+| coppa | int8 | COPPA by USA, where 0 = no, 1 = yes.| 1 |✖︎|
+| ccpa | int8 | CCPA by California, where 0 = no, 1 = yes. | 1 |✖︎|
 
 #### Currency
 
@@ -84,7 +94,7 @@
 | 25 | Russian ruble | RUB |
 | 26 | Singapore dollar | SGD |
 | 27 | South Korean won | KRW |
-| 28 | Thai Baht | THB | 
+| 28 | Thai Baht | THB |
 
 
 #### AdType

@@ -11,6 +11,8 @@ import com.adtiming.om.server.service.CacheService;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static com.adtiming.om.server.dto.EventLogRequest.REQUIRED_EVENT_IDS;
+
 public class InitResponse {
 
     private final PublisherApp pubApp;
@@ -23,7 +25,7 @@ public class InitResponse {
     private final CacheService cs;
     private final InitRequest req;
     private final API api;
-    private Events events;
+    private final Events events;
 
     public InitResponse(InitRequest req, CacheService cs, PublisherApp pubApp, Integer devDevicePubId, Integer devAdnId) {
         this.req = req;
@@ -41,11 +43,15 @@ public class InitResponse {
         this.api.iap = "https://" + req.getReqHost() + "/iap";
         this.api.er = "https://" + req.getReqHost() + "/err";
 
-        List<Integer> eIds = pubApp.getEventIds();
-        if (!eIds.isEmpty()) {
-            events = new Events();
-            events.url = "https://" + req.getReqHost() + "/log";
-            events.ids = eIds;
+        events = new Events();
+        events.url = "https://" + req.getReqHost() + "/log";
+        List<Integer> eids = pubApp.getEventIds();
+        if (eids.isEmpty()) {
+            events.ids = REQUIRED_EVENT_IDS;
+        } else {
+            events.ids = new HashSet<>(eids.size() + REQUIRED_EVENT_IDS.size());
+            events.ids.addAll(eids);
+            events.ids.addAll(REQUIRED_EVENT_IDS);
         }
 
         addAdnToResponseList(devAdnId);
@@ -102,11 +108,11 @@ public class InitResponse {
                 if (devAdnId == null) {
                     List<Instance> insList = cs.getPlacementInstancesAfterRuleMatch(p.getId(), this.adnApps.keySet(),
                             req.getCountry(), req.getBrand(), req.getModel(), req.getCnl(), req.getMtype());
-                    addInstances(p, pIns, insList, hasHb);
+                    addInstances(pIns, insList, hasHb);
                 } else {//dev模式
                     if (this.adnApps.containsKey(devAdnId)) {
                         List<Instance> insList = cs.getPlacementAdnInstanceList(p.getId(), devAdnId);
-                        addInstances(p, pIns, insList, hasHb);
+                        addInstances(pIns, insList, hasHb);
                     }
                 }
                 this.placements.add(new InitPlacement(p, pIns, hasHb));
@@ -117,20 +123,17 @@ public class InitResponse {
     /**
      * add instances to placement response
      *
-     * @param p       placement
      * @param pIns    added to
      * @param insList make sure this list are from the same AdNetwork
      */
-    private void addInstances(Placement p, List<MInstance> pIns, List<Instance> insList, AtomicBoolean hasHb) {
+    private void addInstances(List<MInstance> pIns, List<Instance> insList, AtomicBoolean hasHb) {
         if (insList == null || insList.isEmpty())
             return;
-        boolean allowHb = p.isAllowHb();
         for (Instance i : insList) {
-            boolean hb = false;
-            if (allowHb && !hasHb.get() && i.isHeadBidding()) {
-                hasHb.set(hb = true);
+            if (!hasHb.get() && i.isHeadBidding()) {
+                hasHb.set(true);
             }
-            pIns.add(new MInstance(i, hb));
+            pIns.add(new MInstance(i));
         }
     }
 
@@ -184,6 +187,7 @@ public class InitResponse {
         public Integer bs, fo; // batchSize & fanOut
         public Integer fc, fu; // frequencryCap & frequencryUnit
         public Integer cs, rf; // RewardVideo & Interstitial
+        public Map<Integer, Integer> rfs; //
         public Integer rlw;    // Banner reload waterfall
         public Integer hb;     // headbidding switch [0,1]
         public List<MInstance> ins;
@@ -212,6 +216,7 @@ public class InitResponse {
             if (adType == CommonPB.AdType.RewardVideo || adType == CommonPB.AdType.Interstitial) {
                 this.cs = p.getInventoryCount();
                 this.rf = p.getInventoryInterval();
+                this.rfs = p.getInventoryIntervalStepMap();
                 if (p.isMainPlacement())
                     this.main = 1;
             } else if (adType == CommonPB.AdType.Banner) {
@@ -264,11 +269,9 @@ public class InitResponse {
 
     public static class MInstance {
         private Instance o;
-        private boolean hb;
 
-        MInstance(Instance o, boolean hb) {
+        MInstance(Instance o) {
             this.o = o;
-            this.hb = hb;
         }
 
         public String getK() {
@@ -296,11 +299,11 @@ public class InitResponse {
         }
 
         public Integer getHb() {
-            return hb ? 1 : null;
+            return o.isHeadBidding() ? 1 : null;
         }
 
         public Integer getHbt() {
-            return hb ? 5000 : null;
+            return o.isHeadBidding() ? 5000 : null;
         }
 
     }

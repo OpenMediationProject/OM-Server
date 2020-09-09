@@ -17,41 +17,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <docker.registry>registry.cn-hongkong.aliyuncs.com</docker.registry>
-        <docker.dockerfile>./docker/Dockerfile</docker.dockerfile>
-        <docker.repo.package>tapque-kks</docker.repo.package>
-        <distr.release.url>http://192.168.254.202:8081/repository/maven-releases/</distr.release.url>
-        <distr.snapshot.url>http://192.168.254.202:8081/repository/maven-snapshots/</distr.snapshot.url>
     </properties>
-
-    <!-- 设定团队持续集成发布包服务器 -->
-    <repositories>
-        <repository>
-            <id>nexus</id>
-            <url>http://192.168.254.202:8081/repository/maven-public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-                <checksumPolicy>warn</checksumPolicy>
-            </snapshots>
-        </repository>
-    </repositories>
-
-    <distributionManagement>
-        <repository>
-            <id>nexus-releases</id>
-            <name>Internal Release Repository</name>
-            <url>${distr.release.url}</url>
-        </repository>
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <name>Internal Snapshot Repository</name>
-            <url>${distr.snapshot.url}</url>
-        </snapshotRepository>
-    </distributionManagement>
 
     <dependencies>
         <dependency>
@@ -124,11 +90,6 @@
             <version>3.0.0</version>
         </dependency>
         <dependency>
-            <groupId>com.maxmind.geoip2</groupId>
-            <artifactId>geoip2</artifactId>
-            <version>2.13.1</version>
-        </dependency>
-        <dependency>
             <groupId>com.amazonaws</groupId>
             <artifactId>aws-java-sdk-s3</artifactId>
             <version>1.11.717</version>
@@ -141,7 +102,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.68</version>
+            <version>1.2.71</version>
         </dependency>
     </dependencies>
 
@@ -162,31 +123,6 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <executable>true</executable>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>1.4.10</version>
-                <executions>
-                    <execution>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>build</goal>
-                            <goal>push</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <dockerfile>${docker.dockerfile}</dockerfile>
-                    <repository>${docker.registry}/${docker.repo.package}/${project.artifactId}</repository>
-                    <contextDirectory>./</contextDirectory>
-                    <buildDirectory>./</buildDirectory>
-                    <tag>latest</tag>
-                    <buildArgs>
-                        <JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
-                    </buildArgs>
                 </configuration>
             </plugin>
         </plugins>

@@ -78,4 +78,24 @@ public interface DeviceInfo {
         return 0;
     }
 
+    /**
+     * any legal, governmental, or industry regulations
+     */
+    default Regs getRegs() {
+        return null;
+    }
+
+    default Integer getAge() {
+        return null;
+    }
+
+    /**
+     * gender
+     *
+     * @return {0: unknown, 1: male, 2: female}
+     */
+    default Integer getGender() {
+        return null;
+    }
+
 }
