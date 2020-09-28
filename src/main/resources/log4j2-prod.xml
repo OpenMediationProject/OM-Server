@@ -10,52 +10,57 @@
             <DefaultRolloverStrategy>
                 <Delete basePath="data" maxDepth="1">
                     <IfFileName glob="*.log.gz"/>
-                    <IfLastModified age="7d"/>
+                    <IfLastModified age="3d"/>
                 </Delete>
                 <Delete basePath="log" maxDepth="1">
                     <IfFileName glob="*.log.gz"/>
-                    <IfLastModified age="7d"/>
+                    <IfLastModified age="3d"/>
                 </Delete>
             </DefaultRolloverStrategy>
         </RollingFile>
 
         <RollingFile name="om.lr" immediateFlush="false" bufferedIO="true" bufferSize="65536"
-                     fileName="data/om.lr.log" filePattern="data/om.lr.%d{yyyy-MM-dd.HH}.log.gz">
+                     fileName="data/om.lr.log" filePattern="data/om.lr.%d{yyyy-MM-dd.HH}.%i.log.gz">
             <PatternLayout pattern="%msg%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+                <SizeBasedTriggeringPolicy size="256MB"/>
             </Policies>
         </RollingFile>
 
         <RollingFile name="om.event" immediateFlush="false" bufferedIO="true" bufferSize="65536"
-                     fileName="data/om.event.log" filePattern="data/om.event.%d{yyyy-MM-dd.HH}.log.gz">
+                     fileName="data/om.event.log" filePattern="data/om.event.%d{yyyy-MM-dd.HH}.%i.log.gz">
             <PatternLayout pattern="%msg%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+                <SizeBasedTriggeringPolicy size="256MB"/>
             </Policies>
         </RollingFile>
 
         <RollingFile name="om.iap" immediateFlush="false" bufferedIO="true" bufferSize="65536"
-                     fileName="data/om.iap.log" filePattern="data/om.iap.%d{yyyy-MM-dd.HH}.log.gz">
+                     fileName="data/om.iap.log" filePattern="data/om.iap.%d{yyyy-MM-dd.HH}.%i.log.gz">
             <PatternLayout pattern="%msg%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+                <SizeBasedTriggeringPolicy size="256MB"/>
             </Policies>
         </RollingFile>
 
         <RollingFile name="om.ic" immediateFlush="false" bufferedIO="true" bufferSize="65536"
-                     fileName="data/om.ic.log" filePattern="data/om.ic.%d{yyyy-MM-dd.HH}.log.gz">
+                     fileName="data/om.ic.log" filePattern="data/om.ic.%d{yyyy-MM-dd.HH}.%i.log.gz">
             <PatternLayout pattern="%msg%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+                <SizeBasedTriggeringPolicy size="256MB"/>
             </Policies>
         </RollingFile>
 
         <RollingFile name="om.error" immediateFlush="false" bufferedIO="true" bufferSize="65536"
-                     fileName="data/om.error.log" filePattern="data/om.error.%d{yyyy-MM-dd.HH}.log.gz">
+                     fileName="data/om.error.log" filePattern="data/om.error.%d{yyyy-MM-dd.HH}.%i.log.gz">
             <PatternLayout pattern="%msg%n"/>
             <Policies>
                 <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+                <SizeBasedTriggeringPolicy size="256MB"/>
             </Policies>
         </RollingFile>
 

@@ -82,31 +82,43 @@ public class LogService {
     /**
      * put log to aws s3 bucket hourly
      */
-    @Scheduled(cron = "0 2 * * * ?")
+    @Scheduled(cron = "0 5 * * * ?")
     public void awsS3Push() {
         if (!awsClient.isEnabled())
             return;
         LOG.info("awsS3Push start");
-        long allStart = System.currentTimeMillis();
+        final long allStart = System.currentTimeMillis();
 
-        LocalDateTime lastHour = LocalDateTime.now().plusHours(-1);
-        String keyTimePath = DateTimeFormatter.ofPattern("yyyy/MM/dd/HH").format(lastHour);
-        String fileNameTimePart = DateTimeFormatter.ofPattern("yyyy-MM-dd.HH").format(lastHour);
+        final LocalDateTime lastHour = LocalDateTime.now().plusHours(-1);
+        final String keyTimePath = DateTimeFormatter.ofPattern("yyyy/MM/dd/HH").format(lastHour);
+        final String fileNameTimePart = DateTimeFormatter.ofPattern("yyyy-MM-dd.HH").format(lastHour);
 
+        final File dir = new File("data");
+        final String[] fileNames = dir.list();
+        if (fileNames == null) {
+            LOG.debug("data empty: {}", dir);
+            return;
+        }
         for (String name : LOG_NAMES) {
-            String fileNamePrefix = name + '.' + fileNameTimePart;
-            File file = new File("data", fileNamePrefix + ".log.gz");
-            if (!file.exists()) {
-                LOG.warn("file not found: {}", file);
-                continue;
+            final String fileNamePrefix = name + '.' + fileNameTimePart;
+            for (String fileName : fileNames) {
+                if (!(fileName.startsWith(fileNamePrefix) && fileName.endsWith(".log.gz"))) {
+                    continue;
+                }
+                File file = new File(dir, fileName);
+                if (!file.exists()) {
+                    LOG.warn("file not found: {}", file);
+                    continue;
+                }
+                if (file.length() < 22) {
+                    LOG.debug("file empty: {}", file);
+                    continue;
+                }
+                String key = name.replace('.', '/') + '/' + keyTimePath + '/'
+                        + fileName.replace(".log.gz", ".") + nodeConfig.id + ".log.gz";
+                awsClient.putObject(key, file);
             }
-            if (file.length() < 22) {
-                LOG.debug("file empty: {}", file);
-                continue;
-            }
-            String key = name.replace('.', '/') + '/' + keyTimePath + '/'
-                    + fileNamePrefix + '.' + nodeConfig.id + ".log.gz";
-            awsClient.putObject(key, file);
+
         }
 
         LOG.info("awsS3Push finished, cost: {}", System.currentTimeMillis() - allStart);
