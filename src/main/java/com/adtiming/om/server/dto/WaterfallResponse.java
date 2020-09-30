@@ -77,5 +77,6 @@ public class WaterfallResponse {
         public String adm;
         public String nurl;
         public String lurl;
+        public int expire;
     }
 }
