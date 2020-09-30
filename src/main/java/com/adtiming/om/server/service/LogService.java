@@ -76,7 +76,7 @@ public class LogService {
     @Scheduled(cron = "1 0 * * * ?")
     private void enforceRollingLogFile() {
         LOG.info("cutLogTail");
-        LOG_MAP.values().forEach(l -> l.info(""));
+        LOG_MAP.values().forEach(l -> l.info("{\"__ignore\":\"cutLogTail\"}"));
     }
 
     /**

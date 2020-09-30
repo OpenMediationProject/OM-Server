@@ -54,6 +54,7 @@ public class WaterfallController extends WaterfallBase {
 
     private static final int ADN_ADTIMING = 1;
     private static final int ADN_FACEBOOK = 3;
+    private static final int ADN_VUNGLE = 3;
     private static final int ADN_MINTEGRAL = 14;
 
     @Resource
@@ -643,6 +644,11 @@ public class WaterfallController extends WaterfallBase {
                 bres.nurl = bid.getString("nurl");
                 bres.lurl = bid.getString("lurl");
                 o.setBidPrice(bidderToken.iid, price);
+                if (bidderToken.adn == ADN_VUNGLE) {
+                    bres.expire = 5;
+                } else {
+                    bres.expire = 30;
+                }
 
                 // write bid response log
                 LrRequest lr = o.copyTo(new LrRequest());
