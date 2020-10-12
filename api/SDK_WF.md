@@ -77,6 +77,7 @@
 | adm | string | Payload Token | | ✖︎ |
 | nurl | string | WinNotice URL | | ✖︎ |
 | lurl | string | LossNotice URL | | ✖︎ |
+| expire | int | Expire time, in minutes | 30 | ✖︎ |
 
 ## RespCode
 | code | key | msg |

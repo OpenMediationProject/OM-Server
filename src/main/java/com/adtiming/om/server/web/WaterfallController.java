@@ -54,6 +54,7 @@ public class WaterfallController extends WaterfallBase {
 
     private static final int ADN_ADTIMING = 1;
     private static final int ADN_FACEBOOK = 3;
+    private static final int ADN_VUNGLE = 5;
     private static final int ADN_MINTEGRAL = 14;
 
     @Resource
@@ -531,6 +532,9 @@ public class WaterfallController extends WaterfallBase {
                 bidreq.setHeader("X-FB-Pool-Routing-Token", bidderToken.token);
             } else if (bidderToken.adn == ADN_MINTEGRAL) {
                 bidreq.setHeader("openrtb", "2.5");
+            } else if (bidderToken.adn == ADN_VUNGLE) {
+                bidreq.setHeader("X-OpenRTB-Version", "2.5");
+                bidreq.setHeader("Accept", "application/json");
             }
 
             String reqData = buildBidReqData(o, isTest, placement, bidderToken).toJSONString();
@@ -643,6 +647,11 @@ public class WaterfallController extends WaterfallBase {
                 bres.nurl = bid.getString("nurl");
                 bres.lurl = bid.getString("lurl");
                 o.setBidPrice(bidderToken.iid, price);
+                if (bidderToken.adn == ADN_VUNGLE) {
+                    bres.expire = 5;
+                } else {
+                    bres.expire = 30;
+                }
 
                 // write bid response log
                 LrRequest lr = o.copyTo(new LrRequest());
@@ -714,6 +723,10 @@ public class WaterfallController extends WaterfallBase {
         JSONObject imp = new JSONObject()
                 .fluentPut("id", "1")
                 .fluentPut("tagid", bidderToken.pkey);
+
+        if (bidderToken.adn == ADN_VUNGLE) {
+            imp.put("ext", Collections.singletonMap("vungle", Collections.singletonMap("bid_token", bidderToken.token)));
+        }
 
         JSONObject size = new JSONObject()
                 .fluentPut("w", ps.getWidth())
