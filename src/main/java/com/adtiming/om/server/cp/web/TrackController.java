@@ -88,11 +88,11 @@ public class TrackController extends BaseController {
         final boolean isImpr = req.getRequestURI().equals("/cp/impr");
         if (isImpr) {
             o.setImpr(1);
-        } else {
-            o.setClick(1);
             if (StringUtils.isNotEmpty(o.getPrice()) && !cs.isTestCampaign(o.getCid())) {
                 o.setCost(new BigDecimal(o.getPrice()));
             }
+        } else {
+            o.setClick(1);
         }
 
         o.writeToLog(logService);
