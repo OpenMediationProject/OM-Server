@@ -1,14 +1,16 @@
-## SDK error Interface
+# SDK error API
 
-### API History
+## API History
+
 |Version|Description|
 |------|------|
 | 1 | API URL from /init Response |
 
+* This API is used to report error logs
+* Request header `Content-Type: application/json` is reqiured
+* The API accepts request body compression, in either `gzip` or `deflate` format, specified by the request header `Content-Encoding`, which is mandatory in this case.
 
-This interface is used to report error logs
-
-### POST request, the following parameters are spelled into the url address, the encrypted content is put into the post body
+## POST request, the following parameters are spelled into the url query
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
@@ -17,8 +19,7 @@ This interface is used to report error logs
 | sdkv | string | SDK Version Name |1.0.1| ✔︎|
 | k | string | appKey| higNI1z4a5l94D3ucZRn5zNZa00NuDTq|✔︎|
 
-
-### The request content is a json + gzip structure.The format of the json data before compression is as follows
+## Request body JSON
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
@@ -30,6 +31,4 @@ This interface is used to report error logs
 | tag | string | Error tag ||✔︎|
 | error | string | Error information ||✔︎|
 
-
 * Resp, Body is empty, success with http status code=200
-

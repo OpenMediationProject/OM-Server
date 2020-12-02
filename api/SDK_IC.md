@@ -1,14 +1,16 @@
-## SDK ic Interface
+# SDK ic API
 
-### API History
+## API History
+
 |Version|Description|
 |------|------|
 | 1 | API URL from /init Response |
 
+* This API is used for Rewarded Callback
+* Request header `Content-Type: application/json` is reqiured
+* The API accepts request body compression, in either `gzip` or `deflate` format, specified by the request header `Content-Encoding`, which is mandatory in this case.
 
-This interface is used for Rewarded Callback
-
-### POST request, the following parameters are spelled into the url address, the encrypted content is put into the post body
+## POST request, the following parameters are spelled into the url query
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
@@ -16,8 +18,7 @@ This interface is used for Rewarded Callback
 | plat | int32 | Platform, 0:iOS,1:Android|1| ✔︎|
 | sdkv | string | SDK Version Name |1.0.1| ✔︎|
 
-
-### The request content is a json + gzip structure.The format of the json data before compression is as follows
+## Request body JSON
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
@@ -27,6 +28,5 @@ This interface is used for Rewarded Callback
 | iid | int32 | InstanceID | 1111|✔︎|
 | scene | int32 | sceneID |1123|✖︎|
 | content | string | User data |{"uid": "aaaaa"}|✔︎|
-
 
 * Resp, Empty Body, success with http status code 200

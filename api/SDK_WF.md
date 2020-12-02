@@ -1,14 +1,16 @@
-## SDK /wf API
+# SDK waterfall API
 
-### API History
+## API History
+
 |Version|Description|
 |------|------|
 | 1 | API URL from /init Response |
 
+* The wf API is used for SDK to obtain waterfall sequence, return http status 200 for success, non 200 for failure
+* Request header `Content-Type: application/json` is reqiured
+* The API accepts request body compression, in either `gzip` or `deflate` format, specified by the request header `Content-Encoding`, which is mandatory in this case.
 
-* The wf interface is used for SDK to obtain waterfall sequence, return http status 200 for success, non 200 for failure
-
-### POST request, the following parameters are spelled into the url address
+## POST request, the following parameters are spelled into the url address
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- |---|
@@ -16,8 +18,9 @@
 | plat | int32 | Platform, 0:iOS,1:Android|1| ✔︎|
 | sdkv | string | SDK Version Name |1.0.1| ✔︎|
 
-### The request content is a json + gzip + aes structure.The format of the json data before compression and encryption is as follows
-* For parameters whose parameter values are only `0` and` 1`, if the value is `0`, you do not need to report
+## Request body JSON
+
+* For parameters whose parameter values are only `0` and `1`, if the value is `0`, you do not need to report
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
@@ -55,8 +58,7 @@
 | code | string | Load Callback Event Code |1002 |✔︎ |
 | msg | string | Load Callback Event Message | Ad was re-loaded too frequently| ✖︎ |
 
-
-### The returned content is a json + gzip structure.The format of the json data before compression is as follows
+### Response body JSON
 
 | Name | Type | Description | Example | Necessary |
 | --- | ---| --- | --- | --- |
@@ -80,6 +82,7 @@
 | expire | int | Expire time, in minutes | 30 | ✖︎ |
 
 ## RespCode
+
 | code | key | msg |
 |---|---|---|
 | 0 | OK |  |
@@ -93,7 +96,6 @@
 | 80 | BRAND_DENIED | brand denied |
 | 90 | MODEL_DENIED | model denied |
 | 100 | DID_DENIED | did denied |
-
 
 * Resp, JSONObject
 
@@ -112,5 +114,3 @@
     ]
 }
 ```
-
-

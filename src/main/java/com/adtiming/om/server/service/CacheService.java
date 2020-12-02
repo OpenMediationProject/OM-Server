@@ -4,8 +4,9 @@
 package com.adtiming.om.server.service;
 
 import com.adtiming.om.pb.*;
+import com.adtiming.om.server.cp.service.CpCacheService;
 import com.adtiming.om.server.dto.*;
-import com.adtiming.om.server.util.Encrypter;
+import com.adtiming.om.server.util.CountryCode;
 import com.adtiming.om.server.util.Util;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -17,27 +18,27 @@ import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
-import java.util.zip.GZIPInputStream;
 
 /**
  * Cache PB Data in memory
  * rsync & load *.gz files from cache directory minutely
  */
 @Service
-public class CacheService {
+public class CacheService extends PBLoader {
 
     private static final Logger LOG = LogManager.getLogger();
 
     @Resource
     private AppConfig appConfig;
 
-    private final File cacheDir = new File("cache");
+    @Resource
+    private DictManager dictManager;
+
+    @Resource
+    private CpCacheService cpCacheService;
 
     // key: pubAppKey
     private Map<String, PublisherApp> appkeyPubApps = Collections.emptyMap();
@@ -98,21 +99,21 @@ public class CacheService {
 
     @PostConstruct
     private void init() {
-        if (!cacheDir.exists() && cacheDir.mkdir())
-            LOG.debug("mkdir {}", cacheDir);
-        rsyncCache();
-        reloadCache();
+        reloadCacheCron();
     }
 
     @Scheduled(fixedDelay = 60000, initialDelay = 60000)
     public void reloadCacheCron() {
         rsyncCache();
+
+        dictManager.reloadCache();
         reloadCache();
+        cpCacheService.reloadCache();
     }
 
     private void rsyncCache() {
         try {
-            String shell = String.format("rsync -zavSHuq %s::om_cache/*.gz %s/", appConfig.getDtask(), cacheDir.getName());
+            String shell = String.format("rsync -zavSHuq %s::om_cache/*.gz %s/", appConfig.getDtask(), CACHE_DIR.getName());
             LOG.debug(shell);
             String[] cmd = {"bash", "-c", shell};
             Process p = new ProcessBuilder(cmd).redirectErrorStream(true).start();
@@ -157,42 +158,6 @@ public class CacheService {
         loadAdnAdTypeCountryEcpm3d();
 
         LOG.info("reload cache finished, cost: {} ms", System.currentTimeMillis() - start);
-    }
-
-    // store file md5, check if file has been modified
-    private Map<String, String> fileMd5Map = new HashMap<>();
-
-    private void load(String name, LoadFun fn) {
-        LOG.debug("load {} start", name);
-        long start = System.currentTimeMillis();
-        File file = new File(cacheDir, name + ".gz");
-        if (!file.exists()) {
-            LOG.warn("load {} failed, file not exists", name);
-            return;
-        }
-
-        String fileMd5 = Encrypter.md5(file);
-        if (fileMd5.equals(fileMd5Map.get(name))) {
-            LOG.debug("skip {}, not modified", name);
-            return;
-        }
-
-        try (InputStream in = new GZIPInputStream(new FileInputStream(file))) {
-            fn.read(in);
-            fileMd5Map.put(name, fileMd5);
-            LOG.debug("load {} finished, cost {} ms", name, System.currentTimeMillis() - start);
-        } catch (Exception e) {
-            LOG.error("load {} error", name, e);
-        }
-    }
-
-    @FunctionalInterface
-    private interface LoadFun {
-        void read(InputStream in) throws Exception;
-    }
-
-    private <K, V> Map<K, V> newMap(Map<K, V> map, int Default, int gt) {
-        return new HashMap<>((map == null || map.isEmpty()) ? Default : map.size() + gt);
     }
 
     private void loadAdNetwork() {
@@ -556,7 +521,7 @@ public class CacheService {
         }
 
         List<InstanceRule> ruleList = countryRuleList.get(country);
-        List<InstanceRule> allRuleList = countryRuleList.get(Util.COUNTRY_ALL);// // 00 represent ALL COUNTRY
+        List<InstanceRule> allRuleList = countryRuleList.get(CountryCode.COUNTRY_ALL);// // 00 represent ALL COUNTRY
         if (ruleList == null) {
             return immutableList(allRuleList);
         } else if (allRuleList == null) {

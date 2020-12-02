@@ -1,15 +1,17 @@
-## SDK Event 接口文档
+# SDK Event API
 
-### API History
-|版本号|修改内容|
+## API History
+
+|Version|Description|
 |-----|------|
 | 1 | API URL from /init Response|
 
+* The API is used for sdk event reporting, returning http status 2xx means success, non-2xx means failure,
+* Events are packaged and reported and placed in events
+* Request header `Content-Type: application/json` is reqiured
+* The API accepts request body compression, in either `gzip` or `deflate` format, specified by the request header `Content-Encoding`, which is mandatory in this case.
 
-接口用于 sdk 事件上报, 返回 http 状态 2xx 为成功, 非2xx为失败,
-事件打包上报, 放入events内
-
-#### POST 请求, 以下参数拼入 url 地址, 压缩加密内容放入 post body
+## POST request, the following parameters are spelled into the url query
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
@@ -18,29 +20,28 @@
 | sdkv | string | SDK Version Name |1.0.1| ✔︎|
 | k | string | appKey| higNI1z4a5l94D3ucZRn5zNZa00NuDTq|✔︎|
 
-#### 内容使用 json + gzip, 压缩加密前json数据格式如下
-* 对于所有参数值只有`0`和`1`的参数, 如果值是`0`, 则不需要上报
+## Request body JSON
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
-|...||[BaseRequestFields](SDK_COMMON.md#baserequestfields)||✔︎|
-| events | Array of <a href='#event'>Event</a> |事件集合 |[]|✔︎|
+|...|| [BaseRequestFields](SDK_COMMON.md#baserequestfields)||✔︎|
+| events | Array of [Event](#event) | |[]|✔︎|
 
-#### Event
+### Event
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
 | ts | int64 | Client timestamp(millisecond) | 1567479919643 |✔︎|
 | eid | int32 | [EventID](#eventid)|100 |✔︎|
-| code | string | 错误事件的Code, 来自AdNetwork回调 |1001|✖︎|
-| msg | string | 事件消息 ||✖︎|
-| pid | int32 | 广告位ID|1111 |✖︎|
+| code | string | Error Code, from AdNetwork callback |1001|✖︎|
+| msg | string | event message ||✖︎|
+| pid | int32 | placementID|1111 |✖︎|
 | mid | int32 | [AdNetwork ID](SDK_COMMON.md#adnetwork)|1 |✖︎|
 | iid | int32 | Instance ID |2222|✖︎|
 | adapterv | string | Adapter Version|3.0.1 |✖︎|
 | msdkv | string | AdNetowrk SDK Version |4.2.0 |✖︎|
 | scene | int32 | SceneID |0 |✖︎|
-| ot | int32 | Orientation, 屏幕横竖状态 [1:竖,2:横]|1 |✖︎|
+| ot | int32 | Orientation, [1:vertical,2:horizontal]|1 |✖︎|
 | duration| int32 |消耗时长,单位秒|6|✖︎|
 | priority | int32 | instance 加载优先级 |2 |✖︎|
 | cs | int32 | caches 库存大小 |3|✖︎|
@@ -49,10 +50,9 @@
 | cur | string | BidResponse的货币单位|USD|✖︎|
 | abt | int32 | ABTest Mode | 0 |✖︎|
 
-
 #### EventID
 
-| Name| ID | Descn	|
+| Name| ID | Descn|
 | --- | ---| ---|
 | INIT_START | 100| 初始化开始 |
 | INIT_COMPLETE| 101| 初始化完成 |
@@ -124,8 +124,7 @@
 | CALLBACK\_DISMISS\_SCREEN | 606 |API回调 离开屏幕可见区|
 | CALLBACK\_SCENE\_CAPPED | 607 |API回调 Scene 达到Cap上限|
 
-
-* Resp, 空Body, 以 http 状态码 2xx 为成功
+* Resp, Body is empty, success with http status code=200
 
 #### 请求示例
 
@@ -193,5 +192,3 @@
   ]
 }
 ```
-
-

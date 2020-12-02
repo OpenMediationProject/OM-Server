@@ -33,7 +33,8 @@ import java.util.Map;
 public class LogService {
 
     private static final Logger LOG = LogManager.getLogger();
-    private static final String[] LOG_NAMES = {"om.lr", "om.event", "om.iap", "om.ic", "om.error"};
+    private static final String[] LOG_NAMES = {
+            "om.lr", "om.event", "om.iap", "om.ic", "om.error", "om.cptk"};
     private static final Map<String, Logger> LOG_MAP = new HashMap<>();
 
     static {
@@ -68,15 +69,6 @@ public class LogService {
         } catch (Exception e) {
             LOG.error("gzip access log error", e);
         }
-    }
-
-    /**
-     * enforce log4j2 to rolling file
-     */
-    @Scheduled(cron = "1 0 * * * ?")
-    private void enforceRollingLogFile() {
-        LOG.info("cutLogTail");
-        LOG_MAP.values().forEach(l -> l.info("{\"__ignore\":\"cutLogTail\"}"));
     }
 
     /**

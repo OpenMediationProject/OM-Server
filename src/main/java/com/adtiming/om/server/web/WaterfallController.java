@@ -15,8 +15,12 @@ import com.adtiming.om.server.util.Util;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.micrometer.core.lang.Nullable;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.*;
+import org.apache.http.Header;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.protocol.HttpClientContext;
@@ -30,32 +34,26 @@ import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.AsyncRequestTimeoutException;
 import org.springframework.web.context.request.async.DeferredResult;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
+import static com.adtiming.om.server.dto.AdNetwork.*;
 import static com.adtiming.om.server.dto.WaterfallResponse.*;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
-@Controller
+@RestController
 public class WaterfallController extends WaterfallBase {
 
     private static final Logger LOG = LogManager.getLogger();
-
-    private static final int ADN_ADTIMING = 1;
-    private static final int ADN_FACEBOOK = 3;
-    private static final int ADN_VUNGLE = 5;
-    private static final int ADN_MINTEGRAL = 14;
 
     @Resource
     private AppConfig cfg;
@@ -78,53 +76,42 @@ public class WaterfallController extends WaterfallBase {
     @Resource
     private ResponseContentEncoding responseContentEncoding;
 
-    private RequestConfig bidReqCfg;
+    private final RequestConfig bidReqCfg = RequestConfig.custom()
+            .setConnectTimeout(2000)
+            .setSocketTimeout(1000)
+            .setRedirectsEnabled(false)
+            .build();
     private final Header bidReqUa = new BasicHeader("User-Agent", "om-bid-s2s");
     private final Header bidReqAe = new BasicHeader("Accept-Encoding", "gzip, deflate");
-
-    @PostConstruct
-    private void init() {
-        RequestConfig.Builder cfgBuilder = RequestConfig.custom()
-                .setConnectTimeout(2000)
-                .setSocketTimeout(1000)
-                .setRedirectsEnabled(false);
-        String proxy = System.getProperty("bid.proxy");
-        if (StringUtils.isNotBlank(proxy)) {
-            cfgBuilder.setProxy(HttpHost.create(proxy));
-        }
-        bidReqCfg = cfgBuilder.build();
-    }
 
     /**
      * waterfall
      */
     @PostMapping(value = "/wf", params = "v=1")
-    @ResponseBody
-    public Object wf(HttpServletRequest req, HttpServletResponse res,
+    public Object wf(HttpServletRequest req,
                      @RequestParam("v") int version, // api version
                      @RequestParam("plat") int plat, // platform
                      @RequestParam("sdkv") String sdkv,
                      @RequestHeader("Host") String reqHost,
                      @RequestHeader(value = "User-Agent", required = false) String ua,
-                     @RequestHeader(value = "debug", required = false) String debug,
+                     @RequestHeader(value = "x-om-debug", required = false) String debug,
                      @RequestBody byte[] data) throws IOException {
         WaterfallRequest o = fillRequestParams(data, version, sdkv, plat, ua, reqHost, req, geoService, cfg, cacheService);
         if (o == null) {
-            res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return null;
+            return ResponseEntity.badRequest().build();
         }
 
-        final boolean DEBUG = debug != null;
-        final List<CharSequence> dmsg = DEBUG ? new DebugMsgs() : null;
+        WaterfallResponse res = new WaterfallResponse(o.getAbt(), debug != null);
 
         LrRequest lr = o.copyTo(new LrRequest());
+        lr.setWfReq(1);
         lr.setType(LrRequest.TYPE_WATERFALL_REQUEST);
 
         Placement placement = cacheService.getPlacement(o.getPid());
         if (placement == null) {
-            response(res, new WaterfallResponse(CODE_PLACEMENT_INVALID, "placement invalid", CommonPB.ABTest.None_VALUE, dmsg));
             lr.setStatus(0, "placement invalid").writeToLog(logService);
-            return null;
+            res.setCode(CODE_PLACEMENT_INVALID).setMsg("placement invalid");
+            return response(res);
         }
         o.setPlacement(placement);
         lr.setPlacement(placement);
@@ -132,69 +119,76 @@ public class WaterfallController extends WaterfallBase {
         o.setAdType(placement.getAdTypeValue());
 //        o.setAbt(cacheService.getAbTestMode(placement.getId(), o));
 
-        if (DEBUG) {
-            dmsg.add(String.format("request ip:%s, country:%s", o.getIp(), o.getCountry()));
-//            if (o.getAbt() > 0) {
-//                dmsg.add("Placement ABTest status: On");
-//                dmsg.add("Placement Device ABTest Mode:" + CommonPB.ABTest.forNumber(o.getAbt()));
-//            }
-        }
+        res.addDebug("request ip:%s, country:%s", o.getIp(), o.getCountry());
+
         Integer devDevicePubId = cacheService.getDevDevicePub(o.getDid());
         // dev device uses the configured abTest mode
         Integer devAbMode = null;
         if (devDevicePubId != null) {
-            if (DEBUG) {
+            if (res.isDebugEnabled()) {
                 Integer devAdnId = cacheService.getDevAppAdnId(placement.getPubAppId());
-                dmsg.add("Is Dev Device,dev publisher:" + devDevicePubId);
-                dmsg.add("Is Dev model,dev adnId:" + devAdnId);
+                res.addDebug("Is Dev Device,dev publisher: %d", devDevicePubId);
+                res.addDebug("Is Dev model,dev adnId: %d", devAdnId);
             }
             devAbMode = cacheService.getDevDeviceAbtMode(o.getDid());
         }
         if (devAbMode != null) {
             o.setAbt(devAbMode);
-            if (DEBUG) dmsg.add("Dev Device ABTest Mode:" + CommonPB.ABTest.forNumber(o.getAbt()));
+            res.setAbt(devAbMode);
+            res.addDebug("Dev Device ABTest Mode: %s", CommonPB.ABTest.forNumber(o.getAbt()));
         }
 
         PublisherApp pubApp = cacheService.getPublisherApp(placement.getPubAppId());
         if (pubApp == null) {
-            response(res, new WaterfallResponse(CODE_PUB_APP_INVALID, "app invalid", o.getAbt(), dmsg));
             lr.setStatus(0, "app invalid").writeToLog(logService);
-            return null;
+            res.setCode(CODE_PUB_APP_INVALID).setMsg("app invalid");
+            return response(res);
         }
 
         if (StringUtils.isEmpty(o.getCountry())) {
-            response(res, new WaterfallResponse(CODE_COUNTRY_NOT_FOUND, "country not found", o.getAbt(), dmsg));
             lr.setStatus(0, "country not found").writeToLog(logService);
-            return null;
+            res.setCode(CODE_COUNTRY_NOT_FOUND).setMsg("country not found");
+            return response(res);
         }
 
         //placement target filter
         if (!matchPlacement(o, placement)) {
-            response(res, new WaterfallResponse(CODE_PLACEMENT_INVALID, "placement not allowed", o.getAbt(), dmsg));
             lr.setStatus(0, "placement not allowed").writeToLog(logService);
-            return null;
+            res.setCode(CODE_PLACEMENT_INVALID).setMsg("placement not allowed");
+            return response(res);
         }
+
+        Map<Integer, Instance> bidInsMap = new HashMap<>();
+        List<WaterfallInstance> insList = getIns(devDevicePubId, o, placement, res, bidInsMap);
 
         if (o.getBids2s() != null) {
             o.getBids2s().removeIf(bidderToken -> {
-                Instance instance = cacheService.getInstanceById(bidderToken.iid);
-                if (instance == null || !instance.isHeadBidding()) {
-                    LOG.debug("instance not found or bid off, {}", bidderToken.iid);
+                Instance instance = bidInsMap.get(bidderToken.iid);
+                if (instance == null) {
+                    LOG.debug("instance not in rule, {}", bidderToken.iid);
+                    res.addDebug("instance not found or bid off, remove instance: %d", bidderToken.iid);
                     return true;
                 }
                 AdNetworkPB.AdNetwork adn = cacheService.getAdNetwork(instance.getAdnId());
                 if (adn == null || StringUtils.isBlank(adn.getBidEndpoint())) {
                     LOG.debug("adn not found or s2s bidding not support, {}", bidderToken.iid);
+                    res.addDebug("adnApp not found, remove instance: %d", bidderToken.iid);
                     return true;
                 }
                 AdNetworkApp adnApp = cacheService.getAdnApp(instance.getPubAppId(), instance.getAdnId());
                 if (adnApp == null) {
                     LOG.debug("adnApp not found, {}", bidderToken.iid);
+                    res.addDebug("adnApp not found, remove instance: %d", bidderToken.iid);
                     return true;
                 }
                 bidderToken.adn = instance.getAdnId();
-                bidderToken.pkey = instance.getPlacementKey();
-                bidderToken.appId = adnApp.getAppKey();
+                if (bidderToken.adn == ADN_CROSSPROMOTION) {
+                    bidderToken.pkey = String.valueOf(placement.getId());
+                    bidderToken.appId = pubApp.getAppKey();
+                } else {
+                    bidderToken.pkey = instance.getPlacementKey();
+                    bidderToken.appId = adnApp.getAppKey();
+                }
 
                 bidderToken.endpoint = adn.getBidEndpoint();
                 if (bidderToken.adn == ADN_FACEBOOK) {
@@ -204,49 +198,49 @@ public class WaterfallController extends WaterfallBase {
             });
         }
 
-        WaterfallResponse resp = new WaterfallResponse(0, null, o.getAbt(), dmsg);
-
         if (CollectionUtils.isEmpty(o.getBids2s())) {
-            List<Integer> ins = getIns(devDevicePubId, o, placement, dmsg, DEBUG);
+            List<Integer> ins = getInsWithBidInstance(o, insList);
             if (ins == null || ins.isEmpty()) {
-                resp.setCode(CODE_INSTANCE_EMPTY);
-                resp.setMsg("instance empty");
-                response(res, resp);
-                lr.setStatus(0, resp.getMsg()).writeToLog(logService);
-                return null;
+                res.setCode(CODE_INSTANCE_EMPTY).setMsg("instance empty");
+                lr.setStatus(0, res.getMsg()).writeToLog(logService);
+                return response(res);
             }
 
-            resp.setIns(ins);
-            response(res, resp);
+            res.setIns(ins);
             lr.setStatus(1, null).writeToLog(logService);
-            return null;
+            return response(res);
         } else {
             // process s2s bid
             // setAttribute 用于 #asyncExceptionHandler
-            req.setAttribute("resp", resp);
+            req.setAttribute("res", res);
             req.setAttribute("lr", lr);
             req.setAttribute("params", o);
+            req.setAttribute("insList", insList);
 
             boolean isTest = devDevicePubId != null;
-            return bid(o, isTest, placement, resp, dr -> {
+            return bid(o, isTest, placement, res, dr -> {
                 try {
                     if (dr.isSetOrExpired()) {
                         LOG.warn("dr isSetOrExpired, ignore");
                         return;
                     }
 
-                    List<Integer> ins = getIns(devDevicePubId, o, placement, dmsg, DEBUG);
+                    if (res.isDebugEnabled() && o.getBidPriceMap() != null && !o.getBidPriceMap().isEmpty()) {
+                        o.getBidPriceMap().forEach((iid, bidPrice) ->
+                                res.addDebug("instance:%d, bidPrice:%f", iid, bidPrice));
+                    }
+
+                    List<Integer> ins = getInsWithBidInstance(o, insList);
                     if (ins == null || ins.isEmpty()) {
-                        resp.setCode(CODE_INSTANCE_EMPTY);
-                        resp.setMsg("instance not found");
-                        dr.setResult(response(resp));
+                        res.setCode(CODE_INSTANCE_EMPTY).setMsg("instance not found");
+                        dr.setResult(response(res));
                         lr.setStatus(0, "instance not found").writeToLog(logService);
                         return;
                     }
 
-                    resp.setIns(ins);
+                    res.setIns(ins);
                     lr.setStatus(1, null).writeToLog(logService);
-                    dr.setResult(response(resp));
+                    dr.setResult(response(res));
                 } catch (IllegalArgumentException | IllegalStateException e) {
                     LOG.warn("set dr result error, {}", e.toString());
                 } catch (Exception e) {
@@ -259,17 +253,18 @@ public class WaterfallController extends WaterfallBase {
 
     }
 
-    List<Integer> getIns(Integer devDevicePubId, WaterfallRequest o, Placement p,
-                         List<CharSequence> dmsg, boolean DEBUG) throws IOException {
+    List<WaterfallInstance> getIns(Integer devDevicePubId, WaterfallRequest o, Placement p, WaterfallResponse res,
+                                   @Nullable Map<Integer, Instance> returnBidIids) {
         //dev mode
         List<Instance> devIns = matchDev(devDevicePubId, p, cacheService);
         if (devIns != null && !devIns.isEmpty()) {
-            List<Integer> rv = new ArrayList<>(devIns.size());
+            List<WaterfallInstance> rv = new ArrayList<>(devIns.size());
             for (Instance ins : devIns) {
-                if (ins.isHeadBidding() && o.getBidPrice(ins.getId()) == null) {
+                if (ins.isHeadBidding()) {
+                    if (returnBidIids != null) returnBidIids.put(ins.getId(), ins);
                     continue;
                 }
-                rv.add(ins.getId());
+                rv.add(new WaterfallInstance(ins, 0F));
             }
             return rv.isEmpty() ? null : rv;
         }
@@ -277,11 +272,11 @@ public class WaterfallController extends WaterfallBase {
         List<InstanceRule> rules = cacheService.getCountryRules(p.getId(), o.getCountry());
         InstanceRule matchedRule = getMatchedRule(rules, o);
 
-        if (DEBUG) {
+        if (res.isDebugEnabled()) {
             if (matchedRule != null) {
-                dmsg.add("hit rule:" + matchedRule.getId());
+                res.addDebug("hit rule: %d", matchedRule.getId());
             } else {
-                dmsg.add("miss rule");
+                res.addDebug("miss rule");
             }
         }
 
@@ -298,12 +293,12 @@ public class WaterfallController extends WaterfallBase {
         }
 
         List<Instance> pmInstances = new ArrayList<>(mps);
-        List<Integer> sortIns;
+        List<WaterfallInstance> sortIns;
         Map<Integer, Integer> insAdnIdMap = new HashMap<>(pmInstances.size());
         if (matchedRule != null) {//has rule
             Set<Integer> insIdSet = matchedRule.getInstanceList();
-            if (DEBUG) {
-                dmsg.add("Rule instance list:" + objectMapper.writeValueAsString(insIdSet));
+            if (res.isDebugEnabled()) {
+                res.addDebug("Rule instance list: %s", insIdSet);
             }
             if (insIdSet.isEmpty()) {
                 return null;
@@ -311,7 +306,7 @@ public class WaterfallController extends WaterfallBase {
             if (matchedRule.isAutoOpt()) {//auto waterfall, ecpm priority
                 Map<Integer, Float> insEcpm = new HashMap<>(insIdSet.size());
                 float totalEcpm = 0;
-                Map<Float, List<Integer>> priorityIns = new HashMap<>(insIdSet.size());
+                Map<Float, List<WaterfallInstance>> priorityIns = new HashMap<>(insIdSet.size());
                 for (Instance ins : pmInstances) {
                     if (!insIdSet.contains(ins.getId())) {
                         continue;
@@ -319,40 +314,36 @@ public class WaterfallController extends WaterfallBase {
                     if (blockAdnIds.contains(ins.getAdnId()) || !ins.matchInstance(o)) {
                         continue;
                     }
-                    if (ins.isHeadBidding() && o.getBidPrice(ins.getId()) == null) {
+                    if (ins.isHeadBidding()) {
+                        if (returnBidIids != null) returnBidIids.put(ins.getId(), ins);
                         // Remove bid instance of nobid
                         continue;
                     }
                     insAdnIdMap.put(ins.getId(), ins.getAdnId());
-                    totalEcpm += setInstanceEcpm(o, ins, priorityIns, insEcpm, totalEcpm, DEBUG, dmsg, p.getAdTypeValue(), cacheService);
+                    totalEcpm += setInstanceEcpm(o, ins, priorityIns, insEcpm, totalEcpm, res, p.getAdTypeValue(), cacheService);
                 }
                 if (priorityIns.isEmpty()) {
-                    if (DEBUG) {
-                        dmsg.add("Has no instance match");
-                    }
+                    res.addDebug("Has no instance match");
                     return null;
                 }
                 if (priorityIns.containsKey(-1F)) {
                     float avgEcpm = totalEcpm / insEcpm.size();//avg ecpm
-                    List<Integer> needAvgEcpmIns = priorityIns.get(-1F);
-                    if (DEBUG) {
-                        dmsg.add(String.format("Rule auto optimize,Instance AvgEcpm:%f,UseAvgEcpm:%s", avgEcpm, objectMapper.writeValueAsString(needAvgEcpmIns)));
+                    List<WaterfallInstance> needAvgEcpmIns = priorityIns.get(-1F);
+                    if (res.isDebugEnabled() && !CollectionUtils.isEmpty(needAvgEcpmIns)) {
+                        res.addDebug("Rule auto optimize,Instance AvgEcpm:%f,UseAvgEcpm:%s", avgEcpm, needAvgEcpmIns);
                     }
                     priorityIns.put(avgEcpm, needAvgEcpmIns);
                     priorityIns.remove(-1F);
                 }
                 sortIns = Util.sortByEcpm(priorityIns);
-                if (DEBUG) {
-                    dmsg.add("Instance Ecpm:" + objectMapper.writeValueAsString(insEcpm));
-                    dmsg.add("Instance sort:" + objectMapper.writeValueAsString(sortIns));
+                if (res.isDebugEnabled()) {
+                    res.addDebug("Instance Ecpm: %s", insEcpm);
+                    res.addDebug("Instance sort: %s", sortIns);
                 }
             } else { // Non-auto sort by rule configuration
-                Map<Integer, Float> instanceEcpm = null;
-                if (!o.getBidPriceMap().isEmpty())
-                    instanceEcpm = new HashMap<>(insIdSet.size());
 
                 Map<Integer, Integer> insConfigWeight = matchedRule.getInstanceWeightMap();
-                Map<Integer, Integer> insWeight = new HashMap<>(insIdSet.size());
+                Map<WaterfallInstance, Integer> insWeight = new HashMap<>(insIdSet.size());
                 for (Instance ins : pmInstances) {
                     if (!insIdSet.contains(ins.getId())) {
                         continue;
@@ -360,31 +351,26 @@ public class WaterfallController extends WaterfallBase {
                     if (blockAdnIds.contains(ins.getAdnId()) || !ins.matchInstance(o)) {
                         continue;
                     }
-                    if (ins.isHeadBidding() && o.getBidPrice(ins.getId()) == null) {
+                    if (ins.isHeadBidding()) {
+                        if (returnBidIids != null) returnBidIids.put(ins.getId(), ins);
                         // Remove bid instance of nobid
                         continue;
                     }
                     insAdnIdMap.put(ins.getId(), ins.getAdnId());
 
-                    if (instanceEcpm != null) {
-                        if (ins.isHeadBidding()) {
-                            continue; // HeadBidding does not participate in manual sorting
-                        }
-                        InstanceEcpm ecpm = cacheService.getInstanceEcpm(ins.getAdnId(), ins.getId(), o.getCountry(), p.getAdTypeValue());
-                        if (ecpm != null && ecpm.ecpm > -1F) {
-                            instanceEcpm.put(ins.getId(), ecpm.ecpm);
-                        }
+                    InstanceEcpm ecpm = cacheService.getInstanceEcpm(ins.getAdnId(), ins.getId(), o.getCountry(), p.getAdTypeValue());
+                    float ecpmVal = 0F;
+                    if (ecpm != null && ecpm.ecpm > -1F) {
+                        ecpmVal = ecpm.ecpm;
                     }
 
                     int weight = insConfigWeight.get(ins.getId());
                     if (weight > 0) {
-                        insWeight.put(ins.getId(), weight);
+                        insWeight.put(new WaterfallInstance(ins, ecpmVal), weight);
                     }
                 }
                 if (insAdnIdMap.isEmpty()) {
-                    if (DEBUG) {
-                        dmsg.add("Has no instance match");
-                    }
+                    res.addDebug("Has no instance match");
                     return null;
                 }
 
@@ -396,84 +382,55 @@ public class WaterfallController extends WaterfallBase {
                     sortIns = Util.sortByPriority(insWeight);
                 }
 
-                if (DEBUG) {
+                if (res.isDebugEnabled()) {
                     String sortName = (matchedRule.getSortType() == 1 ? "Priority" : "Weight");
-                    dmsg.add(String.format("Sort type:%s, %s:%s", sortName, sortName, objectMapper.writeValueAsString((insWeight))));
-                    dmsg.add("Instance sort:" + objectMapper.writeValueAsString(sortIns));
-                }
-
-                if (instanceEcpm != null) {// Insert HeadBidding Instance
-                    if (!sortIns.isEmpty()) {// There are instances other than headerbidding
-                        sortIns = new ArrayList<>(sortIns);
-                        List<Integer> finalSortIns = sortIns;
-                        Map<Integer, Float> finalInstanceEcpm = instanceEcpm;
-                        if (DEBUG && !o.getBidPriceMap().isEmpty()) {
-                            dmsg.add(String.format("instance bid info:%s", objectMapper.writeValueAsString(o.getBidPriceMap())));
-                            dmsg.add(String.format("instance ecpm info:%s", objectMapper.writeValueAsString(instanceEcpm)));
-                        }
-                        o.getBidPriceMap().forEach((iid, bidPrice) -> {
-                            for (int i = 0; i < finalSortIns.size(); i++) {
-                                Float ecpm = finalInstanceEcpm.getOrDefault(finalSortIns.get(i), 0f);
-                                if (bidPrice > ecpm) {
-                                    finalSortIns.add(i, iid);
-                                    break;
-                                }
-                            }
-                        });
-                    } else {
-                        // Only configured with headerbidding instances
-                        sortIns = Util.sortByPrice(o.getBidPriceMap());
-                    }
-                    if (DEBUG) {
-                        dmsg.add("Instance finally sort:" + objectMapper.writeValueAsString(sortIns));
-                    }
+                    res.addDebug("Sort type:%s, %s:%s", sortName, sortName, insWeight);
+                    res.addDebug("Instance sort: %s", sortIns);
                 }
             }
         } else {// Rule is not configured by ecpm absolute priority ordering
             Map<Integer, Float> insEcpm = new HashMap<>(pmInstances.size());
             float totalEcpm = 0;
-            Map<Float, List<Integer>> priorityIns = new HashMap<>(pmInstances.size());
+            Map<Float, List<WaterfallInstance>> priorityIns = new HashMap<>(pmInstances.size());
             for (Instance ins : pmInstances) {
                 if (blockAdnIds.contains(ins.getAdnId()) || !ins.matchInstance(o)) {
                     continue;
                 }
-                if (ins.isHeadBidding() && o.getBidPrice(ins.getId()) == null) {
+                if (ins.isHeadBidding()) {
+                    if (returnBidIids != null) returnBidIids.put(ins.getId(), ins);
                     // Remove bid instance of nobid
                     continue;
                 }
                 insAdnIdMap.put(ins.getId(), ins.getAdnId());
 
-                totalEcpm += setInstanceEcpm(o, ins, priorityIns, insEcpm, totalEcpm, DEBUG, dmsg,
-                        p.getAdTypeValue(), cacheService);
+                totalEcpm += setInstanceEcpm(o, ins, priorityIns, insEcpm, totalEcpm, res, p.getAdTypeValue(), cacheService);
             }
             if (priorityIns.isEmpty()) {
-                if (DEBUG) {
-                    dmsg.add("Has no instance match");
-                }
+                res.addDebug("Has no instance match");
                 return null;
             }
             if (priorityIns.containsKey(-1F)) {//No ecpm use average ecpm
                 float avgEcpm = totalEcpm / insEcpm.size();
-                List<Integer> needAvgEcpmIns = priorityIns.get(-1F);
-                if (DEBUG) {
-                    dmsg.add(String.format("No rule auto optimize,Instance AvgEcpm:%f,UseAvgEcpm:%s", avgEcpm, objectMapper.writeValueAsString(needAvgEcpmIns)));
+                List<WaterfallInstance> needAvgEcpmIns = priorityIns.get(-1F);
+                if (res.isDebugEnabled() && !CollectionUtils.isEmpty(needAvgEcpmIns)) {
+                    res.addDebug("No rule auto optimize,Instance AvgEcpm:%f,UseAvgEcpm:%s", avgEcpm, needAvgEcpmIns);
                 }
                 priorityIns.put(avgEcpm, needAvgEcpmIns);
                 priorityIns.remove(-1F);
             }
             sortIns = Util.sortByEcpm(priorityIns);
-            if (DEBUG) {
-                dmsg.add("Instance Ecpm:" + objectMapper.writeValueAsString(insEcpm));
-                dmsg.add("Instance sort:" + objectMapper.writeValueAsString(sortIns));
+            if (res.isDebugEnabled()) {
+                res.addDebug("Instance Ecpm: %s", insEcpm);
+                res.addDebug("Instance sort: %s", sortIns);
             }
         }
         return sortIns;
     }
 
-    private float setInstanceEcpm(WaterfallRequest o, Instance ins, Map<Float, List<Integer>> priorityIns,
-                                  Map<Integer, Float> insEcpm, float totalEcpm, boolean DEBUG, List<CharSequence> dmsg,
+    private float setInstanceEcpm(WaterfallRequest o, Instance ins, Map<Float, List<WaterfallInstance>> priorityIns,
+                                  Map<Integer, Float> insEcpm, float totalEcpm, WaterfallResponse res,
                                   int adType, CacheService cacheService) {
-        Float bidPrice = o.getBidPrice(ins.getId());
+        /*Float bidPrice = o.getBidPrice(ins.getId());
         if (bidPrice != null) {
             priorityIns.computeIfAbsent(bidPrice, k -> new ArrayList<>()).add(ins.getId());
             insEcpm.put(ins.getId(), bidPrice);
@@ -481,21 +438,21 @@ public class WaterfallController extends WaterfallBase {
             if (DEBUG) {
                 dmsg.add("Instance: " + ins.getId() + ", BidPrice:" + bidPrice);
             }
-        } else {
-            InstanceEcpm ecpm = cacheService.getInstanceEcpm(ins.getAdnId(), ins.getId(), o.getCountry(), adType);
-            priorityIns.computeIfAbsent(ecpm.ecpm, k -> new ArrayList<>()).add(ins.getId());
-            if (ecpm.ecpm > -1F) {
-                insEcpm.put(ins.getId(), ecpm.ecpm);
-            }
-            totalEcpm += ecpm.ecpm;
-            if (DEBUG) {
-                try {
-                    dmsg.add("Instance Ecpm:" + objectMapper.writeValueAsString(ecpm));
-                } catch (JsonProcessingException e) {
-                    LOG.error("error", e);
-                }
+        } else {*/
+        InstanceEcpm ecpm = cacheService.getInstanceEcpm(ins.getAdnId(), ins.getId(), o.getCountry(), adType);
+        priorityIns.computeIfAbsent(ecpm.ecpm, k -> new ArrayList<>()).add(new WaterfallInstance(ins, ecpm.ecpm));
+        if (ecpm.ecpm > -1F) {
+            insEcpm.put(ins.getId(), ecpm.ecpm);
+        }
+        totalEcpm += ecpm.ecpm;
+        if (res.isDebugEnabled()) {
+            try {
+                res.addDebug("Instance Ecpm: %s", objectMapper.writeValueAsString(ecpm));
+            } catch (JsonProcessingException e) {
+                LOG.error("error", e);
             }
         }
+        //}
         return totalEcpm;
     }
 
@@ -511,6 +468,41 @@ public class WaterfallController extends WaterfallBase {
             }
         }
     }*/
+
+    public List<Integer> getInsWithBidInstance(WaterfallRequest req, List<WaterfallInstance> insList) {
+        if (CollectionUtils.isEmpty(insList) && req.getBidPriceMap().isEmpty()) {
+            return null;
+        }
+
+        // insert bid instance
+        if (!req.getBidPriceMap().isEmpty()) {
+            if (CollectionUtils.isEmpty(insList)) {
+                insList = new ArrayList<>();
+            }
+            List<WaterfallInstance> finalInsList = insList;
+            req.getBidPriceMap().forEach((iid, bidPrice) -> {
+                boolean added = false;
+                Instance ins = cacheService.getInstanceById(iid);
+                if (ins == null) {
+                    return;
+                }
+                WaterfallInstance bidIns = new WaterfallInstance(ins, bidPrice);
+                for (int i = 0; i < finalInsList.size(); i++) {
+                    float ecpm = finalInsList.get(i).ecpm;
+                    if (bidPrice > ecpm) {
+                        finalInsList.add(i, bidIns);
+                        added = true;
+                        break;
+                    }
+                }
+                if (!added) {
+                    finalInsList.add(bidIns);
+                }
+            });
+        }
+
+        return insList.stream().map(o -> o.instance.getId()).collect(Collectors.toList());
+    }
 
     @FunctionalInterface
     public interface S2SBidCallback {
@@ -543,6 +535,16 @@ public class WaterfallController extends WaterfallBase {
             if (DEBUG) {
                 resp.getDebug().add(String.format("bidreq to %d, %s, bid: %s", bidderToken.iid, bidderToken.endpoint, reqData));
             }
+
+            // write bid request log
+            LrRequest lr = o.copyTo(new LrRequest());
+            lr.setBid(1);
+            lr.setBidReq(1);
+            lr.setType(EventLogRequest.INSTANCE_BID_REQUEST);
+            lr.setMid(bidderToken.adn);
+            lr.setPlacement(placement);
+            lr.setIid(bidderToken.iid);
+//            lr.writeToLog(logService);
 
             HttpClientContext hcc = HttpClientContext.create();
             httpAsyncClient.execute(bidreq, hcc, new FutureCallback<HttpResponse>() {
@@ -589,7 +591,7 @@ public class WaterfallController extends WaterfallBase {
                     } finally {
                         EntityUtils.consumeQuietly(entity);
                     }
-                    handleS2SBidResponse(count, bidderToken, isTest, bidresp, err, o, resp, placement, callback, dr);
+                    handleS2SBidResponse(count, bidderToken, isTest, bidresp, err, o, resp, lr, callback, dr);
                 }
 
                 @Override
@@ -599,30 +601,21 @@ public class WaterfallController extends WaterfallBase {
                     if (DEBUG) {
                         resp.getDebug().add(String.format("bidresp from %d failed: %s", bidderToken.iid, ex.toString()));
                     }
-                    handleS2SBidResponse(count, bidderToken, isTest, null, msg, o, resp, placement, callback, dr);
+                    handleS2SBidResponse(count, bidderToken, isTest, null, msg, o, resp, lr, callback, dr);
                 }
 
                 @Override
                 public void cancelled() {
-                    handleS2SBidResponse(count, bidderToken, isTest, null, "cancelled", o, resp, placement, callback, dr);
+                    handleS2SBidResponse(count, bidderToken, isTest, null, "cancelled", o, resp, lr, callback, dr);
                 }
             });
-
-            // write bid request log
-            LrRequest lr = o.copyTo(new LrRequest());
-            lr.setBid(1);
-            lr.setType(EventLogRequest.INSTANCE_BID_REQUEST);
-            lr.setMid(bidderToken.adn);
-            lr.setPlacement(placement);
-            lr.setIid(bidderToken.iid);
-            lr.writeToLog(logService);
         }
         return dr;
     }
 
     private void handleS2SBidResponse(
             AtomicInteger count, WaterfallRequest.S2SBidderToken bidderToken, boolean isTest,
-            JSONObject bidresp, String err, WaterfallRequest o, WaterfallResponse resp, Placement placement,
+            JSONObject bidresp, String err, WaterfallRequest o, WaterfallResponse resp, LrRequest lr,
             S2SBidCallback callback, DeferredResult<Object> dr) {
         try {
             WaterfallResponse.S2SBidResponse bres = new WaterfallResponse.S2SBidResponse();
@@ -654,16 +647,16 @@ public class WaterfallController extends WaterfallBase {
                 }
 
                 // write bid response log
-                LrRequest lr = o.copyTo(new LrRequest());
-                lr.setBid(1);
-                lr.setType(EventLogRequest.INSTANCE_BID_RESPONSE);
-                lr.setMid(bidderToken.adn);
-                lr.setPlacement(placement);
-                lr.setIid(bidderToken.iid);
+//                LrRequest lr = o.copyTo(new LrRequest());
+//                lr.setBid(1);
+//                lr.setType(EventLogRequest.INSTANCE_BID_RESPONSE);
+//                lr.setMid(bidderToken.adn);
+//                lr.setPlacement(placement);
+//                lr.setIid(bidderToken.iid);
+                lr.setBidRes(1);
                 if (!isTest) {
-                    lr.setPrice(price);
+                    lr.setBidResPrice(price);
                 }
-                lr.writeToLog(logService);
             }
         } catch (Exception e) {
             LOG.error("set s2s bidresp error", e);
@@ -671,6 +664,7 @@ public class WaterfallController extends WaterfallBase {
             if (count.decrementAndGet() == 0) {
                 callback.cb(dr);
             }
+            lr.writeToLog(logService);
         }
     }
 
@@ -682,7 +676,7 @@ public class WaterfallController extends WaterfallBase {
         bid.put("at", 1);
         bid.put("tmax", 1000);
 
-        if (bidderToken.adn == ADN_ADTIMING) {
+        if (bidderToken.adn == ADN_ADTIMING || bidderToken.adn == ADN_CROSSPROMOTION) {
             bid.put("user", new JSONObject().fluentPut("id", bidderToken.token));
         } else if (bidderToken.adn == ADN_FACEBOOK || bidderToken.adn == ADN_MINTEGRAL) {
             bid.put("user", new JSONObject().fluentPut("buyeruid", bidderToken.token));
@@ -787,19 +781,26 @@ public class WaterfallController extends WaterfallBase {
     }
 
     @ExceptionHandler(AsyncRequestTimeoutException.class)
-    @ResponseBody
-    public Object asyncExceptionHandler(HttpServletRequest req, HttpServletResponse res) throws IOException {
-        WaterfallResponse resp = (WaterfallResponse) req.getAttribute("resp");
+    public ResponseEntity<?> asyncExceptionHandler(HttpServletRequest req) throws IOException {
+        WaterfallResponse res = (WaterfallResponse) req.getAttribute("res");
         LrRequest lr = (LrRequest) req.getAttribute("lr");
-        if (resp == null || lr == null) {
-            return ResponseEntity.noContent();
+        WaterfallRequest o = (WaterfallRequest) req.getAttribute("params");
+        if (res == null || lr == null || o == null) {
+            return ResponseEntity.noContent().build();
+        }
+        Object insObject = req.getAttribute("insList");
+        if (insObject != null) {
+            //noinspection unchecked
+            List<WaterfallInstance> insList = (List<WaterfallInstance>) insObject;
+            if (!CollectionUtils.isEmpty(insList)) {
+                res.setIns(getInsWithBidInstance(o, insList));
+            }
         }
         lr.writeToLog(logService);
-        if (resp.getIns() == null || resp.getIns().isEmpty()) {
-            resp.setCode(CODE_INSTANCE_EMPTY);
+        if (res.getIns() == null || res.getIns().isEmpty()) {
+            res.setCode(CODE_INSTANCE_EMPTY);
         }
-        response(res, resp);
-        return null;
+        return response(res);
     }
 
 }

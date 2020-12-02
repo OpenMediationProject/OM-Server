@@ -149,6 +149,22 @@ public final class CommonPB {
      * <code>Interstitial = 3;</code>
      */
     Interstitial(3),
+    /**
+     * <pre>
+     * 开屏
+     * </pre>
+     *
+     * <code>Splash = 4;</code>
+     */
+    Splash(4),
+    /**
+     * <pre>
+     * 交叉推广
+     * </pre>
+     *
+     * <code>CrossPromotion = 5;</code>
+     */
+    CrossPromotion(5),
     UNRECOGNIZED(-1),
     ;
 
@@ -184,6 +200,22 @@ public final class CommonPB {
      * <code>Interstitial = 3;</code>
      */
     public static final int Interstitial_VALUE = 3;
+    /**
+     * <pre>
+     * 开屏
+     * </pre>
+     *
+     * <code>Splash = 4;</code>
+     */
+    public static final int Splash_VALUE = 4;
+    /**
+     * <pre>
+     * 交叉推广
+     * </pre>
+     *
+     * <code>CrossPromotion = 5;</code>
+     */
+    public static final int CrossPromotion_VALUE = 5;
 
 
     public final int getNumber() {
@@ -208,6 +240,8 @@ public final class CommonPB {
         case 1: return Native;
         case 2: return RewardVideo;
         case 3: return Interstitial;
+        case 4: return Splash;
+        case 5: return CrossPromotion;
         default: return null;
       }
     }
@@ -2727,10 +2761,11 @@ public final class CommonPB {
       "\003 \001(\t\022\r\n\005value\030\004 \001(\t\"C\n\010Currency\022\020\n\010cur_" +
       "from\030\001 \001(\t\022\016\n\006cur_to\030\002 \001(\t\022\025\n\rexchange_r" +
       "ate\030\003 \001(\002*\034\n\004Plat\022\007\n\003iOS\020\000\022\013\n\007Android\020\001*" +
-      "C\n\006AdType\022\n\n\006Banner\020\000\022\n\n\006Native\020\001\022\017\n\013Rew" +
-      "ardVideo\020\002\022\020\n\014Interstitial\020\003* \n\006ABTest\022\010" +
-      "\n\004None\020\000\022\005\n\001A\020\001\022\005\n\001B\020\002B\036\n\022com.adtiming.o" +
-      "m.pbB\010CommonPBb\006proto3"
+      "c\n\006AdType\022\n\n\006Banner\020\000\022\n\n\006Native\020\001\022\017\n\013Rew" +
+      "ardVideo\020\002\022\020\n\014Interstitial\020\003\022\n\n\006Splash\020\004" +
+      "\022\022\n\016CrossPromotion\020\005* \n\006ABTest\022\010\n\004None\020\000" +
+      "\022\005\n\001A\020\001\022\005\n\001B\020\002B\036\n\022com.adtiming.om.pbB\010Co",
+      "mmonPBb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

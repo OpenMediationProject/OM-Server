@@ -3,6 +3,7 @@
 
 package com.adtiming.om.server.test;
 
+import com.adtiming.om.server.cp.util.ParamsBuilder;
 import com.adtiming.om.server.util.Compressor;
 import com.adtiming.om.server.util.CountryCode;
 import com.alibaba.fastjson.JSONArray;
@@ -15,10 +16,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.zip.GZIPInputStream;
 
 public class TestSDKReq {
+
+    @Test
+    public void generateBytes() {
+        byte[] bs = new byte[16];
+        ThreadLocalRandom.current().nextBytes(bs);
+        System.out.println(Arrays.toString(bs));
+    }
 
     @Test
     public void testCountryCode() {

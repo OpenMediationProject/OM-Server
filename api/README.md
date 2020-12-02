@@ -2,18 +2,16 @@
 
 OpenMediationAPI Doc
 
-<a href="SDK_COMMON.md">Common</a>
-
-<a href="SDK_INIT.md">Init</a>
-
-<a href="SDK_HB.md">Headbidding</a>
-
-<a href="SDK_WF.md">Waterfall</a>
-
-<a href="SDK_LR.md">LR</a>
-
-<a href="SDK_IAP.md">IAP</a>
-
-<a href="SDK_IC.md">IC</a>
-
-<a href="SDK_EVENT.md">Event</a>
+|API|Description|
+|-----|------|
+|[Common](SDK_COMMON.md)| Base type definition|
+|[Init](SDK_INIT.md)| Init API|
+|~~[Headbidding](SDK_HB.md)~~| @Deprecated |
+|[Waterfall](SDK_WF.md)| Waterfall API|
+|[LR](SDK_LR.md)| Load & Ready reporting API|
+|[IAP](SDK_IAP.md)| In App Purchase API|
+|[IC](SDK_IC.md)| Rewarded Callback API|
+|[Event](SDK_EVENT.md)| Event reporting API|
+|[CP/CL](CP_CL_V1.md)| Cross Promotion Ad API|
+|[CP/BID](CP_BID_V1.md)| Cross Promotion Bid API|
+|[CP/PAYLOAD](CP_PAYLOAD_V1.md)| Cross Promotion Bid Payload API|

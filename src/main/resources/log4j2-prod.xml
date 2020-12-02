@@ -5,12 +5,12 @@
             <PatternLayout
                     pattern="%style{%d{yyyy-MM-dd HH:mm:ss.SSS}}{magenta} [%style{%t}{blue}] %highlight{%-5level} %style{%logger{36}}{cyan} - %msg%n"/>
             <Policies>
-                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+                <CronTriggeringPolicy schedule="0 0 0 * * ?"/>
             </Policies>
             <DefaultRolloverStrategy>
                 <Delete basePath="data" maxDepth="1">
                     <IfFileName glob="*.log.gz"/>
-                    <IfLastModified age="3d"/>
+                    <IfLastModified age="2d"/>
                 </Delete>
                 <Delete basePath="log" maxDepth="1">
                     <IfFileName glob="*.log.gz"/>
@@ -23,45 +23,60 @@
                      fileName="data/om.lr.log" filePattern="data/om.lr.%d{yyyy-MM-dd.HH}.%i.log.gz">
             <PatternLayout pattern="%msg%n"/>
             <Policies>
-                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+                <CronTriggeringPolicy schedule="0 0 * * * ?"/>
                 <SizeBasedTriggeringPolicy size="256MB"/>
             </Policies>
+            <DefaultRolloverStrategy max="1000"/>
         </RollingFile>
 
         <RollingFile name="om.event" immediateFlush="false" bufferedIO="true" bufferSize="65536"
                      fileName="data/om.event.log" filePattern="data/om.event.%d{yyyy-MM-dd.HH}.%i.log.gz">
             <PatternLayout pattern="%msg%n"/>
             <Policies>
-                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+                <CronTriggeringPolicy schedule="0 0 * * * ?"/>
                 <SizeBasedTriggeringPolicy size="256MB"/>
             </Policies>
+            <DefaultRolloverStrategy max="1000"/>
         </RollingFile>
 
         <RollingFile name="om.iap" immediateFlush="false" bufferedIO="true" bufferSize="65536"
                      fileName="data/om.iap.log" filePattern="data/om.iap.%d{yyyy-MM-dd.HH}.%i.log.gz">
             <PatternLayout pattern="%msg%n"/>
             <Policies>
-                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+                <CronTriggeringPolicy schedule="0 0 * * * ?"/>
                 <SizeBasedTriggeringPolicy size="256MB"/>
             </Policies>
+            <DefaultRolloverStrategy max="1000"/>
         </RollingFile>
 
         <RollingFile name="om.ic" immediateFlush="false" bufferedIO="true" bufferSize="65536"
                      fileName="data/om.ic.log" filePattern="data/om.ic.%d{yyyy-MM-dd.HH}.%i.log.gz">
             <PatternLayout pattern="%msg%n"/>
             <Policies>
-                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+                <CronTriggeringPolicy schedule="0 0 * * * ?"/>
                 <SizeBasedTriggeringPolicy size="256MB"/>
             </Policies>
+            <DefaultRolloverStrategy max="1000"/>
         </RollingFile>
 
         <RollingFile name="om.error" immediateFlush="false" bufferedIO="true" bufferSize="65536"
                      fileName="data/om.error.log" filePattern="data/om.error.%d{yyyy-MM-dd.HH}.%i.log.gz">
             <PatternLayout pattern="%msg%n"/>
             <Policies>
-                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+                <CronTriggeringPolicy schedule="0 0 * * * ?"/>
                 <SizeBasedTriggeringPolicy size="256MB"/>
             </Policies>
+            <DefaultRolloverStrategy max="1000"/>
+        </RollingFile>
+
+        <RollingFile name="om.cptk" immediateFlush="false" bufferedIO="true" bufferSize="65536"
+                     fileName="data/om.cptk.log" filePattern="data/om.cptk.%d{yyyy-MM-dd.HH}.%i.log.gz">
+            <PatternLayout pattern="%msg%n"/>
+            <Policies>
+                <CronTriggeringPolicy schedule="0 0 * * * ?"/>
+                <SizeBasedTriggeringPolicy size="256MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="1000"/>
         </RollingFile>
 
     </Appenders>
@@ -73,6 +88,7 @@
         </Root>
 
         <Logger name="com.adtiming.om" level="debug"/>
+        <Logger name="com.adtiming.om.server.service.PBLoader" level="info"/>
         <Logger name="org.springframework.boot.web.embedded" level="info"/>
         <Logger name="org.apache.catalina.connector.CoyoteAdapter" level="fatal"/>
 
@@ -90,6 +106,9 @@
         </Logger>
         <Logger name="om.error" level="info" additivity="false">
             <AppenderRef ref="om.error"/>
+        </Logger>
+        <Logger name="om.cptk" level="info" additivity="false">
+            <AppenderRef ref="om.cptk"/>
         </Logger>
     </Loggers>
 </Configuration>

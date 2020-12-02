@@ -1,14 +1,16 @@
-## SDK lr Interface
+# SDK lr API
 
-### API History
+## API History
+
 |Version|Description|
 |------|------|
 | 1 | API URL from /init Response |
 
+* This interface is used to report the counts of sdk load and ready. It returns http status 200 indicates success, non-200 indicates failure. If no body is returned, no resend is required.
+* Request header `Content-Type: application/json` is reqiured
+* The API accepts request body compression, in either `gzip` or `deflate` format, specified by the request header `Content-Encoding`, which is mandatory in this case.
 
-This interface is used to report the counts of sdk load and ready. It returns http status 200 indicates success, non-200 indicates failure. If no body is returned, no resend is required.
-
-### POST request, the following parameters are spelled into the url address, the encrypted content is put into the post body
+### POST request, the following parameters are spelled into the url query
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
@@ -16,9 +18,9 @@ This interface is used to report the counts of sdk load and ready. It returns ht
 | plat | int32 | Platform, 0:iOS,1:Android|1| ✔︎|
 | sdkv | string | SDK Version Name |1.0.1| ✔︎|
 
+## Request body JSON
 
-### The request content is a json + gzip structure.The format of the json data before compression is as follows
-* For all parameters whose parameter values are only `0` and` 1`, if the value is `0`, you do not need to report
+* For all parameters whose parameter values are only `0` and `1`, if the value is `0`, you do not need to report
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
@@ -34,8 +36,7 @@ This interface is used to report the counts of sdk load and ready. It returns ht
 
 * Resp, Body is empty, Success with http status code=200
 
-
-#### Type
+### Type
 
 |Value|Description|
 | --- | ---|

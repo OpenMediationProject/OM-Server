@@ -18,14 +18,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-
-@Controller
+@RestController
 public class InitController extends BaseController {
 
     private static final Logger LOG = LogManager.getLogger();
@@ -46,7 +44,6 @@ public class InitController extends BaseController {
     private LogService logService;
 
     @PostMapping(value = "/init", params = "v=1")
-    @ResponseBody
     public ResponseEntity<?> init(HttpServletRequest req,
                                   @RequestParam("v") int version, // api version
                                   @RequestParam("plat") int plat, // platform
@@ -98,6 +95,7 @@ public class InitController extends BaseController {
         }*/
 
         LrRequest lr = o.copyTo(new LrRequest());
+        lr.setInit(1);
         lr.setType(LrRequest.TYPE_INIT);
 
         if (devAdnId == null && pubApp.isBlock(o)) {// Block by rule in non-test mode

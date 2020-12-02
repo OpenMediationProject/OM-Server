@@ -1,21 +1,27 @@
+# SDK init API
 
-### History
+## History
+
 |Version|Description|
 |---------|------|
 | 1 |  |
 
-### https://om.adtiming.com/init
+* Request header `Content-Type: application/json` is reqiured
+* The API accepts request body compression, in either `gzip` or `deflate` format, specified by the request header `Content-Encoding`, which is mandatory in this case.
 
-* POST, The following parameters are put into the url req, and request content should be compressed into post body
+## https://s.openmediation.com/init
 
-| Name  |  Type	| Description	|Example| Required |
+## POST request, the following parameters are spelled into the url query
+
+| Name  |  Type| Description|Example| Required |
 | ------- | -------| ----- | ----| ------ |
 | v | int32 | API Version|1| ✔︎|
 | plat | int32 | Platform, 0:iOS,1:Android|1|✔︎|
 | sdkv | string | SDK Version Name| 1.0.1 |✔︎|
 | k | string | appKey| higNI1z4a5l94D3ucZRn5zNZa00NuDTq|✔︎|
 
-### Request content is json + gzip, the json format as follow
+## Request body JSON
+
 * For parameters those values are 0 and 1, if value is 0, no need to report
 
 | Name | Type | Description | Example | iOS | Android |
@@ -27,8 +33,7 @@
 | ios| Object of [iOS](#ios) | iOS-specific parameters| |✔︎|✖︎|
 | android| Object of [Android](#android) | Android-specific parameters| |✖︎|✔︎|
 
-
-#### iOS
+### iOS
 
 | Name | Type | Description | Example | Required |
 | --- | ---| --- | --- | --- |
@@ -49,8 +54,7 @@
 | tdsg| string | total storage, GB |256|✔︎|
 | rdsg| string | available storage, GB|62.18|✔︎|
 
-
-#### Android
+### Android
 
 | Name | Type | Description | Example | Required |
 | --- | ---| --- | --- | --- |
@@ -69,7 +73,6 @@
 | xdp| string | x Pixel density, DisplayMetrics.xdpi |268.941|✔︎|
 | ydp| string | y Pixel density, DisplayMetrics.ydpi |268.694|✔︎|
 | dfpid| string | deviceFingerPrintId, getUniquePsuedoID | |✔︎|
-| time_zone| string | TimeZone.getDefault().getID() |Asia/Shanghai︎|✔︎|
 | arch| string | ro.arch| |✔︎|
 | chipname| string | ro.chipname | |✔︎|
 | bridge| string |ro.dalvik.vm.native.bridge | |✔︎|
@@ -87,42 +90,18 @@
 | build_user| string |ro.build.user | |✔︎|
 | kernel_qemu| string |ro.kernel.qemu | |✔︎|
 | hardware| string | ro.hardware| |✔︎|
-| sensor_size| int32 | sensor numbers |18|✔︎|
-| sensors| Array of [Sensor](#sensor) |sensor list||✔︎|
-| as| Object of [AppSource](#appsource) |app install source||✔︎|
-| fb_id| string | FacebookID | |✔︎|
+| ifgp| int8 | if install from GP | 1 |✔︎|
 | tdm| int32 | device total storage capacity, MB (without SD Card) | 5837498317 |✔︎|
 
-
-#### AdNetwork
+### AdNetwork
 
 | Name | Type | Description | Example | Required |
 | --- | ---| --- | --- | --- |
-| id | int32 | [AdNetwork ID](SDK_COMMON.md#adnetwork)| 1 | ✔︎ |
+| mid | int32 | [AdNetwork ID](SDK_COMMON.md#adnetwork)| 1 | ✔︎ |
 | adapterv | string | AdNetwork Adapter Version| 1.0.1 |✔︎|
-| sdkv | string | AdNetwork SDK Version | 3.2.1 |✔︎|
+| msdkv | string | AdNetwork SDK Version | 3.2.1 |✔︎|
 
-
-#### Sensor
-
-| Name | Type | Description | Example | Required |
-| --- | ---| --- | --- | --- |
-| sT | int32 | sensor type | 2 | ✔︎ |
-| sV | string | | Invensense Inc.|✔︎|
-| sVE | Array of float | | [43.411255, 4.421997, 33.135986] |✔︎|
-| sVS | Array of float | | [43.411255, 4.421997, 33.135986] |✔︎|
-| sN| string| |Invensense Magnetometer|✔︎|
-
-#### AppSource
-
-| Name | Type | Description | Example | Required |
-| --- | ---| --- | --- | --- |
-| os | int32 | installs number from os | 126 | ✔︎ |
-| gp | int32 | installs number from GooglePlay | 35 |✔︎|
-| other | int32 | installs number not from GooglePlay | 14 |✔︎|
-
-
-### response content with json + gzip, the json format as follow
+## Response body JSON
 
 | Name | Type | Description | Example | Necessary |
 | --- | ---| --- | --- | --- |
@@ -132,7 +111,7 @@
 | ms | Array of [Mediation](#mediation) | Mediation list,<br> **when SDK initialization and load. Do not initial all mediations, The principle is to initialize on demand** |  |✔︎|
 | pls | Array of [Placement](#placement) | Placement list |  |✔︎|
 
-#### APIs
+### APIs
 
 | Name | Type | Description | Example | Necessary |
 | --- | ---| --- | --- | --- |
@@ -142,8 +121,11 @@
 | ic | string | Incentivized Callback URL | https://om.adtiming.com/ic |✖︎ |
 | iap | string | IAP URL | https://om.adtiming.com/iap |✖︎ |
 | er | string | Error API URL(`No need to report errors if url is empty`) | https://om.adtiming.com/er | ✖︎ |
+| cpcl | string | CrossPromotion Ad | https://om.adtiming.com/cp/cl | ✖︎ |
+| cppl | string | CrossPromotion Payload | https://om.adtiming.com/cp/pl | ✖︎ |
 
-#### Events
+### Events
+
 * Event reporting settings, where the ids field indicates the set of events that need to be reported, and if empty, no reporting is required
 * There are two triggering methods for event reporting, `quantitative` (mn) and` timing` (ci). No matter which trigger, only one report request is made at the same time.
 
@@ -154,7 +136,7 @@
 | ci | int32 | checkInterval Check the event queue interval regularly, in seconds, and report it once when there are events in the queue| 10 |✔︎|
 | ids | Array of [EventID](SDK_EVENT.md#eventid) | List of EventIDs to be reported| [100,101] |✖︎|
 
-#### Mediation
+### Mediation
 
 | Name | Type | Description | Example | Necessary |
 | --- | ---| --- | --- | --- |
@@ -162,7 +144,7 @@
 | n | string | AdNetwork Name| AdMob |✔︎|
 | k | string | AdNetwork Key| 1234567 |✔︎|
 
-#### Placement
+### Placement
 
 | Name | Type | Description | Example | Necessary |
 | --- | ---| --- | --- | --- |
@@ -206,8 +188,7 @@
 | hb | int8 | HeadBidding switch, 0:close,1:open| 1 |✖︎|
 | hbt | int32 | HeadBidding Timeout duration in milliseconds; Note: `If the value is less than 1000, the default is 5000`| 3000 |✖︎|
 
-
-#### Response JSON Example
+## Response JSON Example
 
 ```json
 {

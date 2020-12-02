@@ -1,7 +1,7 @@
 // Copyright 2019 ADTIMING TECHNOLOGY COMPANY LIMITED
 // Licensed under the GNU Lesser General Public License Version 3
 
-package com.adtiming.om.server.test;
+package com.adtiming.om.server.cp.util;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.entity.UrlEncodedFormEntity;

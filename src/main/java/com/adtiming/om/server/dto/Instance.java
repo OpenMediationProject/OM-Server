@@ -4,6 +4,7 @@
 package com.adtiming.om.server.dto;
 
 import com.adtiming.om.pb.AdNetworkPB;
+import com.adtiming.om.server.util.CountryCode;
 import com.adtiming.om.server.util.Util;
 import org.apache.commons.lang3.StringUtils;
 
@@ -107,7 +108,7 @@ public class Instance {
     public boolean isAllowPeriod(String country) {
         AdNetworkPB.Instance.CountrySettings cp = ins.getCountrySettingsOrDefault(country, null);
         if (cp == null || cp.getPeriodCount() == 0) {
-            cp = ins.getCountrySettingsOrDefault("AA", null);
+            cp = ins.getCountrySettingsOrDefault(CountryCode.COUNTRY_ALL, null);
             if (cp == null || cp.getPeriodCount() == 0)
                 return true;
         }

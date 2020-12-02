@@ -15,18 +15,19 @@ import com.adtiming.om.server.util.Compressor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import static com.adtiming.om.server.dto.LrRequest.*;
 
-@Controller
+@RestController
 public class LoadReadyController extends BaseController {
 
     private static final Logger LOG = LogManager.getLogger();
@@ -47,11 +48,11 @@ public class LoadReadyController extends BaseController {
     private LogService logService;
 
     @PostMapping(value = "/lr", params = "v=1")
-    public void lr(HttpServletRequest req, HttpServletResponse res,
-                   @RequestParam("v") int version,    // api version
-                   @RequestParam("plat") int plat,    // platform (0:iOS,1:Android)
-                   @RequestParam("sdkv") String sdkv, // sdk version
-                   @RequestBody byte[] data) {
+    public ResponseEntity<?> lr(HttpServletRequest req,
+                                @RequestParam("v") int version,    // api version
+                                @RequestParam("plat") int plat,    // platform (0:iOS,1:Android)
+                                @RequestParam("sdkv") String sdkv, // sdk version
+                                @RequestBody byte[] data) {
         LrRequest o;
         try {
             o = objectMapper.readValue(Compressor.gunzip2s(data), LrRequest.class);
@@ -62,40 +63,63 @@ public class LoadReadyController extends BaseController {
             o.setAppConfig(cfg);
         } catch (Exception e) {
             LOG.warn("lr v{} decode fail", version, e);
-            res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
+            return ResponseEntity.badRequest().body("decode fail");
         }
 
         if (o.getType() < TYPE_WATERFALL_FILLED) {
             LOG.warn("lr v{}, type {} not allowed", version, o.getType());
-            res.setStatus(HttpServletResponse.SC_BAD_REQUEST);
-            return;
+            return ResponseEntity.badRequest().body("type denied");
         }
 
         Placement placement = cacheService.getPlacement(o.getPid());
         if (placement == null) {
-            res.setStatus(HttpServletResponse.SC_NO_CONTENT);
             o.setStatus(0, "placement invalid");
-            return;
+            return ResponseEntity.status(HttpStatus.GONE).body("placement invalid");
         }
 
         if (o.getType() == TYPE_INSTANCE_REQUEST || o.getType() == TYPE_INSTANCE_FILLED) {
             Instance ins = cacheService.getInstanceById(o.getIid());
             if (ins != null && ins.isHeadBidding()) {
                 // SDK 误上报了 payload 请求, server 强制过滤
-                res.setStatus(HttpServletResponse.SC_NO_CONTENT);
                 o.setStatus(0, "ignore bid payload");
-                return;
+                return ResponseEntity.status(HttpStatus.GONE).body("ignore payload");
             }
         }
 
-        res.setStatus(HttpServletResponse.SC_OK);
+        switch (o.getType()) {
+//            case TYPE_WATERFALL_REQUEST:
+//                o.setWfReq(1);
+//                break;
+            case TYPE_WATERFALL_FILLED:
+                o.setWfFil(1);
+                break;
+            case TYPE_INSTANCE_REQUEST:
+                o.setInsReq(1);
+                break;
+            case TYPE_INSTANCE_FILLED:
+                o.setInsFil(1);
+                break;
+            case TYPE_INSTANCE_IMPR:
+                o.setImpr(1);
+                break;
+            case TYPE_INSTANCE_CLICK:
+                o.setClick(1);
+                break;
+            case TYPE_VIDEO_START:
+                o.setVdStart(1);
+                break;
+            case TYPE_VIDEO_COMPLETE:
+                o.setVdEnd(1);
+                break;
+            default:
+                return ResponseEntity.badRequest().body("lr type not allowed");
+        }
+
         o.setPlacement(placement);
         o.setAbt(CommonPB.ABTest.None_VALUE);
         o.setStatus(1, null);
-
-
         o.writeToLog(logService);
+        return ResponseEntity.ok().build();
     }
 
 }

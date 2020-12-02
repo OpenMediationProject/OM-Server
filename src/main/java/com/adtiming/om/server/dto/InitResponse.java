@@ -7,14 +7,17 @@ import com.adtiming.om.pb.AdNetworkPB;
 import com.adtiming.om.pb.CommonPB;
 import com.adtiming.om.pb.PlacementPB;
 import com.adtiming.om.server.service.CacheService;
+import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import static com.adtiming.om.pb.CommonPB.AdType.*;
 import static com.adtiming.om.server.dto.EventLogRequest.REQUIRED_EVENT_IDS;
 
 public class InitResponse {
 
+    private final static int ADN_CROSSPROMOTION = 19;
     private final PublisherApp pubApp;
     private Map<Integer, AdnAppConf> adnApps = Collections.emptyMap();
     private List<InitPlacement> placements = Collections.emptyList();
@@ -42,6 +45,8 @@ public class InitResponse {
         this.api.ic = "https://" + req.getReqHost() + "/ic";
         this.api.iap = "https://" + req.getReqHost() + "/iap";
         this.api.er = "https://" + req.getReqHost() + "/err";
+        this.api.cpcl = "https://" + req.getReqHost() + "/cp/cl";
+        this.api.cppl = "https://" + req.getReqHost() + "/cp/pl";
 
         events = new Events();
         events.url = "https://" + req.getReqHost() + "/log";
@@ -93,7 +98,7 @@ public class InitResponse {
             AdnAppConf a = new AdnAppConf();
             a.id = adn.getId();
             a.n = adn.getClassName();
-            a.k = m.getAppKey();
+            a.k = adn.getId() == ADN_CROSSPROMOTION ? pubApp.getAppKey() : m.getAppKey();
             this.adnApps.put(a.id, a);
         }
     }
@@ -115,7 +120,9 @@ public class InitResponse {
                         addInstances(pIns, insList, hasHb);
                     }
                 }
-                this.placements.add(new InitPlacement(p, pIns, hasHb));
+                if (!CollectionUtils.isEmpty(pIns)) {
+                    this.placements.add(new InitPlacement(p, pIns, hasHb));
+                }
             }
         }
     }
@@ -154,7 +161,7 @@ public class InitResponse {
     }
 
     public static class API {
-        public String wf, lr, er, iap, ic, hb;
+        public String wf, lr, er, iap, ic, hb, cpcl, cppl;
     }
 
     public static class Events {
@@ -204,7 +211,7 @@ public class InitResponse {
             }
 
             CommonPB.AdType adType = p.getAdType();
-            if (adType == CommonPB.AdType.Banner || adType == CommonPB.AdType.Native) {
+            if (adType == Banner || adType == Native) {
                 if (p.getFanOut())
                     this.fo = 1;
                 if (p.getFrequencyCap() > 0 && p.getFrequencyUnit() > 0) {
@@ -213,13 +220,13 @@ public class InitResponse {
                 }
             }
 
-            if (adType == CommonPB.AdType.RewardVideo || adType == CommonPB.AdType.Interstitial) {
+            if (adType == RewardVideo || adType == Interstitial || adType == CrossPromotion) {
                 this.cs = p.getInventoryCount();
                 this.rf = p.getInventoryInterval();
                 this.rfs = p.getInventoryIntervalStepMap();
                 if (p.isMainPlacement())
                     this.main = 1;
-            } else if (adType == CommonPB.AdType.Banner) {
+            } else if (adType == Banner) {
                 this.rlw = p.getReloadInterval();
             }
 
@@ -275,7 +282,7 @@ public class InitResponse {
         }
 
         public String getK() {
-            return o.getPlacementKey();
+            return o.getAdnId() == ADN_CROSSPROMOTION ? String.valueOf(o.getPlacementId()) : o.getPlacementKey();
         }
 
         public int getId() {
