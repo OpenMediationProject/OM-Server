@@ -82,7 +82,7 @@ public class CpCacheService extends PBLoader {
 
     private void loadCampaignTargeting() {
         load("cp_campaign_targeting", in -> {
-            Map<Long, CampaignTargeting> ctMap = newMap(this.campaignTargetingMap, 50, 20);
+            Map<Long, CampaignTargeting> ctMap = newMap(this.campaignTargetingMap, 1000, 20);
             while (true) {
                 CrossPromotionPB.CpCampaignTargeting campaignTargeting = CrossPromotionPB.CpCampaignTargeting.parseDelimitedFrom(in);
                 if (campaignTargeting == null) break;
@@ -95,7 +95,7 @@ public class CpCacheService extends PBLoader {
     private void loadCampaign() {
         load("cp_campaign", in -> {
             Map<Integer, Map<Integer, Map<String, List<Campaign>>>> ppccMap = newMap(this.pubPlatCountryCampaigns, 50, 20);
-            Map<Long, Campaign> m = newMap(this.campaignMap, 50, 20);
+            Map<Long, Campaign> m = newMap(this.campaignMap, 1000, 20);
             while (true) {
                 CrossPromotionPB.CpCampaign campaign = CrossPromotionPB.CpCampaign.parseDelimitedFrom(in);
                 if (campaign == null) break;
@@ -143,7 +143,7 @@ public class CpCacheService extends PBLoader {
     private void loadCreative() {
         load("cp_creative", in -> {
             Map<Long, CpCreative> creativeMap = newMap(this.creativeMap, 1000, 20);
-            Map<Long, Map<Integer, List<CpCreative>>> cc = newMap(this.campaignCreativeMap, 50, 20);
+            Map<Long, Map<Integer, List<CpCreative>>> cc = newMap(this.campaignCreativeMap, 1000, 20);
             while (true) {
                 CpCreative creative = CpCreative.parseDelimitedFrom(in);
                 if (creative == null) break;
@@ -238,16 +238,18 @@ public class CpCacheService extends PBLoader {
         int creativeType = 0;
         switch (placement.getAdType()) {
             case Banner:
-                creativeType = CrossPromotionPB.CpCreative.Type.Banner_VALUE;
+                creativeType = CpCreative.Type.Banner_VALUE;
                 break;
             case Native:
             case Splash:
-                creativeType = CrossPromotionPB.CpCreative.Type.Native_VALUE;
+                creativeType = CpCreative.Type.Native_VALUE;
                 break;
             case RewardVideo:
             case Interstitial:
+                creativeType = CpCreative.Type.Video_VALUE;
+                break;
             case CrossPromotion:
-                creativeType = CrossPromotionPB.CpCreative.Type.Video_VALUE;
+                creativeType = CpCreative.Type.CrossPromotion_VALUE;
                 break;
             default:
                 break;

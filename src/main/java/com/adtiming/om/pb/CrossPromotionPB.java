@@ -9007,6 +9007,10 @@ public final class CrossPromotionPB {
        * <code>Video = 2;</code>
        */
       Video(2),
+      /**
+       * <code>CrossPromotion = 3;</code>
+       */
+      CrossPromotion(3),
       UNRECOGNIZED(-1),
       ;
 
@@ -9022,6 +9026,10 @@ public final class CrossPromotionPB {
        * <code>Video = 2;</code>
        */
       public static final int Video_VALUE = 2;
+      /**
+       * <code>CrossPromotion = 3;</code>
+       */
+      public static final int CrossPromotion_VALUE = 3;
 
 
       public final int getNumber() {
@@ -9045,6 +9053,7 @@ public final class CrossPromotionPB {
           case 0: return Banner;
           case 1: return Native;
           case 2: return Video;
+          case 3: return CrossPromotion;
           default: return null;
         }
       }
@@ -14434,29 +14443,29 @@ public final class CrossPromotionPB {
       "\024 \003(\0132\006.Range\022\021\n\tosv_black\030\025 \003(\t\022\037\n\017osv_" +
       "black_range\030\026 \003(\0132\006.Range\"E\n\005Range\022\013\n\003mi" +
       "n\030\001 \001(\t\022\013\n\003max\030\002 \001(\t\022\020\n\010min_type\030\003 \001(\010\022\020" +
-      "\n\010max_type\030\004 \001(\010\"\210\002\n\nCpCreative\022\n\n\002id\030\001 " +
+      "\n\010max_type\030\004 \001(\010\"\234\002\n\nCpCreative\022\n\n\002id\030\001 " +
       "\001(\003\022\023\n\013campaign_id\030\002 \001(\003\022\014\n\004name\030\003 \001(\t\022\036",
       "\n\004type\030\004 \001(\0162\020.CpCreative.Type\022\r\n\005title\030" +
       "\005 \001(\t\022\r\n\005descn\030\006 \001(\t\022\024\n\014material_ids\030\007 \003" +
       "(\003\022\020\n\010play_url\030\010 \001(\t\022\016\n\006weight\030\t \001(\005\022\020\n\010" +
       "template\030\n \001(\005\022\030\n\020endcard_template\030\013 \001(\005" +
-      "\")\n\004Type\022\n\n\006Banner\020\000\022\n\n\006Native\020\001\022\t\n\005Vide" +
-      "o\020\002\"\305\001\n\nCpMaterial\022\n\n\002id\030\001 \001(\003\022\013\n\003url\030\002 " +
-      "\001(\t\022\r\n\005width\030\003 \001(\005\022\016\n\006height\030\004 \001(\005\022\014\n\004si" +
-      "ze\030\005 \001(\005\022\036\n\004type\030\006 \001(\0162\020.CpMaterial.Type" +
-      "\022\021\n\tmime_type\030\007 \001(\t\022\026\n\016video_duration\030\010 " +
-      "\001(\005\"&\n\004Type\022\t\n\005Image\020\000\022\010\n\004Icon\020\001\022\t\n\005Vide",
-      "o\020\002\"w\n\nH5Template\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 " +
-      "\001(\t\022\014\n\004type\030\003 \001(\005\022\013\n\003url\030\004 \001(\t\022\r\n\005width\030" +
-      "\005 \001(\005\022\016\n\006height\030\006 \001(\005\022\025\n\rneed_carousel\030\007" +
-      " \001(\010\"\364\001\n\003App\022\n\n\002id\030\001 \001(\005\022\016\n\006app_id\030\002 \001(\t" +
-      "\022\014\n\004plat\030\003 \001(\005\022\014\n\004name\030\004 \001(\t\022\014\n\004icon\030\005 \001" +
-      "(\t\022\024\n\014rating_value\030\006 \001(\002\022\024\n\014rating_count" +
-      "\030\007 \001(\005\022\017\n\007osv_min\030\010 \001(\t\022\017\n\007osv_max\030\t \001(\t" +
-      "\022\020\n\010category\030\n \001(\t\022\023\n\013category_id\030\013 \001(\005\022" +
-      "\030\n\020sub_category_id1\030\014 \001(\005\022\030\n\020sub_categor" +
-      "y_id2\030\r \001(\005B&\n\022com.adtiming.om.pbB\020Cross",
-      "PromotionPBb\006proto3"
+      "\"=\n\004Type\022\n\n\006Banner\020\000\022\n\n\006Native\020\001\022\t\n\005Vide" +
+      "o\020\002\022\022\n\016CrossPromotion\020\003\"\305\001\n\nCpMaterial\022\n" +
+      "\n\002id\030\001 \001(\003\022\013\n\003url\030\002 \001(\t\022\r\n\005width\030\003 \001(\005\022\016" +
+      "\n\006height\030\004 \001(\005\022\014\n\004size\030\005 \001(\005\022\036\n\004type\030\006 \001" +
+      "(\0162\020.CpMaterial.Type\022\021\n\tmime_type\030\007 \001(\t\022" +
+      "\026\n\016video_duration\030\010 \001(\005\"&\n\004Type\022\t\n\005Image",
+      "\020\000\022\010\n\004Icon\020\001\022\t\n\005Video\020\002\"w\n\nH5Template\022\n\n" +
+      "\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\014\n\004type\030\003 \001(\005\022\013\n" +
+      "\003url\030\004 \001(\t\022\r\n\005width\030\005 \001(\005\022\016\n\006height\030\006 \001(" +
+      "\005\022\025\n\rneed_carousel\030\007 \001(\010\"\364\001\n\003App\022\n\n\002id\030\001" +
+      " \001(\005\022\016\n\006app_id\030\002 \001(\t\022\014\n\004plat\030\003 \001(\005\022\014\n\004na" +
+      "me\030\004 \001(\t\022\014\n\004icon\030\005 \001(\t\022\024\n\014rating_value\030\006" +
+      " \001(\002\022\024\n\014rating_count\030\007 \001(\005\022\017\n\007osv_min\030\010 " +
+      "\001(\t\022\017\n\007osv_max\030\t \001(\t\022\020\n\010category\030\n \001(\t\022\023" +
+      "\n\013category_id\030\013 \001(\005\022\030\n\020sub_category_id1\030" +
+      "\014 \001(\005\022\030\n\020sub_category_id2\030\r \001(\005B&\n\022com.a",
+      "dtiming.om.pbB\020CrossPromotionPBb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

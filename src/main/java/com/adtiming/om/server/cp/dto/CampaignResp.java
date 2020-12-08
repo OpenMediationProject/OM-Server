@@ -217,7 +217,8 @@ public class CampaignResp {
                     mcr.template = ccs.getH5TemplateByType(2);
                 return mcr.template == null ? null : Collections.singletonList(mcr.template.getUrl());
             case CrossPromotion:
-                mcr.template = ccs.getH5TemplateByType(4);
+                if (mcr.template == null)
+                    mcr.template = ccs.getH5TemplateByType(4);
                 return mcr.template == null ? null : Collections.singletonList(mcr.template.getUrl());
             default:
                 return null;
