@@ -12,8 +12,9 @@ server:
   tomcat:
     basedir: .
     max-connections: 20000
-    max-threads: 1000
     accept-count: 500
+    threads:
+      max: 1000
     accesslog:
       directory: /data/om-server/log
       enabled: true
@@ -21,7 +22,8 @@ server:
       buffered: true
       rename-on-rotate: true
       prefix: access
-      pattern: '%h %t [%I] %{Host}i "%r" %s %b %D %F "%{Referer}i" "%{User-Agent}i"'
+      pattern: '%h %{X-Real-IP}i %t [%I] %{Host}i "%r" %s %b %D %F "%{Referer}i" "%{User-Agent}i"'
+
 
 spring:
   ## scheduling
@@ -42,10 +44,6 @@ spring:
     generator:
       AUTO_CLOSE_TARGET: false
       IGNORE_UNKNOWN: true
-  ## mvc
-  mvc:
-    favicon:
-      enabled: false
   ## proviles
   profiles:
     active: dev

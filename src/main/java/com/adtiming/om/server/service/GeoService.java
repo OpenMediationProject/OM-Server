@@ -7,10 +7,6 @@ import com.adtiming.om.server.dto.CommonRequest;
 import com.adtiming.om.server.dto.GeoData;
 import com.adtiming.om.server.dto.GeoDataCommon;
 import com.adtiming.om.server.util.CountryCode;
-import com.adtiming.om.server.util.RequestParamsUtil;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,15 +19,25 @@ import javax.servlet.http.HttpServletRequest;
 @Service
 public class GeoService {
 
-    private static final Logger LOG = LogManager.getLogger();
-
     public GeoData getGeoData(HttpServletRequest req, CommonRequest o) {
-        String ip = RequestParamsUtil.getClientIp(req);;
+        return getGeoData(getClientIP(req), o == null ? null : o.getLcountry());
+    }
+
+    public GeoData getGeoData(HttpServletRequest req, String defaultCountry) {
+        return getGeoData(getClientIP(req), defaultCountry);
+    }
+
+    public GeoData getGeoData(String ip, String defaultCountry) {
         GeoDataCommon geo = new GeoDataCommon(ip);
-        if (o != null) {
-            String country = CountryCode.convertToA2(o.getLcountry());
+        if (defaultCountry != null) {
+            String country = CountryCode.convertToA2(defaultCountry);
             geo.setCountry(country);
         }
         return geo;
     }
+
+    public static String getClientIP(HttpServletRequest req) {
+        return RequestParamsUtil.getClientIp(req);
+    }
+
 }

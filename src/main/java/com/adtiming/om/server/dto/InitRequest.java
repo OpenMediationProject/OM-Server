@@ -15,9 +15,9 @@ public class InitRequest extends CommonRequest {
     private IOS ios;
 
     public static class AdNetwork {
-        public int id;            // AdNetwork ID
+        public int mid;           // AdNetwork ID
         public String adapterv;   // AdNetwork Adapter Version
-        public String sdkv;       // AdNetwork SDK Version
+        public String msdkv;      // AdNetwork SDK Version
     }
 
     public static class Android {

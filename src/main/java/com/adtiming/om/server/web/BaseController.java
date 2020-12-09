@@ -21,8 +21,13 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+import java.util.zip.InflaterInputStream;
 
 public class BaseController {
 
@@ -31,6 +36,7 @@ public class BaseController {
     @Resource
     private ObjectMapper objectMapper;
 
+    @Deprecated
     void response(HttpServletResponse res, Object o) throws IOException {
         if (o == null || res.isCommitted())
             return;
@@ -51,7 +57,7 @@ public class BaseController {
 
     }
 
-    ResponseEntity<?> response(Object o) throws IOException {
+    protected ResponseEntity<?> response(Object o) throws IOException {
         if (o == null)
             return ResponseEntity.noContent().build();
 
@@ -86,6 +92,19 @@ public class BaseController {
     private void sendError(HttpServletResponse res, int sc, String msg) throws IOException {
         if (res.isCommitted()) return;
         res.sendError(sc, msg);
+    }
+
+    protected <T> T parseBody(HttpServletRequest req, Class<T> clazz) throws IOException {
+        InputStream in = req.getInputStream();
+        String contentEncoding = req.getHeader(HTTP.CONTENT_ENCODING);
+        if (contentEncoding != null) {
+            if ("gzip".equalsIgnoreCase(contentEncoding)) {
+                in = new GZIPInputStream(in);
+            } else if ("deflate".equalsIgnoreCase(contentEncoding)) {
+                in = new InflaterInputStream(in);
+            }
+        }
+        return objectMapper.readValue(new InputStreamReader(in, StandardCharsets.UTF_8), clazz);
     }
 
 }

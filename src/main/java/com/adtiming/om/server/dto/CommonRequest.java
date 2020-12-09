@@ -4,6 +4,7 @@
 package com.adtiming.om.server.dto;
 
 import com.adtiming.om.server.service.AppConfig;
+import com.adtiming.om.server.util.Util;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.BeanUtils;
 
@@ -41,6 +42,7 @@ public class CommonRequest implements DeviceInfo {
     private int fm;           //  Free hard disk space, unit M
     private int battery;      //  Remaining battery percentage
     private int btch;         //  Whether charging, 0: No, 1: Yes
+    private int lowp;         //  Low battery mode, 0:No,1:Yes
     private int abt;
     private String cnl;       //  Channel
     private Regs regs;        //  Regs
@@ -54,6 +56,7 @@ public class CommonRequest implements DeviceInfo {
     private int plat;
     private String sdkv;
     private Version sdkVersion;
+    private Version osVersion;
     private int apiv;
     private String reqId = UUID.randomUUID().toString();
     private long serverTs = System.currentTimeMillis();
@@ -66,6 +69,7 @@ public class CommonRequest implements DeviceInfo {
      * @see DeviceInfo#getMtype()
      */
     private int mtype;     // model type
+    private boolean emptyDid;
 
     public long getTs() {
         return ts;
@@ -124,6 +128,12 @@ public class CommonRequest implements DeviceInfo {
 
     public void setDid(String did) {
         this.did = did;
+        this.emptyDid = Util.isEmptyDid(did);
+    }
+
+    @JsonIgnore
+    public boolean isEmptyDid() {
+        return emptyDid;
     }
 
     @Override
@@ -205,6 +215,12 @@ public class CommonRequest implements DeviceInfo {
 
     public void setOsv(String osv) {
         this.osv = osv;
+        this.osVersion = Version.of(osv);
+    }
+
+    @JsonIgnore
+    public Version getOsVersion() {
+        return osVersion;
     }
 
     public String getAppv() {
@@ -295,6 +311,14 @@ public class CommonRequest implements DeviceInfo {
 
     public void setBtch(int btch) {
         this.btch = btch;
+    }
+
+    public int getLowp() {
+        return lowp;
+    }
+
+    public void setLowp(int lowp) {
+        this.lowp = lowp;
     }
 
     @JsonIgnore

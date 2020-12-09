@@ -1,7 +1,7 @@
-## Base type definition
+# Base type definition
 
+## BaseRequestFields
 
-### BaseRequestFields
 * For the parameters those values are only 0 and 1, if value is 0,  no need to report.
 
 | Name|Type|Description|Example|Required|
@@ -40,8 +40,9 @@
 | age | int8 | Age year | 26 |✖︎|
 | regs | Object of [Regs](#regs) | any legal, governmental, or industry regulations |  |✖︎|
 
-#### ConnectionType
-> Copy From "OpenRTB API Specification Version 2.5" Page 52
+### ConnectionType
+
+> Copy From "[OpenRTB API Specification Version 2.5](https://www.iab.com/wp-content/uploads/2016/03/OpenRTB-API-Specification-Version-2-5-FINAL.pdf)" Page 52
 
 | Value  |  Description |
 | --- | ---|
@@ -55,7 +56,7 @@
 |7|Cellular Network – 5G|
 |8|Cellular Network – 6G|
 
-#### Regs
+### Regs
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
@@ -63,10 +64,10 @@
 | coppa | int8 | COPPA by USA, where 0 = no, 1 = yes.| 1 |✖︎|
 | ccpa | int8 | CCPA by California, where 0 = no, 1 = yes. | 1 |✖︎|
 
-#### Currency
+### Currency
 
-| No |     currency  |  abbr	|
-| ---- | ------------- | ------- |
+| No | currency| abbr|
+| ---- | ---- | ---- |
 | 1 | RMB| CNY |
 | 2 | US Dollar | USD |
 | 3 | Japan Yuan | JPY |
@@ -96,8 +97,7 @@
 | 27 | South Korean won | KRW |
 | 28 | Thai Baht | THB |
 
-
-#### AdType
+### AdType
 
 | Value  |  Description |
 | --- | ---|
@@ -105,8 +105,11 @@
 |1|Native|
 |2|RewardVideo|
 |3|Interstitial|
+|4|Splash|
+|5|CrossPromotion|
 
 ### AdNetwork
+
 |ID|Name|ClassName|
 |---|---|---|
 |1|adt|AdTiming|
@@ -123,5 +126,9 @@
 |12|chartboost|Chartboost|
 |13|tiktok|TikTok|
 |14|mintegral|Mintegral|
-
-
+|15|ironSource|IronSource|
+|16|myTarget|MyTarget|
+|17|chartboostBid|ChartboostBid|
+|18|mint|Mint|
+|19|crossPromotion|CrossPromotion|
+|30|fyber|Fyber|

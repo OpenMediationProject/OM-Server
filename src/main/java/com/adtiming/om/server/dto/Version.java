@@ -11,6 +11,8 @@ import org.apache.maven.artifact.versioning.DefaultArtifactVersion;
  */
 public class Version implements Comparable<Version> {
 
+    public static final Version OSV_IOS_14_0_0 = Version.of("14.0");
+
     private ArtifactVersion v;
 
     private Version(String version) {

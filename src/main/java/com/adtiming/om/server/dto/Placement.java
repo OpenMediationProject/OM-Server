@@ -5,6 +5,7 @@ package com.adtiming.om.server.dto;
 
 import com.adtiming.om.pb.CommonPB;
 import com.adtiming.om.pb.PlacementPB;
+import com.adtiming.om.server.util.CountryCode;
 import com.adtiming.om.server.util.Util;
 import org.apache.commons.lang3.StringUtils;
 
@@ -15,7 +16,7 @@ import java.util.Set;
 
 public class Placement {
 
-    private PlacementPB.Placement p;
+    private final PlacementPB.Placement p;
     private Set<String> sdkVersionBlacklist;
     private Set<String> makeWhitelist, makeBlacklist, brandWhitelist, brandBlacklist, modelWhitelist, modelBlacklist;
     private Set<String> didBlacklist;
@@ -126,8 +127,8 @@ public class Placement {
                 (modelBlacklist == null || !modelBlacklist.contains(model));
     }
 
-    public boolean isBlockDeviceId(String device_id) {
-        return didBlacklist != null && didBlacklist.contains(device_id);
+    public boolean isBlockDeviceId(String did) {
+        return didBlacklist != null && didBlacklist.contains(did);
     }
 
     public int getFrequencyCap() {
@@ -145,7 +146,7 @@ public class Placement {
     public boolean isAllowPeriod(String country) {
         PlacementPB.Placement.CountrySettings cs = p.getCountrySettingsOrDefault(country, null);
         if (cs == null || cs.getPeriodCount() == 0) {
-            cs = p.getCountrySettingsOrDefault("AA", null);
+            cs = p.getCountrySettingsOrDefault(CountryCode.COUNTRY_ALL, null);
             if (cs == null || cs.getPeriodCount() == 0)
                 return true;
         }
@@ -195,4 +196,5 @@ public class Placement {
     public int getReloadInterval() {
         return p.getReloadInterval();
     }
+
 }

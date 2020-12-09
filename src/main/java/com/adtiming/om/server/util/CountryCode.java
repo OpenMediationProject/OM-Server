@@ -22,6 +22,8 @@ public abstract class CountryCode {
 
     private static final Logger log = LogManager.getLogger();
 
+    public static final String COUNTRY_ALL = "00";
+
     private static final Map<String, String> a2a3;
     private static final Map<String, String> a3a2;
     private static final Map<String, String> numA2;

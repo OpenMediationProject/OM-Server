@@ -12,9 +12,10 @@ import org.apache.logging.log4j.Logger;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class WaterfallBase extends BaseController {
 
@@ -22,15 +23,6 @@ public class WaterfallBase extends BaseController {
 
     @Resource
     private ObjectMapper objectMapper;
-
-    public static class DebugMsgs extends ArrayList<CharSequence> {
-        static final DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
-
-        @Override
-        public boolean add(CharSequence o) {
-            return super.add(LocalDateTime.now().format(fmt) + " - " + o);
-        }
-    }
 
     WaterfallRequest fillRequestParams(byte[] data, int apiv, String sdkv, int plat, String ua, String reqHost, HttpServletRequest req, GeoService geoService, AppConfig cfg, CacheService cacheService) {
         WaterfallRequest o;
@@ -118,5 +110,20 @@ public class WaterfallBase extends BaseController {
             }
         }
         return null;
+    }
+
+    static class WaterfallInstance {
+        public Instance instance;
+        public float ecpm;
+
+        public WaterfallInstance(Instance instance, float ecpm) {
+            this.instance = instance;
+            this.ecpm = ecpm;
+        }
+
+        @Override
+        public String toString() {
+            return Integer.toString(instance.getId());
+        }
     }
 }

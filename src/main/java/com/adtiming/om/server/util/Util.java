@@ -20,8 +20,6 @@ public abstract class Util {
     private Util() {
     }
 
-    public static final String COUNTRY_ALL = "00";
-
     public static boolean isAllowOsv(String osv, Version osvMax, Version osvMin) {
         if (StringUtils.isBlank(osv) && (osvMax != null || osvMin != null))
             return false;
@@ -165,4 +163,8 @@ public abstract class Util {
         return phone;
     }
 
+    public static boolean isEmptyDid(String did) {
+        return StringUtils.isBlank(did)
+                || StringUtils.equals(did, "00000000-0000-0000-0000-000000000000");
+    }
 }

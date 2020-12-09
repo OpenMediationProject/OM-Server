@@ -25,7 +25,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -33,7 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.URLEncoder;
 
-@Controller
+@RestController
 public class IncentivizedController extends BaseController {
 
     private static final Logger LOG = LogManager.getLogger();
@@ -65,7 +64,6 @@ public class IncentivizedController extends BaseController {
             .build();
 
     @PostMapping(value = "/ic", params = "v=1")
-    @ResponseBody
     public ResponseEntity<?> ic(HttpServletRequest req,
                                 @RequestHeader("Host") String reqHost,
                                 @RequestParam("v") int apiv,
@@ -84,18 +82,14 @@ public class IncentivizedController extends BaseController {
             o.setAppConfig(cfg);
         } catch (Exception e) {
             LOG.warn("/ic decrypt fail {}, {}", sdkv, e.toString());
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                    .contentType(MediaType.TEXT_PLAIN)
-                    .body("parse json error");
+            return ResponseEntity.badRequest().body("parse json error");
         }
 
         try {
             Placement placement = cacheService.getPlacement(o.getPid());
             if (placement == null) {
                 o.setStatus(0, "placement invalid").writeToLog(logService);
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                        .contentType(MediaType.TEXT_PLAIN)
-                        .body("placement invalid");
+                return ResponseEntity.badRequest().body("placement invalid");
             }
 
             o.setPlacement(placement);

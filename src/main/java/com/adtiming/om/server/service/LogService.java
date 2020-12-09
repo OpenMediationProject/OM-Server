@@ -6,7 +6,6 @@ package com.adtiming.om.server.service;
 import com.adtiming.om.server.dto.NodeConfig;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.logging.log4j.LogManager;
@@ -15,7 +14,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-
 import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -35,7 +33,8 @@ import java.util.Map;
 public class LogService {
 
     private static final Logger LOG = LogManager.getLogger();
-    private static final String[] LOG_NAMES = {"om.lr", "om.event", "om.iap", "om.ic", "om.error"};
+    private static final String[] LOG_NAMES = {
+            "om.lr", "om.event", "om.iap", "om.ic", "om.error", "om.cptk"};
     private static final Map<String, Logger> LOG_MAP = new HashMap<>();
 
     static {
@@ -70,15 +69,6 @@ public class LogService {
         } catch (Exception e) {
             LOG.error("gzip access log error", e);
         }
-    }
-
-    /**
-     * enforce log4j2 to rolling file
-     */
-    @Scheduled(cron = "1 0 * * * ?")
-    private void enforceRollingLogFile() {
-        LOG.info("cutLogTail");
-        LOG_MAP.values().forEach(l -> l.info(""));
     }
 
     /**

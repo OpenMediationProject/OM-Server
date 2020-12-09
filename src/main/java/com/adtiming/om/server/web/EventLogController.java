@@ -12,22 +12,22 @@ import com.adtiming.om.server.service.CacheService;
 import com.adtiming.om.server.service.GeoService;
 import com.adtiming.om.server.service.LogService;
 import com.adtiming.om.server.util.Compressor;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-@Controller
+import static com.adtiming.om.server.dto.EventLogRequest.*;
+
+@RestController
 public class EventLogController extends BaseController {
 
     private static final Logger LOG = LogManager.getLogger();
@@ -51,7 +51,6 @@ public class EventLogController extends BaseController {
      * for SDK Event Log
      */
     @PostMapping(value = "/log", params = "v=1")
-    @ResponseBody
     public ResponseEntity<?> log(HttpServletRequest req,
                                  @RequestParam("v") int version, // api version
                                  @RequestParam("plat") int plat, // platform (0:iOS,1:Android)
@@ -66,12 +65,9 @@ public class EventLogController extends BaseController {
             o.setPlat(plat);
             o.setGeo(geoService.getGeoData(req, o));
             o.setAppConfig(cfg);
-        } catch (java.util.zip.ZipException | JsonProcessingException e) {
-            LOG.warn("log decode fail {}, {}", req.getQueryString(), e.toString());
-            return ResponseEntity.badRequest().body("bad data");
         } catch (Exception e) {
-            LOG.error("log decode fail {}", req.getQueryString(), e);
-            return ResponseEntity.badRequest().body("bad data 2");
+            LOG.warn("log decode fail {}", req.getQueryString(), e);
+            return ResponseEntity.badRequest().body("bad data");
         }
 
         o.setPubApp(cacheService.getPublisherApp(appKey));
@@ -96,11 +92,39 @@ public class EventLogController extends BaseController {
             }
 
             // add REQUIRED_EVENT_IDS event to lr log
-            if (EventLogRequest.REQUIRED_EVENT_IDS.contains(event.eid)) {
+            if (REQUIRED_EVENT_IDS.contains(event.eid)) {
                 LrRequest lr = o.copyTo(new LrRequest());
                 lr.setTs(event.ts);
                 lr.setServerTs(event.serverTs);
                 lr.setType(event.eid);
+                switch (event.eid) {
+                    case INSTANCE_BID_REQUEST:
+                        lr.setBidReq(1);
+                        break;
+                    case INSTANCE_BID_RESPONSE:
+                        lr.setBidRes(1);
+                        if (event.price > 0F) {
+                            lr.setBidResPrice(event.price);
+                        }
+                        break;
+                    case INSTANCE_BID_WIN:
+                        lr.setBidWin(1);
+                        if (event.price > 0F) {
+                            lr.setBidWinPrice(event.price);
+                        }
+                        break;
+                    case CALLED_SHOW:
+                        lr.setCalledShow(1);
+                        break;
+                    case CALLED_IS_READY_TRUE:
+                        lr.setReadyTrue(1);
+                        break;
+                    case CALLED_IS_READY_FALSE:
+                        lr.setReadyFalse(1);
+                        break;
+                    default:
+                        continue;
+                }
                 lr.setMid(event.mid);
                 lr.setPid(event.pid);
                 if (placement != null) {
@@ -111,9 +135,9 @@ public class EventLogController extends BaseController {
                 lr.setScene(event.scene);
                 lr.setAbt(event.abt);
                 lr.setBid(event.bid);
-                if (event.price > 0F) {
-                    lr.setPrice(event.price);
-                }
+//                if (event.price > 0F) {
+//                    lr.setPrice(event.price);
+//                }
                 lr.writeToLog(logService);
             }
         }
