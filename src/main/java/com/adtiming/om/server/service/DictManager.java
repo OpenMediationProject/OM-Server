@@ -15,9 +15,9 @@ import java.util.stream.Stream;
 @Component
 public class DictManager extends PBLoader {
 
-    private Map<Integer, Dict> idMap;
-    private Map<String, Dict> pathMap;
-    private Map<Integer, List<Dict>> pidMap;
+    private Map<Integer, Dict> idMap = Collections.emptyMap();
+    private Map<String, Dict> pathMap = Collections.emptyMap();
+    private Map<Integer, List<Dict>> pidMap = Collections.emptyMap();
 
     void reloadCache() {
         load("om_dict", in -> {
