@@ -8,11 +8,11 @@
                 <CronTriggeringPolicy schedule="0 0 0 * * ?"/>
             </Policies>
             <DefaultRolloverStrategy>
-                <Delete basePath="data" maxDepth="1">
+                <Delete basePath="data" maxDepth="1" followLinks="true">
                     <IfFileName glob="*.log.gz"/>
                     <IfLastModified age="2d"/>
                 </Delete>
-                <Delete basePath="log" maxDepth="1">
+                <Delete basePath="log" maxDepth="1" followLinks="true">
                     <IfFileName glob="*.log.gz"/>
                     <IfLastModified age="3d"/>
                 </Delete>
