@@ -32,6 +32,7 @@
 | adns | Array of [AdNetwork](#adnetwork) | integrated AdNetworks | |✔︎|✔︎|
 | ios| Object of [iOS](#ios) | iOS-specific parameters| |✔︎|✖︎|
 | android| Object of [Android](#android) | Android-specific parameters| |✖︎|✔︎|
+| tags | Map<string, any>  | App defined Tags, used for rule match| { "sth":[2,6], "gender":1, "age":3 }|✖︎|
 
 ### iOS
 

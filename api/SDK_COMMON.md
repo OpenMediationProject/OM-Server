@@ -39,6 +39,8 @@
 | gender | int8 | 0:unknown,1:male,2:female | 1 |✖︎|
 | age | int8 | Age year | 26 |✖︎|
 | regs | Object of [Regs](#regs) | any legal, governmental, or industry regulations |  |✖︎|
+| cdid | string | Custom DeviceID | |✖︎|
+| tags | Map<string,any> | App defined user tags| { "channel":"a", "likes":[2,6], "gender":1, "age":3 }|✖︎|
 
 ### ConnectionType
 

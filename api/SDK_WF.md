@@ -20,8 +20,6 @@
 
 ## Request body JSON
 
-* For parameters whose parameter values are only `0` and `1`, if the value is `0`, you do not need to report
-
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
 |...||[BaseRequestFields](SDK_COMMON.md#baserequestfields)||✔︎|

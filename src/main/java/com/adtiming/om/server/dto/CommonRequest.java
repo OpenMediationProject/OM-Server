@@ -8,6 +8,7 @@ import com.adtiming.om.server.util.Util;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.beans.BeanUtils;
 
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -48,6 +49,8 @@ public class CommonRequest implements DeviceInfo {
     private Regs regs;        //  Regs
     private Integer age;      //  age
     private Integer gender;   //  gender, {0: unknown, 1: male, 2: female}
+    private String cdid;      //  Custom Device ID
+    private Map<String, Object> tags; // User tags
 
     // not from request params
     // set by api controller
@@ -483,6 +486,24 @@ public class CommonRequest implements DeviceInfo {
 
     public void setGender(Integer gender) {
         this.gender = gender;
+    }
+
+    @Override
+    public String getCdid() {
+        return cdid;
+    }
+
+    public void setCdid(String cdid) {
+        this.cdid = cdid;
+    }
+
+    @Override
+    public Map<String, Object> getTags() {
+        return tags;
+    }
+
+    public void setTags(Map<String, Object> tags) {
+        this.tags = tags;
     }
 
     @JsonIgnore

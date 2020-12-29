@@ -3,6 +3,7 @@
 
 package com.adtiming.om.server.service;
 
+import com.adtiming.om.server.dto.DeviceInfo;
 import com.adtiming.om.server.dto.NodeConfig;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -119,6 +120,12 @@ public class LogService {
 
     public String toJson(Object o) {
         try {
+            if (o instanceof DeviceInfo) {
+                DeviceInfo d = (DeviceInfo) o;
+                if (d.getTags() != null) {
+                    d.getTags().replaceAll((k, v) -> v == null ? null : v.toString());
+                }
+            }
             return objectMapper.writeValueAsString(o);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);

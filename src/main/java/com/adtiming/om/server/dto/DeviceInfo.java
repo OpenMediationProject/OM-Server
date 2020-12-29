@@ -3,6 +3,8 @@
 
 package com.adtiming.om.server.dto;
 
+import java.util.Map;
+
 public interface DeviceInfo {
 
     /**
@@ -97,5 +99,15 @@ public interface DeviceInfo {
     default Integer getGender() {
         return null;
     }
+
+    /**
+     * Custom DeviceID
+     */
+    String getCdid();
+
+    /**
+     * App defined user tags
+     */
+    Map<String, Object> getTags();
 
 }
