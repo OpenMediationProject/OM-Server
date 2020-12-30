@@ -474,11 +474,12 @@ public class WaterfallController extends WaterfallBase {
             return null;
         }
 
+        if (CollectionUtils.isEmpty(insList)) {
+            insList = new ArrayList<>();
+        }
+
         // insert bid instance
         if (!req.getBidPriceMap().isEmpty()) {
-            if (CollectionUtils.isEmpty(insList)) {
-                insList = new ArrayList<>();
-            }
             List<WaterfallInstance> finalInsList = insList;
             req.getBidPriceMap().forEach((iid, bidPrice) -> {
                 boolean added = false;

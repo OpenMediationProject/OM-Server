@@ -159,7 +159,7 @@ public class CampaignResp {
 
     // 是否使用 webview 打开 link 地址
     public Integer getIswv() {
-        return c.getBillingType() == 4 ? 1 : null;
+        return c.getOpenType() == 1 || c.getBillingType() == 4 ? 1 : null;
     }
 
     // 点击跟踪地址列表
@@ -286,6 +286,10 @@ public class CampaignResp {
      */
     public Integer getTest() {
         return req.isTest() ? 1 : null;
+    }
+
+    public Integer getOpenType() {
+        return c.getOpenType();
     }
 
     public static class SkAdNetwork {

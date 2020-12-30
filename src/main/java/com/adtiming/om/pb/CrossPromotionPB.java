@@ -328,6 +328,15 @@ public final class CrossPromotionPB {
      */
     com.google.protobuf.ByteString
         getImprTkUrlsBytes(int index);
+
+    /**
+     * <pre>
+     * app open type,0:Store,1:Webview,2:System Brower
+     * </pre>
+     *
+     * <code>optional int32 open_type = 23;</code>
+     */
+    int getOpenType();
   }
   /**
    * <pre>
@@ -366,6 +375,7 @@ public final class CrossPromotionPB {
       clickUrl_ = "";
       clickTkUrls_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       imprTkUrls_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      openType_ = 0;
     }
 
     @java.lang.Override
@@ -522,6 +532,11 @@ public final class CrossPromotionPB {
                 mutable_bitField0_ |= 0x00200000;
               }
               imprTkUrls_.add(s);
+              break;
+            }
+            case 184: {
+
+              openType_ = input.readInt32();
               break;
             }
           }
@@ -1130,6 +1145,19 @@ public final class CrossPromotionPB {
       return imprTkUrls_.getByteString(index);
     }
 
+    public static final int OPEN_TYPE_FIELD_NUMBER = 23;
+    private int openType_;
+    /**
+     * <pre>
+     * app open type,0:Store,1:Webview,2:System Brower
+     * </pre>
+     *
+     * <code>optional int32 open_type = 23;</code>
+     */
+    public int getOpenType() {
+      return openType_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -1213,6 +1241,9 @@ public final class CrossPromotionPB {
       }
       for (int i = 0; i < imprTkUrls_.size(); i++) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 22, imprTkUrls_.getRaw(i));
+      }
+      if (openType_ != 0) {
+        output.writeInt32(23, openType_);
       }
     }
 
@@ -1317,6 +1348,10 @@ public final class CrossPromotionPB {
         size += dataSize;
         size += 2 * getImprTkUrlsList().size();
       }
+      if (openType_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(23, openType_);
+      }
       memoizedSize = size;
       return size;
     }
@@ -1385,6 +1420,8 @@ public final class CrossPromotionPB {
           .equals(other.getClickTkUrlsList());
       result = result && getImprTkUrlsList()
           .equals(other.getImprTkUrlsList());
+      result = result && (getOpenType()
+          == other.getOpenType());
       return result;
     }
 
@@ -1450,6 +1487,8 @@ public final class CrossPromotionPB {
         hash = (37 * hash) + IMPR_TK_URLS_FIELD_NUMBER;
         hash = (53 * hash) + getImprTkUrlsList().hashCode();
       }
+      hash = (37 * hash) + OPEN_TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getOpenType();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1637,6 +1676,8 @@ public final class CrossPromotionPB {
         bitField0_ = (bitField0_ & ~0x00100000);
         imprTkUrls_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00200000);
+        openType_ = 0;
+
         return this;
       }
 
@@ -1692,6 +1733,7 @@ public final class CrossPromotionPB {
           bitField0_ = (bitField0_ & ~0x00200000);
         }
         result.imprTkUrls_ = imprTkUrls_;
+        result.openType_ = openType_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1818,6 +1860,9 @@ public final class CrossPromotionPB {
             imprTkUrls_.addAll(other.imprTkUrls_);
           }
           onChanged();
+        }
+        if (other.getOpenType() != 0) {
+          setOpenType(other.getOpenType());
         }
         onChanged();
         return this;
@@ -3172,6 +3217,44 @@ public final class CrossPromotionPB {
   checkByteStringIsUtf8(value);
         ensureImprTkUrlsIsMutable();
         imprTkUrls_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private int openType_ ;
+      /**
+       * <pre>
+       * app open type,0:Store,1:Webview,2:System Brower
+       * </pre>
+       *
+       * <code>optional int32 open_type = 23;</code>
+       */
+      public int getOpenType() {
+        return openType_;
+      }
+      /**
+       * <pre>
+       * app open type,0:Store,1:Webview,2:System Brower
+       * </pre>
+       *
+       * <code>optional int32 open_type = 23;</code>
+       */
+      public Builder setOpenType(int value) {
+        
+        openType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * app open type,0:Store,1:Webview,2:System Brower
+       * </pre>
+       *
+       * <code>optional int32 open_type = 23;</code>
+       */
+      public Builder clearOpenType() {
+        
+        openType_ = 0;
         onChanged();
         return this;
       }
@@ -14415,7 +14498,7 @@ public final class CrossPromotionPB {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\010cp.proto\"\216\004\n\nCpCampaign\022\n\n\002id\030\001 \001(\003\022\027\n" +
+      "\n\010cp.proto\"\241\004\n\nCpCampaign\022\n\n\002id\030\001 \001(\003\022\027\n" +
       "\017ska_campaign_id\030\002 \001(\005\022\024\n\014publisher_id\030\003" +
       " \001(\005\022\014\n\004type\030\004 \001(\005\022\014\n\004name\030\005 \001(\t\022\016\n\006app_" +
       "id\030\006 \001(\t\022\020\n\010app_name\030\007 \001(\t\022\023\n\013preview_ur" +
@@ -14427,45 +14510,46 @@ public final class CrossPromotionPB {
       "try\022\020\n\010impr_cap\030\021 \001(\005\022\021\n\timpr_freq\030\022 \001(\005",
       "\022\021\n\tad_domain\030\023 \001(\t\022\021\n\tclick_url\030\024 \001(\t\022\025" +
       "\n\rclick_tk_urls\030\025 \003(\t\022\024\n\014impr_tk_urls\030\026 " +
-      "\003(\t\0326\n\024CountryBidpriceEntry\022\013\n\003key\030\001 \001(\t" +
-      "\022\r\n\005value\030\002 \001(\002:\0028\001\"\213\004\n\023CpCampaignTarget" +
-      "ing\022\023\n\013campaign_id\030\001 \001(\003\022\017\n\007contype\030\002 \001(" +
-      "\005\022\024\n\014mccmnc_white\030\003 \003(\t\022\024\n\014mccmnc_black\030" +
-      "\004 \003(\t\022\025\n\rcountry_white\030\005 \003(\t\022\025\n\rcountry_" +
-      "black\030\006 \003(\t\022\024\n\014pubapp_white\030\007 \003(\005\022\024\n\014pub" +
-      "app_black\030\010 \003(\005\022\027\n\017placement_white\030\t \003(\005" +
-      "\022\027\n\017placement_black\030\n \003(\005\022\030\n\020devicetype_",
-      "white\030\013 \003(\005\022\030\n\020devicetype_black\030\014 \003(\005\022\022\n" +
-      "\nmake_white\030\r \003(\t\022\022\n\nmake_black\030\016 \003(\t\022\023\n" +
-      "\013brand_white\030\017 \003(\t\022\023\n\013brand_black\030\020 \003(\t\022" +
-      "\023\n\013model_white\030\021 \003(\t\022\023\n\013model_black\030\022 \003(" +
-      "\t\022\021\n\tosv_white\030\023 \003(\t\022\037\n\017osv_white_range\030" +
-      "\024 \003(\0132\006.Range\022\021\n\tosv_black\030\025 \003(\t\022\037\n\017osv_" +
-      "black_range\030\026 \003(\0132\006.Range\"E\n\005Range\022\013\n\003mi" +
-      "n\030\001 \001(\t\022\013\n\003max\030\002 \001(\t\022\020\n\010min_type\030\003 \001(\010\022\020" +
-      "\n\010max_type\030\004 \001(\010\"\234\002\n\nCpCreative\022\n\n\002id\030\001 " +
-      "\001(\003\022\023\n\013campaign_id\030\002 \001(\003\022\014\n\004name\030\003 \001(\t\022\036",
-      "\n\004type\030\004 \001(\0162\020.CpCreative.Type\022\r\n\005title\030" +
-      "\005 \001(\t\022\r\n\005descn\030\006 \001(\t\022\024\n\014material_ids\030\007 \003" +
-      "(\003\022\020\n\010play_url\030\010 \001(\t\022\016\n\006weight\030\t \001(\005\022\020\n\010" +
-      "template\030\n \001(\005\022\030\n\020endcard_template\030\013 \001(\005" +
-      "\"=\n\004Type\022\n\n\006Banner\020\000\022\n\n\006Native\020\001\022\t\n\005Vide" +
-      "o\020\002\022\022\n\016CrossPromotion\020\003\"\305\001\n\nCpMaterial\022\n" +
-      "\n\002id\030\001 \001(\003\022\013\n\003url\030\002 \001(\t\022\r\n\005width\030\003 \001(\005\022\016" +
-      "\n\006height\030\004 \001(\005\022\014\n\004size\030\005 \001(\005\022\036\n\004type\030\006 \001" +
-      "(\0162\020.CpMaterial.Type\022\021\n\tmime_type\030\007 \001(\t\022" +
-      "\026\n\016video_duration\030\010 \001(\005\"&\n\004Type\022\t\n\005Image",
-      "\020\000\022\010\n\004Icon\020\001\022\t\n\005Video\020\002\"w\n\nH5Template\022\n\n" +
-      "\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\014\n\004type\030\003 \001(\005\022\013\n" +
-      "\003url\030\004 \001(\t\022\r\n\005width\030\005 \001(\005\022\016\n\006height\030\006 \001(" +
-      "\005\022\025\n\rneed_carousel\030\007 \001(\010\"\364\001\n\003App\022\n\n\002id\030\001" +
-      " \001(\005\022\016\n\006app_id\030\002 \001(\t\022\014\n\004plat\030\003 \001(\005\022\014\n\004na" +
-      "me\030\004 \001(\t\022\014\n\004icon\030\005 \001(\t\022\024\n\014rating_value\030\006" +
-      " \001(\002\022\024\n\014rating_count\030\007 \001(\005\022\017\n\007osv_min\030\010 " +
-      "\001(\t\022\017\n\007osv_max\030\t \001(\t\022\020\n\010category\030\n \001(\t\022\023" +
-      "\n\013category_id\030\013 \001(\005\022\030\n\020sub_category_id1\030" +
-      "\014 \001(\005\022\030\n\020sub_category_id2\030\r \001(\005B&\n\022com.a",
-      "dtiming.om.pbB\020CrossPromotionPBb\006proto3"
+      "\003(\t\022\021\n\topen_type\030\027 \001(\005\0326\n\024CountryBidpric" +
+      "eEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\002:\0028\001\"\213" +
+      "\004\n\023CpCampaignTargeting\022\023\n\013campaign_id\030\001 " +
+      "\001(\003\022\017\n\007contype\030\002 \001(\005\022\024\n\014mccmnc_white\030\003 \003" +
+      "(\t\022\024\n\014mccmnc_black\030\004 \003(\t\022\025\n\rcountry_whit" +
+      "e\030\005 \003(\t\022\025\n\rcountry_black\030\006 \003(\t\022\024\n\014pubapp" +
+      "_white\030\007 \003(\005\022\024\n\014pubapp_black\030\010 \003(\005\022\027\n\017pl" +
+      "acement_white\030\t \003(\005\022\027\n\017placement_black\030\n",
+      " \003(\005\022\030\n\020devicetype_white\030\013 \003(\005\022\030\n\020device" +
+      "type_black\030\014 \003(\005\022\022\n\nmake_white\030\r \003(\t\022\022\n\n" +
+      "make_black\030\016 \003(\t\022\023\n\013brand_white\030\017 \003(\t\022\023\n" +
+      "\013brand_black\030\020 \003(\t\022\023\n\013model_white\030\021 \003(\t\022" +
+      "\023\n\013model_black\030\022 \003(\t\022\021\n\tosv_white\030\023 \003(\t\022" +
+      "\037\n\017osv_white_range\030\024 \003(\0132\006.Range\022\021\n\tosv_" +
+      "black\030\025 \003(\t\022\037\n\017osv_black_range\030\026 \003(\0132\006.R" +
+      "ange\"E\n\005Range\022\013\n\003min\030\001 \001(\t\022\013\n\003max\030\002 \001(\t\022" +
+      "\020\n\010min_type\030\003 \001(\010\022\020\n\010max_type\030\004 \001(\010\"\234\002\n\n" +
+      "CpCreative\022\n\n\002id\030\001 \001(\003\022\023\n\013campaign_id\030\002 ",
+      "\001(\003\022\014\n\004name\030\003 \001(\t\022\036\n\004type\030\004 \001(\0162\020.CpCrea" +
+      "tive.Type\022\r\n\005title\030\005 \001(\t\022\r\n\005descn\030\006 \001(\t\022" +
+      "\024\n\014material_ids\030\007 \003(\003\022\020\n\010play_url\030\010 \001(\t\022" +
+      "\016\n\006weight\030\t \001(\005\022\020\n\010template\030\n \001(\005\022\030\n\020end" +
+      "card_template\030\013 \001(\005\"=\n\004Type\022\n\n\006Banner\020\000\022" +
+      "\n\n\006Native\020\001\022\t\n\005Video\020\002\022\022\n\016CrossPromotion" +
+      "\020\003\"\305\001\n\nCpMaterial\022\n\n\002id\030\001 \001(\003\022\013\n\003url\030\002 \001" +
+      "(\t\022\r\n\005width\030\003 \001(\005\022\016\n\006height\030\004 \001(\005\022\014\n\004siz" +
+      "e\030\005 \001(\005\022\036\n\004type\030\006 \001(\0162\020.CpMaterial.Type\022" +
+      "\021\n\tmime_type\030\007 \001(\t\022\026\n\016video_duration\030\010 \001",
+      "(\005\"&\n\004Type\022\t\n\005Image\020\000\022\010\n\004Icon\020\001\022\t\n\005Video" +
+      "\020\002\"w\n\nH5Template\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001" +
+      "(\t\022\014\n\004type\030\003 \001(\005\022\013\n\003url\030\004 \001(\t\022\r\n\005width\030\005" +
+      " \001(\005\022\016\n\006height\030\006 \001(\005\022\025\n\rneed_carousel\030\007 " +
+      "\001(\010\"\364\001\n\003App\022\n\n\002id\030\001 \001(\005\022\016\n\006app_id\030\002 \001(\t\022" +
+      "\014\n\004plat\030\003 \001(\005\022\014\n\004name\030\004 \001(\t\022\014\n\004icon\030\005 \001(" +
+      "\t\022\024\n\014rating_value\030\006 \001(\002\022\024\n\014rating_count\030" +
+      "\007 \001(\005\022\017\n\007osv_min\030\010 \001(\t\022\017\n\007osv_max\030\t \001(\t\022" +
+      "\020\n\010category\030\n \001(\t\022\023\n\013category_id\030\013 \001(\005\022\030" +
+      "\n\020sub_category_id1\030\014 \001(\005\022\030\n\020sub_category",
+      "_id2\030\r \001(\005B&\n\022com.adtiming.om.pbB\020CrossP" +
+      "romotionPBb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -14484,7 +14568,7 @@ public final class CrossPromotionPB {
     internal_static_CpCampaign_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CpCampaign_descriptor,
-        new java.lang.String[] { "Id", "SkaCampaignId", "PublisherId", "Type", "Name", "AppId", "AppName", "PreviewUrl", "Platform", "BillingType", "Price", "DailyCap", "DailyBudget", "MaxBidprice", "Bidprice", "CountryBidprice", "ImprCap", "ImprFreq", "AdDomain", "ClickUrl", "ClickTkUrls", "ImprTkUrls", });
+        new java.lang.String[] { "Id", "SkaCampaignId", "PublisherId", "Type", "Name", "AppId", "AppName", "PreviewUrl", "Platform", "BillingType", "Price", "DailyCap", "DailyBudget", "MaxBidprice", "Bidprice", "CountryBidprice", "ImprCap", "ImprFreq", "AdDomain", "ClickUrl", "ClickTkUrls", "ImprTkUrls", "OpenType", });
     internal_static_CpCampaign_CountryBidpriceEntry_descriptor =
       internal_static_CpCampaign_descriptor.getNestedTypes().get(0);
     internal_static_CpCampaign_CountryBidpriceEntry_fieldAccessorTable = new

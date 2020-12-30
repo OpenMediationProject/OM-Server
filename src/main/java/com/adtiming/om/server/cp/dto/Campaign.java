@@ -112,4 +112,8 @@ public class Campaign {
     public List<String> getClickTkUrlsList() {
         return campaign.getClickTkUrlsList();
     }
+
+    public int getOpenType() {
+        return campaign.getOpenType();
+    }
 }
