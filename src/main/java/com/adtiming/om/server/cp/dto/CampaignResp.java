@@ -13,6 +13,7 @@ import com.adtiming.om.server.cp.util.Util;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.util.CollectionUtils;
@@ -88,9 +89,9 @@ public class CampaignResp {
                 ska.adNetworkId = ccs.getSkAdNetworkId();
                 ska.adNetworkCampaignId = c.getSkaCampaignId();
                 ska.adNetworkNonce = UUID.randomUUID().toString().toLowerCase();
-                ska.adNetworkSourceAppStoreIdentifier = req.getPubApp().getAppId();
+                ska.adNetworkSourceAppStoreIdentifier = NumberUtils.toLong(req.getPubApp().getAppId());
                 ska.adNetworkImpressionTimestamp = System.currentTimeMillis();
-                String data = String.format("%s\u2063%s\u2063%d\u2063%s\u2063%s\u2063%s\u2063%s",
+                String data = String.format("%s\u2063%s\u2063%d\u2063%s\u2063%s\u2063%d\u2063%d",
                         ska.adNetworkPayloadVersion, ska.adNetworkId, ska.adNetworkCampaignId, c.getAppId(),
                         ska.adNetworkNonce, ska.adNetworkSourceAppStoreIdentifier, ska.adNetworkImpressionTimestamp);
                 ska.adNetworkAttributionSignature = ECDSAUtil.encodeSHA256WithECDSA(data, ccs.getSkPrivateKey());
@@ -293,13 +294,13 @@ public class CampaignResp {
     }
 
     public static class SkAdNetwork {
-        public String adNetworkPayloadVersion;     //AdNetworkVersion
-        public String adNetworkId;   //AdNetworkIdentifier
-        public int adNetworkCampaignId;      //AdNetworkCampaignIdentifier: [1-100]
-        public String adNetworkNonce; //AdNetworkNonce: 随机值,小写uuid
-        public String adNetworkSourceAppStoreIdentifier;//AdNetworkSourceAppStoreIdentifier：媒体app id
-        public long adNetworkImpressionTimestamp;       //AdNetworkTimestamp: 时间戳,毫秒
-        public String adNetworkAttributionSignature;  //AdNetworkAttributionSignature：签名
+        public String adNetworkPayloadVersion;          // AdNetworkVersion
+        public String adNetworkId;                      // AdNetworkIdentifier
+        public int adNetworkCampaignId;                 // AdNetworkCampaignIdentifier: [1-100]
+        public String adNetworkNonce;                   // AdNetworkNonce: 随机值,小写uuid
+        public long adNetworkSourceAppStoreIdentifier;  // AdNetworkSourceAppStoreIdentifier：媒体app id
+        public long adNetworkImpressionTimestamp;       // AdNetworkTimestamp: 时间戳,毫秒
+        public String adNetworkAttributionSignature;    // AdNetworkAttributionSignature：签名
     }
 
     public static class VideoRes {
