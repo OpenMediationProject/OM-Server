@@ -424,6 +424,9 @@ public class WaterfallController extends WaterfallBase {
                 res.addDebug("Instance sort: %s", sortIns);
             }
         }
+        if (sortIns.size() == 1) {
+            return new ArrayList<>(sortIns);
+        }
         return sortIns;
     }
 
