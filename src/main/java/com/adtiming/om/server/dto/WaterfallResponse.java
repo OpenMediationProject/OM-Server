@@ -8,10 +8,11 @@ import java.util.List;
 
 public class WaterfallResponse extends Debugable<WaterfallResponse> {
 
-    public static final int CODE_COUNTRY_NOT_FOUND = 10;      //country not found
-    public static final int CODE_PUB_APP_INVALID = 20;       //pub app invalid
-    public static final int CODE_PLACEMENT_INVALID = 30;     //placement invalid
-    public static final int CODE_INSTANCE_EMPTY = 40;        //instance empty
+    public static final int CODE_COUNTRY_NOT_FOUND = 10;     // country not found
+    public static final int CODE_PUB_APP_INVALID = 20;       // pub app invalid
+    public static final int CODE_PLACEMENT_INVALID = 30;     // placement invalid
+    public static final int CODE_INSTANCE_EMPTY = 40;        // instance empty
+    public static final int CODE_NOAVAILABLE_INSTANCE = 50;  // no available instance
 
     private int code;
     private String msg;

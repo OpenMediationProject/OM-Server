@@ -232,9 +232,9 @@ public class WaterfallController extends WaterfallBase {
 
                     List<Integer> ins = getInsWithBidInstance(o, insList);
                     if (ins == null || ins.isEmpty()) {
-                        res.setCode(CODE_INSTANCE_EMPTY).setMsg("instance not found");
+                        res.setCode(CODE_NOAVAILABLE_INSTANCE).setMsg("no available instance");
                         dr.setResult(response(res));
-                        lr.setStatus(0, "instance not found").writeToLog(logService);
+                        lr.setStatus(0, res.getMsg()).writeToLog(logService);
                         return;
                     }
 
@@ -423,9 +423,6 @@ public class WaterfallController extends WaterfallBase {
                 res.addDebug("Instance Ecpm: %s", insEcpm);
                 res.addDebug("Instance sort: %s", sortIns);
             }
-        }
-        if (sortIns.size() == 1) {
-            return new ArrayList<>(sortIns);
         }
         return sortIns;
     }
@@ -802,7 +799,7 @@ public class WaterfallController extends WaterfallBase {
         }
         lr.writeToLog(logService);
         if (res.getIns() == null || res.getIns().isEmpty()) {
-            res.setCode(CODE_INSTANCE_EMPTY);
+            res.setCode(CODE_NOAVAILABLE_INSTANCE).setMsg("no available instance");
         }
         return response(res);
     }
