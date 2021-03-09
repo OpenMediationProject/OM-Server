@@ -5,6 +5,7 @@ package com.adtiming.om.server.web;
 
 import com.adtiming.om.pb.CommonPB;
 import com.adtiming.om.server.dto.Instance;
+import com.adtiming.om.server.dto.InstanceRule;
 import com.adtiming.om.server.dto.LrRequest;
 import com.adtiming.om.server.dto.Placement;
 import com.adtiming.om.server.service.AppConfig;
@@ -83,6 +84,20 @@ public class LoadReadyController extends BaseController {
                 // SDK 误上报了 payload 请求, server 强制过滤
                 o.setStatus(0, "ignore bid payload");
                 return ResponseEntity.status(HttpStatus.GONE).body("ignore payload");
+            }
+        }
+
+        if (o.getRuleId() > 0) {
+            InstanceRule rule = cacheService.getInstanceRule(o.getRuleId());
+            if (rule != null) {
+                o.setRuleType(rule.isAutoOpt() ? 1 : 0);
+                o.setRp(rule.getPriority());
+            }
+        }
+        if (o.getIid() > 0) {
+            Instance instance = cacheService.getInstanceById(o.getIid());
+            if (instance != null) {
+                o.setAdnPk(instance.getPlacementKey());
             }
         }
 

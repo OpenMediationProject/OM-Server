@@ -20,8 +20,6 @@
 
 ## Request body JSON
 
-* For all parameters whose parameter values are only `0` and `1`, if the value is `0`, you do not need to report
-
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
 |...||[BaseRequestFields](SDK_COMMON.md#baserequestfields)||✔︎|
@@ -33,7 +31,12 @@
 | scene | int32 | sceneID |1123|✖︎|
 | abt | int32 | ABTest Mode | 0 |✖︎|
 | bid | int8 | 是否是Bid相关请求 [0,1] |1|✖︎|
+| ruleId | int32 | Mediation Rule ID |123|✖︎|
+| revenue | float | Instance Impression Revenue |1.2|✖︎|
+| rp | int32 | Revenue Precision |0|✖︎|
+| ii | int32 | Instance Priority |0|✖︎|
 
+* ruleId, revenue, rp, ii need to be reported only when type=6
 * Resp, Body is empty, Success with http status code=200
 
 ### Type

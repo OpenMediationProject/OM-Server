@@ -97,6 +97,24 @@ public final class AdNetworkPB {
      */
     com.google.protobuf.ByteString
         getBidEndpointBytes();
+
+    /**
+     * <pre>
+     * Description
+     * </pre>
+     *
+     * <code>optional string descn = 7;</code>
+     */
+    java.lang.String getDescn();
+    /**
+     * <pre>
+     * Description
+     * </pre>
+     *
+     * <code>optional string descn = 7;</code>
+     */
+    com.google.protobuf.ByteString
+        getDescnBytes();
   }
   /**
    * Protobuf type {@code AdNetwork}
@@ -116,6 +134,7 @@ public final class AdNetworkPB {
       type_ = 0;
       sdkVersion_ = "";
       bidEndpoint_ = "";
+      descn_ = "";
     }
 
     @java.lang.Override
@@ -175,6 +194,12 @@ public final class AdNetworkPB {
               java.lang.String s = input.readStringRequireUtf8();
 
               bidEndpoint_ = s;
+              break;
+            }
+            case 58: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              descn_ = s;
               break;
             }
           }
@@ -384,6 +409,48 @@ public final class AdNetworkPB {
       }
     }
 
+    public static final int DESCN_FIELD_NUMBER = 7;
+    private volatile java.lang.Object descn_;
+    /**
+     * <pre>
+     * Description
+     * </pre>
+     *
+     * <code>optional string descn = 7;</code>
+     */
+    public java.lang.String getDescn() {
+      java.lang.Object ref = descn_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        descn_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Description
+     * </pre>
+     *
+     * <code>optional string descn = 7;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDescnBytes() {
+      java.lang.Object ref = descn_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        descn_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -414,6 +481,9 @@ public final class AdNetworkPB {
       if (!getBidEndpointBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 6, bidEndpoint_);
       }
+      if (!getDescnBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 7, descn_);
+      }
     }
 
     public int getSerializedSize() {
@@ -440,6 +510,9 @@ public final class AdNetworkPB {
       }
       if (!getBidEndpointBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(6, bidEndpoint_);
+      }
+      if (!getDescnBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, descn_);
       }
       memoizedSize = size;
       return size;
@@ -469,6 +542,8 @@ public final class AdNetworkPB {
           .equals(other.getSdkVersion());
       result = result && getBidEndpoint()
           .equals(other.getBidEndpoint());
+      result = result && getDescn()
+          .equals(other.getDescn());
       return result;
     }
 
@@ -491,6 +566,8 @@ public final class AdNetworkPB {
       hash = (53 * hash) + getSdkVersion().hashCode();
       hash = (37 * hash) + BID_ENDPOINT_FIELD_NUMBER;
       hash = (53 * hash) + getBidEndpoint().hashCode();
+      hash = (37 * hash) + DESCN_FIELD_NUMBER;
+      hash = (53 * hash) + getDescn().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -621,6 +698,8 @@ public final class AdNetworkPB {
 
         bidEndpoint_ = "";
 
+        descn_ = "";
+
         return this;
       }
 
@@ -649,6 +728,7 @@ public final class AdNetworkPB {
         result.type_ = type_;
         result.sdkVersion_ = sdkVersion_;
         result.bidEndpoint_ = bidEndpoint_;
+        result.descn_ = descn_;
         onBuilt();
         return result;
       }
@@ -710,6 +790,10 @@ public final class AdNetworkPB {
         }
         if (!other.getBidEndpoint().isEmpty()) {
           bidEndpoint_ = other.bidEndpoint_;
+          onChanged();
+        }
+        if (!other.getDescn().isEmpty()) {
+          descn_ = other.descn_;
           onChanged();
         }
         onChanged();
@@ -1141,6 +1225,95 @@ public final class AdNetworkPB {
   checkByteStringIsUtf8(value);
         
         bidEndpoint_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object descn_ = "";
+      /**
+       * <pre>
+       * Description
+       * </pre>
+       *
+       * <code>optional string descn = 7;</code>
+       */
+      public java.lang.String getDescn() {
+        java.lang.Object ref = descn_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          descn_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Description
+       * </pre>
+       *
+       * <code>optional string descn = 7;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDescnBytes() {
+        java.lang.Object ref = descn_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          descn_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Description
+       * </pre>
+       *
+       * <code>optional string descn = 7;</code>
+       */
+      public Builder setDescn(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        descn_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Description
+       * </pre>
+       *
+       * <code>optional string descn = 7;</code>
+       */
+      public Builder clearDescn() {
+        
+        descn_ = getDefaultInstance().getDescn();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Description
+       * </pre>
+       *
+       * <code>optional string descn = 7;</code>
+       */
+      public Builder setDescnBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        descn_ = value;
         onChanged();
         return this;
       }
@@ -4192,6 +4365,16 @@ public final class AdNetworkPB {
 
     com.adtiming.om.pb.AdNetworkPB.Instance.CountrySettings getCountrySettingsOrThrow(
         java.lang.String key);
+
+    /**
+     * <code>optional string name = 21;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 21;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
   }
   /**
    * Protobuf type {@code Instance}
@@ -4224,6 +4407,7 @@ public final class AdNetworkPB {
       frequencyInterval_ = 0;
       hbStatus_ = false;
       ecpm_ = 0F;
+      name_ = "";
     }
 
     @java.lang.Override
@@ -4384,6 +4568,12 @@ public final class AdNetworkPB {
               countrySettings = input.readMessage(
                   CountrySettingsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               countrySettings_.getMutableMap().put(countrySettings.getKey(), countrySettings.getValue());
+              break;
+            }
+            case 170: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              name_ = s;
               break;
             }
           }
@@ -5602,6 +5792,40 @@ public final class AdNetworkPB {
       return map.get(key);
     }
 
+    public static final int NAME_FIELD_NUMBER = 21;
+    private volatile java.lang.Object name_;
+    /**
+     * <code>optional string name = 21;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        name_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>optional string name = 21;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -5679,6 +5903,9 @@ public final class AdNetworkPB {
             .setValue(entry.getValue())
             .build();
         output.writeMessage(20, countrySettings);
+      }
+      if (!getNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 21, name_);
       }
     }
 
@@ -5793,6 +6020,9 @@ public final class AdNetworkPB {
         size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(20, countrySettings);
       }
+      if (!getNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(21, name_);
+      }
       memoizedSize = size;
       return size;
     }
@@ -5851,6 +6081,8 @@ public final class AdNetworkPB {
               other.getEcpm()));
       result = result && internalGetCountrySettings().equals(
           other.internalGetCountrySettings());
+      result = result && getName()
+          .equals(other.getName());
       return result;
     }
 
@@ -5917,6 +6149,8 @@ public final class AdNetworkPB {
         hash = (37 * hash) + COUNTRY_SETTINGS_FIELD_NUMBER;
         hash = (53 * hash) + internalGetCountrySettings().hashCode();
       }
+      hash = (37 * hash) + NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getName().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -6096,6 +6330,8 @@ public final class AdNetworkPB {
         ecpm_ = 0F;
 
         internalGetMutableCountrySettings().clear();
+        name_ = "";
+
         return this;
       }
 
@@ -6165,6 +6401,7 @@ public final class AdNetworkPB {
         result.ecpm_ = ecpm_;
         result.countrySettings_ = internalGetCountrySettings();
         result.countrySettings_.makeImmutable();
+        result.name_ = name_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6312,6 +6549,10 @@ public final class AdNetworkPB {
         }
         internalGetMutableCountrySettings().mergeFrom(
             other.internalGetCountrySettings());
+        if (!other.getName().isEmpty()) {
+          name_ = other.name_;
+          onChanged();
+        }
         onChanged();
         return this;
       }
@@ -7600,6 +7841,75 @@ public final class AdNetworkPB {
         getMutableCountrySettings().putAll(values);
         return this;
       }
+
+      private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 21;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 21;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 21;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 21;</code>
+       */
+      public Builder clearName() {
+        
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 21;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        name_ = value;
+        onChanged();
+        return this;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
@@ -7952,6 +8262,196 @@ public final class AdNetworkPB {
      * <code>optional int32 age_max = 25;</code>
      */
     int getAgeMax();
+
+    /**
+     * <pre>
+     * 2021-03-04
+     * </pre>
+     *
+     * <code>optional string name = 26;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <pre>
+     * 2021-03-04
+     * </pre>
+     *
+     * <code>optional string name = 26;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <code>repeated string osv_white = 27;</code>
+     */
+    java.util.List<java.lang.String>
+        getOsvWhiteList();
+    /**
+     * <code>repeated string osv_white = 27;</code>
+     */
+    int getOsvWhiteCount();
+    /**
+     * <code>repeated string osv_white = 27;</code>
+     */
+    java.lang.String getOsvWhite(int index);
+    /**
+     * <code>repeated string osv_white = 27;</code>
+     */
+    com.google.protobuf.ByteString
+        getOsvWhiteBytes(int index);
+
+    /**
+     * <code>repeated .Range osv_range = 28;</code>
+     */
+    java.util.List<com.adtiming.om.pb.CommonPB.Range> 
+        getOsvRangeList();
+    /**
+     * <code>repeated .Range osv_range = 28;</code>
+     */
+    com.adtiming.om.pb.CommonPB.Range getOsvRange(int index);
+    /**
+     * <code>repeated .Range osv_range = 28;</code>
+     */
+    int getOsvRangeCount();
+    /**
+     * <code>repeated .Range osv_range = 28;</code>
+     */
+    java.util.List<? extends com.adtiming.om.pb.CommonPB.RangeOrBuilder> 
+        getOsvRangeOrBuilderList();
+    /**
+     * <code>repeated .Range osv_range = 28;</code>
+     */
+    com.adtiming.om.pb.CommonPB.RangeOrBuilder getOsvRangeOrBuilder(
+        int index);
+
+    /**
+     * <code>repeated string sdkv_white = 29;</code>
+     */
+    java.util.List<java.lang.String>
+        getSdkvWhiteList();
+    /**
+     * <code>repeated string sdkv_white = 29;</code>
+     */
+    int getSdkvWhiteCount();
+    /**
+     * <code>repeated string sdkv_white = 29;</code>
+     */
+    java.lang.String getSdkvWhite(int index);
+    /**
+     * <code>repeated string sdkv_white = 29;</code>
+     */
+    com.google.protobuf.ByteString
+        getSdkvWhiteBytes(int index);
+
+    /**
+     * <code>repeated .Range sdkv_range = 30;</code>
+     */
+    java.util.List<com.adtiming.om.pb.CommonPB.Range> 
+        getSdkvRangeList();
+    /**
+     * <code>repeated .Range sdkv_range = 30;</code>
+     */
+    com.adtiming.om.pb.CommonPB.Range getSdkvRange(int index);
+    /**
+     * <code>repeated .Range sdkv_range = 30;</code>
+     */
+    int getSdkvRangeCount();
+    /**
+     * <code>repeated .Range sdkv_range = 30;</code>
+     */
+    java.util.List<? extends com.adtiming.om.pb.CommonPB.RangeOrBuilder> 
+        getSdkvRangeOrBuilderList();
+    /**
+     * <code>repeated .Range sdkv_range = 30;</code>
+     */
+    com.adtiming.om.pb.CommonPB.RangeOrBuilder getSdkvRangeOrBuilder(
+        int index);
+
+    /**
+     * <code>repeated string appv_white = 31;</code>
+     */
+    java.util.List<java.lang.String>
+        getAppvWhiteList();
+    /**
+     * <code>repeated string appv_white = 31;</code>
+     */
+    int getAppvWhiteCount();
+    /**
+     * <code>repeated string appv_white = 31;</code>
+     */
+    java.lang.String getAppvWhite(int index);
+    /**
+     * <code>repeated string appv_white = 31;</code>
+     */
+    com.google.protobuf.ByteString
+        getAppvWhiteBytes(int index);
+
+    /**
+     * <code>repeated .Range appv_range = 32;</code>
+     */
+    java.util.List<com.adtiming.om.pb.CommonPB.Range> 
+        getAppvRangeList();
+    /**
+     * <code>repeated .Range appv_range = 32;</code>
+     */
+    com.adtiming.om.pb.CommonPB.Range getAppvRange(int index);
+    /**
+     * <code>repeated .Range appv_range = 32;</code>
+     */
+    int getAppvRangeCount();
+    /**
+     * <code>repeated .Range appv_range = 32;</code>
+     */
+    java.util.List<? extends com.adtiming.om.pb.CommonPB.RangeOrBuilder> 
+        getAppvRangeOrBuilderList();
+    /**
+     * <code>repeated .Range appv_range = 32;</code>
+     */
+    com.adtiming.om.pb.CommonPB.RangeOrBuilder getAppvRangeOrBuilder(
+        int index);
+
+    /**
+     * <pre>
+     *需要非空deviceId, 0:No,1:Yes
+     * </pre>
+     *
+     * <code>optional int32 require_did = 33;</code>
+     */
+    int getRequireDid();
+
+    /**
+     * <code>map&lt;string, .CustomTag&gt; custom_tags = 34;</code>
+     */
+    int getCustomTagsCount();
+    /**
+     * <code>map&lt;string, .CustomTag&gt; custom_tags = 34;</code>
+     */
+    boolean containsCustomTags(
+        java.lang.String key);
+    /**
+     * Use {@link #getCustomTagsMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag>
+    getCustomTags();
+    /**
+     * <code>map&lt;string, .CustomTag&gt; custom_tags = 34;</code>
+     */
+    java.util.Map<java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag>
+    getCustomTagsMap();
+    /**
+     * <code>map&lt;string, .CustomTag&gt; custom_tags = 34;</code>
+     */
+
+    com.adtiming.om.pb.AdNetworkPB.CustomTag getCustomTagsOrDefault(
+        java.lang.String key,
+        com.adtiming.om.pb.AdNetworkPB.CustomTag defaultValue);
+    /**
+     * <code>map&lt;string, .CustomTag&gt; custom_tags = 34;</code>
+     */
+
+    com.adtiming.om.pb.AdNetworkPB.CustomTag getCustomTagsOrThrow(
+        java.lang.String key);
   }
   /**
    * Protobuf type {@code InstanceRule}
@@ -7989,6 +8489,14 @@ public final class AdNetworkPB {
       interest_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       ageMin_ = 0;
       ageMax_ = 0;
+      name_ = "";
+      osvWhite_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      osvRange_ = java.util.Collections.emptyList();
+      sdkvWhite_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      sdkvRange_ = java.util.Collections.emptyList();
+      appvWhite_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      appvRange_ = java.util.Collections.emptyList();
+      requireDid_ = 0;
     }
 
     @java.lang.Override
@@ -8002,6 +8510,7 @@ public final class AdNetworkPB {
         throws com.google.protobuf.InvalidProtocolBufferException {
       this();
       int mutable_bitField0_ = 0;
+      int mutable_bitField1_ = 0;
       try {
         boolean done = false;
         while (!done) {
@@ -8177,6 +8686,83 @@ public final class AdNetworkPB {
               ageMax_ = input.readInt32();
               break;
             }
+            case 210: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              name_ = s;
+              break;
+            }
+            case 218: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x04000000) == 0x04000000)) {
+                osvWhite_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x04000000;
+              }
+              osvWhite_.add(s);
+              break;
+            }
+            case 226: {
+              if (!((mutable_bitField0_ & 0x08000000) == 0x08000000)) {
+                osvRange_ = new java.util.ArrayList<com.adtiming.om.pb.CommonPB.Range>();
+                mutable_bitField0_ |= 0x08000000;
+              }
+              osvRange_.add(
+                  input.readMessage(com.adtiming.om.pb.CommonPB.Range.parser(), extensionRegistry));
+              break;
+            }
+            case 234: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x10000000) == 0x10000000)) {
+                sdkvWhite_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x10000000;
+              }
+              sdkvWhite_.add(s);
+              break;
+            }
+            case 242: {
+              if (!((mutable_bitField0_ & 0x20000000) == 0x20000000)) {
+                sdkvRange_ = new java.util.ArrayList<com.adtiming.om.pb.CommonPB.Range>();
+                mutable_bitField0_ |= 0x20000000;
+              }
+              sdkvRange_.add(
+                  input.readMessage(com.adtiming.om.pb.CommonPB.Range.parser(), extensionRegistry));
+              break;
+            }
+            case 250: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x40000000) == 0x40000000)) {
+                appvWhite_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x40000000;
+              }
+              appvWhite_.add(s);
+              break;
+            }
+            case 258: {
+              if (!((mutable_bitField0_ & 0x80000000) == 0x80000000)) {
+                appvRange_ = new java.util.ArrayList<com.adtiming.om.pb.CommonPB.Range>();
+                mutable_bitField0_ |= 0x80000000;
+              }
+              appvRange_.add(
+                  input.readMessage(com.adtiming.om.pb.CommonPB.Range.parser(), extensionRegistry));
+              break;
+            }
+            case 264: {
+
+              requireDid_ = input.readInt32();
+              break;
+            }
+            case 274: {
+              if (!((mutable_bitField1_ & 0x00000002) == 0x00000002)) {
+                customTags_ = com.google.protobuf.MapField.newMapField(
+                    CustomTagsDefaultEntryHolder.defaultEntry);
+                mutable_bitField1_ |= 0x00000002;
+              }
+              com.google.protobuf.MapEntry<java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag>
+              customTags = input.readMessage(
+                  CustomTagsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              customTags_.getMutableMap().put(customTags.getKey(), customTags.getValue());
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -8206,6 +8792,24 @@ public final class AdNetworkPB {
         if (((mutable_bitField0_ & 0x00400000) == 0x00400000)) {
           interest_ = interest_.getUnmodifiableView();
         }
+        if (((mutable_bitField0_ & 0x04000000) == 0x04000000)) {
+          osvWhite_ = osvWhite_.getUnmodifiableView();
+        }
+        if (((mutable_bitField0_ & 0x08000000) == 0x08000000)) {
+          osvRange_ = java.util.Collections.unmodifiableList(osvRange_);
+        }
+        if (((mutable_bitField0_ & 0x10000000) == 0x10000000)) {
+          sdkvWhite_ = sdkvWhite_.getUnmodifiableView();
+        }
+        if (((mutable_bitField0_ & 0x20000000) == 0x20000000)) {
+          sdkvRange_ = java.util.Collections.unmodifiableList(sdkvRange_);
+        }
+        if (((mutable_bitField0_ & 0x40000000) == 0x40000000)) {
+          appvWhite_ = appvWhite_.getUnmodifiableView();
+        }
+        if (((mutable_bitField0_ & 0x80000000) == 0x80000000)) {
+          appvRange_ = java.util.Collections.unmodifiableList(appvRange_);
+        }
         makeExtensionsImmutable();
       }
     }
@@ -8220,6 +8824,8 @@ public final class AdNetworkPB {
       switch (number) {
         case 9:
           return internalGetInstanceWeight();
+        case 34:
+          return internalGetCustomTags();
         default:
           throw new RuntimeException(
               "Invalid map field number: " + number);
@@ -8716,6 +9322,329 @@ public final class AdNetworkPB {
       return ageMax_;
     }
 
+    public static final int NAME_FIELD_NUMBER = 26;
+    private volatile java.lang.Object name_;
+    /**
+     * <pre>
+     * 2021-03-04
+     * </pre>
+     *
+     * <code>optional string name = 26;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        name_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * 2021-03-04
+     * </pre>
+     *
+     * <code>optional string name = 26;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int OSV_WHITE_FIELD_NUMBER = 27;
+    private com.google.protobuf.LazyStringList osvWhite_;
+    /**
+     * <code>repeated string osv_white = 27;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getOsvWhiteList() {
+      return osvWhite_;
+    }
+    /**
+     * <code>repeated string osv_white = 27;</code>
+     */
+    public int getOsvWhiteCount() {
+      return osvWhite_.size();
+    }
+    /**
+     * <code>repeated string osv_white = 27;</code>
+     */
+    public java.lang.String getOsvWhite(int index) {
+      return osvWhite_.get(index);
+    }
+    /**
+     * <code>repeated string osv_white = 27;</code>
+     */
+    public com.google.protobuf.ByteString
+        getOsvWhiteBytes(int index) {
+      return osvWhite_.getByteString(index);
+    }
+
+    public static final int OSV_RANGE_FIELD_NUMBER = 28;
+    private java.util.List<com.adtiming.om.pb.CommonPB.Range> osvRange_;
+    /**
+     * <code>repeated .Range osv_range = 28;</code>
+     */
+    public java.util.List<com.adtiming.om.pb.CommonPB.Range> getOsvRangeList() {
+      return osvRange_;
+    }
+    /**
+     * <code>repeated .Range osv_range = 28;</code>
+     */
+    public java.util.List<? extends com.adtiming.om.pb.CommonPB.RangeOrBuilder> 
+        getOsvRangeOrBuilderList() {
+      return osvRange_;
+    }
+    /**
+     * <code>repeated .Range osv_range = 28;</code>
+     */
+    public int getOsvRangeCount() {
+      return osvRange_.size();
+    }
+    /**
+     * <code>repeated .Range osv_range = 28;</code>
+     */
+    public com.adtiming.om.pb.CommonPB.Range getOsvRange(int index) {
+      return osvRange_.get(index);
+    }
+    /**
+     * <code>repeated .Range osv_range = 28;</code>
+     */
+    public com.adtiming.om.pb.CommonPB.RangeOrBuilder getOsvRangeOrBuilder(
+        int index) {
+      return osvRange_.get(index);
+    }
+
+    public static final int SDKV_WHITE_FIELD_NUMBER = 29;
+    private com.google.protobuf.LazyStringList sdkvWhite_;
+    /**
+     * <code>repeated string sdkv_white = 29;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getSdkvWhiteList() {
+      return sdkvWhite_;
+    }
+    /**
+     * <code>repeated string sdkv_white = 29;</code>
+     */
+    public int getSdkvWhiteCount() {
+      return sdkvWhite_.size();
+    }
+    /**
+     * <code>repeated string sdkv_white = 29;</code>
+     */
+    public java.lang.String getSdkvWhite(int index) {
+      return sdkvWhite_.get(index);
+    }
+    /**
+     * <code>repeated string sdkv_white = 29;</code>
+     */
+    public com.google.protobuf.ByteString
+        getSdkvWhiteBytes(int index) {
+      return sdkvWhite_.getByteString(index);
+    }
+
+    public static final int SDKV_RANGE_FIELD_NUMBER = 30;
+    private java.util.List<com.adtiming.om.pb.CommonPB.Range> sdkvRange_;
+    /**
+     * <code>repeated .Range sdkv_range = 30;</code>
+     */
+    public java.util.List<com.adtiming.om.pb.CommonPB.Range> getSdkvRangeList() {
+      return sdkvRange_;
+    }
+    /**
+     * <code>repeated .Range sdkv_range = 30;</code>
+     */
+    public java.util.List<? extends com.adtiming.om.pb.CommonPB.RangeOrBuilder> 
+        getSdkvRangeOrBuilderList() {
+      return sdkvRange_;
+    }
+    /**
+     * <code>repeated .Range sdkv_range = 30;</code>
+     */
+    public int getSdkvRangeCount() {
+      return sdkvRange_.size();
+    }
+    /**
+     * <code>repeated .Range sdkv_range = 30;</code>
+     */
+    public com.adtiming.om.pb.CommonPB.Range getSdkvRange(int index) {
+      return sdkvRange_.get(index);
+    }
+    /**
+     * <code>repeated .Range sdkv_range = 30;</code>
+     */
+    public com.adtiming.om.pb.CommonPB.RangeOrBuilder getSdkvRangeOrBuilder(
+        int index) {
+      return sdkvRange_.get(index);
+    }
+
+    public static final int APPV_WHITE_FIELD_NUMBER = 31;
+    private com.google.protobuf.LazyStringList appvWhite_;
+    /**
+     * <code>repeated string appv_white = 31;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getAppvWhiteList() {
+      return appvWhite_;
+    }
+    /**
+     * <code>repeated string appv_white = 31;</code>
+     */
+    public int getAppvWhiteCount() {
+      return appvWhite_.size();
+    }
+    /**
+     * <code>repeated string appv_white = 31;</code>
+     */
+    public java.lang.String getAppvWhite(int index) {
+      return appvWhite_.get(index);
+    }
+    /**
+     * <code>repeated string appv_white = 31;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAppvWhiteBytes(int index) {
+      return appvWhite_.getByteString(index);
+    }
+
+    public static final int APPV_RANGE_FIELD_NUMBER = 32;
+    private java.util.List<com.adtiming.om.pb.CommonPB.Range> appvRange_;
+    /**
+     * <code>repeated .Range appv_range = 32;</code>
+     */
+    public java.util.List<com.adtiming.om.pb.CommonPB.Range> getAppvRangeList() {
+      return appvRange_;
+    }
+    /**
+     * <code>repeated .Range appv_range = 32;</code>
+     */
+    public java.util.List<? extends com.adtiming.om.pb.CommonPB.RangeOrBuilder> 
+        getAppvRangeOrBuilderList() {
+      return appvRange_;
+    }
+    /**
+     * <code>repeated .Range appv_range = 32;</code>
+     */
+    public int getAppvRangeCount() {
+      return appvRange_.size();
+    }
+    /**
+     * <code>repeated .Range appv_range = 32;</code>
+     */
+    public com.adtiming.om.pb.CommonPB.Range getAppvRange(int index) {
+      return appvRange_.get(index);
+    }
+    /**
+     * <code>repeated .Range appv_range = 32;</code>
+     */
+    public com.adtiming.om.pb.CommonPB.RangeOrBuilder getAppvRangeOrBuilder(
+        int index) {
+      return appvRange_.get(index);
+    }
+
+    public static final int REQUIRE_DID_FIELD_NUMBER = 33;
+    private int requireDid_;
+    /**
+     * <pre>
+     *需要非空deviceId, 0:No,1:Yes
+     * </pre>
+     *
+     * <code>optional int32 require_did = 33;</code>
+     */
+    public int getRequireDid() {
+      return requireDid_;
+    }
+
+    public static final int CUSTOM_TAGS_FIELD_NUMBER = 34;
+    private static final class CustomTagsDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag>newDefaultInstance(
+                  com.adtiming.om.pb.AdNetworkPB.internal_static_InstanceRule_CustomTagsEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.STRING,
+                  "",
+                  com.google.protobuf.WireFormat.FieldType.MESSAGE,
+                  com.adtiming.om.pb.AdNetworkPB.CustomTag.getDefaultInstance());
+    }
+    private com.google.protobuf.MapField<
+        java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag> customTags_;
+    private com.google.protobuf.MapField<java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag>
+    internalGetCustomTags() {
+      if (customTags_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            CustomTagsDefaultEntryHolder.defaultEntry);
+      }
+      return customTags_;
+    }
+
+    public int getCustomTagsCount() {
+      return internalGetCustomTags().getMap().size();
+    }
+    /**
+     * <code>map&lt;string, .CustomTag&gt; custom_tags = 34;</code>
+     */
+
+    public boolean containsCustomTags(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      return internalGetCustomTags().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getCustomTagsMap()} instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag> getCustomTags() {
+      return getCustomTagsMap();
+    }
+    /**
+     * <code>map&lt;string, .CustomTag&gt; custom_tags = 34;</code>
+     */
+
+    public java.util.Map<java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag> getCustomTagsMap() {
+      return internalGetCustomTags().getMap();
+    }
+    /**
+     * <code>map&lt;string, .CustomTag&gt; custom_tags = 34;</code>
+     */
+
+    public com.adtiming.om.pb.AdNetworkPB.CustomTag getCustomTagsOrDefault(
+        java.lang.String key,
+        com.adtiming.om.pb.AdNetworkPB.CustomTag defaultValue) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag> map =
+          internalGetCustomTags().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <code>map&lt;string, .CustomTag&gt; custom_tags = 34;</code>
+     */
+
+    public com.adtiming.om.pb.AdNetworkPB.CustomTag getCustomTagsOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag> map =
+          internalGetCustomTags().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -8808,6 +9737,39 @@ public final class AdNetworkPB {
       }
       if (ageMax_ != 0) {
         output.writeInt32(25, ageMax_);
+      }
+      if (!getNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 26, name_);
+      }
+      for (int i = 0; i < osvWhite_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 27, osvWhite_.getRaw(i));
+      }
+      for (int i = 0; i < osvRange_.size(); i++) {
+        output.writeMessage(28, osvRange_.get(i));
+      }
+      for (int i = 0; i < sdkvWhite_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 29, sdkvWhite_.getRaw(i));
+      }
+      for (int i = 0; i < sdkvRange_.size(); i++) {
+        output.writeMessage(30, sdkvRange_.get(i));
+      }
+      for (int i = 0; i < appvWhite_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 31, appvWhite_.getRaw(i));
+      }
+      for (int i = 0; i < appvRange_.size(); i++) {
+        output.writeMessage(32, appvRange_.get(i));
+      }
+      if (requireDid_ != 0) {
+        output.writeInt32(33, requireDid_);
+      }
+      for (java.util.Map.Entry<java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag> entry
+           : internalGetCustomTags().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag>
+        customTags = CustomTagsDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        output.writeMessage(34, customTags);
       }
     }
 
@@ -8950,6 +9912,59 @@ public final class AdNetworkPB {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(25, ageMax_);
       }
+      if (!getNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(26, name_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < osvWhite_.size(); i++) {
+          dataSize += computeStringSizeNoTag(osvWhite_.getRaw(i));
+        }
+        size += dataSize;
+        size += 2 * getOsvWhiteList().size();
+      }
+      for (int i = 0; i < osvRange_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(28, osvRange_.get(i));
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < sdkvWhite_.size(); i++) {
+          dataSize += computeStringSizeNoTag(sdkvWhite_.getRaw(i));
+        }
+        size += dataSize;
+        size += 2 * getSdkvWhiteList().size();
+      }
+      for (int i = 0; i < sdkvRange_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(30, sdkvRange_.get(i));
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < appvWhite_.size(); i++) {
+          dataSize += computeStringSizeNoTag(appvWhite_.getRaw(i));
+        }
+        size += dataSize;
+        size += 2 * getAppvWhiteList().size();
+      }
+      for (int i = 0; i < appvRange_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(32, appvRange_.get(i));
+      }
+      if (requireDid_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(33, requireDid_);
+      }
+      for (java.util.Map.Entry<java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag> entry
+           : internalGetCustomTags().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag>
+        customTags = CustomTagsDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(34, customTags);
+      }
       memoizedSize = size;
       return size;
     }
@@ -9019,6 +10034,24 @@ public final class AdNetworkPB {
           == other.getAgeMin());
       result = result && (getAgeMax()
           == other.getAgeMax());
+      result = result && getName()
+          .equals(other.getName());
+      result = result && getOsvWhiteList()
+          .equals(other.getOsvWhiteList());
+      result = result && getOsvRangeList()
+          .equals(other.getOsvRangeList());
+      result = result && getSdkvWhiteList()
+          .equals(other.getSdkvWhiteList());
+      result = result && getSdkvRangeList()
+          .equals(other.getSdkvRangeList());
+      result = result && getAppvWhiteList()
+          .equals(other.getAppvWhiteList());
+      result = result && getAppvRangeList()
+          .equals(other.getAppvRangeList());
+      result = result && (getRequireDid()
+          == other.getRequireDid());
+      result = result && internalGetCustomTags().equals(
+          other.internalGetCustomTags());
       return result;
     }
 
@@ -9098,6 +10131,38 @@ public final class AdNetworkPB {
       hash = (53 * hash) + getAgeMin();
       hash = (37 * hash) + AGE_MAX_FIELD_NUMBER;
       hash = (53 * hash) + getAgeMax();
+      hash = (37 * hash) + NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getName().hashCode();
+      if (getOsvWhiteCount() > 0) {
+        hash = (37 * hash) + OSV_WHITE_FIELD_NUMBER;
+        hash = (53 * hash) + getOsvWhiteList().hashCode();
+      }
+      if (getOsvRangeCount() > 0) {
+        hash = (37 * hash) + OSV_RANGE_FIELD_NUMBER;
+        hash = (53 * hash) + getOsvRangeList().hashCode();
+      }
+      if (getSdkvWhiteCount() > 0) {
+        hash = (37 * hash) + SDKV_WHITE_FIELD_NUMBER;
+        hash = (53 * hash) + getSdkvWhiteList().hashCode();
+      }
+      if (getSdkvRangeCount() > 0) {
+        hash = (37 * hash) + SDKV_RANGE_FIELD_NUMBER;
+        hash = (53 * hash) + getSdkvRangeList().hashCode();
+      }
+      if (getAppvWhiteCount() > 0) {
+        hash = (37 * hash) + APPV_WHITE_FIELD_NUMBER;
+        hash = (53 * hash) + getAppvWhiteList().hashCode();
+      }
+      if (getAppvRangeCount() > 0) {
+        hash = (37 * hash) + APPV_RANGE_FIELD_NUMBER;
+        hash = (53 * hash) + getAppvRangeList().hashCode();
+      }
+      hash = (37 * hash) + REQUIRE_DID_FIELD_NUMBER;
+      hash = (53 * hash) + getRequireDid();
+      if (!internalGetCustomTags().getMap().isEmpty()) {
+        hash = (37 * hash) + CUSTOM_TAGS_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetCustomTags().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -9198,6 +10263,8 @@ public final class AdNetworkPB {
         switch (number) {
           case 9:
             return internalGetInstanceWeight();
+          case 34:
+            return internalGetCustomTags();
           default:
             throw new RuntimeException(
                 "Invalid map field number: " + number);
@@ -9209,6 +10276,8 @@ public final class AdNetworkPB {
         switch (number) {
           case 9:
             return internalGetMutableInstanceWeight();
+          case 34:
+            return internalGetMutableCustomTags();
           default:
             throw new RuntimeException(
                 "Invalid map field number: " + number);
@@ -9234,6 +10303,9 @@ public final class AdNetworkPB {
       private void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
+          getOsvRangeFieldBuilder();
+          getSdkvRangeFieldBuilder();
+          getAppvRangeFieldBuilder();
         }
       }
       public Builder clear() {
@@ -9287,6 +10359,35 @@ public final class AdNetworkPB {
 
         ageMax_ = 0;
 
+        name_ = "";
+
+        osvWhite_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x04000000);
+        if (osvRangeBuilder_ == null) {
+          osvRange_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x08000000);
+        } else {
+          osvRangeBuilder_.clear();
+        }
+        sdkvWhite_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x10000000);
+        if (sdkvRangeBuilder_ == null) {
+          sdkvRange_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x20000000);
+        } else {
+          sdkvRangeBuilder_.clear();
+        }
+        appvWhite_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x40000000);
+        if (appvRangeBuilder_ == null) {
+          appvRange_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x80000000);
+        } else {
+          appvRangeBuilder_.clear();
+        }
+        requireDid_ = 0;
+
+        internalGetMutableCustomTags().clear();
         return this;
       }
 
@@ -9310,6 +10411,7 @@ public final class AdNetworkPB {
       public com.adtiming.om.pb.AdNetworkPB.InstanceRule buildPartial() {
         com.adtiming.om.pb.AdNetworkPB.InstanceRule result = new com.adtiming.om.pb.AdNetworkPB.InstanceRule(this);
         int from_bitField0_ = bitField0_;
+        int from_bitField1_ = bitField1_;
         int to_bitField0_ = 0;
         result.id_ = id_;
         result.publisherId_ = publisherId_;
@@ -9365,6 +10467,52 @@ public final class AdNetworkPB {
         result.interest_ = interest_;
         result.ageMin_ = ageMin_;
         result.ageMax_ = ageMax_;
+        result.name_ = name_;
+        if (((bitField0_ & 0x04000000) == 0x04000000)) {
+          osvWhite_ = osvWhite_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x04000000);
+        }
+        result.osvWhite_ = osvWhite_;
+        if (osvRangeBuilder_ == null) {
+          if (((bitField0_ & 0x08000000) == 0x08000000)) {
+            osvRange_ = java.util.Collections.unmodifiableList(osvRange_);
+            bitField0_ = (bitField0_ & ~0x08000000);
+          }
+          result.osvRange_ = osvRange_;
+        } else {
+          result.osvRange_ = osvRangeBuilder_.build();
+        }
+        if (((bitField0_ & 0x10000000) == 0x10000000)) {
+          sdkvWhite_ = sdkvWhite_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x10000000);
+        }
+        result.sdkvWhite_ = sdkvWhite_;
+        if (sdkvRangeBuilder_ == null) {
+          if (((bitField0_ & 0x20000000) == 0x20000000)) {
+            sdkvRange_ = java.util.Collections.unmodifiableList(sdkvRange_);
+            bitField0_ = (bitField0_ & ~0x20000000);
+          }
+          result.sdkvRange_ = sdkvRange_;
+        } else {
+          result.sdkvRange_ = sdkvRangeBuilder_.build();
+        }
+        if (((bitField0_ & 0x40000000) == 0x40000000)) {
+          appvWhite_ = appvWhite_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x40000000);
+        }
+        result.appvWhite_ = appvWhite_;
+        if (appvRangeBuilder_ == null) {
+          if (((bitField0_ & 0x80000000) == 0x80000000)) {
+            appvRange_ = java.util.Collections.unmodifiableList(appvRange_);
+            bitField0_ = (bitField0_ & ~0x80000000);
+          }
+          result.appvRange_ = appvRange_;
+        } else {
+          result.appvRange_ = appvRangeBuilder_.build();
+        }
+        result.requireDid_ = requireDid_;
+        result.customTags_ = internalGetCustomTags();
+        result.customTags_.makeImmutable();
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -9530,6 +10678,123 @@ public final class AdNetworkPB {
         if (other.getAgeMax() != 0) {
           setAgeMax(other.getAgeMax());
         }
+        if (!other.getName().isEmpty()) {
+          name_ = other.name_;
+          onChanged();
+        }
+        if (!other.osvWhite_.isEmpty()) {
+          if (osvWhite_.isEmpty()) {
+            osvWhite_ = other.osvWhite_;
+            bitField0_ = (bitField0_ & ~0x04000000);
+          } else {
+            ensureOsvWhiteIsMutable();
+            osvWhite_.addAll(other.osvWhite_);
+          }
+          onChanged();
+        }
+        if (osvRangeBuilder_ == null) {
+          if (!other.osvRange_.isEmpty()) {
+            if (osvRange_.isEmpty()) {
+              osvRange_ = other.osvRange_;
+              bitField0_ = (bitField0_ & ~0x08000000);
+            } else {
+              ensureOsvRangeIsMutable();
+              osvRange_.addAll(other.osvRange_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.osvRange_.isEmpty()) {
+            if (osvRangeBuilder_.isEmpty()) {
+              osvRangeBuilder_.dispose();
+              osvRangeBuilder_ = null;
+              osvRange_ = other.osvRange_;
+              bitField0_ = (bitField0_ & ~0x08000000);
+              osvRangeBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getOsvRangeFieldBuilder() : null;
+            } else {
+              osvRangeBuilder_.addAllMessages(other.osvRange_);
+            }
+          }
+        }
+        if (!other.sdkvWhite_.isEmpty()) {
+          if (sdkvWhite_.isEmpty()) {
+            sdkvWhite_ = other.sdkvWhite_;
+            bitField0_ = (bitField0_ & ~0x10000000);
+          } else {
+            ensureSdkvWhiteIsMutable();
+            sdkvWhite_.addAll(other.sdkvWhite_);
+          }
+          onChanged();
+        }
+        if (sdkvRangeBuilder_ == null) {
+          if (!other.sdkvRange_.isEmpty()) {
+            if (sdkvRange_.isEmpty()) {
+              sdkvRange_ = other.sdkvRange_;
+              bitField0_ = (bitField0_ & ~0x20000000);
+            } else {
+              ensureSdkvRangeIsMutable();
+              sdkvRange_.addAll(other.sdkvRange_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.sdkvRange_.isEmpty()) {
+            if (sdkvRangeBuilder_.isEmpty()) {
+              sdkvRangeBuilder_.dispose();
+              sdkvRangeBuilder_ = null;
+              sdkvRange_ = other.sdkvRange_;
+              bitField0_ = (bitField0_ & ~0x20000000);
+              sdkvRangeBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getSdkvRangeFieldBuilder() : null;
+            } else {
+              sdkvRangeBuilder_.addAllMessages(other.sdkvRange_);
+            }
+          }
+        }
+        if (!other.appvWhite_.isEmpty()) {
+          if (appvWhite_.isEmpty()) {
+            appvWhite_ = other.appvWhite_;
+            bitField0_ = (bitField0_ & ~0x40000000);
+          } else {
+            ensureAppvWhiteIsMutable();
+            appvWhite_.addAll(other.appvWhite_);
+          }
+          onChanged();
+        }
+        if (appvRangeBuilder_ == null) {
+          if (!other.appvRange_.isEmpty()) {
+            if (appvRange_.isEmpty()) {
+              appvRange_ = other.appvRange_;
+              bitField0_ = (bitField0_ & ~0x80000000);
+            } else {
+              ensureAppvRangeIsMutable();
+              appvRange_.addAll(other.appvRange_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.appvRange_.isEmpty()) {
+            if (appvRangeBuilder_.isEmpty()) {
+              appvRangeBuilder_.dispose();
+              appvRangeBuilder_ = null;
+              appvRange_ = other.appvRange_;
+              bitField0_ = (bitField0_ & ~0x80000000);
+              appvRangeBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getAppvRangeFieldBuilder() : null;
+            } else {
+              appvRangeBuilder_.addAllMessages(other.appvRange_);
+            }
+          }
+        }
+        if (other.getRequireDid() != 0) {
+          setRequireDid(other.getRequireDid());
+        }
+        internalGetMutableCustomTags().mergeFrom(
+            other.internalGetCustomTags());
         onChanged();
         return this;
       }
@@ -9556,6 +10821,7 @@ public final class AdNetworkPB {
         return this;
       }
       private int bitField0_;
+      private int bitField1_;
 
       private int id_ ;
       /**
@@ -10913,6 +12179,1254 @@ public final class AdNetworkPB {
         onChanged();
         return this;
       }
+
+      private java.lang.Object name_ = "";
+      /**
+       * <pre>
+       * 2021-03-04
+       * </pre>
+       *
+       * <code>optional string name = 26;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * 2021-03-04
+       * </pre>
+       *
+       * <code>optional string name = 26;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * 2021-03-04
+       * </pre>
+       *
+       * <code>optional string name = 26;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 2021-03-04
+       * </pre>
+       *
+       * <code>optional string name = 26;</code>
+       */
+      public Builder clearName() {
+        
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 2021-03-04
+       * </pre>
+       *
+       * <code>optional string name = 26;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        name_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList osvWhite_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureOsvWhiteIsMutable() {
+        if (!((bitField0_ & 0x04000000) == 0x04000000)) {
+          osvWhite_ = new com.google.protobuf.LazyStringArrayList(osvWhite_);
+          bitField0_ |= 0x04000000;
+         }
+      }
+      /**
+       * <code>repeated string osv_white = 27;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getOsvWhiteList() {
+        return osvWhite_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string osv_white = 27;</code>
+       */
+      public int getOsvWhiteCount() {
+        return osvWhite_.size();
+      }
+      /**
+       * <code>repeated string osv_white = 27;</code>
+       */
+      public java.lang.String getOsvWhite(int index) {
+        return osvWhite_.get(index);
+      }
+      /**
+       * <code>repeated string osv_white = 27;</code>
+       */
+      public com.google.protobuf.ByteString
+          getOsvWhiteBytes(int index) {
+        return osvWhite_.getByteString(index);
+      }
+      /**
+       * <code>repeated string osv_white = 27;</code>
+       */
+      public Builder setOsvWhite(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureOsvWhiteIsMutable();
+        osvWhite_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string osv_white = 27;</code>
+       */
+      public Builder addOsvWhite(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureOsvWhiteIsMutable();
+        osvWhite_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string osv_white = 27;</code>
+       */
+      public Builder addAllOsvWhite(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureOsvWhiteIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, osvWhite_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string osv_white = 27;</code>
+       */
+      public Builder clearOsvWhite() {
+        osvWhite_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x04000000);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string osv_white = 27;</code>
+       */
+      public Builder addOsvWhiteBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureOsvWhiteIsMutable();
+        osvWhite_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.adtiming.om.pb.CommonPB.Range> osvRange_ =
+        java.util.Collections.emptyList();
+      private void ensureOsvRangeIsMutable() {
+        if (!((bitField0_ & 0x08000000) == 0x08000000)) {
+          osvRange_ = new java.util.ArrayList<com.adtiming.om.pb.CommonPB.Range>(osvRange_);
+          bitField0_ |= 0x08000000;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.adtiming.om.pb.CommonPB.Range, com.adtiming.om.pb.CommonPB.Range.Builder, com.adtiming.om.pb.CommonPB.RangeOrBuilder> osvRangeBuilder_;
+
+      /**
+       * <code>repeated .Range osv_range = 28;</code>
+       */
+      public java.util.List<com.adtiming.om.pb.CommonPB.Range> getOsvRangeList() {
+        if (osvRangeBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(osvRange_);
+        } else {
+          return osvRangeBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .Range osv_range = 28;</code>
+       */
+      public int getOsvRangeCount() {
+        if (osvRangeBuilder_ == null) {
+          return osvRange_.size();
+        } else {
+          return osvRangeBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .Range osv_range = 28;</code>
+       */
+      public com.adtiming.om.pb.CommonPB.Range getOsvRange(int index) {
+        if (osvRangeBuilder_ == null) {
+          return osvRange_.get(index);
+        } else {
+          return osvRangeBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .Range osv_range = 28;</code>
+       */
+      public Builder setOsvRange(
+          int index, com.adtiming.om.pb.CommonPB.Range value) {
+        if (osvRangeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureOsvRangeIsMutable();
+          osvRange_.set(index, value);
+          onChanged();
+        } else {
+          osvRangeBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range osv_range = 28;</code>
+       */
+      public Builder setOsvRange(
+          int index, com.adtiming.om.pb.CommonPB.Range.Builder builderForValue) {
+        if (osvRangeBuilder_ == null) {
+          ensureOsvRangeIsMutable();
+          osvRange_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          osvRangeBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range osv_range = 28;</code>
+       */
+      public Builder addOsvRange(com.adtiming.om.pb.CommonPB.Range value) {
+        if (osvRangeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureOsvRangeIsMutable();
+          osvRange_.add(value);
+          onChanged();
+        } else {
+          osvRangeBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range osv_range = 28;</code>
+       */
+      public Builder addOsvRange(
+          int index, com.adtiming.om.pb.CommonPB.Range value) {
+        if (osvRangeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureOsvRangeIsMutable();
+          osvRange_.add(index, value);
+          onChanged();
+        } else {
+          osvRangeBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range osv_range = 28;</code>
+       */
+      public Builder addOsvRange(
+          com.adtiming.om.pb.CommonPB.Range.Builder builderForValue) {
+        if (osvRangeBuilder_ == null) {
+          ensureOsvRangeIsMutable();
+          osvRange_.add(builderForValue.build());
+          onChanged();
+        } else {
+          osvRangeBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range osv_range = 28;</code>
+       */
+      public Builder addOsvRange(
+          int index, com.adtiming.om.pb.CommonPB.Range.Builder builderForValue) {
+        if (osvRangeBuilder_ == null) {
+          ensureOsvRangeIsMutable();
+          osvRange_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          osvRangeBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range osv_range = 28;</code>
+       */
+      public Builder addAllOsvRange(
+          java.lang.Iterable<? extends com.adtiming.om.pb.CommonPB.Range> values) {
+        if (osvRangeBuilder_ == null) {
+          ensureOsvRangeIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, osvRange_);
+          onChanged();
+        } else {
+          osvRangeBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range osv_range = 28;</code>
+       */
+      public Builder clearOsvRange() {
+        if (osvRangeBuilder_ == null) {
+          osvRange_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x08000000);
+          onChanged();
+        } else {
+          osvRangeBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range osv_range = 28;</code>
+       */
+      public Builder removeOsvRange(int index) {
+        if (osvRangeBuilder_ == null) {
+          ensureOsvRangeIsMutable();
+          osvRange_.remove(index);
+          onChanged();
+        } else {
+          osvRangeBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range osv_range = 28;</code>
+       */
+      public com.adtiming.om.pb.CommonPB.Range.Builder getOsvRangeBuilder(
+          int index) {
+        return getOsvRangeFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .Range osv_range = 28;</code>
+       */
+      public com.adtiming.om.pb.CommonPB.RangeOrBuilder getOsvRangeOrBuilder(
+          int index) {
+        if (osvRangeBuilder_ == null) {
+          return osvRange_.get(index);  } else {
+          return osvRangeBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .Range osv_range = 28;</code>
+       */
+      public java.util.List<? extends com.adtiming.om.pb.CommonPB.RangeOrBuilder> 
+           getOsvRangeOrBuilderList() {
+        if (osvRangeBuilder_ != null) {
+          return osvRangeBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(osvRange_);
+        }
+      }
+      /**
+       * <code>repeated .Range osv_range = 28;</code>
+       */
+      public com.adtiming.om.pb.CommonPB.Range.Builder addOsvRangeBuilder() {
+        return getOsvRangeFieldBuilder().addBuilder(
+            com.adtiming.om.pb.CommonPB.Range.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Range osv_range = 28;</code>
+       */
+      public com.adtiming.om.pb.CommonPB.Range.Builder addOsvRangeBuilder(
+          int index) {
+        return getOsvRangeFieldBuilder().addBuilder(
+            index, com.adtiming.om.pb.CommonPB.Range.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Range osv_range = 28;</code>
+       */
+      public java.util.List<com.adtiming.om.pb.CommonPB.Range.Builder> 
+           getOsvRangeBuilderList() {
+        return getOsvRangeFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.adtiming.om.pb.CommonPB.Range, com.adtiming.om.pb.CommonPB.Range.Builder, com.adtiming.om.pb.CommonPB.RangeOrBuilder> 
+          getOsvRangeFieldBuilder() {
+        if (osvRangeBuilder_ == null) {
+          osvRangeBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.adtiming.om.pb.CommonPB.Range, com.adtiming.om.pb.CommonPB.Range.Builder, com.adtiming.om.pb.CommonPB.RangeOrBuilder>(
+                  osvRange_,
+                  ((bitField0_ & 0x08000000) == 0x08000000),
+                  getParentForChildren(),
+                  isClean());
+          osvRange_ = null;
+        }
+        return osvRangeBuilder_;
+      }
+
+      private com.google.protobuf.LazyStringList sdkvWhite_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureSdkvWhiteIsMutable() {
+        if (!((bitField0_ & 0x10000000) == 0x10000000)) {
+          sdkvWhite_ = new com.google.protobuf.LazyStringArrayList(sdkvWhite_);
+          bitField0_ |= 0x10000000;
+         }
+      }
+      /**
+       * <code>repeated string sdkv_white = 29;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getSdkvWhiteList() {
+        return sdkvWhite_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string sdkv_white = 29;</code>
+       */
+      public int getSdkvWhiteCount() {
+        return sdkvWhite_.size();
+      }
+      /**
+       * <code>repeated string sdkv_white = 29;</code>
+       */
+      public java.lang.String getSdkvWhite(int index) {
+        return sdkvWhite_.get(index);
+      }
+      /**
+       * <code>repeated string sdkv_white = 29;</code>
+       */
+      public com.google.protobuf.ByteString
+          getSdkvWhiteBytes(int index) {
+        return sdkvWhite_.getByteString(index);
+      }
+      /**
+       * <code>repeated string sdkv_white = 29;</code>
+       */
+      public Builder setSdkvWhite(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureSdkvWhiteIsMutable();
+        sdkvWhite_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string sdkv_white = 29;</code>
+       */
+      public Builder addSdkvWhite(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureSdkvWhiteIsMutable();
+        sdkvWhite_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string sdkv_white = 29;</code>
+       */
+      public Builder addAllSdkvWhite(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureSdkvWhiteIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, sdkvWhite_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string sdkv_white = 29;</code>
+       */
+      public Builder clearSdkvWhite() {
+        sdkvWhite_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x10000000);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string sdkv_white = 29;</code>
+       */
+      public Builder addSdkvWhiteBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureSdkvWhiteIsMutable();
+        sdkvWhite_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.adtiming.om.pb.CommonPB.Range> sdkvRange_ =
+        java.util.Collections.emptyList();
+      private void ensureSdkvRangeIsMutable() {
+        if (!((bitField0_ & 0x20000000) == 0x20000000)) {
+          sdkvRange_ = new java.util.ArrayList<com.adtiming.om.pb.CommonPB.Range>(sdkvRange_);
+          bitField0_ |= 0x20000000;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.adtiming.om.pb.CommonPB.Range, com.adtiming.om.pb.CommonPB.Range.Builder, com.adtiming.om.pb.CommonPB.RangeOrBuilder> sdkvRangeBuilder_;
+
+      /**
+       * <code>repeated .Range sdkv_range = 30;</code>
+       */
+      public java.util.List<com.adtiming.om.pb.CommonPB.Range> getSdkvRangeList() {
+        if (sdkvRangeBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(sdkvRange_);
+        } else {
+          return sdkvRangeBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .Range sdkv_range = 30;</code>
+       */
+      public int getSdkvRangeCount() {
+        if (sdkvRangeBuilder_ == null) {
+          return sdkvRange_.size();
+        } else {
+          return sdkvRangeBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .Range sdkv_range = 30;</code>
+       */
+      public com.adtiming.om.pb.CommonPB.Range getSdkvRange(int index) {
+        if (sdkvRangeBuilder_ == null) {
+          return sdkvRange_.get(index);
+        } else {
+          return sdkvRangeBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .Range sdkv_range = 30;</code>
+       */
+      public Builder setSdkvRange(
+          int index, com.adtiming.om.pb.CommonPB.Range value) {
+        if (sdkvRangeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureSdkvRangeIsMutable();
+          sdkvRange_.set(index, value);
+          onChanged();
+        } else {
+          sdkvRangeBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range sdkv_range = 30;</code>
+       */
+      public Builder setSdkvRange(
+          int index, com.adtiming.om.pb.CommonPB.Range.Builder builderForValue) {
+        if (sdkvRangeBuilder_ == null) {
+          ensureSdkvRangeIsMutable();
+          sdkvRange_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          sdkvRangeBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range sdkv_range = 30;</code>
+       */
+      public Builder addSdkvRange(com.adtiming.om.pb.CommonPB.Range value) {
+        if (sdkvRangeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureSdkvRangeIsMutable();
+          sdkvRange_.add(value);
+          onChanged();
+        } else {
+          sdkvRangeBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range sdkv_range = 30;</code>
+       */
+      public Builder addSdkvRange(
+          int index, com.adtiming.om.pb.CommonPB.Range value) {
+        if (sdkvRangeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureSdkvRangeIsMutable();
+          sdkvRange_.add(index, value);
+          onChanged();
+        } else {
+          sdkvRangeBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range sdkv_range = 30;</code>
+       */
+      public Builder addSdkvRange(
+          com.adtiming.om.pb.CommonPB.Range.Builder builderForValue) {
+        if (sdkvRangeBuilder_ == null) {
+          ensureSdkvRangeIsMutable();
+          sdkvRange_.add(builderForValue.build());
+          onChanged();
+        } else {
+          sdkvRangeBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range sdkv_range = 30;</code>
+       */
+      public Builder addSdkvRange(
+          int index, com.adtiming.om.pb.CommonPB.Range.Builder builderForValue) {
+        if (sdkvRangeBuilder_ == null) {
+          ensureSdkvRangeIsMutable();
+          sdkvRange_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          sdkvRangeBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range sdkv_range = 30;</code>
+       */
+      public Builder addAllSdkvRange(
+          java.lang.Iterable<? extends com.adtiming.om.pb.CommonPB.Range> values) {
+        if (sdkvRangeBuilder_ == null) {
+          ensureSdkvRangeIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, sdkvRange_);
+          onChanged();
+        } else {
+          sdkvRangeBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range sdkv_range = 30;</code>
+       */
+      public Builder clearSdkvRange() {
+        if (sdkvRangeBuilder_ == null) {
+          sdkvRange_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x20000000);
+          onChanged();
+        } else {
+          sdkvRangeBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range sdkv_range = 30;</code>
+       */
+      public Builder removeSdkvRange(int index) {
+        if (sdkvRangeBuilder_ == null) {
+          ensureSdkvRangeIsMutable();
+          sdkvRange_.remove(index);
+          onChanged();
+        } else {
+          sdkvRangeBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range sdkv_range = 30;</code>
+       */
+      public com.adtiming.om.pb.CommonPB.Range.Builder getSdkvRangeBuilder(
+          int index) {
+        return getSdkvRangeFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .Range sdkv_range = 30;</code>
+       */
+      public com.adtiming.om.pb.CommonPB.RangeOrBuilder getSdkvRangeOrBuilder(
+          int index) {
+        if (sdkvRangeBuilder_ == null) {
+          return sdkvRange_.get(index);  } else {
+          return sdkvRangeBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .Range sdkv_range = 30;</code>
+       */
+      public java.util.List<? extends com.adtiming.om.pb.CommonPB.RangeOrBuilder> 
+           getSdkvRangeOrBuilderList() {
+        if (sdkvRangeBuilder_ != null) {
+          return sdkvRangeBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(sdkvRange_);
+        }
+      }
+      /**
+       * <code>repeated .Range sdkv_range = 30;</code>
+       */
+      public com.adtiming.om.pb.CommonPB.Range.Builder addSdkvRangeBuilder() {
+        return getSdkvRangeFieldBuilder().addBuilder(
+            com.adtiming.om.pb.CommonPB.Range.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Range sdkv_range = 30;</code>
+       */
+      public com.adtiming.om.pb.CommonPB.Range.Builder addSdkvRangeBuilder(
+          int index) {
+        return getSdkvRangeFieldBuilder().addBuilder(
+            index, com.adtiming.om.pb.CommonPB.Range.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Range sdkv_range = 30;</code>
+       */
+      public java.util.List<com.adtiming.om.pb.CommonPB.Range.Builder> 
+           getSdkvRangeBuilderList() {
+        return getSdkvRangeFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.adtiming.om.pb.CommonPB.Range, com.adtiming.om.pb.CommonPB.Range.Builder, com.adtiming.om.pb.CommonPB.RangeOrBuilder> 
+          getSdkvRangeFieldBuilder() {
+        if (sdkvRangeBuilder_ == null) {
+          sdkvRangeBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.adtiming.om.pb.CommonPB.Range, com.adtiming.om.pb.CommonPB.Range.Builder, com.adtiming.om.pb.CommonPB.RangeOrBuilder>(
+                  sdkvRange_,
+                  ((bitField0_ & 0x20000000) == 0x20000000),
+                  getParentForChildren(),
+                  isClean());
+          sdkvRange_ = null;
+        }
+        return sdkvRangeBuilder_;
+      }
+
+      private com.google.protobuf.LazyStringList appvWhite_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureAppvWhiteIsMutable() {
+        if (!((bitField0_ & 0x40000000) == 0x40000000)) {
+          appvWhite_ = new com.google.protobuf.LazyStringArrayList(appvWhite_);
+          bitField0_ |= 0x40000000;
+         }
+      }
+      /**
+       * <code>repeated string appv_white = 31;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getAppvWhiteList() {
+        return appvWhite_.getUnmodifiableView();
+      }
+      /**
+       * <code>repeated string appv_white = 31;</code>
+       */
+      public int getAppvWhiteCount() {
+        return appvWhite_.size();
+      }
+      /**
+       * <code>repeated string appv_white = 31;</code>
+       */
+      public java.lang.String getAppvWhite(int index) {
+        return appvWhite_.get(index);
+      }
+      /**
+       * <code>repeated string appv_white = 31;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAppvWhiteBytes(int index) {
+        return appvWhite_.getByteString(index);
+      }
+      /**
+       * <code>repeated string appv_white = 31;</code>
+       */
+      public Builder setAppvWhite(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureAppvWhiteIsMutable();
+        appvWhite_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string appv_white = 31;</code>
+       */
+      public Builder addAppvWhite(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureAppvWhiteIsMutable();
+        appvWhite_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string appv_white = 31;</code>
+       */
+      public Builder addAllAppvWhite(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureAppvWhiteIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, appvWhite_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string appv_white = 31;</code>
+       */
+      public Builder clearAppvWhite() {
+        appvWhite_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x40000000);
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>repeated string appv_white = 31;</code>
+       */
+      public Builder addAppvWhiteBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureAppvWhiteIsMutable();
+        appvWhite_.add(value);
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.adtiming.om.pb.CommonPB.Range> appvRange_ =
+        java.util.Collections.emptyList();
+      private void ensureAppvRangeIsMutable() {
+        if (!((bitField0_ & 0x80000000) == 0x80000000)) {
+          appvRange_ = new java.util.ArrayList<com.adtiming.om.pb.CommonPB.Range>(appvRange_);
+          bitField0_ |= 0x80000000;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.adtiming.om.pb.CommonPB.Range, com.adtiming.om.pb.CommonPB.Range.Builder, com.adtiming.om.pb.CommonPB.RangeOrBuilder> appvRangeBuilder_;
+
+      /**
+       * <code>repeated .Range appv_range = 32;</code>
+       */
+      public java.util.List<com.adtiming.om.pb.CommonPB.Range> getAppvRangeList() {
+        if (appvRangeBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(appvRange_);
+        } else {
+          return appvRangeBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .Range appv_range = 32;</code>
+       */
+      public int getAppvRangeCount() {
+        if (appvRangeBuilder_ == null) {
+          return appvRange_.size();
+        } else {
+          return appvRangeBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .Range appv_range = 32;</code>
+       */
+      public com.adtiming.om.pb.CommonPB.Range getAppvRange(int index) {
+        if (appvRangeBuilder_ == null) {
+          return appvRange_.get(index);
+        } else {
+          return appvRangeBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .Range appv_range = 32;</code>
+       */
+      public Builder setAppvRange(
+          int index, com.adtiming.om.pb.CommonPB.Range value) {
+        if (appvRangeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAppvRangeIsMutable();
+          appvRange_.set(index, value);
+          onChanged();
+        } else {
+          appvRangeBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range appv_range = 32;</code>
+       */
+      public Builder setAppvRange(
+          int index, com.adtiming.om.pb.CommonPB.Range.Builder builderForValue) {
+        if (appvRangeBuilder_ == null) {
+          ensureAppvRangeIsMutable();
+          appvRange_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          appvRangeBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range appv_range = 32;</code>
+       */
+      public Builder addAppvRange(com.adtiming.om.pb.CommonPB.Range value) {
+        if (appvRangeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAppvRangeIsMutable();
+          appvRange_.add(value);
+          onChanged();
+        } else {
+          appvRangeBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range appv_range = 32;</code>
+       */
+      public Builder addAppvRange(
+          int index, com.adtiming.om.pb.CommonPB.Range value) {
+        if (appvRangeBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureAppvRangeIsMutable();
+          appvRange_.add(index, value);
+          onChanged();
+        } else {
+          appvRangeBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range appv_range = 32;</code>
+       */
+      public Builder addAppvRange(
+          com.adtiming.om.pb.CommonPB.Range.Builder builderForValue) {
+        if (appvRangeBuilder_ == null) {
+          ensureAppvRangeIsMutable();
+          appvRange_.add(builderForValue.build());
+          onChanged();
+        } else {
+          appvRangeBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range appv_range = 32;</code>
+       */
+      public Builder addAppvRange(
+          int index, com.adtiming.om.pb.CommonPB.Range.Builder builderForValue) {
+        if (appvRangeBuilder_ == null) {
+          ensureAppvRangeIsMutable();
+          appvRange_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          appvRangeBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range appv_range = 32;</code>
+       */
+      public Builder addAllAppvRange(
+          java.lang.Iterable<? extends com.adtiming.om.pb.CommonPB.Range> values) {
+        if (appvRangeBuilder_ == null) {
+          ensureAppvRangeIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, appvRange_);
+          onChanged();
+        } else {
+          appvRangeBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range appv_range = 32;</code>
+       */
+      public Builder clearAppvRange() {
+        if (appvRangeBuilder_ == null) {
+          appvRange_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x80000000);
+          onChanged();
+        } else {
+          appvRangeBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range appv_range = 32;</code>
+       */
+      public Builder removeAppvRange(int index) {
+        if (appvRangeBuilder_ == null) {
+          ensureAppvRangeIsMutable();
+          appvRange_.remove(index);
+          onChanged();
+        } else {
+          appvRangeBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .Range appv_range = 32;</code>
+       */
+      public com.adtiming.om.pb.CommonPB.Range.Builder getAppvRangeBuilder(
+          int index) {
+        return getAppvRangeFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .Range appv_range = 32;</code>
+       */
+      public com.adtiming.om.pb.CommonPB.RangeOrBuilder getAppvRangeOrBuilder(
+          int index) {
+        if (appvRangeBuilder_ == null) {
+          return appvRange_.get(index);  } else {
+          return appvRangeBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .Range appv_range = 32;</code>
+       */
+      public java.util.List<? extends com.adtiming.om.pb.CommonPB.RangeOrBuilder> 
+           getAppvRangeOrBuilderList() {
+        if (appvRangeBuilder_ != null) {
+          return appvRangeBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(appvRange_);
+        }
+      }
+      /**
+       * <code>repeated .Range appv_range = 32;</code>
+       */
+      public com.adtiming.om.pb.CommonPB.Range.Builder addAppvRangeBuilder() {
+        return getAppvRangeFieldBuilder().addBuilder(
+            com.adtiming.om.pb.CommonPB.Range.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Range appv_range = 32;</code>
+       */
+      public com.adtiming.om.pb.CommonPB.Range.Builder addAppvRangeBuilder(
+          int index) {
+        return getAppvRangeFieldBuilder().addBuilder(
+            index, com.adtiming.om.pb.CommonPB.Range.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .Range appv_range = 32;</code>
+       */
+      public java.util.List<com.adtiming.om.pb.CommonPB.Range.Builder> 
+           getAppvRangeBuilderList() {
+        return getAppvRangeFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.adtiming.om.pb.CommonPB.Range, com.adtiming.om.pb.CommonPB.Range.Builder, com.adtiming.om.pb.CommonPB.RangeOrBuilder> 
+          getAppvRangeFieldBuilder() {
+        if (appvRangeBuilder_ == null) {
+          appvRangeBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.adtiming.om.pb.CommonPB.Range, com.adtiming.om.pb.CommonPB.Range.Builder, com.adtiming.om.pb.CommonPB.RangeOrBuilder>(
+                  appvRange_,
+                  ((bitField0_ & 0x80000000) == 0x80000000),
+                  getParentForChildren(),
+                  isClean());
+          appvRange_ = null;
+        }
+        return appvRangeBuilder_;
+      }
+
+      private int requireDid_ ;
+      /**
+       * <pre>
+       *需要非空deviceId, 0:No,1:Yes
+       * </pre>
+       *
+       * <code>optional int32 require_did = 33;</code>
+       */
+      public int getRequireDid() {
+        return requireDid_;
+      }
+      /**
+       * <pre>
+       *需要非空deviceId, 0:No,1:Yes
+       * </pre>
+       *
+       * <code>optional int32 require_did = 33;</code>
+       */
+      public Builder setRequireDid(int value) {
+        
+        requireDid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *需要非空deviceId, 0:No,1:Yes
+       * </pre>
+       *
+       * <code>optional int32 require_did = 33;</code>
+       */
+      public Builder clearRequireDid() {
+        
+        requireDid_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.MapField<
+          java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag> customTags_;
+      private com.google.protobuf.MapField<java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag>
+      internalGetCustomTags() {
+        if (customTags_ == null) {
+          return com.google.protobuf.MapField.emptyMapField(
+              CustomTagsDefaultEntryHolder.defaultEntry);
+        }
+        return customTags_;
+      }
+      private com.google.protobuf.MapField<java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag>
+      internalGetMutableCustomTags() {
+        onChanged();;
+        if (customTags_ == null) {
+          customTags_ = com.google.protobuf.MapField.newMapField(
+              CustomTagsDefaultEntryHolder.defaultEntry);
+        }
+        if (!customTags_.isMutable()) {
+          customTags_ = customTags_.copy();
+        }
+        return customTags_;
+      }
+
+      public int getCustomTagsCount() {
+        return internalGetCustomTags().getMap().size();
+      }
+      /**
+       * <code>map&lt;string, .CustomTag&gt; custom_tags = 34;</code>
+       */
+
+      public boolean containsCustomTags(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        return internalGetCustomTags().getMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getCustomTagsMap()} instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag> getCustomTags() {
+        return getCustomTagsMap();
+      }
+      /**
+       * <code>map&lt;string, .CustomTag&gt; custom_tags = 34;</code>
+       */
+
+      public java.util.Map<java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag> getCustomTagsMap() {
+        return internalGetCustomTags().getMap();
+      }
+      /**
+       * <code>map&lt;string, .CustomTag&gt; custom_tags = 34;</code>
+       */
+
+      public com.adtiming.om.pb.AdNetworkPB.CustomTag getCustomTagsOrDefault(
+          java.lang.String key,
+          com.adtiming.om.pb.AdNetworkPB.CustomTag defaultValue) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag> map =
+            internalGetCustomTags().getMap();
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+      }
+      /**
+       * <code>map&lt;string, .CustomTag&gt; custom_tags = 34;</code>
+       */
+
+      public com.adtiming.om.pb.AdNetworkPB.CustomTag getCustomTagsOrThrow(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag> map =
+            internalGetCustomTags().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return map.get(key);
+      }
+
+      public Builder clearCustomTags() {
+        getMutableCustomTags().clear();
+        return this;
+      }
+      /**
+       * <code>map&lt;string, .CustomTag&gt; custom_tags = 34;</code>
+       */
+
+      public Builder removeCustomTags(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        getMutableCustomTags().remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag>
+      getMutableCustomTags() {
+        return internalGetMutableCustomTags().getMutableMap();
+      }
+      /**
+       * <code>map&lt;string, .CustomTag&gt; custom_tags = 34;</code>
+       */
+      public Builder putCustomTags(
+          java.lang.String key,
+          com.adtiming.om.pb.AdNetworkPB.CustomTag value) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        if (value == null) { throw new java.lang.NullPointerException(); }
+        getMutableCustomTags().put(key, value);
+        return this;
+      }
+      /**
+       * <code>map&lt;string, .CustomTag&gt; custom_tags = 34;</code>
+       */
+
+      public Builder putAllCustomTags(
+          java.util.Map<java.lang.String, com.adtiming.om.pb.AdNetworkPB.CustomTag> values) {
+        getMutableCustomTags().putAll(values);
+        return this;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
@@ -10957,6 +13471,1902 @@ public final class AdNetworkPB {
     }
 
     public com.adtiming.om.pb.AdNetworkPB.InstanceRule getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface CustomTagOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:CustomTag)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string name = 1;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
+
+    /**
+     * <pre>
+     * 0:string, 1:int, 2:float, 3:version
+     * </pre>
+     *
+     * <code>optional int32 type = 2;</code>
+     */
+    int getType();
+
+    /**
+     * <code>repeated .TagCondition conditions = 3;</code>
+     */
+    java.util.List<com.adtiming.om.pb.AdNetworkPB.TagCondition> 
+        getConditionsList();
+    /**
+     * <code>repeated .TagCondition conditions = 3;</code>
+     */
+    com.adtiming.om.pb.AdNetworkPB.TagCondition getConditions(int index);
+    /**
+     * <code>repeated .TagCondition conditions = 3;</code>
+     */
+    int getConditionsCount();
+    /**
+     * <code>repeated .TagCondition conditions = 3;</code>
+     */
+    java.util.List<? extends com.adtiming.om.pb.AdNetworkPB.TagConditionOrBuilder> 
+        getConditionsOrBuilderList();
+    /**
+     * <code>repeated .TagCondition conditions = 3;</code>
+     */
+    com.adtiming.om.pb.AdNetworkPB.TagConditionOrBuilder getConditionsOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code CustomTag}
+   */
+  public  static final class CustomTag extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:CustomTag)
+      CustomTagOrBuilder {
+    // Use CustomTag.newBuilder() to construct.
+    private CustomTag(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private CustomTag() {
+      name_ = "";
+      type_ = 0;
+      conditions_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private CustomTag(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              name_ = s;
+              break;
+            }
+            case 16: {
+
+              type_ = input.readInt32();
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                conditions_ = new java.util.ArrayList<com.adtiming.om.pb.AdNetworkPB.TagCondition>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              conditions_.add(
+                  input.readMessage(com.adtiming.om.pb.AdNetworkPB.TagCondition.parser(), extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          conditions_ = java.util.Collections.unmodifiableList(conditions_);
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.adtiming.om.pb.AdNetworkPB.internal_static_CustomTag_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.adtiming.om.pb.AdNetworkPB.internal_static_CustomTag_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.adtiming.om.pb.AdNetworkPB.CustomTag.class, com.adtiming.om.pb.AdNetworkPB.CustomTag.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int NAME_FIELD_NUMBER = 1;
+    private volatile java.lang.Object name_;
+    /**
+     * <code>optional string name = 1;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        name_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>optional string name = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TYPE_FIELD_NUMBER = 2;
+    private int type_;
+    /**
+     * <pre>
+     * 0:string, 1:int, 2:float, 3:version
+     * </pre>
+     *
+     * <code>optional int32 type = 2;</code>
+     */
+    public int getType() {
+      return type_;
+    }
+
+    public static final int CONDITIONS_FIELD_NUMBER = 3;
+    private java.util.List<com.adtiming.om.pb.AdNetworkPB.TagCondition> conditions_;
+    /**
+     * <code>repeated .TagCondition conditions = 3;</code>
+     */
+    public java.util.List<com.adtiming.om.pb.AdNetworkPB.TagCondition> getConditionsList() {
+      return conditions_;
+    }
+    /**
+     * <code>repeated .TagCondition conditions = 3;</code>
+     */
+    public java.util.List<? extends com.adtiming.om.pb.AdNetworkPB.TagConditionOrBuilder> 
+        getConditionsOrBuilderList() {
+      return conditions_;
+    }
+    /**
+     * <code>repeated .TagCondition conditions = 3;</code>
+     */
+    public int getConditionsCount() {
+      return conditions_.size();
+    }
+    /**
+     * <code>repeated .TagCondition conditions = 3;</code>
+     */
+    public com.adtiming.om.pb.AdNetworkPB.TagCondition getConditions(int index) {
+      return conditions_.get(index);
+    }
+    /**
+     * <code>repeated .TagCondition conditions = 3;</code>
+     */
+    public com.adtiming.om.pb.AdNetworkPB.TagConditionOrBuilder getConditionsOrBuilder(
+        int index) {
+      return conditions_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, name_);
+      }
+      if (type_ != 0) {
+        output.writeInt32(2, type_);
+      }
+      for (int i = 0; i < conditions_.size(); i++) {
+        output.writeMessage(3, conditions_.get(i));
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, name_);
+      }
+      if (type_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, type_);
+      }
+      for (int i = 0; i < conditions_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, conditions_.get(i));
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.adtiming.om.pb.AdNetworkPB.CustomTag)) {
+        return super.equals(obj);
+      }
+      com.adtiming.om.pb.AdNetworkPB.CustomTag other = (com.adtiming.om.pb.AdNetworkPB.CustomTag) obj;
+
+      boolean result = true;
+      result = result && getName()
+          .equals(other.getName());
+      result = result && (getType()
+          == other.getType());
+      result = result && getConditionsList()
+          .equals(other.getConditionsList());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getName().hashCode();
+      hash = (37 * hash) + TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getType();
+      if (getConditionsCount() > 0) {
+        hash = (37 * hash) + CONDITIONS_FIELD_NUMBER;
+        hash = (53 * hash) + getConditionsList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.adtiming.om.pb.AdNetworkPB.CustomTag parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.CustomTag parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.CustomTag parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.CustomTag parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.CustomTag parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.CustomTag parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.CustomTag parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.CustomTag parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.CustomTag parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.CustomTag parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.adtiming.om.pb.AdNetworkPB.CustomTag prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code CustomTag}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:CustomTag)
+        com.adtiming.om.pb.AdNetworkPB.CustomTagOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.adtiming.om.pb.AdNetworkPB.internal_static_CustomTag_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.adtiming.om.pb.AdNetworkPB.internal_static_CustomTag_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.adtiming.om.pb.AdNetworkPB.CustomTag.class, com.adtiming.om.pb.AdNetworkPB.CustomTag.Builder.class);
+      }
+
+      // Construct using com.adtiming.om.pb.AdNetworkPB.CustomTag.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getConditionsFieldBuilder();
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        name_ = "";
+
+        type_ = 0;
+
+        if (conditionsBuilder_ == null) {
+          conditions_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          conditionsBuilder_.clear();
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.adtiming.om.pb.AdNetworkPB.internal_static_CustomTag_descriptor;
+      }
+
+      public com.adtiming.om.pb.AdNetworkPB.CustomTag getDefaultInstanceForType() {
+        return com.adtiming.om.pb.AdNetworkPB.CustomTag.getDefaultInstance();
+      }
+
+      public com.adtiming.om.pb.AdNetworkPB.CustomTag build() {
+        com.adtiming.om.pb.AdNetworkPB.CustomTag result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.adtiming.om.pb.AdNetworkPB.CustomTag buildPartial() {
+        com.adtiming.om.pb.AdNetworkPB.CustomTag result = new com.adtiming.om.pb.AdNetworkPB.CustomTag(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.name_ = name_;
+        result.type_ = type_;
+        if (conditionsBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            conditions_ = java.util.Collections.unmodifiableList(conditions_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.conditions_ = conditions_;
+        } else {
+          result.conditions_ = conditionsBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.adtiming.om.pb.AdNetworkPB.CustomTag) {
+          return mergeFrom((com.adtiming.om.pb.AdNetworkPB.CustomTag)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.adtiming.om.pb.AdNetworkPB.CustomTag other) {
+        if (other == com.adtiming.om.pb.AdNetworkPB.CustomTag.getDefaultInstance()) return this;
+        if (!other.getName().isEmpty()) {
+          name_ = other.name_;
+          onChanged();
+        }
+        if (other.getType() != 0) {
+          setType(other.getType());
+        }
+        if (conditionsBuilder_ == null) {
+          if (!other.conditions_.isEmpty()) {
+            if (conditions_.isEmpty()) {
+              conditions_ = other.conditions_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureConditionsIsMutable();
+              conditions_.addAll(other.conditions_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.conditions_.isEmpty()) {
+            if (conditionsBuilder_.isEmpty()) {
+              conditionsBuilder_.dispose();
+              conditionsBuilder_ = null;
+              conditions_ = other.conditions_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              conditionsBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getConditionsFieldBuilder() : null;
+            } else {
+              conditionsBuilder_.addAllMessages(other.conditions_);
+            }
+          }
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.adtiming.om.pb.AdNetworkPB.CustomTag parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.adtiming.om.pb.AdNetworkPB.CustomTag) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 1;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 1;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 1;</code>
+       */
+      public Builder clearName() {
+        
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 1;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        name_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int type_ ;
+      /**
+       * <pre>
+       * 0:string, 1:int, 2:float, 3:version
+       * </pre>
+       *
+       * <code>optional int32 type = 2;</code>
+       */
+      public int getType() {
+        return type_;
+      }
+      /**
+       * <pre>
+       * 0:string, 1:int, 2:float, 3:version
+       * </pre>
+       *
+       * <code>optional int32 type = 2;</code>
+       */
+      public Builder setType(int value) {
+        
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * 0:string, 1:int, 2:float, 3:version
+       * </pre>
+       *
+       * <code>optional int32 type = 2;</code>
+       */
+      public Builder clearType() {
+        
+        type_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.adtiming.om.pb.AdNetworkPB.TagCondition> conditions_ =
+        java.util.Collections.emptyList();
+      private void ensureConditionsIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          conditions_ = new java.util.ArrayList<com.adtiming.om.pb.AdNetworkPB.TagCondition>(conditions_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.adtiming.om.pb.AdNetworkPB.TagCondition, com.adtiming.om.pb.AdNetworkPB.TagCondition.Builder, com.adtiming.om.pb.AdNetworkPB.TagConditionOrBuilder> conditionsBuilder_;
+
+      /**
+       * <code>repeated .TagCondition conditions = 3;</code>
+       */
+      public java.util.List<com.adtiming.om.pb.AdNetworkPB.TagCondition> getConditionsList() {
+        if (conditionsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(conditions_);
+        } else {
+          return conditionsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .TagCondition conditions = 3;</code>
+       */
+      public int getConditionsCount() {
+        if (conditionsBuilder_ == null) {
+          return conditions_.size();
+        } else {
+          return conditionsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .TagCondition conditions = 3;</code>
+       */
+      public com.adtiming.om.pb.AdNetworkPB.TagCondition getConditions(int index) {
+        if (conditionsBuilder_ == null) {
+          return conditions_.get(index);
+        } else {
+          return conditionsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .TagCondition conditions = 3;</code>
+       */
+      public Builder setConditions(
+          int index, com.adtiming.om.pb.AdNetworkPB.TagCondition value) {
+        if (conditionsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureConditionsIsMutable();
+          conditions_.set(index, value);
+          onChanged();
+        } else {
+          conditionsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .TagCondition conditions = 3;</code>
+       */
+      public Builder setConditions(
+          int index, com.adtiming.om.pb.AdNetworkPB.TagCondition.Builder builderForValue) {
+        if (conditionsBuilder_ == null) {
+          ensureConditionsIsMutable();
+          conditions_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          conditionsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .TagCondition conditions = 3;</code>
+       */
+      public Builder addConditions(com.adtiming.om.pb.AdNetworkPB.TagCondition value) {
+        if (conditionsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureConditionsIsMutable();
+          conditions_.add(value);
+          onChanged();
+        } else {
+          conditionsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .TagCondition conditions = 3;</code>
+       */
+      public Builder addConditions(
+          int index, com.adtiming.om.pb.AdNetworkPB.TagCondition value) {
+        if (conditionsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureConditionsIsMutable();
+          conditions_.add(index, value);
+          onChanged();
+        } else {
+          conditionsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .TagCondition conditions = 3;</code>
+       */
+      public Builder addConditions(
+          com.adtiming.om.pb.AdNetworkPB.TagCondition.Builder builderForValue) {
+        if (conditionsBuilder_ == null) {
+          ensureConditionsIsMutable();
+          conditions_.add(builderForValue.build());
+          onChanged();
+        } else {
+          conditionsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .TagCondition conditions = 3;</code>
+       */
+      public Builder addConditions(
+          int index, com.adtiming.om.pb.AdNetworkPB.TagCondition.Builder builderForValue) {
+        if (conditionsBuilder_ == null) {
+          ensureConditionsIsMutable();
+          conditions_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          conditionsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .TagCondition conditions = 3;</code>
+       */
+      public Builder addAllConditions(
+          java.lang.Iterable<? extends com.adtiming.om.pb.AdNetworkPB.TagCondition> values) {
+        if (conditionsBuilder_ == null) {
+          ensureConditionsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, conditions_);
+          onChanged();
+        } else {
+          conditionsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .TagCondition conditions = 3;</code>
+       */
+      public Builder clearConditions() {
+        if (conditionsBuilder_ == null) {
+          conditions_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+        } else {
+          conditionsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .TagCondition conditions = 3;</code>
+       */
+      public Builder removeConditions(int index) {
+        if (conditionsBuilder_ == null) {
+          ensureConditionsIsMutable();
+          conditions_.remove(index);
+          onChanged();
+        } else {
+          conditionsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .TagCondition conditions = 3;</code>
+       */
+      public com.adtiming.om.pb.AdNetworkPB.TagCondition.Builder getConditionsBuilder(
+          int index) {
+        return getConditionsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .TagCondition conditions = 3;</code>
+       */
+      public com.adtiming.om.pb.AdNetworkPB.TagConditionOrBuilder getConditionsOrBuilder(
+          int index) {
+        if (conditionsBuilder_ == null) {
+          return conditions_.get(index);  } else {
+          return conditionsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .TagCondition conditions = 3;</code>
+       */
+      public java.util.List<? extends com.adtiming.om.pb.AdNetworkPB.TagConditionOrBuilder> 
+           getConditionsOrBuilderList() {
+        if (conditionsBuilder_ != null) {
+          return conditionsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(conditions_);
+        }
+      }
+      /**
+       * <code>repeated .TagCondition conditions = 3;</code>
+       */
+      public com.adtiming.om.pb.AdNetworkPB.TagCondition.Builder addConditionsBuilder() {
+        return getConditionsFieldBuilder().addBuilder(
+            com.adtiming.om.pb.AdNetworkPB.TagCondition.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .TagCondition conditions = 3;</code>
+       */
+      public com.adtiming.om.pb.AdNetworkPB.TagCondition.Builder addConditionsBuilder(
+          int index) {
+        return getConditionsFieldBuilder().addBuilder(
+            index, com.adtiming.om.pb.AdNetworkPB.TagCondition.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .TagCondition conditions = 3;</code>
+       */
+      public java.util.List<com.adtiming.om.pb.AdNetworkPB.TagCondition.Builder> 
+           getConditionsBuilderList() {
+        return getConditionsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.adtiming.om.pb.AdNetworkPB.TagCondition, com.adtiming.om.pb.AdNetworkPB.TagCondition.Builder, com.adtiming.om.pb.AdNetworkPB.TagConditionOrBuilder> 
+          getConditionsFieldBuilder() {
+        if (conditionsBuilder_ == null) {
+          conditionsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.adtiming.om.pb.AdNetworkPB.TagCondition, com.adtiming.om.pb.AdNetworkPB.TagCondition.Builder, com.adtiming.om.pb.AdNetworkPB.TagConditionOrBuilder>(
+                  conditions_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  getParentForChildren(),
+                  isClean());
+          conditions_ = null;
+        }
+        return conditionsBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:CustomTag)
+    }
+
+    // @@protoc_insertion_point(class_scope:CustomTag)
+    private static final com.adtiming.om.pb.AdNetworkPB.CustomTag DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.adtiming.om.pb.AdNetworkPB.CustomTag();
+    }
+
+    public static com.adtiming.om.pb.AdNetworkPB.CustomTag getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<CustomTag>
+        PARSER = new com.google.protobuf.AbstractParser<CustomTag>() {
+      public CustomTag parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new CustomTag(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<CustomTag> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CustomTag> getParserForType() {
+      return PARSER;
+    }
+
+    public com.adtiming.om.pb.AdNetworkPB.CustomTag getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface TagConditionOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:TagCondition)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * &gt;|&gt;=|&lt;|&lt;=|=|!=|in|notin
+     * </pre>
+     *
+     * <code>optional string operator = 1;</code>
+     */
+    java.lang.String getOperator();
+    /**
+     * <pre>
+     * &gt;|&gt;=|&lt;|&lt;=|=|!=|in|notin
+     * </pre>
+     *
+     * <code>optional string operator = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getOperatorBytes();
+
+    /**
+     * <code>optional string value = 2;</code>
+     */
+    java.lang.String getValue();
+    /**
+     * <code>optional string value = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getValueBytes();
+
+    /**
+     * <pre>
+     * in|notin时多值使用
+     * </pre>
+     *
+     * <code>repeated string values = 3;</code>
+     */
+    java.util.List<java.lang.String>
+        getValuesList();
+    /**
+     * <pre>
+     * in|notin时多值使用
+     * </pre>
+     *
+     * <code>repeated string values = 3;</code>
+     */
+    int getValuesCount();
+    /**
+     * <pre>
+     * in|notin时多值使用
+     * </pre>
+     *
+     * <code>repeated string values = 3;</code>
+     */
+    java.lang.String getValues(int index);
+    /**
+     * <pre>
+     * in|notin时多值使用
+     * </pre>
+     *
+     * <code>repeated string values = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getValuesBytes(int index);
+  }
+  /**
+   * Protobuf type {@code TagCondition}
+   */
+  public  static final class TagCondition extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:TagCondition)
+      TagConditionOrBuilder {
+    // Use TagCondition.newBuilder() to construct.
+    private TagCondition(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private TagCondition() {
+      operator_ = "";
+      value_ = "";
+      values_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private TagCondition(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              operator_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              value_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                values_ = new com.google.protobuf.LazyStringArrayList();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              values_.add(s);
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          values_ = values_.getUnmodifiableView();
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.adtiming.om.pb.AdNetworkPB.internal_static_TagCondition_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.adtiming.om.pb.AdNetworkPB.internal_static_TagCondition_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.adtiming.om.pb.AdNetworkPB.TagCondition.class, com.adtiming.om.pb.AdNetworkPB.TagCondition.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int OPERATOR_FIELD_NUMBER = 1;
+    private volatile java.lang.Object operator_;
+    /**
+     * <pre>
+     * &gt;|&gt;=|&lt;|&lt;=|=|!=|in|notin
+     * </pre>
+     *
+     * <code>optional string operator = 1;</code>
+     */
+    public java.lang.String getOperator() {
+      java.lang.Object ref = operator_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        operator_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * &gt;|&gt;=|&lt;|&lt;=|=|!=|in|notin
+     * </pre>
+     *
+     * <code>optional string operator = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getOperatorBytes() {
+      java.lang.Object ref = operator_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        operator_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int VALUE_FIELD_NUMBER = 2;
+    private volatile java.lang.Object value_;
+    /**
+     * <code>optional string value = 2;</code>
+     */
+    public java.lang.String getValue() {
+      java.lang.Object ref = value_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        value_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>optional string value = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getValueBytes() {
+      java.lang.Object ref = value_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        value_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int VALUES_FIELD_NUMBER = 3;
+    private com.google.protobuf.LazyStringList values_;
+    /**
+     * <pre>
+     * in|notin时多值使用
+     * </pre>
+     *
+     * <code>repeated string values = 3;</code>
+     */
+    public com.google.protobuf.ProtocolStringList
+        getValuesList() {
+      return values_;
+    }
+    /**
+     * <pre>
+     * in|notin时多值使用
+     * </pre>
+     *
+     * <code>repeated string values = 3;</code>
+     */
+    public int getValuesCount() {
+      return values_.size();
+    }
+    /**
+     * <pre>
+     * in|notin时多值使用
+     * </pre>
+     *
+     * <code>repeated string values = 3;</code>
+     */
+    public java.lang.String getValues(int index) {
+      return values_.get(index);
+    }
+    /**
+     * <pre>
+     * in|notin时多值使用
+     * </pre>
+     *
+     * <code>repeated string values = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getValuesBytes(int index) {
+      return values_.getByteString(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getOperatorBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, operator_);
+      }
+      if (!getValueBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, value_);
+      }
+      for (int i = 0; i < values_.size(); i++) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, values_.getRaw(i));
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getOperatorBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, operator_);
+      }
+      if (!getValueBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, value_);
+      }
+      {
+        int dataSize = 0;
+        for (int i = 0; i < values_.size(); i++) {
+          dataSize += computeStringSizeNoTag(values_.getRaw(i));
+        }
+        size += dataSize;
+        size += 1 * getValuesList().size();
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.adtiming.om.pb.AdNetworkPB.TagCondition)) {
+        return super.equals(obj);
+      }
+      com.adtiming.om.pb.AdNetworkPB.TagCondition other = (com.adtiming.om.pb.AdNetworkPB.TagCondition) obj;
+
+      boolean result = true;
+      result = result && getOperator()
+          .equals(other.getOperator());
+      result = result && getValue()
+          .equals(other.getValue());
+      result = result && getValuesList()
+          .equals(other.getValuesList());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + OPERATOR_FIELD_NUMBER;
+      hash = (53 * hash) + getOperator().hashCode();
+      hash = (37 * hash) + VALUE_FIELD_NUMBER;
+      hash = (53 * hash) + getValue().hashCode();
+      if (getValuesCount() > 0) {
+        hash = (37 * hash) + VALUES_FIELD_NUMBER;
+        hash = (53 * hash) + getValuesList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.adtiming.om.pb.AdNetworkPB.TagCondition parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.TagCondition parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.TagCondition parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.TagCondition parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.TagCondition parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.TagCondition parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.TagCondition parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.TagCondition parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.TagCondition parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.TagCondition parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.adtiming.om.pb.AdNetworkPB.TagCondition prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code TagCondition}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:TagCondition)
+        com.adtiming.om.pb.AdNetworkPB.TagConditionOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.adtiming.om.pb.AdNetworkPB.internal_static_TagCondition_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.adtiming.om.pb.AdNetworkPB.internal_static_TagCondition_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.adtiming.om.pb.AdNetworkPB.TagCondition.class, com.adtiming.om.pb.AdNetworkPB.TagCondition.Builder.class);
+      }
+
+      // Construct using com.adtiming.om.pb.AdNetworkPB.TagCondition.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        operator_ = "";
+
+        value_ = "";
+
+        values_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.adtiming.om.pb.AdNetworkPB.internal_static_TagCondition_descriptor;
+      }
+
+      public com.adtiming.om.pb.AdNetworkPB.TagCondition getDefaultInstanceForType() {
+        return com.adtiming.om.pb.AdNetworkPB.TagCondition.getDefaultInstance();
+      }
+
+      public com.adtiming.om.pb.AdNetworkPB.TagCondition build() {
+        com.adtiming.om.pb.AdNetworkPB.TagCondition result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.adtiming.om.pb.AdNetworkPB.TagCondition buildPartial() {
+        com.adtiming.om.pb.AdNetworkPB.TagCondition result = new com.adtiming.om.pb.AdNetworkPB.TagCondition(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.operator_ = operator_;
+        result.value_ = value_;
+        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+          values_ = values_.getUnmodifiableView();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        }
+        result.values_ = values_;
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.adtiming.om.pb.AdNetworkPB.TagCondition) {
+          return mergeFrom((com.adtiming.om.pb.AdNetworkPB.TagCondition)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.adtiming.om.pb.AdNetworkPB.TagCondition other) {
+        if (other == com.adtiming.om.pb.AdNetworkPB.TagCondition.getDefaultInstance()) return this;
+        if (!other.getOperator().isEmpty()) {
+          operator_ = other.operator_;
+          onChanged();
+        }
+        if (!other.getValue().isEmpty()) {
+          value_ = other.value_;
+          onChanged();
+        }
+        if (!other.values_.isEmpty()) {
+          if (values_.isEmpty()) {
+            values_ = other.values_;
+            bitField0_ = (bitField0_ & ~0x00000004);
+          } else {
+            ensureValuesIsMutable();
+            values_.addAll(other.values_);
+          }
+          onChanged();
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.adtiming.om.pb.AdNetworkPB.TagCondition parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.adtiming.om.pb.AdNetworkPB.TagCondition) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private java.lang.Object operator_ = "";
+      /**
+       * <pre>
+       * &gt;|&gt;=|&lt;|&lt;=|=|!=|in|notin
+       * </pre>
+       *
+       * <code>optional string operator = 1;</code>
+       */
+      public java.lang.String getOperator() {
+        java.lang.Object ref = operator_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          operator_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * &gt;|&gt;=|&lt;|&lt;=|=|!=|in|notin
+       * </pre>
+       *
+       * <code>optional string operator = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getOperatorBytes() {
+        java.lang.Object ref = operator_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          operator_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * &gt;|&gt;=|&lt;|&lt;=|=|!=|in|notin
+       * </pre>
+       *
+       * <code>optional string operator = 1;</code>
+       */
+      public Builder setOperator(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        operator_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * &gt;|&gt;=|&lt;|&lt;=|=|!=|in|notin
+       * </pre>
+       *
+       * <code>optional string operator = 1;</code>
+       */
+      public Builder clearOperator() {
+        
+        operator_ = getDefaultInstance().getOperator();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * &gt;|&gt;=|&lt;|&lt;=|=|!=|in|notin
+       * </pre>
+       *
+       * <code>optional string operator = 1;</code>
+       */
+      public Builder setOperatorBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        operator_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object value_ = "";
+      /**
+       * <code>optional string value = 2;</code>
+       */
+      public java.lang.String getValue() {
+        java.lang.Object ref = value_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          value_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string value = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getValueBytes() {
+        java.lang.Object ref = value_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          value_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string value = 2;</code>
+       */
+      public Builder setValue(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        value_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string value = 2;</code>
+       */
+      public Builder clearValue() {
+        
+        value_ = getDefaultInstance().getValue();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string value = 2;</code>
+       */
+      public Builder setValueBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        value_ = value;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.LazyStringList values_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      private void ensureValuesIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          values_ = new com.google.protobuf.LazyStringArrayList(values_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+      /**
+       * <pre>
+       * in|notin时多值使用
+       * </pre>
+       *
+       * <code>repeated string values = 3;</code>
+       */
+      public com.google.protobuf.ProtocolStringList
+          getValuesList() {
+        return values_.getUnmodifiableView();
+      }
+      /**
+       * <pre>
+       * in|notin时多值使用
+       * </pre>
+       *
+       * <code>repeated string values = 3;</code>
+       */
+      public int getValuesCount() {
+        return values_.size();
+      }
+      /**
+       * <pre>
+       * in|notin时多值使用
+       * </pre>
+       *
+       * <code>repeated string values = 3;</code>
+       */
+      public java.lang.String getValues(int index) {
+        return values_.get(index);
+      }
+      /**
+       * <pre>
+       * in|notin时多值使用
+       * </pre>
+       *
+       * <code>repeated string values = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getValuesBytes(int index) {
+        return values_.getByteString(index);
+      }
+      /**
+       * <pre>
+       * in|notin时多值使用
+       * </pre>
+       *
+       * <code>repeated string values = 3;</code>
+       */
+      public Builder setValues(
+          int index, java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureValuesIsMutable();
+        values_.set(index, value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * in|notin时多值使用
+       * </pre>
+       *
+       * <code>repeated string values = 3;</code>
+       */
+      public Builder addValues(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  ensureValuesIsMutable();
+        values_.add(value);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * in|notin时多值使用
+       * </pre>
+       *
+       * <code>repeated string values = 3;</code>
+       */
+      public Builder addAllValues(
+          java.lang.Iterable<java.lang.String> values) {
+        ensureValuesIsMutable();
+        com.google.protobuf.AbstractMessageLite.Builder.addAll(
+            values, values_);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * in|notin时多值使用
+       * </pre>
+       *
+       * <code>repeated string values = 3;</code>
+       */
+      public Builder clearValues() {
+        values_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+        bitField0_ = (bitField0_ & ~0x00000004);
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * in|notin时多值使用
+       * </pre>
+       *
+       * <code>repeated string values = 3;</code>
+       */
+      public Builder addValuesBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        ensureValuesIsMutable();
+        values_.add(value);
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:TagCondition)
+    }
+
+    // @@protoc_insertion_point(class_scope:TagCondition)
+    private static final com.adtiming.om.pb.AdNetworkPB.TagCondition DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.adtiming.om.pb.AdNetworkPB.TagCondition();
+    }
+
+    public static com.adtiming.om.pb.AdNetworkPB.TagCondition getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<TagCondition>
+        PARSER = new com.google.protobuf.AbstractParser<TagCondition>() {
+      public TagCondition parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new TagCondition(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<TagCondition> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TagCondition> getParserForType() {
+      return PARSER;
+    }
+
+    public com.adtiming.om.pb.AdNetworkPB.TagCondition getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -11007,6 +15417,21 @@ public final class AdNetworkPB {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_InstanceRule_InstanceWeightEntry_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_InstanceRule_CustomTagsEntry_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_InstanceRule_CustomTagsEntry_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_CustomTag_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_CustomTag_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_TagCondition_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_TagCondition_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -11016,52 +15441,63 @@ public final class AdNetworkPB {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\tadn.proto\032\014common.proto\"r\n\tAdNetwork\022\n" +
-      "\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nclass_name\030\003" +
-      " \001(\t\022\014\n\004type\030\004 \001(\005\022\023\n\013sdk_version\030\005 \001(\t\022" +
-      "\024\n\014bid_endpoint\030\006 \001(\t\"|\n\014AdNetworkApp\022\n\n" +
-      "\002id\030\001 \001(\005\022\016\n\006adn_id\030\002 \001(\005\022\022\n\npub_app_id\030" +
-      "\003 \001(\005\022\017\n\007app_key\030\004 \001(\t\022+\n\013block_rules\030\006 " +
-      "\003(\0132\026.AdNetworkAppBlockRule\"\321\001\n\025AdNetwor" +
-      "kAppBlockRule\022\n\n\002id\030\001 \001(\005\022\022\n\npub_app_id\030" +
-      "\002 \001(\005\022\016\n\006adn_id\030\003 \001(\005\022\023\n\013sdk_version\030\004 \001" +
-      "(\t\022\017\n\007osv_max\030\005 \001(\t\022\017\n\007osv_min\030\006 \001(\t\022\035\n\025",
-      "make_device_blacklist\030\007 \003(\t\022\035\n\025brand_mod" +
-      "el_blacklist\030\010 \003(\t\022\023\n\013app_version\030\t \001(\t\"" +
-      "\244\005\n\010Instance\022\n\n\002id\030\001 \001(\005\022\022\n\npub_app_id\030\002" +
-      " \001(\005\022\024\n\014placement_id\030\003 \001(\005\022\016\n\006adn_id\030\004 \001" +
-      "(\005\022\025\n\rplacement_key\030\005 \001(\t\022\023\n\013app_unit_id" +
-      "\030\006 \001(\t\022\017\n\007osv_max\030\007 \001(\t\022\017\n\007osv_min\030\010 \001(\t" +
-      "\022\026\n\016make_whitelist\030\t \003(\t\022\026\n\016make_blackli" +
-      "st\030\n \003(\t\022\027\n\017brand_whitelist\030\013 \003(\t\022\027\n\017bra" +
-      "nd_blacklist\030\014 \003(\t\022\027\n\017model_whitelist\030\r " +
-      "\003(\t\022\027\n\017model_blacklist\030\016 \003(\t\022\025\n\rfrequenc",
-      "y_cap\030\017 \001(\005\022\026\n\016frequency_unit\030\020 \001(\005\022\032\n\022f" +
-      "requency_interval\030\021 \001(\005\022\021\n\thb_status\030\022 \001" +
-      "(\010\022\014\n\004ecpm\030\023 \001(\002\0228\n\020country_settings\030\024 \003" +
-      "(\0132\036.Instance.CountrySettingsEntry\032Q\n\024Co" +
-      "untrySettingsEntry\022\013\n\003key\030\001 \001(\t\022(\n\005value" +
-      "\030\002 \001(\0132\031.Instance.CountrySettings:\0028\001\032w\n" +
-      "\017CountrySettings\0225\n\006period\030\001 \003(\0132%.Insta" +
-      "nce.CountrySettings.PeriodEntry\032-\n\013Perio" +
-      "dEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\005:\0028\001\"\327" +
-      "\004\n\014InstanceRule\022\n\n\002id\030\001 \001(\005\022\024\n\014publisher",
-      "_id\030\002 \001(\005\022\022\n\npub_app_id\030\003 \001(\005\022\024\n\014placeme" +
-      "nt_id\030\004 \001(\005\022\017\n\007country\030\005 \003(\t\022\021\n\tsort_typ" +
-      "e\030\006 \001(\005\022\024\n\003abt\030\007 \001(\0162\007.ABTest\022\023\n\013auto_sw" +
-      "itch\030\010 \001(\005\022:\n\017instance_weight\030\t \003(\0132!.In" +
-      "stanceRule.InstanceWeightEntry\022\020\n\010priori" +
-      "ty\030\n \001(\005\022\021\n\tfrequency\030\013 \001(\005\022\020\n\010con_type\030" +
-      "\014 \001(\005\022\027\n\017brand_whitelist\030\r \003(\t\022\027\n\017brand_" +
-      "blacklist\030\016 \003(\t\022\027\n\017model_whitelist\030\017 \003(\t" +
-      "\022\027\n\017model_blacklist\030\020 \003(\t\022\017\n\007iap_min\030\021 \001" +
-      "(\002\022\017\n\007iap_max\030\022 \001(\002\022\022\n\nmodel_type\030\023 \001(\005\022",
-      "\023\n\013channel_bow\030\024 \001(\010\022\017\n\007channel\030\025 \003(\t\022\016\n" +
-      "\006gender\030\026 \001(\005\022\020\n\010interest\030\027 \003(\t\022\017\n\007age_m" +
-      "in\030\030 \001(\005\022\017\n\007age_max\030\031 \001(\005\0325\n\023InstanceWei" +
-      "ghtEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\005:\0028\001" +
-      "B!\n\022com.adtiming.om.pbB\013AdNetworkPBb\006pro" +
-      "to3"
+      "\n\tadn.proto\032\014common.proto\"\201\001\n\tAdNetwork\022" +
+      "\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nclass_name\030" +
+      "\003 \001(\t\022\014\n\004type\030\004 \001(\005\022\023\n\013sdk_version\030\005 \001(\t" +
+      "\022\024\n\014bid_endpoint\030\006 \001(\t\022\r\n\005descn\030\007 \001(\t\"|\n" +
+      "\014AdNetworkApp\022\n\n\002id\030\001 \001(\005\022\016\n\006adn_id\030\002 \001(" +
+      "\005\022\022\n\npub_app_id\030\003 \001(\005\022\017\n\007app_key\030\004 \001(\t\022+" +
+      "\n\013block_rules\030\006 \003(\0132\026.AdNetworkAppBlockR" +
+      "ule\"\321\001\n\025AdNetworkAppBlockRule\022\n\n\002id\030\001 \001(" +
+      "\005\022\022\n\npub_app_id\030\002 \001(\005\022\016\n\006adn_id\030\003 \001(\005\022\023\n" +
+      "\013sdk_version\030\004 \001(\t\022\017\n\007osv_max\030\005 \001(\t\022\017\n\007o",
+      "sv_min\030\006 \001(\t\022\035\n\025make_device_blacklist\030\007 " +
+      "\003(\t\022\035\n\025brand_model_blacklist\030\010 \003(\t\022\023\n\013ap" +
+      "p_version\030\t \001(\t\"\262\005\n\010Instance\022\n\n\002id\030\001 \001(\005" +
+      "\022\022\n\npub_app_id\030\002 \001(\005\022\024\n\014placement_id\030\003 \001" +
+      "(\005\022\016\n\006adn_id\030\004 \001(\005\022\025\n\rplacement_key\030\005 \001(" +
+      "\t\022\023\n\013app_unit_id\030\006 \001(\t\022\017\n\007osv_max\030\007 \001(\t\022" +
+      "\017\n\007osv_min\030\010 \001(\t\022\026\n\016make_whitelist\030\t \003(\t" +
+      "\022\026\n\016make_blacklist\030\n \003(\t\022\027\n\017brand_whitel" +
+      "ist\030\013 \003(\t\022\027\n\017brand_blacklist\030\014 \003(\t\022\027\n\017mo" +
+      "del_whitelist\030\r \003(\t\022\027\n\017model_blacklist\030\016",
+      " \003(\t\022\025\n\rfrequency_cap\030\017 \001(\005\022\026\n\016frequency" +
+      "_unit\030\020 \001(\005\022\032\n\022frequency_interval\030\021 \001(\005\022" +
+      "\021\n\thb_status\030\022 \001(\010\022\014\n\004ecpm\030\023 \001(\002\0228\n\020coun" +
+      "try_settings\030\024 \003(\0132\036.Instance.CountrySet" +
+      "tingsEntry\022\014\n\004name\030\025 \001(\t\032Q\n\024CountrySetti" +
+      "ngsEntry\022\013\n\003key\030\001 \001(\t\022(\n\005value\030\002 \001(\0132\031.I" +
+      "nstance.CountrySettings:\0028\001\032w\n\017CountrySe" +
+      "ttings\0225\n\006period\030\001 \003(\0132%.Instance.Countr" +
+      "ySettings.PeriodEntry\032-\n\013PeriodEntry\022\013\n\003" +
+      "key\030\001 \001(\005\022\r\n\005value\030\002 \001(\005:\0028\001\"\373\006\n\014Instanc",
+      "eRule\022\n\n\002id\030\001 \001(\005\022\024\n\014publisher_id\030\002 \001(\005\022" +
+      "\022\n\npub_app_id\030\003 \001(\005\022\024\n\014placement_id\030\004 \001(" +
+      "\005\022\017\n\007country\030\005 \003(\t\022\021\n\tsort_type\030\006 \001(\005\022\024\n" +
+      "\003abt\030\007 \001(\0162\007.ABTest\022\023\n\013auto_switch\030\010 \001(\005" +
+      "\022:\n\017instance_weight\030\t \003(\0132!.InstanceRule" +
+      ".InstanceWeightEntry\022\020\n\010priority\030\n \001(\005\022\021" +
+      "\n\tfrequency\030\013 \001(\005\022\020\n\010con_type\030\014 \001(\005\022\027\n\017b" +
+      "rand_whitelist\030\r \003(\t\022\027\n\017brand_blacklist\030" +
+      "\016 \003(\t\022\027\n\017model_whitelist\030\017 \003(\t\022\027\n\017model_" +
+      "blacklist\030\020 \003(\t\022\017\n\007iap_min\030\021 \001(\002\022\017\n\007iap_",
+      "max\030\022 \001(\002\022\022\n\nmodel_type\030\023 \001(\005\022\023\n\013channel" +
+      "_bow\030\024 \001(\010\022\017\n\007channel\030\025 \003(\t\022\016\n\006gender\030\026 " +
+      "\001(\005\022\020\n\010interest\030\027 \003(\t\022\017\n\007age_min\030\030 \001(\005\022\017" +
+      "\n\007age_max\030\031 \001(\005\022\014\n\004name\030\032 \001(\t\022\021\n\tosv_whi" +
+      "te\030\033 \003(\t\022\031\n\tosv_range\030\034 \003(\0132\006.Range\022\022\n\ns" +
+      "dkv_white\030\035 \003(\t\022\032\n\nsdkv_range\030\036 \003(\0132\006.Ra" +
+      "nge\022\022\n\nappv_white\030\037 \003(\t\022\032\n\nappv_range\030  " +
+      "\003(\0132\006.Range\022\023\n\013require_did\030! \001(\005\0222\n\013cust" +
+      "om_tags\030\" \003(\0132\035.InstanceRule.CustomTagsE" +
+      "ntry\0325\n\023InstanceWeightEntry\022\013\n\003key\030\001 \001(\005",
+      "\022\r\n\005value\030\002 \001(\005:\0028\001\032=\n\017CustomTagsEntry\022\013" +
+      "\n\003key\030\001 \001(\t\022\031\n\005value\030\002 \001(\0132\n.CustomTag:\002" +
+      "8\001\"J\n\tCustomTag\022\014\n\004name\030\001 \001(\t\022\014\n\004type\030\002 " +
+      "\001(\005\022!\n\nconditions\030\003 \003(\0132\r.TagCondition\"?" +
+      "\n\014TagCondition\022\020\n\010operator\030\001 \001(\t\022\r\n\005valu" +
+      "e\030\002 \001(\t\022\016\n\006values\030\003 \003(\tB!\n\022com.adtiming." +
+      "om.pbB\013AdNetworkPBb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -11081,7 +15517,7 @@ public final class AdNetworkPB {
     internal_static_AdNetwork_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_AdNetwork_descriptor,
-        new java.lang.String[] { "Id", "Name", "ClassName", "Type", "SdkVersion", "BidEndpoint", });
+        new java.lang.String[] { "Id", "Name", "ClassName", "Type", "SdkVersion", "BidEndpoint", "Descn", });
     internal_static_AdNetworkApp_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_AdNetworkApp_fieldAccessorTable = new
@@ -11099,7 +15535,7 @@ public final class AdNetworkPB {
     internal_static_Instance_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Instance_descriptor,
-        new java.lang.String[] { "Id", "PubAppId", "PlacementId", "AdnId", "PlacementKey", "AppUnitId", "OsvMax", "OsvMin", "MakeWhitelist", "MakeBlacklist", "BrandWhitelist", "BrandBlacklist", "ModelWhitelist", "ModelBlacklist", "FrequencyCap", "FrequencyUnit", "FrequencyInterval", "HbStatus", "Ecpm", "CountrySettings", });
+        new java.lang.String[] { "Id", "PubAppId", "PlacementId", "AdnId", "PlacementKey", "AppUnitId", "OsvMax", "OsvMin", "MakeWhitelist", "MakeBlacklist", "BrandWhitelist", "BrandBlacklist", "ModelWhitelist", "ModelBlacklist", "FrequencyCap", "FrequencyUnit", "FrequencyInterval", "HbStatus", "Ecpm", "CountrySettings", "Name", });
     internal_static_Instance_CountrySettingsEntry_descriptor =
       internal_static_Instance_descriptor.getNestedTypes().get(0);
     internal_static_Instance_CountrySettingsEntry_fieldAccessorTable = new
@@ -11123,13 +15559,31 @@ public final class AdNetworkPB {
     internal_static_InstanceRule_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_InstanceRule_descriptor,
-        new java.lang.String[] { "Id", "PublisherId", "PubAppId", "PlacementId", "Country", "SortType", "Abt", "AutoSwitch", "InstanceWeight", "Priority", "Frequency", "ConType", "BrandWhitelist", "BrandBlacklist", "ModelWhitelist", "ModelBlacklist", "IapMin", "IapMax", "ModelType", "ChannelBow", "Channel", "Gender", "Interest", "AgeMin", "AgeMax", });
+        new java.lang.String[] { "Id", "PublisherId", "PubAppId", "PlacementId", "Country", "SortType", "Abt", "AutoSwitch", "InstanceWeight", "Priority", "Frequency", "ConType", "BrandWhitelist", "BrandBlacklist", "ModelWhitelist", "ModelBlacklist", "IapMin", "IapMax", "ModelType", "ChannelBow", "Channel", "Gender", "Interest", "AgeMin", "AgeMax", "Name", "OsvWhite", "OsvRange", "SdkvWhite", "SdkvRange", "AppvWhite", "AppvRange", "RequireDid", "CustomTags", });
     internal_static_InstanceRule_InstanceWeightEntry_descriptor =
       internal_static_InstanceRule_descriptor.getNestedTypes().get(0);
     internal_static_InstanceRule_InstanceWeightEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_InstanceRule_InstanceWeightEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
+    internal_static_InstanceRule_CustomTagsEntry_descriptor =
+      internal_static_InstanceRule_descriptor.getNestedTypes().get(1);
+    internal_static_InstanceRule_CustomTagsEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_InstanceRule_CustomTagsEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_CustomTag_descriptor =
+      getDescriptor().getMessageTypes().get(5);
+    internal_static_CustomTag_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_CustomTag_descriptor,
+        new java.lang.String[] { "Name", "Type", "Conditions", });
+    internal_static_TagCondition_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_TagCondition_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_TagCondition_descriptor,
+        new java.lang.String[] { "Operator", "Value", "Values", });
     com.adtiming.om.pb.CommonPB.getDescriptor();
   }
 

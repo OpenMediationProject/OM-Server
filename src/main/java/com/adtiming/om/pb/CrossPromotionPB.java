@@ -3647,12 +3647,12 @@ public final class CrossPromotionPB {
     /**
      * <code>repeated .Range osv_white_range = 20;</code>
      */
-    java.util.List<com.adtiming.om.pb.CrossPromotionPB.Range> 
+    java.util.List<com.adtiming.om.pb.CommonPB.Range> 
         getOsvWhiteRangeList();
     /**
      * <code>repeated .Range osv_white_range = 20;</code>
      */
-    com.adtiming.om.pb.CrossPromotionPB.Range getOsvWhiteRange(int index);
+    com.adtiming.om.pb.CommonPB.Range getOsvWhiteRange(int index);
     /**
      * <code>repeated .Range osv_white_range = 20;</code>
      */
@@ -3660,12 +3660,12 @@ public final class CrossPromotionPB {
     /**
      * <code>repeated .Range osv_white_range = 20;</code>
      */
-    java.util.List<? extends com.adtiming.om.pb.CrossPromotionPB.RangeOrBuilder> 
+    java.util.List<? extends com.adtiming.om.pb.CommonPB.RangeOrBuilder> 
         getOsvWhiteRangeOrBuilderList();
     /**
      * <code>repeated .Range osv_white_range = 20;</code>
      */
-    com.adtiming.om.pb.CrossPromotionPB.RangeOrBuilder getOsvWhiteRangeOrBuilder(
+    com.adtiming.om.pb.CommonPB.RangeOrBuilder getOsvWhiteRangeOrBuilder(
         int index);
 
     /**
@@ -3690,12 +3690,12 @@ public final class CrossPromotionPB {
     /**
      * <code>repeated .Range osv_black_range = 22;</code>
      */
-    java.util.List<com.adtiming.om.pb.CrossPromotionPB.Range> 
+    java.util.List<com.adtiming.om.pb.CommonPB.Range> 
         getOsvBlackRangeList();
     /**
      * <code>repeated .Range osv_black_range = 22;</code>
      */
-    com.adtiming.om.pb.CrossPromotionPB.Range getOsvBlackRange(int index);
+    com.adtiming.om.pb.CommonPB.Range getOsvBlackRange(int index);
     /**
      * <code>repeated .Range osv_black_range = 22;</code>
      */
@@ -3703,12 +3703,12 @@ public final class CrossPromotionPB {
     /**
      * <code>repeated .Range osv_black_range = 22;</code>
      */
-    java.util.List<? extends com.adtiming.om.pb.CrossPromotionPB.RangeOrBuilder> 
+    java.util.List<? extends com.adtiming.om.pb.CommonPB.RangeOrBuilder> 
         getOsvBlackRangeOrBuilderList();
     /**
      * <code>repeated .Range osv_black_range = 22;</code>
      */
-    com.adtiming.om.pb.CrossPromotionPB.RangeOrBuilder getOsvBlackRangeOrBuilder(
+    com.adtiming.om.pb.CommonPB.RangeOrBuilder getOsvBlackRangeOrBuilder(
         int index);
   }
   /**
@@ -4013,11 +4013,11 @@ public final class CrossPromotionPB {
             }
             case 162: {
               if (!((mutable_bitField0_ & 0x00080000) == 0x00080000)) {
-                osvWhiteRange_ = new java.util.ArrayList<com.adtiming.om.pb.CrossPromotionPB.Range>();
+                osvWhiteRange_ = new java.util.ArrayList<com.adtiming.om.pb.CommonPB.Range>();
                 mutable_bitField0_ |= 0x00080000;
               }
               osvWhiteRange_.add(
-                  input.readMessage(com.adtiming.om.pb.CrossPromotionPB.Range.parser(), extensionRegistry));
+                  input.readMessage(com.adtiming.om.pb.CommonPB.Range.parser(), extensionRegistry));
               break;
             }
             case 170: {
@@ -4031,11 +4031,11 @@ public final class CrossPromotionPB {
             }
             case 178: {
               if (!((mutable_bitField0_ & 0x00200000) == 0x00200000)) {
-                osvBlackRange_ = new java.util.ArrayList<com.adtiming.om.pb.CrossPromotionPB.Range>();
+                osvBlackRange_ = new java.util.ArrayList<com.adtiming.om.pb.CommonPB.Range>();
                 mutable_bitField0_ |= 0x00200000;
               }
               osvBlackRange_.add(
-                  input.readMessage(com.adtiming.om.pb.CrossPromotionPB.Range.parser(), extensionRegistry));
+                  input.readMessage(com.adtiming.om.pb.CommonPB.Range.parser(), extensionRegistry));
               break;
             }
           }
@@ -4634,17 +4634,17 @@ public final class CrossPromotionPB {
     }
 
     public static final int OSV_WHITE_RANGE_FIELD_NUMBER = 20;
-    private java.util.List<com.adtiming.om.pb.CrossPromotionPB.Range> osvWhiteRange_;
+    private java.util.List<com.adtiming.om.pb.CommonPB.Range> osvWhiteRange_;
     /**
      * <code>repeated .Range osv_white_range = 20;</code>
      */
-    public java.util.List<com.adtiming.om.pb.CrossPromotionPB.Range> getOsvWhiteRangeList() {
+    public java.util.List<com.adtiming.om.pb.CommonPB.Range> getOsvWhiteRangeList() {
       return osvWhiteRange_;
     }
     /**
      * <code>repeated .Range osv_white_range = 20;</code>
      */
-    public java.util.List<? extends com.adtiming.om.pb.CrossPromotionPB.RangeOrBuilder> 
+    public java.util.List<? extends com.adtiming.om.pb.CommonPB.RangeOrBuilder> 
         getOsvWhiteRangeOrBuilderList() {
       return osvWhiteRange_;
     }
@@ -4657,13 +4657,13 @@ public final class CrossPromotionPB {
     /**
      * <code>repeated .Range osv_white_range = 20;</code>
      */
-    public com.adtiming.om.pb.CrossPromotionPB.Range getOsvWhiteRange(int index) {
+    public com.adtiming.om.pb.CommonPB.Range getOsvWhiteRange(int index) {
       return osvWhiteRange_.get(index);
     }
     /**
      * <code>repeated .Range osv_white_range = 20;</code>
      */
-    public com.adtiming.om.pb.CrossPromotionPB.RangeOrBuilder getOsvWhiteRangeOrBuilder(
+    public com.adtiming.om.pb.CommonPB.RangeOrBuilder getOsvWhiteRangeOrBuilder(
         int index) {
       return osvWhiteRange_.get(index);
     }
@@ -4698,17 +4698,17 @@ public final class CrossPromotionPB {
     }
 
     public static final int OSV_BLACK_RANGE_FIELD_NUMBER = 22;
-    private java.util.List<com.adtiming.om.pb.CrossPromotionPB.Range> osvBlackRange_;
+    private java.util.List<com.adtiming.om.pb.CommonPB.Range> osvBlackRange_;
     /**
      * <code>repeated .Range osv_black_range = 22;</code>
      */
-    public java.util.List<com.adtiming.om.pb.CrossPromotionPB.Range> getOsvBlackRangeList() {
+    public java.util.List<com.adtiming.om.pb.CommonPB.Range> getOsvBlackRangeList() {
       return osvBlackRange_;
     }
     /**
      * <code>repeated .Range osv_black_range = 22;</code>
      */
-    public java.util.List<? extends com.adtiming.om.pb.CrossPromotionPB.RangeOrBuilder> 
+    public java.util.List<? extends com.adtiming.om.pb.CommonPB.RangeOrBuilder> 
         getOsvBlackRangeOrBuilderList() {
       return osvBlackRange_;
     }
@@ -4721,13 +4721,13 @@ public final class CrossPromotionPB {
     /**
      * <code>repeated .Range osv_black_range = 22;</code>
      */
-    public com.adtiming.om.pb.CrossPromotionPB.Range getOsvBlackRange(int index) {
+    public com.adtiming.om.pb.CommonPB.Range getOsvBlackRange(int index) {
       return osvBlackRange_.get(index);
     }
     /**
      * <code>repeated .Range osv_black_range = 22;</code>
      */
-    public com.adtiming.om.pb.CrossPromotionPB.RangeOrBuilder getOsvBlackRangeOrBuilder(
+    public com.adtiming.om.pb.CommonPB.RangeOrBuilder getOsvBlackRangeOrBuilder(
         int index) {
       return osvBlackRange_.get(index);
     }
@@ -7376,22 +7376,22 @@ public final class CrossPromotionPB {
         return this;
       }
 
-      private java.util.List<com.adtiming.om.pb.CrossPromotionPB.Range> osvWhiteRange_ =
+      private java.util.List<com.adtiming.om.pb.CommonPB.Range> osvWhiteRange_ =
         java.util.Collections.emptyList();
       private void ensureOsvWhiteRangeIsMutable() {
         if (!((bitField0_ & 0x00080000) == 0x00080000)) {
-          osvWhiteRange_ = new java.util.ArrayList<com.adtiming.om.pb.CrossPromotionPB.Range>(osvWhiteRange_);
+          osvWhiteRange_ = new java.util.ArrayList<com.adtiming.om.pb.CommonPB.Range>(osvWhiteRange_);
           bitField0_ |= 0x00080000;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.adtiming.om.pb.CrossPromotionPB.Range, com.adtiming.om.pb.CrossPromotionPB.Range.Builder, com.adtiming.om.pb.CrossPromotionPB.RangeOrBuilder> osvWhiteRangeBuilder_;
+          com.adtiming.om.pb.CommonPB.Range, com.adtiming.om.pb.CommonPB.Range.Builder, com.adtiming.om.pb.CommonPB.RangeOrBuilder> osvWhiteRangeBuilder_;
 
       /**
        * <code>repeated .Range osv_white_range = 20;</code>
        */
-      public java.util.List<com.adtiming.om.pb.CrossPromotionPB.Range> getOsvWhiteRangeList() {
+      public java.util.List<com.adtiming.om.pb.CommonPB.Range> getOsvWhiteRangeList() {
         if (osvWhiteRangeBuilder_ == null) {
           return java.util.Collections.unmodifiableList(osvWhiteRange_);
         } else {
@@ -7411,7 +7411,7 @@ public final class CrossPromotionPB {
       /**
        * <code>repeated .Range osv_white_range = 20;</code>
        */
-      public com.adtiming.om.pb.CrossPromotionPB.Range getOsvWhiteRange(int index) {
+      public com.adtiming.om.pb.CommonPB.Range getOsvWhiteRange(int index) {
         if (osvWhiteRangeBuilder_ == null) {
           return osvWhiteRange_.get(index);
         } else {
@@ -7422,7 +7422,7 @@ public final class CrossPromotionPB {
        * <code>repeated .Range osv_white_range = 20;</code>
        */
       public Builder setOsvWhiteRange(
-          int index, com.adtiming.om.pb.CrossPromotionPB.Range value) {
+          int index, com.adtiming.om.pb.CommonPB.Range value) {
         if (osvWhiteRangeBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7439,7 +7439,7 @@ public final class CrossPromotionPB {
        * <code>repeated .Range osv_white_range = 20;</code>
        */
       public Builder setOsvWhiteRange(
-          int index, com.adtiming.om.pb.CrossPromotionPB.Range.Builder builderForValue) {
+          int index, com.adtiming.om.pb.CommonPB.Range.Builder builderForValue) {
         if (osvWhiteRangeBuilder_ == null) {
           ensureOsvWhiteRangeIsMutable();
           osvWhiteRange_.set(index, builderForValue.build());
@@ -7452,7 +7452,7 @@ public final class CrossPromotionPB {
       /**
        * <code>repeated .Range osv_white_range = 20;</code>
        */
-      public Builder addOsvWhiteRange(com.adtiming.om.pb.CrossPromotionPB.Range value) {
+      public Builder addOsvWhiteRange(com.adtiming.om.pb.CommonPB.Range value) {
         if (osvWhiteRangeBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7469,7 +7469,7 @@ public final class CrossPromotionPB {
        * <code>repeated .Range osv_white_range = 20;</code>
        */
       public Builder addOsvWhiteRange(
-          int index, com.adtiming.om.pb.CrossPromotionPB.Range value) {
+          int index, com.adtiming.om.pb.CommonPB.Range value) {
         if (osvWhiteRangeBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7486,7 +7486,7 @@ public final class CrossPromotionPB {
        * <code>repeated .Range osv_white_range = 20;</code>
        */
       public Builder addOsvWhiteRange(
-          com.adtiming.om.pb.CrossPromotionPB.Range.Builder builderForValue) {
+          com.adtiming.om.pb.CommonPB.Range.Builder builderForValue) {
         if (osvWhiteRangeBuilder_ == null) {
           ensureOsvWhiteRangeIsMutable();
           osvWhiteRange_.add(builderForValue.build());
@@ -7500,7 +7500,7 @@ public final class CrossPromotionPB {
        * <code>repeated .Range osv_white_range = 20;</code>
        */
       public Builder addOsvWhiteRange(
-          int index, com.adtiming.om.pb.CrossPromotionPB.Range.Builder builderForValue) {
+          int index, com.adtiming.om.pb.CommonPB.Range.Builder builderForValue) {
         if (osvWhiteRangeBuilder_ == null) {
           ensureOsvWhiteRangeIsMutable();
           osvWhiteRange_.add(index, builderForValue.build());
@@ -7514,7 +7514,7 @@ public final class CrossPromotionPB {
        * <code>repeated .Range osv_white_range = 20;</code>
        */
       public Builder addAllOsvWhiteRange(
-          java.lang.Iterable<? extends com.adtiming.om.pb.CrossPromotionPB.Range> values) {
+          java.lang.Iterable<? extends com.adtiming.om.pb.CommonPB.Range> values) {
         if (osvWhiteRangeBuilder_ == null) {
           ensureOsvWhiteRangeIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -7554,14 +7554,14 @@ public final class CrossPromotionPB {
       /**
        * <code>repeated .Range osv_white_range = 20;</code>
        */
-      public com.adtiming.om.pb.CrossPromotionPB.Range.Builder getOsvWhiteRangeBuilder(
+      public com.adtiming.om.pb.CommonPB.Range.Builder getOsvWhiteRangeBuilder(
           int index) {
         return getOsvWhiteRangeFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .Range osv_white_range = 20;</code>
        */
-      public com.adtiming.om.pb.CrossPromotionPB.RangeOrBuilder getOsvWhiteRangeOrBuilder(
+      public com.adtiming.om.pb.CommonPB.RangeOrBuilder getOsvWhiteRangeOrBuilder(
           int index) {
         if (osvWhiteRangeBuilder_ == null) {
           return osvWhiteRange_.get(index);  } else {
@@ -7571,7 +7571,7 @@ public final class CrossPromotionPB {
       /**
        * <code>repeated .Range osv_white_range = 20;</code>
        */
-      public java.util.List<? extends com.adtiming.om.pb.CrossPromotionPB.RangeOrBuilder> 
+      public java.util.List<? extends com.adtiming.om.pb.CommonPB.RangeOrBuilder> 
            getOsvWhiteRangeOrBuilderList() {
         if (osvWhiteRangeBuilder_ != null) {
           return osvWhiteRangeBuilder_.getMessageOrBuilderList();
@@ -7582,31 +7582,31 @@ public final class CrossPromotionPB {
       /**
        * <code>repeated .Range osv_white_range = 20;</code>
        */
-      public com.adtiming.om.pb.CrossPromotionPB.Range.Builder addOsvWhiteRangeBuilder() {
+      public com.adtiming.om.pb.CommonPB.Range.Builder addOsvWhiteRangeBuilder() {
         return getOsvWhiteRangeFieldBuilder().addBuilder(
-            com.adtiming.om.pb.CrossPromotionPB.Range.getDefaultInstance());
+            com.adtiming.om.pb.CommonPB.Range.getDefaultInstance());
       }
       /**
        * <code>repeated .Range osv_white_range = 20;</code>
        */
-      public com.adtiming.om.pb.CrossPromotionPB.Range.Builder addOsvWhiteRangeBuilder(
+      public com.adtiming.om.pb.CommonPB.Range.Builder addOsvWhiteRangeBuilder(
           int index) {
         return getOsvWhiteRangeFieldBuilder().addBuilder(
-            index, com.adtiming.om.pb.CrossPromotionPB.Range.getDefaultInstance());
+            index, com.adtiming.om.pb.CommonPB.Range.getDefaultInstance());
       }
       /**
        * <code>repeated .Range osv_white_range = 20;</code>
        */
-      public java.util.List<com.adtiming.om.pb.CrossPromotionPB.Range.Builder> 
+      public java.util.List<com.adtiming.om.pb.CommonPB.Range.Builder> 
            getOsvWhiteRangeBuilderList() {
         return getOsvWhiteRangeFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.adtiming.om.pb.CrossPromotionPB.Range, com.adtiming.om.pb.CrossPromotionPB.Range.Builder, com.adtiming.om.pb.CrossPromotionPB.RangeOrBuilder> 
+          com.adtiming.om.pb.CommonPB.Range, com.adtiming.om.pb.CommonPB.Range.Builder, com.adtiming.om.pb.CommonPB.RangeOrBuilder> 
           getOsvWhiteRangeFieldBuilder() {
         if (osvWhiteRangeBuilder_ == null) {
           osvWhiteRangeBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.adtiming.om.pb.CrossPromotionPB.Range, com.adtiming.om.pb.CrossPromotionPB.Range.Builder, com.adtiming.om.pb.CrossPromotionPB.RangeOrBuilder>(
+              com.adtiming.om.pb.CommonPB.Range, com.adtiming.om.pb.CommonPB.Range.Builder, com.adtiming.om.pb.CommonPB.RangeOrBuilder>(
                   osvWhiteRange_,
                   ((bitField0_ & 0x00080000) == 0x00080000),
                   getParentForChildren(),
@@ -7710,22 +7710,22 @@ public final class CrossPromotionPB {
         return this;
       }
 
-      private java.util.List<com.adtiming.om.pb.CrossPromotionPB.Range> osvBlackRange_ =
+      private java.util.List<com.adtiming.om.pb.CommonPB.Range> osvBlackRange_ =
         java.util.Collections.emptyList();
       private void ensureOsvBlackRangeIsMutable() {
         if (!((bitField0_ & 0x00200000) == 0x00200000)) {
-          osvBlackRange_ = new java.util.ArrayList<com.adtiming.om.pb.CrossPromotionPB.Range>(osvBlackRange_);
+          osvBlackRange_ = new java.util.ArrayList<com.adtiming.om.pb.CommonPB.Range>(osvBlackRange_);
           bitField0_ |= 0x00200000;
          }
       }
 
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.adtiming.om.pb.CrossPromotionPB.Range, com.adtiming.om.pb.CrossPromotionPB.Range.Builder, com.adtiming.om.pb.CrossPromotionPB.RangeOrBuilder> osvBlackRangeBuilder_;
+          com.adtiming.om.pb.CommonPB.Range, com.adtiming.om.pb.CommonPB.Range.Builder, com.adtiming.om.pb.CommonPB.RangeOrBuilder> osvBlackRangeBuilder_;
 
       /**
        * <code>repeated .Range osv_black_range = 22;</code>
        */
-      public java.util.List<com.adtiming.om.pb.CrossPromotionPB.Range> getOsvBlackRangeList() {
+      public java.util.List<com.adtiming.om.pb.CommonPB.Range> getOsvBlackRangeList() {
         if (osvBlackRangeBuilder_ == null) {
           return java.util.Collections.unmodifiableList(osvBlackRange_);
         } else {
@@ -7745,7 +7745,7 @@ public final class CrossPromotionPB {
       /**
        * <code>repeated .Range osv_black_range = 22;</code>
        */
-      public com.adtiming.om.pb.CrossPromotionPB.Range getOsvBlackRange(int index) {
+      public com.adtiming.om.pb.CommonPB.Range getOsvBlackRange(int index) {
         if (osvBlackRangeBuilder_ == null) {
           return osvBlackRange_.get(index);
         } else {
@@ -7756,7 +7756,7 @@ public final class CrossPromotionPB {
        * <code>repeated .Range osv_black_range = 22;</code>
        */
       public Builder setOsvBlackRange(
-          int index, com.adtiming.om.pb.CrossPromotionPB.Range value) {
+          int index, com.adtiming.om.pb.CommonPB.Range value) {
         if (osvBlackRangeBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7773,7 +7773,7 @@ public final class CrossPromotionPB {
        * <code>repeated .Range osv_black_range = 22;</code>
        */
       public Builder setOsvBlackRange(
-          int index, com.adtiming.om.pb.CrossPromotionPB.Range.Builder builderForValue) {
+          int index, com.adtiming.om.pb.CommonPB.Range.Builder builderForValue) {
         if (osvBlackRangeBuilder_ == null) {
           ensureOsvBlackRangeIsMutable();
           osvBlackRange_.set(index, builderForValue.build());
@@ -7786,7 +7786,7 @@ public final class CrossPromotionPB {
       /**
        * <code>repeated .Range osv_black_range = 22;</code>
        */
-      public Builder addOsvBlackRange(com.adtiming.om.pb.CrossPromotionPB.Range value) {
+      public Builder addOsvBlackRange(com.adtiming.om.pb.CommonPB.Range value) {
         if (osvBlackRangeBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7803,7 +7803,7 @@ public final class CrossPromotionPB {
        * <code>repeated .Range osv_black_range = 22;</code>
        */
       public Builder addOsvBlackRange(
-          int index, com.adtiming.om.pb.CrossPromotionPB.Range value) {
+          int index, com.adtiming.om.pb.CommonPB.Range value) {
         if (osvBlackRangeBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -7820,7 +7820,7 @@ public final class CrossPromotionPB {
        * <code>repeated .Range osv_black_range = 22;</code>
        */
       public Builder addOsvBlackRange(
-          com.adtiming.om.pb.CrossPromotionPB.Range.Builder builderForValue) {
+          com.adtiming.om.pb.CommonPB.Range.Builder builderForValue) {
         if (osvBlackRangeBuilder_ == null) {
           ensureOsvBlackRangeIsMutable();
           osvBlackRange_.add(builderForValue.build());
@@ -7834,7 +7834,7 @@ public final class CrossPromotionPB {
        * <code>repeated .Range osv_black_range = 22;</code>
        */
       public Builder addOsvBlackRange(
-          int index, com.adtiming.om.pb.CrossPromotionPB.Range.Builder builderForValue) {
+          int index, com.adtiming.om.pb.CommonPB.Range.Builder builderForValue) {
         if (osvBlackRangeBuilder_ == null) {
           ensureOsvBlackRangeIsMutable();
           osvBlackRange_.add(index, builderForValue.build());
@@ -7848,7 +7848,7 @@ public final class CrossPromotionPB {
        * <code>repeated .Range osv_black_range = 22;</code>
        */
       public Builder addAllOsvBlackRange(
-          java.lang.Iterable<? extends com.adtiming.om.pb.CrossPromotionPB.Range> values) {
+          java.lang.Iterable<? extends com.adtiming.om.pb.CommonPB.Range> values) {
         if (osvBlackRangeBuilder_ == null) {
           ensureOsvBlackRangeIsMutable();
           com.google.protobuf.AbstractMessageLite.Builder.addAll(
@@ -7888,14 +7888,14 @@ public final class CrossPromotionPB {
       /**
        * <code>repeated .Range osv_black_range = 22;</code>
        */
-      public com.adtiming.om.pb.CrossPromotionPB.Range.Builder getOsvBlackRangeBuilder(
+      public com.adtiming.om.pb.CommonPB.Range.Builder getOsvBlackRangeBuilder(
           int index) {
         return getOsvBlackRangeFieldBuilder().getBuilder(index);
       }
       /**
        * <code>repeated .Range osv_black_range = 22;</code>
        */
-      public com.adtiming.om.pb.CrossPromotionPB.RangeOrBuilder getOsvBlackRangeOrBuilder(
+      public com.adtiming.om.pb.CommonPB.RangeOrBuilder getOsvBlackRangeOrBuilder(
           int index) {
         if (osvBlackRangeBuilder_ == null) {
           return osvBlackRange_.get(index);  } else {
@@ -7905,7 +7905,7 @@ public final class CrossPromotionPB {
       /**
        * <code>repeated .Range osv_black_range = 22;</code>
        */
-      public java.util.List<? extends com.adtiming.om.pb.CrossPromotionPB.RangeOrBuilder> 
+      public java.util.List<? extends com.adtiming.om.pb.CommonPB.RangeOrBuilder> 
            getOsvBlackRangeOrBuilderList() {
         if (osvBlackRangeBuilder_ != null) {
           return osvBlackRangeBuilder_.getMessageOrBuilderList();
@@ -7916,31 +7916,31 @@ public final class CrossPromotionPB {
       /**
        * <code>repeated .Range osv_black_range = 22;</code>
        */
-      public com.adtiming.om.pb.CrossPromotionPB.Range.Builder addOsvBlackRangeBuilder() {
+      public com.adtiming.om.pb.CommonPB.Range.Builder addOsvBlackRangeBuilder() {
         return getOsvBlackRangeFieldBuilder().addBuilder(
-            com.adtiming.om.pb.CrossPromotionPB.Range.getDefaultInstance());
+            com.adtiming.om.pb.CommonPB.Range.getDefaultInstance());
       }
       /**
        * <code>repeated .Range osv_black_range = 22;</code>
        */
-      public com.adtiming.om.pb.CrossPromotionPB.Range.Builder addOsvBlackRangeBuilder(
+      public com.adtiming.om.pb.CommonPB.Range.Builder addOsvBlackRangeBuilder(
           int index) {
         return getOsvBlackRangeFieldBuilder().addBuilder(
-            index, com.adtiming.om.pb.CrossPromotionPB.Range.getDefaultInstance());
+            index, com.adtiming.om.pb.CommonPB.Range.getDefaultInstance());
       }
       /**
        * <code>repeated .Range osv_black_range = 22;</code>
        */
-      public java.util.List<com.adtiming.om.pb.CrossPromotionPB.Range.Builder> 
+      public java.util.List<com.adtiming.om.pb.CommonPB.Range.Builder> 
            getOsvBlackRangeBuilderList() {
         return getOsvBlackRangeFieldBuilder().getBuilderList();
       }
       private com.google.protobuf.RepeatedFieldBuilderV3<
-          com.adtiming.om.pb.CrossPromotionPB.Range, com.adtiming.om.pb.CrossPromotionPB.Range.Builder, com.adtiming.om.pb.CrossPromotionPB.RangeOrBuilder> 
+          com.adtiming.om.pb.CommonPB.Range, com.adtiming.om.pb.CommonPB.Range.Builder, com.adtiming.om.pb.CommonPB.RangeOrBuilder> 
           getOsvBlackRangeFieldBuilder() {
         if (osvBlackRangeBuilder_ == null) {
           osvBlackRangeBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
-              com.adtiming.om.pb.CrossPromotionPB.Range, com.adtiming.om.pb.CrossPromotionPB.Range.Builder, com.adtiming.om.pb.CrossPromotionPB.RangeOrBuilder>(
+              com.adtiming.om.pb.CommonPB.Range, com.adtiming.om.pb.CommonPB.Range.Builder, com.adtiming.om.pb.CommonPB.RangeOrBuilder>(
                   osvBlackRange_,
                   ((bitField0_ & 0x00200000) == 0x00200000),
                   getParentForChildren(),
@@ -7993,822 +7993,6 @@ public final class CrossPromotionPB {
     }
 
     public com.adtiming.om.pb.CrossPromotionPB.CpCampaignTargeting getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface RangeOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:Range)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>optional string min = 1;</code>
-     */
-    java.lang.String getMin();
-    /**
-     * <code>optional string min = 1;</code>
-     */
-    com.google.protobuf.ByteString
-        getMinBytes();
-
-    /**
-     * <code>optional string max = 2;</code>
-     */
-    java.lang.String getMax();
-    /**
-     * <code>optional string max = 2;</code>
-     */
-    com.google.protobuf.ByteString
-        getMaxBytes();
-
-    /**
-     * <pre>
-     * true: open, false: close
-     * </pre>
-     *
-     * <code>optional bool min_type = 3;</code>
-     */
-    boolean getMinType();
-
-    /**
-     * <pre>
-     * true: open, false: close
-     * </pre>
-     *
-     * <code>optional bool max_type = 4;</code>
-     */
-    boolean getMaxType();
-  }
-  /**
-   * <pre>
-   * 区间, *_type 为 true 表式开区间, false 表示闭区间
-   * </pre>
-   *
-   * Protobuf type {@code Range}
-   */
-  public  static final class Range extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:Range)
-      RangeOrBuilder {
-    // Use Range.newBuilder() to construct.
-    private Range(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private Range() {
-      min_ = "";
-      max_ = "";
-      minType_ = false;
-      maxType_ = false;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
-    }
-    private Range(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      int mutable_bitField0_ = 0;
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!input.skipField(tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 10: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              min_ = s;
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              max_ = s;
-              break;
-            }
-            case 24: {
-
-              minType_ = input.readBool();
-              break;
-            }
-            case 32: {
-
-              maxType_ = input.readBool();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.adtiming.om.pb.CrossPromotionPB.internal_static_Range_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.adtiming.om.pb.CrossPromotionPB.internal_static_Range_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.adtiming.om.pb.CrossPromotionPB.Range.class, com.adtiming.om.pb.CrossPromotionPB.Range.Builder.class);
-    }
-
-    public static final int MIN_FIELD_NUMBER = 1;
-    private volatile java.lang.Object min_;
-    /**
-     * <code>optional string min = 1;</code>
-     */
-    public java.lang.String getMin() {
-      java.lang.Object ref = min_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        min_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>optional string min = 1;</code>
-     */
-    public com.google.protobuf.ByteString
-        getMinBytes() {
-      java.lang.Object ref = min_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        min_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int MAX_FIELD_NUMBER = 2;
-    private volatile java.lang.Object max_;
-    /**
-     * <code>optional string max = 2;</code>
-     */
-    public java.lang.String getMax() {
-      java.lang.Object ref = max_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        max_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>optional string max = 2;</code>
-     */
-    public com.google.protobuf.ByteString
-        getMaxBytes() {
-      java.lang.Object ref = max_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        max_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int MIN_TYPE_FIELD_NUMBER = 3;
-    private boolean minType_;
-    /**
-     * <pre>
-     * true: open, false: close
-     * </pre>
-     *
-     * <code>optional bool min_type = 3;</code>
-     */
-    public boolean getMinType() {
-      return minType_;
-    }
-
-    public static final int MAX_TYPE_FIELD_NUMBER = 4;
-    private boolean maxType_;
-    /**
-     * <pre>
-     * true: open, false: close
-     * </pre>
-     *
-     * <code>optional bool max_type = 4;</code>
-     */
-    public boolean getMaxType() {
-      return maxType_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (!getMinBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, min_);
-      }
-      if (!getMaxBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, max_);
-      }
-      if (minType_ != false) {
-        output.writeBool(3, minType_);
-      }
-      if (maxType_ != false) {
-        output.writeBool(4, maxType_);
-      }
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (!getMinBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, min_);
-      }
-      if (!getMaxBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, max_);
-      }
-      if (minType_ != false) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(3, minType_);
-      }
-      if (maxType_ != false) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBoolSize(4, maxType_);
-      }
-      memoizedSize = size;
-      return size;
-    }
-
-    private static final long serialVersionUID = 0L;
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof com.adtiming.om.pb.CrossPromotionPB.Range)) {
-        return super.equals(obj);
-      }
-      com.adtiming.om.pb.CrossPromotionPB.Range other = (com.adtiming.om.pb.CrossPromotionPB.Range) obj;
-
-      boolean result = true;
-      result = result && getMin()
-          .equals(other.getMin());
-      result = result && getMax()
-          .equals(other.getMax());
-      result = result && (getMinType()
-          == other.getMinType());
-      result = result && (getMaxType()
-          == other.getMaxType());
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptorForType().hashCode();
-      hash = (37 * hash) + MIN_FIELD_NUMBER;
-      hash = (53 * hash) + getMin().hashCode();
-      hash = (37 * hash) + MAX_FIELD_NUMBER;
-      hash = (53 * hash) + getMax().hashCode();
-      hash = (37 * hash) + MIN_TYPE_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-          getMinType());
-      hash = (37 * hash) + MAX_TYPE_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
-          getMaxType());
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static com.adtiming.om.pb.CrossPromotionPB.Range parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.adtiming.om.pb.CrossPromotionPB.Range parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.adtiming.om.pb.CrossPromotionPB.Range parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.adtiming.om.pb.CrossPromotionPB.Range parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.adtiming.om.pb.CrossPromotionPB.Range parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.adtiming.om.pb.CrossPromotionPB.Range parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.adtiming.om.pb.CrossPromotionPB.Range parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static com.adtiming.om.pb.CrossPromotionPB.Range parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.adtiming.om.pb.CrossPromotionPB.Range parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.adtiming.om.pb.CrossPromotionPB.Range parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.adtiming.om.pb.CrossPromotionPB.Range prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * <pre>
-     * 区间, *_type 为 true 表式开区间, false 表示闭区间
-     * </pre>
-     *
-     * Protobuf type {@code Range}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:Range)
-        com.adtiming.om.pb.CrossPromotionPB.RangeOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.adtiming.om.pb.CrossPromotionPB.internal_static_Range_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.adtiming.om.pb.CrossPromotionPB.internal_static_Range_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.adtiming.om.pb.CrossPromotionPB.Range.class, com.adtiming.om.pb.CrossPromotionPB.Range.Builder.class);
-      }
-
-      // Construct using com.adtiming.om.pb.CrossPromotionPB.Range.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        min_ = "";
-
-        max_ = "";
-
-        minType_ = false;
-
-        maxType_ = false;
-
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.adtiming.om.pb.CrossPromotionPB.internal_static_Range_descriptor;
-      }
-
-      public com.adtiming.om.pb.CrossPromotionPB.Range getDefaultInstanceForType() {
-        return com.adtiming.om.pb.CrossPromotionPB.Range.getDefaultInstance();
-      }
-
-      public com.adtiming.om.pb.CrossPromotionPB.Range build() {
-        com.adtiming.om.pb.CrossPromotionPB.Range result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.adtiming.om.pb.CrossPromotionPB.Range buildPartial() {
-        com.adtiming.om.pb.CrossPromotionPB.Range result = new com.adtiming.om.pb.CrossPromotionPB.Range(this);
-        result.min_ = min_;
-        result.max_ = max_;
-        result.minType_ = minType_;
-        result.maxType_ = maxType_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.adtiming.om.pb.CrossPromotionPB.Range) {
-          return mergeFrom((com.adtiming.om.pb.CrossPromotionPB.Range)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.adtiming.om.pb.CrossPromotionPB.Range other) {
-        if (other == com.adtiming.om.pb.CrossPromotionPB.Range.getDefaultInstance()) return this;
-        if (!other.getMin().isEmpty()) {
-          min_ = other.min_;
-          onChanged();
-        }
-        if (!other.getMax().isEmpty()) {
-          max_ = other.max_;
-          onChanged();
-        }
-        if (other.getMinType() != false) {
-          setMinType(other.getMinType());
-        }
-        if (other.getMaxType() != false) {
-          setMaxType(other.getMaxType());
-        }
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.adtiming.om.pb.CrossPromotionPB.Range parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.adtiming.om.pb.CrossPromotionPB.Range) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private java.lang.Object min_ = "";
-      /**
-       * <code>optional string min = 1;</code>
-       */
-      public java.lang.String getMin() {
-        java.lang.Object ref = min_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          min_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string min = 1;</code>
-       */
-      public com.google.protobuf.ByteString
-          getMinBytes() {
-        java.lang.Object ref = min_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          min_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string min = 1;</code>
-       */
-      public Builder setMin(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        min_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string min = 1;</code>
-       */
-      public Builder clearMin() {
-        
-        min_ = getDefaultInstance().getMin();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string min = 1;</code>
-       */
-      public Builder setMinBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        min_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object max_ = "";
-      /**
-       * <code>optional string max = 2;</code>
-       */
-      public java.lang.String getMax() {
-        java.lang.Object ref = max_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          max_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>optional string max = 2;</code>
-       */
-      public com.google.protobuf.ByteString
-          getMaxBytes() {
-        java.lang.Object ref = max_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          max_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>optional string max = 2;</code>
-       */
-      public Builder setMax(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        max_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string max = 2;</code>
-       */
-      public Builder clearMax() {
-        
-        max_ = getDefaultInstance().getMax();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>optional string max = 2;</code>
-       */
-      public Builder setMaxBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        max_ = value;
-        onChanged();
-        return this;
-      }
-
-      private boolean minType_ ;
-      /**
-       * <pre>
-       * true: open, false: close
-       * </pre>
-       *
-       * <code>optional bool min_type = 3;</code>
-       */
-      public boolean getMinType() {
-        return minType_;
-      }
-      /**
-       * <pre>
-       * true: open, false: close
-       * </pre>
-       *
-       * <code>optional bool min_type = 3;</code>
-       */
-      public Builder setMinType(boolean value) {
-        
-        minType_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * true: open, false: close
-       * </pre>
-       *
-       * <code>optional bool min_type = 3;</code>
-       */
-      public Builder clearMinType() {
-        
-        minType_ = false;
-        onChanged();
-        return this;
-      }
-
-      private boolean maxType_ ;
-      /**
-       * <pre>
-       * true: open, false: close
-       * </pre>
-       *
-       * <code>optional bool max_type = 4;</code>
-       */
-      public boolean getMaxType() {
-        return maxType_;
-      }
-      /**
-       * <pre>
-       * true: open, false: close
-       * </pre>
-       *
-       * <code>optional bool max_type = 4;</code>
-       */
-      public Builder setMaxType(boolean value) {
-        
-        maxType_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * true: open, false: close
-       * </pre>
-       *
-       * <code>optional bool max_type = 4;</code>
-       */
-      public Builder clearMaxType() {
-        
-        maxType_ = false;
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return this;
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:Range)
-    }
-
-    // @@protoc_insertion_point(class_scope:Range)
-    private static final com.adtiming.om.pb.CrossPromotionPB.Range DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.adtiming.om.pb.CrossPromotionPB.Range();
-    }
-
-    public static com.adtiming.om.pb.CrossPromotionPB.Range getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<Range>
-        PARSER = new com.google.protobuf.AbstractParser<Range>() {
-      public Range parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-          return new Range(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<Range> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<Range> getParserForType() {
-      return PARSER;
-    }
-
-    public com.adtiming.om.pb.CrossPromotionPB.Range getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -14465,11 +13649,6 @@ public final class CrossPromotionPB {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_CpCampaignTargeting_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_Range_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_Range_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_CpCreative_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -14498,58 +13677,57 @@ public final class CrossPromotionPB {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\010cp.proto\"\241\004\n\nCpCampaign\022\n\n\002id\030\001 \001(\003\022\027\n" +
-      "\017ska_campaign_id\030\002 \001(\005\022\024\n\014publisher_id\030\003" +
-      " \001(\005\022\014\n\004type\030\004 \001(\005\022\014\n\004name\030\005 \001(\t\022\016\n\006app_" +
-      "id\030\006 \001(\t\022\020\n\010app_name\030\007 \001(\t\022\023\n\013preview_ur" +
-      "l\030\010 \001(\t\022\020\n\010platform\030\t \001(\005\022\024\n\014billing_typ" +
-      "e\030\n \001(\005\022\r\n\005price\030\013 \001(\002\022\021\n\tdaily_cap\030\014 \001(" +
-      "\005\022\024\n\014daily_budget\030\r \001(\002\022\024\n\014max_bidprice\030" +
-      "\016 \001(\002\022\020\n\010bidprice\030\017 \001(\002\022:\n\020country_bidpr" +
-      "ice\030\020 \003(\0132 .CpCampaign.CountryBidpriceEn" +
-      "try\022\020\n\010impr_cap\030\021 \001(\005\022\021\n\timpr_freq\030\022 \001(\005",
-      "\022\021\n\tad_domain\030\023 \001(\t\022\021\n\tclick_url\030\024 \001(\t\022\025" +
-      "\n\rclick_tk_urls\030\025 \003(\t\022\024\n\014impr_tk_urls\030\026 " +
-      "\003(\t\022\021\n\topen_type\030\027 \001(\005\0326\n\024CountryBidpric" +
-      "eEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\002:\0028\001\"\213" +
-      "\004\n\023CpCampaignTargeting\022\023\n\013campaign_id\030\001 " +
-      "\001(\003\022\017\n\007contype\030\002 \001(\005\022\024\n\014mccmnc_white\030\003 \003" +
-      "(\t\022\024\n\014mccmnc_black\030\004 \003(\t\022\025\n\rcountry_whit" +
-      "e\030\005 \003(\t\022\025\n\rcountry_black\030\006 \003(\t\022\024\n\014pubapp" +
-      "_white\030\007 \003(\005\022\024\n\014pubapp_black\030\010 \003(\005\022\027\n\017pl" +
-      "acement_white\030\t \003(\005\022\027\n\017placement_black\030\n",
-      " \003(\005\022\030\n\020devicetype_white\030\013 \003(\005\022\030\n\020device" +
-      "type_black\030\014 \003(\005\022\022\n\nmake_white\030\r \003(\t\022\022\n\n" +
-      "make_black\030\016 \003(\t\022\023\n\013brand_white\030\017 \003(\t\022\023\n" +
-      "\013brand_black\030\020 \003(\t\022\023\n\013model_white\030\021 \003(\t\022" +
-      "\023\n\013model_black\030\022 \003(\t\022\021\n\tosv_white\030\023 \003(\t\022" +
-      "\037\n\017osv_white_range\030\024 \003(\0132\006.Range\022\021\n\tosv_" +
-      "black\030\025 \003(\t\022\037\n\017osv_black_range\030\026 \003(\0132\006.R" +
-      "ange\"E\n\005Range\022\013\n\003min\030\001 \001(\t\022\013\n\003max\030\002 \001(\t\022" +
-      "\020\n\010min_type\030\003 \001(\010\022\020\n\010max_type\030\004 \001(\010\"\234\002\n\n" +
-      "CpCreative\022\n\n\002id\030\001 \001(\003\022\023\n\013campaign_id\030\002 ",
-      "\001(\003\022\014\n\004name\030\003 \001(\t\022\036\n\004type\030\004 \001(\0162\020.CpCrea" +
-      "tive.Type\022\r\n\005title\030\005 \001(\t\022\r\n\005descn\030\006 \001(\t\022" +
-      "\024\n\014material_ids\030\007 \003(\003\022\020\n\010play_url\030\010 \001(\t\022" +
-      "\016\n\006weight\030\t \001(\005\022\020\n\010template\030\n \001(\005\022\030\n\020end" +
-      "card_template\030\013 \001(\005\"=\n\004Type\022\n\n\006Banner\020\000\022" +
-      "\n\n\006Native\020\001\022\t\n\005Video\020\002\022\022\n\016CrossPromotion" +
-      "\020\003\"\305\001\n\nCpMaterial\022\n\n\002id\030\001 \001(\003\022\013\n\003url\030\002 \001" +
-      "(\t\022\r\n\005width\030\003 \001(\005\022\016\n\006height\030\004 \001(\005\022\014\n\004siz" +
-      "e\030\005 \001(\005\022\036\n\004type\030\006 \001(\0162\020.CpMaterial.Type\022" +
-      "\021\n\tmime_type\030\007 \001(\t\022\026\n\016video_duration\030\010 \001",
-      "(\005\"&\n\004Type\022\t\n\005Image\020\000\022\010\n\004Icon\020\001\022\t\n\005Video" +
-      "\020\002\"w\n\nH5Template\022\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001" +
-      "(\t\022\014\n\004type\030\003 \001(\005\022\013\n\003url\030\004 \001(\t\022\r\n\005width\030\005" +
-      " \001(\005\022\016\n\006height\030\006 \001(\005\022\025\n\rneed_carousel\030\007 " +
-      "\001(\010\"\364\001\n\003App\022\n\n\002id\030\001 \001(\005\022\016\n\006app_id\030\002 \001(\t\022" +
-      "\014\n\004plat\030\003 \001(\005\022\014\n\004name\030\004 \001(\t\022\014\n\004icon\030\005 \001(" +
-      "\t\022\024\n\014rating_value\030\006 \001(\002\022\024\n\014rating_count\030" +
-      "\007 \001(\005\022\017\n\007osv_min\030\010 \001(\t\022\017\n\007osv_max\030\t \001(\t\022" +
-      "\020\n\010category\030\n \001(\t\022\023\n\013category_id\030\013 \001(\005\022\030" +
-      "\n\020sub_category_id1\030\014 \001(\005\022\030\n\020sub_category",
-      "_id2\030\r \001(\005B&\n\022com.adtiming.om.pbB\020CrossP" +
-      "romotionPBb\006proto3"
+      "\n\010cp.proto\032\014common.proto\"\241\004\n\nCpCampaign\022" +
+      "\n\n\002id\030\001 \001(\003\022\027\n\017ska_campaign_id\030\002 \001(\005\022\024\n\014" +
+      "publisher_id\030\003 \001(\005\022\014\n\004type\030\004 \001(\005\022\014\n\004name" +
+      "\030\005 \001(\t\022\016\n\006app_id\030\006 \001(\t\022\020\n\010app_name\030\007 \001(\t" +
+      "\022\023\n\013preview_url\030\010 \001(\t\022\020\n\010platform\030\t \001(\005\022" +
+      "\024\n\014billing_type\030\n \001(\005\022\r\n\005price\030\013 \001(\002\022\021\n\t" +
+      "daily_cap\030\014 \001(\005\022\024\n\014daily_budget\030\r \001(\002\022\024\n" +
+      "\014max_bidprice\030\016 \001(\002\022\020\n\010bidprice\030\017 \001(\002\022:\n" +
+      "\020country_bidprice\030\020 \003(\0132 .CpCampaign.Cou" +
+      "ntryBidpriceEntry\022\020\n\010impr_cap\030\021 \001(\005\022\021\n\ti",
+      "mpr_freq\030\022 \001(\005\022\021\n\tad_domain\030\023 \001(\t\022\021\n\tcli" +
+      "ck_url\030\024 \001(\t\022\025\n\rclick_tk_urls\030\025 \003(\t\022\024\n\014i" +
+      "mpr_tk_urls\030\026 \003(\t\022\021\n\topen_type\030\027 \001(\005\0326\n\024" +
+      "CountryBidpriceEntry\022\013\n\003key\030\001 \001(\t\022\r\n\005val" +
+      "ue\030\002 \001(\002:\0028\001\"\213\004\n\023CpCampaignTargeting\022\023\n\013" +
+      "campaign_id\030\001 \001(\003\022\017\n\007contype\030\002 \001(\005\022\024\n\014mc" +
+      "cmnc_white\030\003 \003(\t\022\024\n\014mccmnc_black\030\004 \003(\t\022\025" +
+      "\n\rcountry_white\030\005 \003(\t\022\025\n\rcountry_black\030\006" +
+      " \003(\t\022\024\n\014pubapp_white\030\007 \003(\005\022\024\n\014pubapp_bla" +
+      "ck\030\010 \003(\005\022\027\n\017placement_white\030\t \003(\005\022\027\n\017pla",
+      "cement_black\030\n \003(\005\022\030\n\020devicetype_white\030\013" +
+      " \003(\005\022\030\n\020devicetype_black\030\014 \003(\005\022\022\n\nmake_w" +
+      "hite\030\r \003(\t\022\022\n\nmake_black\030\016 \003(\t\022\023\n\013brand_" +
+      "white\030\017 \003(\t\022\023\n\013brand_black\030\020 \003(\t\022\023\n\013mode" +
+      "l_white\030\021 \003(\t\022\023\n\013model_black\030\022 \003(\t\022\021\n\tos" +
+      "v_white\030\023 \003(\t\022\037\n\017osv_white_range\030\024 \003(\0132\006" +
+      ".Range\022\021\n\tosv_black\030\025 \003(\t\022\037\n\017osv_black_r" +
+      "ange\030\026 \003(\0132\006.Range\"\234\002\n\nCpCreative\022\n\n\002id\030" +
+      "\001 \001(\003\022\023\n\013campaign_id\030\002 \001(\003\022\014\n\004name\030\003 \001(\t" +
+      "\022\036\n\004type\030\004 \001(\0162\020.CpCreative.Type\022\r\n\005titl",
+      "e\030\005 \001(\t\022\r\n\005descn\030\006 \001(\t\022\024\n\014material_ids\030\007" +
+      " \003(\003\022\020\n\010play_url\030\010 \001(\t\022\016\n\006weight\030\t \001(\005\022\020" +
+      "\n\010template\030\n \001(\005\022\030\n\020endcard_template\030\013 \001" +
+      "(\005\"=\n\004Type\022\n\n\006Banner\020\000\022\n\n\006Native\020\001\022\t\n\005Vi" +
+      "deo\020\002\022\022\n\016CrossPromotion\020\003\"\305\001\n\nCpMaterial" +
+      "\022\n\n\002id\030\001 \001(\003\022\013\n\003url\030\002 \001(\t\022\r\n\005width\030\003 \001(\005" +
+      "\022\016\n\006height\030\004 \001(\005\022\014\n\004size\030\005 \001(\005\022\036\n\004type\030\006" +
+      " \001(\0162\020.CpMaterial.Type\022\021\n\tmime_type\030\007 \001(" +
+      "\t\022\026\n\016video_duration\030\010 \001(\005\"&\n\004Type\022\t\n\005Ima" +
+      "ge\020\000\022\010\n\004Icon\020\001\022\t\n\005Video\020\002\"w\n\nH5Template\022",
+      "\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\014\n\004type\030\003 \001(\005\022" +
+      "\013\n\003url\030\004 \001(\t\022\r\n\005width\030\005 \001(\005\022\016\n\006height\030\006 " +
+      "\001(\005\022\025\n\rneed_carousel\030\007 \001(\010\"\364\001\n\003App\022\n\n\002id" +
+      "\030\001 \001(\005\022\016\n\006app_id\030\002 \001(\t\022\014\n\004plat\030\003 \001(\005\022\014\n\004" +
+      "name\030\004 \001(\t\022\014\n\004icon\030\005 \001(\t\022\024\n\014rating_value" +
+      "\030\006 \001(\002\022\024\n\014rating_count\030\007 \001(\005\022\017\n\007osv_min\030" +
+      "\010 \001(\t\022\017\n\007osv_max\030\t \001(\t\022\020\n\010category\030\n \001(\t" +
+      "\022\023\n\013category_id\030\013 \001(\005\022\030\n\020sub_category_id" +
+      "1\030\014 \001(\005\022\030\n\020sub_category_id2\030\r \001(\005B&\n\022com" +
+      ".adtiming.om.pbB\020CrossPromotionPBb\006proto",
+      "3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -14562,6 +13740,7 @@ public final class CrossPromotionPB {
     com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.adtiming.om.pb.CommonPB.getDescriptor(),
         }, assigner);
     internal_static_CpCampaign_descriptor =
       getDescriptor().getMessageTypes().get(0);
@@ -14581,36 +13760,31 @@ public final class CrossPromotionPB {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CpCampaignTargeting_descriptor,
         new java.lang.String[] { "CampaignId", "Contype", "MccmncWhite", "MccmncBlack", "CountryWhite", "CountryBlack", "PubappWhite", "PubappBlack", "PlacementWhite", "PlacementBlack", "DevicetypeWhite", "DevicetypeBlack", "MakeWhite", "MakeBlack", "BrandWhite", "BrandBlack", "ModelWhite", "ModelBlack", "OsvWhite", "OsvWhiteRange", "OsvBlack", "OsvBlackRange", });
-    internal_static_Range_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_Range_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_Range_descriptor,
-        new java.lang.String[] { "Min", "Max", "MinType", "MaxType", });
     internal_static_CpCreative_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_CpCreative_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CpCreative_descriptor,
         new java.lang.String[] { "Id", "CampaignId", "Name", "Type", "Title", "Descn", "MaterialIds", "PlayUrl", "Weight", "Template", "EndcardTemplate", });
     internal_static_CpMaterial_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(3);
     internal_static_CpMaterial_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CpMaterial_descriptor,
         new java.lang.String[] { "Id", "Url", "Width", "Height", "Size", "Type", "MimeType", "VideoDuration", });
     internal_static_H5Template_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_H5Template_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_H5Template_descriptor,
         new java.lang.String[] { "Id", "Name", "Type", "Url", "Width", "Height", "NeedCarousel", });
     internal_static_App_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_App_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_App_descriptor,
         new java.lang.String[] { "Id", "AppId", "Plat", "Name", "Icon", "RatingValue", "RatingCount", "OsvMin", "OsvMax", "Category", "CategoryId", "SubCategoryId1", "SubCategoryId2", });
+    com.adtiming.om.pb.CommonPB.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

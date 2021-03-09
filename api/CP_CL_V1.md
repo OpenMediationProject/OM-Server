@@ -59,6 +59,8 @@
 | expire | int32 | campaign expire time in seconds | |✔︎|
 | rt | int8 | Retargeting mark| 1 |✖︎|
 | ska | Object of [SkAdNetwork](#skadnetwork) | iOS 14 SkAdNetwork | |✖︎|
+| r | float | Revenue, bidPrice or ecpm | 3.6 | ✖︎ |
+| rp | int8 | Revenue Precision, 0:undisclosed,1:exact,2:estimated,3:defined | 0 | ✖︎ |
 
 #### App
 

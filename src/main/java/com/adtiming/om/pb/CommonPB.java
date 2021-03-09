@@ -2731,6 +2731,822 @@ public final class CommonPB {
 
   }
 
+  public interface RangeOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:Range)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string min = 1;</code>
+     */
+    java.lang.String getMin();
+    /**
+     * <code>optional string min = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getMinBytes();
+
+    /**
+     * <code>optional string max = 2;</code>
+     */
+    java.lang.String getMax();
+    /**
+     * <code>optional string max = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getMaxBytes();
+
+    /**
+     * <pre>
+     * true: open, false: close
+     * </pre>
+     *
+     * <code>optional bool min_type = 3;</code>
+     */
+    boolean getMinType();
+
+    /**
+     * <pre>
+     * true: open, false: close
+     * </pre>
+     *
+     * <code>optional bool max_type = 4;</code>
+     */
+    boolean getMaxType();
+  }
+  /**
+   * <pre>
+   * 区间, *_type 为 true 表式开区间, false 表示闭区间
+   * </pre>
+   *
+   * Protobuf type {@code Range}
+   */
+  public  static final class Range extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:Range)
+      RangeOrBuilder {
+    // Use Range.newBuilder() to construct.
+    private Range(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private Range() {
+      min_ = "";
+      max_ = "";
+      minType_ = false;
+      maxType_ = false;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private Range(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              min_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              max_ = s;
+              break;
+            }
+            case 24: {
+
+              minType_ = input.readBool();
+              break;
+            }
+            case 32: {
+
+              maxType_ = input.readBool();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.adtiming.om.pb.CommonPB.internal_static_Range_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.adtiming.om.pb.CommonPB.internal_static_Range_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.adtiming.om.pb.CommonPB.Range.class, com.adtiming.om.pb.CommonPB.Range.Builder.class);
+    }
+
+    public static final int MIN_FIELD_NUMBER = 1;
+    private volatile java.lang.Object min_;
+    /**
+     * <code>optional string min = 1;</code>
+     */
+    public java.lang.String getMin() {
+      java.lang.Object ref = min_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        min_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>optional string min = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getMinBytes() {
+      java.lang.Object ref = min_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        min_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int MAX_FIELD_NUMBER = 2;
+    private volatile java.lang.Object max_;
+    /**
+     * <code>optional string max = 2;</code>
+     */
+    public java.lang.String getMax() {
+      java.lang.Object ref = max_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        max_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>optional string max = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getMaxBytes() {
+      java.lang.Object ref = max_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        max_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int MIN_TYPE_FIELD_NUMBER = 3;
+    private boolean minType_;
+    /**
+     * <pre>
+     * true: open, false: close
+     * </pre>
+     *
+     * <code>optional bool min_type = 3;</code>
+     */
+    public boolean getMinType() {
+      return minType_;
+    }
+
+    public static final int MAX_TYPE_FIELD_NUMBER = 4;
+    private boolean maxType_;
+    /**
+     * <pre>
+     * true: open, false: close
+     * </pre>
+     *
+     * <code>optional bool max_type = 4;</code>
+     */
+    public boolean getMaxType() {
+      return maxType_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getMinBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, min_);
+      }
+      if (!getMaxBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, max_);
+      }
+      if (minType_ != false) {
+        output.writeBool(3, minType_);
+      }
+      if (maxType_ != false) {
+        output.writeBool(4, maxType_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getMinBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, min_);
+      }
+      if (!getMaxBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, max_);
+      }
+      if (minType_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, minType_);
+      }
+      if (maxType_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(4, maxType_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.adtiming.om.pb.CommonPB.Range)) {
+        return super.equals(obj);
+      }
+      com.adtiming.om.pb.CommonPB.Range other = (com.adtiming.om.pb.CommonPB.Range) obj;
+
+      boolean result = true;
+      result = result && getMin()
+          .equals(other.getMin());
+      result = result && getMax()
+          .equals(other.getMax());
+      result = result && (getMinType()
+          == other.getMinType());
+      result = result && (getMaxType()
+          == other.getMaxType());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + MIN_FIELD_NUMBER;
+      hash = (53 * hash) + getMin().hashCode();
+      hash = (37 * hash) + MAX_FIELD_NUMBER;
+      hash = (53 * hash) + getMax().hashCode();
+      hash = (37 * hash) + MIN_TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getMinType());
+      hash = (37 * hash) + MAX_TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getMaxType());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.adtiming.om.pb.CommonPB.Range parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.CommonPB.Range parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.CommonPB.Range parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.CommonPB.Range parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.CommonPB.Range parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.CommonPB.Range parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.CommonPB.Range parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.CommonPB.Range parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.CommonPB.Range parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.CommonPB.Range parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.adtiming.om.pb.CommonPB.Range prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * 区间, *_type 为 true 表式开区间, false 表示闭区间
+     * </pre>
+     *
+     * Protobuf type {@code Range}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:Range)
+        com.adtiming.om.pb.CommonPB.RangeOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.adtiming.om.pb.CommonPB.internal_static_Range_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.adtiming.om.pb.CommonPB.internal_static_Range_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.adtiming.om.pb.CommonPB.Range.class, com.adtiming.om.pb.CommonPB.Range.Builder.class);
+      }
+
+      // Construct using com.adtiming.om.pb.CommonPB.Range.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        min_ = "";
+
+        max_ = "";
+
+        minType_ = false;
+
+        maxType_ = false;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.adtiming.om.pb.CommonPB.internal_static_Range_descriptor;
+      }
+
+      public com.adtiming.om.pb.CommonPB.Range getDefaultInstanceForType() {
+        return com.adtiming.om.pb.CommonPB.Range.getDefaultInstance();
+      }
+
+      public com.adtiming.om.pb.CommonPB.Range build() {
+        com.adtiming.om.pb.CommonPB.Range result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.adtiming.om.pb.CommonPB.Range buildPartial() {
+        com.adtiming.om.pb.CommonPB.Range result = new com.adtiming.om.pb.CommonPB.Range(this);
+        result.min_ = min_;
+        result.max_ = max_;
+        result.minType_ = minType_;
+        result.maxType_ = maxType_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.adtiming.om.pb.CommonPB.Range) {
+          return mergeFrom((com.adtiming.om.pb.CommonPB.Range)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.adtiming.om.pb.CommonPB.Range other) {
+        if (other == com.adtiming.om.pb.CommonPB.Range.getDefaultInstance()) return this;
+        if (!other.getMin().isEmpty()) {
+          min_ = other.min_;
+          onChanged();
+        }
+        if (!other.getMax().isEmpty()) {
+          max_ = other.max_;
+          onChanged();
+        }
+        if (other.getMinType() != false) {
+          setMinType(other.getMinType());
+        }
+        if (other.getMaxType() != false) {
+          setMaxType(other.getMaxType());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.adtiming.om.pb.CommonPB.Range parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.adtiming.om.pb.CommonPB.Range) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object min_ = "";
+      /**
+       * <code>optional string min = 1;</code>
+       */
+      public java.lang.String getMin() {
+        java.lang.Object ref = min_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          min_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string min = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getMinBytes() {
+        java.lang.Object ref = min_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          min_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string min = 1;</code>
+       */
+      public Builder setMin(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        min_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string min = 1;</code>
+       */
+      public Builder clearMin() {
+        
+        min_ = getDefaultInstance().getMin();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string min = 1;</code>
+       */
+      public Builder setMinBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        min_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object max_ = "";
+      /**
+       * <code>optional string max = 2;</code>
+       */
+      public java.lang.String getMax() {
+        java.lang.Object ref = max_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          max_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string max = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getMaxBytes() {
+        java.lang.Object ref = max_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          max_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string max = 2;</code>
+       */
+      public Builder setMax(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        max_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string max = 2;</code>
+       */
+      public Builder clearMax() {
+        
+        max_ = getDefaultInstance().getMax();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string max = 2;</code>
+       */
+      public Builder setMaxBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        max_ = value;
+        onChanged();
+        return this;
+      }
+
+      private boolean minType_ ;
+      /**
+       * <pre>
+       * true: open, false: close
+       * </pre>
+       *
+       * <code>optional bool min_type = 3;</code>
+       */
+      public boolean getMinType() {
+        return minType_;
+      }
+      /**
+       * <pre>
+       * true: open, false: close
+       * </pre>
+       *
+       * <code>optional bool min_type = 3;</code>
+       */
+      public Builder setMinType(boolean value) {
+        
+        minType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * true: open, false: close
+       * </pre>
+       *
+       * <code>optional bool min_type = 3;</code>
+       */
+      public Builder clearMinType() {
+        
+        minType_ = false;
+        onChanged();
+        return this;
+      }
+
+      private boolean maxType_ ;
+      /**
+       * <pre>
+       * true: open, false: close
+       * </pre>
+       *
+       * <code>optional bool max_type = 4;</code>
+       */
+      public boolean getMaxType() {
+        return maxType_;
+      }
+      /**
+       * <pre>
+       * true: open, false: close
+       * </pre>
+       *
+       * <code>optional bool max_type = 4;</code>
+       */
+      public Builder setMaxType(boolean value) {
+        
+        maxType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * true: open, false: close
+       * </pre>
+       *
+       * <code>optional bool max_type = 4;</code>
+       */
+      public Builder clearMaxType() {
+        
+        maxType_ = false;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:Range)
+    }
+
+    // @@protoc_insertion_point(class_scope:Range)
+    private static final com.adtiming.om.pb.CommonPB.Range DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.adtiming.om.pb.CommonPB.Range();
+    }
+
+    public static com.adtiming.om.pb.CommonPB.Range getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<Range>
+        PARSER = new com.google.protobuf.AbstractParser<Range>() {
+      public Range parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new Range(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<Range> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Range> getParserForType() {
+      return PARSER;
+    }
+
+    public com.adtiming.om.pb.CommonPB.Range getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Country_descriptor;
   private static final 
@@ -2746,6 +3562,11 @@ public final class CommonPB {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Currency_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Range_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_Range_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2760,12 +3581,14 @@ public final class CommonPB {
       "\n\004Dict\022\n\n\002id\030\001 \001(\005\022\013\n\003pid\030\002 \001(\005\022\014\n\004name\030" +
       "\003 \001(\t\022\r\n\005value\030\004 \001(\t\"C\n\010Currency\022\020\n\010cur_" +
       "from\030\001 \001(\t\022\016\n\006cur_to\030\002 \001(\t\022\025\n\rexchange_r" +
-      "ate\030\003 \001(\002*\034\n\004Plat\022\007\n\003iOS\020\000\022\013\n\007Android\020\001*" +
-      "c\n\006AdType\022\n\n\006Banner\020\000\022\n\n\006Native\020\001\022\017\n\013Rew" +
-      "ardVideo\020\002\022\020\n\014Interstitial\020\003\022\n\n\006Splash\020\004" +
-      "\022\022\n\016CrossPromotion\020\005* \n\006ABTest\022\010\n\004None\020\000" +
-      "\022\005\n\001A\020\001\022\005\n\001B\020\002B\036\n\022com.adtiming.om.pbB\010Co",
-      "mmonPBb\006proto3"
+      "ate\030\003 \001(\002\"E\n\005Range\022\013\n\003min\030\001 \001(\t\022\013\n\003max\030\002" +
+      " \001(\t\022\020\n\010min_type\030\003 \001(\010\022\020\n\010max_type\030\004 \001(\010" +
+      "*\034\n\004Plat\022\007\n\003iOS\020\000\022\013\n\007Android\020\001*c\n\006AdType" +
+      "\022\n\n\006Banner\020\000\022\n\n\006Native\020\001\022\017\n\013RewardVideo\020" +
+      "\002\022\020\n\014Interstitial\020\003\022\n\n\006Splash\020\004\022\022\n\016Cross",
+      "Promotion\020\005* \n\006ABTest\022\010\n\004None\020\000\022\005\n\001A\020\001\022\005" +
+      "\n\001B\020\002B\036\n\022com.adtiming.om.pbB\010CommonPBb\006p" +
+      "roto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2797,6 +3620,12 @@ public final class CommonPB {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Currency_descriptor,
         new java.lang.String[] { "CurFrom", "CurTo", "ExchangeRate", });
+    internal_static_Range_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_Range_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Range_descriptor,
+        new java.lang.String[] { "Min", "Max", "MinType", "MaxType", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

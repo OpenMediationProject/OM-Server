@@ -51,6 +51,7 @@ public class CommonRequest implements DeviceInfo {
     private Integer gender;   //  gender, {0: unknown, 1: male, 2: female}
     private String cdid;      //  Custom Device ID
     private Map<String, Object> tags; // User tags
+    private Integer atts;            // The status value for app tracking authorization.0 = not determined,1 = restricted,2 = denied,3 = authorized
 
     // not from request params
     // set by api controller
@@ -504,6 +505,14 @@ public class CommonRequest implements DeviceInfo {
 
     public void setTags(Map<String, Object> tags) {
         this.tags = tags;
+    }
+
+    public Integer getAtts() {
+        return atts;
+    }
+
+    public void setAtts(Integer atts) {
+        this.atts = atts;
     }
 
     @JsonIgnore

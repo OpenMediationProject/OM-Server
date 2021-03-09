@@ -6,6 +6,7 @@
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
+| reqId| string | AuctionID |BBD6E1CD8C4B40CB8A624BBC7AFE07D6|✖|
 | ts | int64 | Client timestamp(millisecond) | 1567479919643|✔︎|
 | fit | int32 | First Install Time, unixTimestamp | 1567479919 |✔︎|
 | flt | int32 | First Launch Time, unixTimestamp | 1567479919 |✔︎|
@@ -41,6 +42,7 @@
 | regs | Object of [Regs](#regs) | any legal, governmental, or industry regulations |  |✖︎|
 | cdid | string | Custom DeviceID | |✖︎|
 | tags | Map<string,any> | App defined user tags| { "channel":"a", "likes":[2,6], "gender":1, "age":3 }|✖︎|
+| atts | int8 | The status value for app tracking authorization.<br>0 = not determined,<br>1 = restricted,<br>2 = denied,<br>3 = authorized | 2|✖︎|
 
 ### ConnectionType
 
@@ -133,4 +135,8 @@
 |17|chartboostBid|ChartboostBid|
 |18|mint|Mint|
 |19|crossPromotion|CrossPromotion|
+|20|SigMob|SigMob|
+|21|KsAd|KsAd|
+|22|Ogury|Ogury|
+|23|HyBid|HyBid|
 |30|fyber|Fyber|

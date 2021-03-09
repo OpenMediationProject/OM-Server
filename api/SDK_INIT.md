@@ -111,6 +111,7 @@
 | events | Object of [Events](#events) | events need to report, events with no value have no need to report| |✖︎|
 | ms | Array of [Mediation](#mediation) | Mediation list,<br> **when SDK initialization and load. Do not initial all mediations, The principle is to initialize on demand** |  |✔︎|
 | pls | Array of [Placement](#placement) | Placement list |  |✔︎|
+| ics | int8 | Impression Callback switch, 0-off,1-on | 0 |✔︎|
 
 ### APIs
 
@@ -142,7 +143,8 @@
 | Name | Type | Description | Example | Necessary |
 | --- | ---| --- | --- | --- |
 | id| int32 | [AdNetwork ID](SDK_COMMON.md#adnetwork) | 1 | ✔︎ |
-| n | string | AdNetwork Name| AdMob |✔︎|
+| n | string | AdNetwork Name| ChartboostBid |✔︎|
+| nn | string | AdNetwork Nickname| Helium |✖︎|
 | k | string | AdNetwork Key| 1234567 |✔︎|
 
 ### Placement
@@ -150,6 +152,7 @@
 | Name | Type | Description | Example | Necessary |
 | --- | ---| --- | --- | --- |
 | id | int32 | Placement ID | 2341 | ✔︎ |
+| n | string | Placement Name | Banner01 | ✔︎ |
 | t | int8 | [AdType](SDK_COMMON.md#adtype)| 3 |✔︎|
 | main | int8 | Main Placement mark, 0:No, 1:Yes| 1 |✖︎|
 | fi | int32 | frequencryInterval, Minimum load interval in seconds | 0 |✖︎|
@@ -181,6 +184,7 @@
 | Name | Type | Description | Example | Necessary |
 | --- | ---| --- | --- | --- |
 | id | int32 | Instance ID | 2341 | ✔︎ |
+| n | string | Instance Name | AdMobBanner1 | ✔︎ |
 | m | int32 | [AdNetwork ID](SDK_COMMON.md#adnetwork)| 2 |✔︎|
 | k | string | Mediation Placement ID/Key/ZoneId|  |✔︎|
 | fc | int32 | frequencry_cap, 0 or no this attribute means no control, n means that this user can show up to n ads at most within <fu> hour| 0 |✖︎|
@@ -194,7 +198,7 @@
 ```json
 {
   "d": 1,
-
+  "ics": 1, //Impression callback switch is on
   "events": {
     "url": "https://sdk.adtiming.com/l",
     "mn": 10,
@@ -207,6 +211,11 @@
     "id": 1,
     "n": "AdMob",
     "k": "1234567"
+  }, {
+    "id": 17,
+    "n": "ChartboostBid",
+    "nn": "Helium",
+    "k": "xcdq241d"
   }],
 
   "pls": [{

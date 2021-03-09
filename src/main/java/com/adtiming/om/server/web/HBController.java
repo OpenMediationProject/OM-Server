@@ -134,7 +134,7 @@ public class HBController extends WaterfallBase {
             return hbList;
         }
         //placement target filter
-        if (!matchPlacement(o, p)) {
+        if (matchPlacement(o, p)) {
             return null;
         }
 

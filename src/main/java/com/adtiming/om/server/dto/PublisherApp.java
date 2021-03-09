@@ -67,4 +67,8 @@ public class PublisherApp {
     public List<Integer> getEventIds() {
         return p.getEventIdsList();
     }
+
+    public int getImprCallbackSwitch() {
+        return p.getImprCallbackSwitch();
+    }
 }

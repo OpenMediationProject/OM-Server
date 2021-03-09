@@ -30,7 +30,7 @@ import static com.adtiming.om.server.dto.AdNetwork.ADN_FACEBOOK;
 import static com.adtiming.om.server.dto.WaterfallResponse.*;
 
 @RestController
-public class WaterfallController extends WaterfallBase {
+public class WaterfallControllerV2 extends WaterfallBase {
 
     private static final Logger LOG = LogManager.getLogger();
 
@@ -49,7 +49,7 @@ public class WaterfallController extends WaterfallBase {
     /**
      * waterfall
      */
-    @PostMapping(value = "/wf", params = "v=1")
+    @PostMapping(value = "/wf", params = "v=2")
     public Object wf(HttpServletRequest req,
                      @RequestParam("v") int version, // api version
                      @RequestParam("plat") int plat, // platform
@@ -63,7 +63,7 @@ public class WaterfallController extends WaterfallBase {
             return ResponseEntity.badRequest().build();
         }
 
-        WaterfallResponse res = new WaterfallResponse(o.getAbt(), debug != null);
+        WaterfallResponseV2 res = new WaterfallResponseV2(0, null, o.getAbt(), debug != null);
 
         LrRequest lr = o.copyTo(new LrRequest());
         lr.setWfReq(1);
@@ -119,13 +119,14 @@ public class WaterfallController extends WaterfallBase {
             res.setCode(CODE_PLACEMENT_INVALID).setMsg("placement not allowed");
             return response(res);
         }
+
         InstanceRule rule = cacheService.matchPlacementRule(placement.getId(), o.getCountry(), o);
         if (rule != null) {
             lr.setRuleId(rule.getId());
             lr.setRuleType(rule.getSortType());
             lr.setRp(rule.getPriority());
         }
-
+        res.setHitRule(rule);
         Map<Integer, Instance> bidInsMap = new HashMap<>();
         List<WaterfallInstance> insList = getIns(devDevicePubId, o, placement, res, bidInsMap, rule);
 
@@ -198,11 +199,11 @@ public class WaterfallController extends WaterfallBase {
                                 res.addDebug("instance:%d, bidPrice:%f", iid, bidPrice));
                     }
 
-                    List<Integer> ins = getInsWithBidInstance(o, insList);
+                    List<WaterfallInstance> ins = getWfInsWithBidInstance(o, insList);
                     if (ins == null || ins.isEmpty()) {
-                        res.setCode(CODE_NOAVAILABLE_INSTANCE).setMsg("no available instance");
+                        res.setCode(CODE_INSTANCE_EMPTY).setMsg("instance not found");
                         dr.setResult(response(res));
-                        lr.setStatus(0, res.getMsg()).writeToLog(logService);
+                        lr.setStatus(0, "instance not found").writeToLog(logService);
                         return;
                     }
 
@@ -223,7 +224,25 @@ public class WaterfallController extends WaterfallBase {
 
     @ExceptionHandler(AsyncRequestTimeoutException.class)
     public ResponseEntity<?> asyncExceptionHandler(HttpServletRequest req) throws IOException {
-        return super.asyncExceptionHandler(req);
+        WaterfallResponseV2 res = (WaterfallResponseV2) req.getAttribute("res");
+        LrRequest lr = (LrRequest) req.getAttribute("lr");
+        WaterfallRequest o = (WaterfallRequest) req.getAttribute("params");
+        if (res == null || lr == null || o == null) {
+            return ResponseEntity.noContent().build();
+        }
+        Object insObject = req.getAttribute("insList");
+        if (insObject != null) {
+            //noinspection unchecked
+            List<WaterfallInstance> insList = (List<WaterfallInstance>) insObject;
+            if (!CollectionUtils.isEmpty(insList)) {
+                res.setIns(getWfInsWithBidInstance(o, insList));
+            }
+        }
+        lr.writeToLog(logService);
+        if (res.getIns() == null || res.getIns().isEmpty()) {
+            res.setCode(CODE_NOAVAILABLE_INSTANCE);
+        }
+        return response(res);
     }
 
 }

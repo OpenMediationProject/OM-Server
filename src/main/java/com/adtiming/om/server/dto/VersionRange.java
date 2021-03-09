@@ -1,6 +1,6 @@
 package com.adtiming.om.server.dto;
 
-import com.adtiming.om.pb.CrossPromotionPB;
+import com.adtiming.om.pb.CommonPB;
 import org.apache.commons.lang3.StringUtils;
 
 public class VersionRange {
@@ -8,7 +8,7 @@ public class VersionRange {
     private Version max;
     private boolean minType;//true: open, false: close
     private boolean maxType;//true: open, false: close
-    public VersionRange(CrossPromotionPB.Range range) {
+    public VersionRange(CommonPB.Range range) {
         if (range != null) {
             if (StringUtils.isNotBlank(range.getMax())) {
                 max = Version.of(range.getMax());

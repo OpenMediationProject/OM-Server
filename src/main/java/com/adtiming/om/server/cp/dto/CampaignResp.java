@@ -293,6 +293,14 @@ public class CampaignResp {
         return c.getOpenType();
     }
 
+    public float getR() {
+        return this.mc != null ? this.mc.getFinalBidPrice() : 0;
+    }
+
+    public int getRp() {//Revenue Precision, 0:undisclosed,1:exact,2:estimated,3:defined
+        return 3;
+    }
+
     public static class SkAdNetwork {
         public String adNetworkPayloadVersion;          // AdNetworkVersion
         public String adNetworkId;                      // AdNetworkIdentifier

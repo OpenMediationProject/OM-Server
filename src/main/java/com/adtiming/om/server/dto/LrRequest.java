@@ -55,6 +55,18 @@ public class LrRequest extends CommonRequest {
     private Integer bidWin;
     private Float bidWinPrice;
 
+    // 2021-03-04
+    private int ruleId;    // Mediation Rule ID for instance req|fill|impr|click
+    private float revenue; // Instance Impression Revenue
+    private int rp;        // Revenue Precision0:undisclosed,1:exact,2:estimated,3:defined
+    private int ii;        // Instance Priority
+    private int ruleType = 1; // mediation rule的优化类型，0:Manual 1:Auto
+    private String adnPk;  // Adn Placement Key
+
+    private int plReq;               // PayloadRequest
+    private int plSuccess;           // PayloadSuccess
+    private int plFail;              // PayloadFail
+
     public int getType() {
         return type;
     }
@@ -279,6 +291,82 @@ public class LrRequest extends CommonRequest {
 
     public void setBidWinPrice(Float bidWinPrice) {
         this.bidWinPrice = bidWinPrice;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public int getRuleId() {
+        return ruleId;
+    }
+
+    public void setRuleId(int ruleId) {
+        this.ruleId = ruleId;
+    }
+
+    public float getRevenue() {
+        return revenue;
+    }
+
+    public void setRevenue(float revenue) {
+        this.revenue = revenue;
+    }
+
+    public int getRp() {
+        return rp;
+    }
+
+    public void setRp(int rp) {
+        this.rp = rp;
+    }
+
+    public int getIi() {
+        return ii;
+    }
+
+    public void setIi(int ii) {
+        this.ii = ii;
+    }
+
+    public int getRuleType() {
+        return ruleType;
+    }
+
+    public void setRuleType(int ruleType) {
+        this.ruleType = ruleType;
+    }
+
+    public String getAdnPk() {
+        return adnPk;
+    }
+
+    public void setAdnPk(String adnPk) {
+        this.adnPk = adnPk;
+    }
+
+    public int getPlReq() {
+        return plReq;
+    }
+
+    public void setPlReq(int plReq) {
+        this.plReq = plReq;
+    }
+
+    public int getPlSuccess() {
+        return plSuccess;
+    }
+
+    public void setPlSuccess(int plSuccess) {
+        this.plSuccess = plSuccess;
+    }
+
+    public int getPlFail() {
+        return plFail;
+    }
+
+    public void setPlFail(int plFail) {
+        this.plFail = plFail;
     }
 
     public void writeToLog(LogService logService) {

@@ -3,22 +3,19 @@
 
 package com.adtiming.om.server.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WaterfallResponse extends Debugable<WaterfallResponse> {
-
-    public static final int CODE_COUNTRY_NOT_FOUND = 10;     // country not found
-    public static final int CODE_PUB_APP_INVALID = 20;       // pub app invalid
-    public static final int CODE_PLACEMENT_INVALID = 30;     // placement invalid
-    public static final int CODE_INSTANCE_EMPTY = 40;        // instance empty
-    public static final int CODE_NOAVAILABLE_INSTANCE = 50;  // no available instance
-
+public class WaterfallResponse implements WfResInterface {
     private int code;
     private String msg;
-    private List<Integer> ins;
+    private List<?> ins;
     public List<S2SBidResponse> bidresp;
     private int abt;
+    private List<CharSequence> debug;
 
     public WaterfallResponse(int abt, boolean debug) {
         this.abt = abt;
@@ -27,11 +24,24 @@ public class WaterfallResponse extends Debugable<WaterfallResponse> {
         }
     }
 
+    @Override
+    public void initBidResponse(List<S2SBidResponse> bidresp) {
+        this.bidresp = bidresp;
+    }
+
+    @Override
+    public void addS2sBidResponse(S2SBidResponse res) {
+        if (bidresp == null) {
+            bidresp = new ArrayList<>();
+        }
+        bidresp.add(res);
+    }
+
     public int getCode() {
         return code;
     }
 
-    public WaterfallResponse setCode(int code) {
+    public WfResInterface setCode(int code) {
         this.code = code;
         return this;
     }
@@ -40,17 +50,29 @@ public class WaterfallResponse extends Debugable<WaterfallResponse> {
         return msg;
     }
 
-    public WaterfallResponse setMsg(String msg) {
+    public WfResInterface setMsg(String msg) {
         this.msg = msg;
         return this;
     }
 
-    public List<Integer> getIns() {
+    public List<?> getIns() {
         return ins;
     }
 
-    public WaterfallResponse setIns(List<Integer> ins) {
+    @Override
+    public WfResInterface setIns(List<?> ins) {
         this.ins = ins;
+        return this;
+    }
+
+    @Override
+    public List<CharSequence> getDebug() {
+        return debug;
+    }
+
+    @Override
+    public WfResInterface setDebug(List<CharSequence> debug) {
+        this.debug = debug;
         return this;
     }
 
@@ -58,8 +80,27 @@ public class WaterfallResponse extends Debugable<WaterfallResponse> {
         return abt;
     }
 
-    public WaterfallResponse setAbt(int abt) {
+    public WfResInterface setAbt(int abt) {
         this.abt = abt;
+        return this;
+    }
+
+    @JsonIgnore
+    public boolean isDebugEnabled() {
+        return debug != null;
+    }
+
+    public WfResInterface addDebug(String str) {
+        if (isDebugEnabled()) {
+            debug.add(LocalDateTime.now().format(FMT) + " - " + str);
+        }
+        return this;
+    }
+
+    public WfResInterface addDebug(String msg, Object... args) {
+        if (isDebugEnabled()) {
+            addDebug(LocalDateTime.now().format(FMT) + " - " + String.format(msg, args));
+        }
         return this;
     }
 

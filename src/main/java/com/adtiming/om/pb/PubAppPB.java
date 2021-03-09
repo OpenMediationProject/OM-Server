@@ -125,48 +125,37 @@ public final class PubAppPB {
     int getEventIds(int index);
 
     /**
-     * <pre>
-     *repeated Segment segments = 11;
-     * </pre>
-     *
      * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
      */
     java.util.List<com.adtiming.om.pb.PubAppPB.PublisherAppBlockRule> 
         getBlockRulesList();
     /**
-     * <pre>
-     *repeated Segment segments = 11;
-     * </pre>
-     *
      * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
      */
     com.adtiming.om.pb.PubAppPB.PublisherAppBlockRule getBlockRules(int index);
     /**
-     * <pre>
-     *repeated Segment segments = 11;
-     * </pre>
-     *
      * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
      */
     int getBlockRulesCount();
     /**
-     * <pre>
-     *repeated Segment segments = 11;
-     * </pre>
-     *
      * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
      */
     java.util.List<? extends com.adtiming.om.pb.PubAppPB.PublisherAppBlockRuleOrBuilder> 
         getBlockRulesOrBuilderList();
     /**
-     * <pre>
-     *repeated Segment segments = 11;
-     * </pre>
-     *
      * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
      */
     com.adtiming.om.pb.PubAppPB.PublisherAppBlockRuleOrBuilder getBlockRulesOrBuilder(
         int index);
+
+    /**
+     * <pre>
+     * Impression callback switch, defualt off
+     * </pre>
+     *
+     * <code>optional int32 impr_callback_switch = 11;</code>
+     */
+    int getImprCallbackSwitch();
   }
   /**
    * Protobuf type {@code PublisherApp}
@@ -190,6 +179,7 @@ public final class PubAppPB {
       createTime_ = 0;
       eventIds_ = java.util.Collections.emptyList();
       blockRules_ = java.util.Collections.emptyList();
+      imprCallbackSwitch_ = 0;
     }
 
     @java.lang.Override
@@ -289,6 +279,11 @@ public final class PubAppPB {
               }
               blockRules_.add(
                   input.readMessage(com.adtiming.om.pb.PubAppPB.PublisherAppBlockRule.parser(), extensionRegistry));
+              break;
+            }
+            case 88: {
+
+              imprCallbackSwitch_ = input.readInt32();
               break;
             }
           }
@@ -552,20 +547,12 @@ public final class PubAppPB {
     public static final int BLOCK_RULES_FIELD_NUMBER = 10;
     private java.util.List<com.adtiming.om.pb.PubAppPB.PublisherAppBlockRule> blockRules_;
     /**
-     * <pre>
-     *repeated Segment segments = 11;
-     * </pre>
-     *
      * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
      */
     public java.util.List<com.adtiming.om.pb.PubAppPB.PublisherAppBlockRule> getBlockRulesList() {
       return blockRules_;
     }
     /**
-     * <pre>
-     *repeated Segment segments = 11;
-     * </pre>
-     *
      * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
      */
     public java.util.List<? extends com.adtiming.om.pb.PubAppPB.PublisherAppBlockRuleOrBuilder> 
@@ -573,35 +560,36 @@ public final class PubAppPB {
       return blockRules_;
     }
     /**
-     * <pre>
-     *repeated Segment segments = 11;
-     * </pre>
-     *
      * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
      */
     public int getBlockRulesCount() {
       return blockRules_.size();
     }
     /**
-     * <pre>
-     *repeated Segment segments = 11;
-     * </pre>
-     *
      * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
      */
     public com.adtiming.om.pb.PubAppPB.PublisherAppBlockRule getBlockRules(int index) {
       return blockRules_.get(index);
     }
     /**
-     * <pre>
-     *repeated Segment segments = 11;
-     * </pre>
-     *
      * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
      */
     public com.adtiming.om.pb.PubAppPB.PublisherAppBlockRuleOrBuilder getBlockRulesOrBuilder(
         int index) {
       return blockRules_.get(index);
+    }
+
+    public static final int IMPR_CALLBACK_SWITCH_FIELD_NUMBER = 11;
+    private int imprCallbackSwitch_;
+    /**
+     * <pre>
+     * Impression callback switch, defualt off
+     * </pre>
+     *
+     * <code>optional int32 impr_callback_switch = 11;</code>
+     */
+    public int getImprCallbackSwitch() {
+      return imprCallbackSwitch_;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -650,6 +638,9 @@ public final class PubAppPB {
       }
       for (int i = 0; i < blockRules_.size(); i++) {
         output.writeMessage(10, blockRules_.get(i));
+      }
+      if (imprCallbackSwitch_ != 0) {
+        output.writeInt32(11, imprCallbackSwitch_);
       }
     }
 
@@ -704,6 +695,10 @@ public final class PubAppPB {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(10, blockRules_.get(i));
       }
+      if (imprCallbackSwitch_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(11, imprCallbackSwitch_);
+      }
       memoizedSize = size;
       return size;
     }
@@ -740,6 +735,8 @@ public final class PubAppPB {
           .equals(other.getEventIdsList());
       result = result && getBlockRulesList()
           .equals(other.getBlockRulesList());
+      result = result && (getImprCallbackSwitch()
+          == other.getImprCallbackSwitch());
       return result;
     }
 
@@ -774,6 +771,8 @@ public final class PubAppPB {
         hash = (37 * hash) + BLOCK_RULES_FIELD_NUMBER;
         hash = (53 * hash) + getBlockRulesList().hashCode();
       }
+      hash = (37 * hash) + IMPR_CALLBACK_SWITCH_FIELD_NUMBER;
+      hash = (53 * hash) + getImprCallbackSwitch();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -917,6 +916,8 @@ public final class PubAppPB {
         } else {
           blockRulesBuilder_.clear();
         }
+        imprCallbackSwitch_ = 0;
+
         return this;
       }
 
@@ -963,6 +964,7 @@ public final class PubAppPB {
         } else {
           result.blockRules_ = blockRulesBuilder_.build();
         }
+        result.imprCallbackSwitch_ = imprCallbackSwitch_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1068,6 +1070,9 @@ public final class PubAppPB {
               blockRulesBuilder_.addAllMessages(other.blockRules_);
             }
           }
+        }
+        if (other.getImprCallbackSwitch() != 0) {
+          setImprCallbackSwitch(other.getImprCallbackSwitch());
         }
         onChanged();
         return this;
@@ -1645,10 +1650,6 @@ public final class PubAppPB {
           com.adtiming.om.pb.PubAppPB.PublisherAppBlockRule, com.adtiming.om.pb.PubAppPB.PublisherAppBlockRule.Builder, com.adtiming.om.pb.PubAppPB.PublisherAppBlockRuleOrBuilder> blockRulesBuilder_;
 
       /**
-       * <pre>
-       *repeated Segment segments = 11;
-       * </pre>
-       *
        * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
        */
       public java.util.List<com.adtiming.om.pb.PubAppPB.PublisherAppBlockRule> getBlockRulesList() {
@@ -1659,10 +1660,6 @@ public final class PubAppPB {
         }
       }
       /**
-       * <pre>
-       *repeated Segment segments = 11;
-       * </pre>
-       *
        * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
        */
       public int getBlockRulesCount() {
@@ -1673,10 +1670,6 @@ public final class PubAppPB {
         }
       }
       /**
-       * <pre>
-       *repeated Segment segments = 11;
-       * </pre>
-       *
        * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
        */
       public com.adtiming.om.pb.PubAppPB.PublisherAppBlockRule getBlockRules(int index) {
@@ -1687,10 +1680,6 @@ public final class PubAppPB {
         }
       }
       /**
-       * <pre>
-       *repeated Segment segments = 11;
-       * </pre>
-       *
        * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
        */
       public Builder setBlockRules(
@@ -1708,10 +1697,6 @@ public final class PubAppPB {
         return this;
       }
       /**
-       * <pre>
-       *repeated Segment segments = 11;
-       * </pre>
-       *
        * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
        */
       public Builder setBlockRules(
@@ -1726,10 +1711,6 @@ public final class PubAppPB {
         return this;
       }
       /**
-       * <pre>
-       *repeated Segment segments = 11;
-       * </pre>
-       *
        * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
        */
       public Builder addBlockRules(com.adtiming.om.pb.PubAppPB.PublisherAppBlockRule value) {
@@ -1746,10 +1727,6 @@ public final class PubAppPB {
         return this;
       }
       /**
-       * <pre>
-       *repeated Segment segments = 11;
-       * </pre>
-       *
        * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
        */
       public Builder addBlockRules(
@@ -1767,10 +1744,6 @@ public final class PubAppPB {
         return this;
       }
       /**
-       * <pre>
-       *repeated Segment segments = 11;
-       * </pre>
-       *
        * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
        */
       public Builder addBlockRules(
@@ -1785,10 +1758,6 @@ public final class PubAppPB {
         return this;
       }
       /**
-       * <pre>
-       *repeated Segment segments = 11;
-       * </pre>
-       *
        * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
        */
       public Builder addBlockRules(
@@ -1803,10 +1772,6 @@ public final class PubAppPB {
         return this;
       }
       /**
-       * <pre>
-       *repeated Segment segments = 11;
-       * </pre>
-       *
        * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
        */
       public Builder addAllBlockRules(
@@ -1822,10 +1787,6 @@ public final class PubAppPB {
         return this;
       }
       /**
-       * <pre>
-       *repeated Segment segments = 11;
-       * </pre>
-       *
        * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
        */
       public Builder clearBlockRules() {
@@ -1839,10 +1800,6 @@ public final class PubAppPB {
         return this;
       }
       /**
-       * <pre>
-       *repeated Segment segments = 11;
-       * </pre>
-       *
        * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
        */
       public Builder removeBlockRules(int index) {
@@ -1856,10 +1813,6 @@ public final class PubAppPB {
         return this;
       }
       /**
-       * <pre>
-       *repeated Segment segments = 11;
-       * </pre>
-       *
        * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
        */
       public com.adtiming.om.pb.PubAppPB.PublisherAppBlockRule.Builder getBlockRulesBuilder(
@@ -1867,10 +1820,6 @@ public final class PubAppPB {
         return getBlockRulesFieldBuilder().getBuilder(index);
       }
       /**
-       * <pre>
-       *repeated Segment segments = 11;
-       * </pre>
-       *
        * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
        */
       public com.adtiming.om.pb.PubAppPB.PublisherAppBlockRuleOrBuilder getBlockRulesOrBuilder(
@@ -1881,10 +1830,6 @@ public final class PubAppPB {
         }
       }
       /**
-       * <pre>
-       *repeated Segment segments = 11;
-       * </pre>
-       *
        * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
        */
       public java.util.List<? extends com.adtiming.om.pb.PubAppPB.PublisherAppBlockRuleOrBuilder> 
@@ -1896,10 +1841,6 @@ public final class PubAppPB {
         }
       }
       /**
-       * <pre>
-       *repeated Segment segments = 11;
-       * </pre>
-       *
        * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
        */
       public com.adtiming.om.pb.PubAppPB.PublisherAppBlockRule.Builder addBlockRulesBuilder() {
@@ -1907,10 +1848,6 @@ public final class PubAppPB {
             com.adtiming.om.pb.PubAppPB.PublisherAppBlockRule.getDefaultInstance());
       }
       /**
-       * <pre>
-       *repeated Segment segments = 11;
-       * </pre>
-       *
        * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
        */
       public com.adtiming.om.pb.PubAppPB.PublisherAppBlockRule.Builder addBlockRulesBuilder(
@@ -1919,10 +1856,6 @@ public final class PubAppPB {
             index, com.adtiming.om.pb.PubAppPB.PublisherAppBlockRule.getDefaultInstance());
       }
       /**
-       * <pre>
-       *repeated Segment segments = 11;
-       * </pre>
-       *
        * <code>repeated .PublisherAppBlockRule block_rules = 10;</code>
        */
       public java.util.List<com.adtiming.om.pb.PubAppPB.PublisherAppBlockRule.Builder> 
@@ -1942,6 +1875,44 @@ public final class PubAppPB {
           blockRules_ = null;
         }
         return blockRulesBuilder_;
+      }
+
+      private int imprCallbackSwitch_ ;
+      /**
+       * <pre>
+       * Impression callback switch, defualt off
+       * </pre>
+       *
+       * <code>optional int32 impr_callback_switch = 11;</code>
+       */
+      public int getImprCallbackSwitch() {
+        return imprCallbackSwitch_;
+      }
+      /**
+       * <pre>
+       * Impression callback switch, defualt off
+       * </pre>
+       *
+       * <code>optional int32 impr_callback_switch = 11;</code>
+       */
+      public Builder setImprCallbackSwitch(int value) {
+        
+        imprCallbackSwitch_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Impression callback switch, defualt off
+       * </pre>
+       *
+       * <code>optional int32 impr_callback_switch = 11;</code>
+       */
+      public Builder clearImprCallbackSwitch() {
+        
+        imprCallbackSwitch_ = 0;
+        onChanged();
+        return this;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -3434,18 +3405,19 @@ public final class PubAppPB {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014pubapp.proto\"\331\001\n\014PublisherApp\022\n\n\002id\030\001 " +
+      "\n\014pubapp.proto\"\367\001\n\014PublisherApp\022\n\n\002id\030\001 " +
       "\001(\005\022\024\n\014publisher_id\030\002 \001(\005\022\014\n\004plat\030\003 \001(\005\022" +
       "\016\n\006app_id\030\004 \001(\t\022\020\n\010app_name\030\005 \001(\t\022\017\n\007app" +
       "_key\030\006 \001(\t\022\021\n\tbundle_id\030\007 \001(\t\022\023\n\013create_" +
       "time\030\010 \001(\005\022\021\n\tevent_ids\030\t \003(\005\022+\n\013block_r" +
-      "ules\030\n \003(\0132\026.PublisherAppBlockRule\"\301\001\n\025P" +
-      "ublisherAppBlockRule\022\n\n\002id\030\001 \001(\005\022\022\n\npub_" +
-      "app_id\030\002 \001(\005\022\023\n\013sdk_version\030\003 \001(\t\022\023\n\013app" +
-      "_version\030\004 \001(\t\022\017\n\007osv_max\030\005 \001(\t\022\017\n\007osv_m" +
-      "in\030\006 \001(\t\022\035\n\025make_device_blacklist\030\007 \003(\t\022",
-      "\035\n\025brand_model_blacklist\030\010 \003(\tB\036\n\022com.ad" +
-      "timing.om.pbB\010PubAppPBb\006proto3"
+      "ules\030\n \003(\0132\026.PublisherAppBlockRule\022\034\n\024im" +
+      "pr_callback_switch\030\013 \001(\005\"\301\001\n\025PublisherAp" +
+      "pBlockRule\022\n\n\002id\030\001 \001(\005\022\022\n\npub_app_id\030\002 \001" +
+      "(\005\022\023\n\013sdk_version\030\003 \001(\t\022\023\n\013app_version\030\004" +
+      " \001(\t\022\017\n\007osv_max\030\005 \001(\t\022\017\n\007osv_min\030\006 \001(\t\022\035",
+      "\n\025make_device_blacklist\030\007 \003(\t\022\035\n\025brand_m" +
+      "odel_blacklist\030\010 \003(\tB\036\n\022com.adtiming.om." +
+      "pbB\010PubAppPBb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3464,7 +3436,7 @@ public final class PubAppPB {
     internal_static_PublisherApp_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_PublisherApp_descriptor,
-        new java.lang.String[] { "Id", "PublisherId", "Plat", "AppId", "AppName", "AppKey", "BundleId", "CreateTime", "EventIds", "BlockRules", });
+        new java.lang.String[] { "Id", "PublisherId", "Plat", "AppId", "AppName", "AppKey", "BundleId", "CreateTime", "EventIds", "BlockRules", "ImprCallbackSwitch", });
     internal_static_PublisherAppBlockRule_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_PublisherAppBlockRule_fieldAccessorTable = new

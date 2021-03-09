@@ -24,13 +24,20 @@ public class EventLogRequest extends CommonRequest {
     public static final int CALLED_IS_READY_TRUE = 502;
     public static final int CALLED_IS_READY_FALSE = 503;
 
+    public static final int INSTANCE_PAYLOAD_REQUEST = 275;
+    public static final int INSTANCE_PAYLOAD_SUCCESS = 276;
+    public static final int INSTANCE_PAYLOAD_FAIL = 277;
+
     public static final Set<Integer> REQUIRED_EVENT_IDS = Collections.unmodifiableSet(Stream.of(
             INSTANCE_BID_REQUEST,
             INSTANCE_BID_RESPONSE,
             INSTANCE_BID_WIN,
             CALLED_SHOW,
             CALLED_IS_READY_TRUE,
-            CALLED_IS_READY_FALSE
+            CALLED_IS_READY_FALSE,
+            INSTANCE_PAYLOAD_REQUEST,
+            INSTANCE_PAYLOAD_SUCCESS,
+            INSTANCE_PAYLOAD_FAIL
     ).collect(Collectors.toSet()));
 
     public List<Event> events;
@@ -58,6 +65,9 @@ public class EventLogRequest extends CommonRequest {
         public int bid;                 // Whether it is a Bid related request
         public float price;             // BidResponse price or win price
         public String cur;              // BidResponse currency
+        public String reqId;            // Client Waterfall Request ID
+        public int ruleId;              // Mediation Rule ID
+        public float revenue;           // Instance Impression Revenue
 
         public String getCur() {
             return null;

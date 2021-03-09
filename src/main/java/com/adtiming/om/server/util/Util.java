@@ -5,7 +5,9 @@ package com.adtiming.om.server.util;
 
 import com.adtiming.om.pb.CommonPB;
 import com.adtiming.om.server.dto.AppBlockRule;
+import com.adtiming.om.server.dto.Instance;
 import com.adtiming.om.server.dto.Version;
+import com.adtiming.om.server.dto.VersionRange;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
 
@@ -14,6 +16,8 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+
+import static com.adtiming.om.server.dto.AdNetwork.ADN_FACEBOOK;
 
 public abstract class Util {
 
@@ -166,5 +170,29 @@ public abstract class Util {
     public static boolean isEmptyDid(String did) {
         return StringUtils.isBlank(did)
                 || StringUtils.equals(did, "00000000-0000-0000-0000-000000000000");
+    }
+
+    public static boolean matchVersion(List<VersionRange> ranges, String version) {
+        if (CollectionUtils.isEmpty(ranges)) {
+            return true;
+        }
+        if (StringUtils.isBlank(version)) {
+            return false;
+        }
+        for (VersionRange range : ranges) {
+            if (range.isInRange(version)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static int getRevenuePrecision(Instance instance) {
+        if (instance.getAdnId() == ADN_FACEBOOK) {
+            return 0; //undisclosed：非公开数据，例如FB要求不得存储收益数据
+        } else if (instance.isHeadBidding()) {
+            return 1; //exact：精准值，一般是in-app bidding类型的instance带来的收益
+        }
+        return 2; //estimated：预估值，由普通instance历史收益数据预估得出
     }
 }

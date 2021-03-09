@@ -5,17 +5,28 @@ package com.adtiming.om.server.dto;
 
 import com.adtiming.om.pb.AdNetworkPB;
 import com.adtiming.om.pb.CommonPB;
+import com.adtiming.om.server.util.Util;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
 
 public class InstanceRule {
 
     private final AdNetworkPB.InstanceRule rule;
     private Set<String> brandWhitelist, brandBlacklist, modelWhitelist, modelBlacklist;
     private Set<String> channelList;
+    private Set<String> osvWhite;
+    private Set<String> sdkvWhite;
+    private Set<String> appvWhite;
+    private List<VersionRange> osvRanges;
+    private List<VersionRange> sdkvRanges;
+    private List<VersionRange> appvRanges;
+    private Map<Integer, Integer> instancePriority = Collections.emptyMap();
 
     public InstanceRule(AdNetworkPB.InstanceRule rule) {
         this.rule = rule;
@@ -37,10 +48,58 @@ public class InstanceRule {
         if (rule.getChannelCount() > 0) {
             this.channelList = new HashSet<>(rule.getChannelList());
         }
+
+        if (rule.getOsvWhiteCount() > 0) {
+            osvWhite = new HashSet<>(rule.getOsvWhiteList());
+        }
+
+        if (rule.getSdkvWhiteCount() > 0) {
+            sdkvWhite = new HashSet<>(rule.getSdkvWhiteList());
+        }
+
+        if (rule.getAppvWhiteCount() > 0) {
+            appvWhite = new HashSet<>(rule.getAppvWhiteList());
+        }
+
+        if (rule.getOsvRangeCount() > 0) {
+            osvRanges = rule.getOsvRangeList().stream().map(VersionRange::new).collect(Collectors.toList());
+        }
+
+        if (rule.getSdkvRangeCount() > 0) {
+            sdkvRanges = rule.getSdkvRangeList().stream().map(VersionRange::new).collect(Collectors.toList());
+        }
+
+        if (rule.getAppvRangeCount() > 0) {
+            appvRanges = rule.getAppvRangeList().stream().map(VersionRange::new).collect(Collectors.toList());
+        }
+        if (rule.getInstanceWeightCount() > 0) {
+            instancePriority = new HashMap<>(rule.getInstanceWeightCount());
+            rule.getInstanceWeightMap().forEach((iid, priority) -> {
+                if (isAutoOpt()) {
+                    instancePriority.put(iid, 0);
+                } else {
+                    instancePriority.put(iid, priority);
+                }
+            });
+            /*int index = 1;
+            List<Integer> instanceList = Util.sortByPriority(rule.getInstanceWeightMap());
+            for (int iid : instanceList) {
+                if (isAutoOpt()) {
+                    instancePriority.put(iid, 0);
+                } else {
+                    instancePriority.put(iid, index);
+                }
+                index++;
+            }*/
+        }
     }
 
     public int getId() {
         return rule.getId();
+    }
+
+    public String getName() {
+        return rule.getName();
     }
 
     public int getPublisherId() {
@@ -90,6 +149,10 @@ public class InstanceRule {
         return Collections.emptySet();
     }
 
+    public Integer getInstancePriority(int instanceId) {
+        return instancePriority.getOrDefault(instanceId, 0);
+    }
+
     /**
      * determin if match rule
      *
@@ -97,7 +160,7 @@ public class InstanceRule {
      * @return matched true, otherwise false
      */
     public boolean isMatched(WaterfallRequest o) {
-        if (!isHardMatched(o.getBrand(), o.getModel(), o.getCnl(), o.getMtype())) {
+        if (!isHardMatched(o.getBrand(), o.getModel(), o.getCnl(), o.getMtype(), o.getOsv(), o.getSdkv(), o.getAppv(), o.getDid())) {
             return false;
         }
 
@@ -132,6 +195,21 @@ public class InstanceRule {
             }
         }
 
+        if (rule.getCustomTagsCount() > 0) {
+            Map<String, Object> tags = o.getTags();
+            if (tags == null || tags.isEmpty()) {
+                return false;
+            }
+            AtomicBoolean tagMatched = new AtomicBoolean(true);
+            rule.getCustomTagsMap().forEach((k, v) -> {
+                Object tagVal = tags.get(k);
+                if (!matchedTag(v, tagVal)) {
+                    tagMatched.set(false);
+                }
+            });
+            return tagMatched.get();
+        }
+
         return true;
     }
 
@@ -144,7 +222,8 @@ public class InstanceRule {
      * @param modelType model type, {0:Phone,1:Pad,2:TV}
      * @return matched true, otherwise false
      */
-    public boolean isHardMatched(String brand, String model, String channel, int modelType) {
+    public boolean isHardMatched(String brand, String model, String channel, int modelType, String osv, String sdkv,
+                                 String appv, String did) {
         if (!isAllowBrand(brand))
             return false;
 
@@ -158,7 +237,33 @@ public class InstanceRule {
         if (rule.getModelType() > 0 && (rule.getModelType() & modelType) == 0)
             return false;
 
-        return true;
+        if (!Util.matchVersion(osvRanges, osv)) {
+            return false;
+        }
+
+        if (!Util.matchVersion(sdkvRanges, sdkv)) {
+            return false;
+        }
+
+        // appv获取不到的情况不过滤
+        if (StringUtils.isNotBlank(appv) && !Util.matchVersion(appvRanges, appv)) {
+            return false;
+        }
+
+        if (!CollectionUtils.isEmpty(osvWhite) &&  !osvWhite.contains(osv)) {
+            return false;
+        }
+
+        if (!CollectionUtils.isEmpty(sdkvWhite) &&  !sdkvWhite.contains(sdkv)) {
+            return false;
+        }
+
+        if (!CollectionUtils.isEmpty(appvWhite) &&  !appvWhite.contains(appv)) {
+            return false;
+        }
+
+        //Rule中配置Did为必须且无did情况
+        return rule.getRequireDid() != 1 || !Util.isEmptyDid(did);
     }
 
     private boolean isAllowBrand(String brand) {
@@ -180,5 +285,299 @@ public class InstanceRule {
         } else {
             return !contains;// 黑名单,不包含
         }
+    }
+
+    private boolean matchedTag(AdNetworkPB.CustomTag tag, Object value) {
+        if (tag.getConditionsCount() > 0 ) {
+            if (ObjectUtils.isEmpty(value)) {
+                return false;
+            }
+            for (AdNetworkPB.TagCondition tc : tag.getConditionsList()) {
+                if (!matchedTagCondition(tag.getType(), tc, value)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    private boolean matchedTagCondition(int type, AdNetworkPB.TagCondition tc, Object value) {
+        switch (tc.getOperator()) {
+            case ">":
+                if (type == 0) {
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        for (Object val : list) {
+                            if (val.toString().compareTo(tc.getValue()) > 0) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        return value.toString().compareTo(tc.getValue()) > 0;
+                    }
+                } else if (type == 1) {
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        for (Object val : list) {
+                            if (NumberUtils.toInt(val.toString()) > NumberUtils.toInt(tc.getValue())) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        return NumberUtils.toInt(value.toString()) > NumberUtils.toInt(tc.getValue());
+                    }
+                } else {
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        for (Object val : list) {
+                            if (NumberUtils.toFloat(val.toString()) > NumberUtils.toFloat(tc.getValue())) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        return NumberUtils.toFloat(value.toString()) > NumberUtils.toFloat(tc.getValue());
+                    }
+                }
+                break;
+            case ">=":
+                if (type == 0) {
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        for (Object val : list) {
+                            if (val.toString().compareTo(tc.getValue()) >= 0) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        return value.toString().compareTo(tc.getValue()) >= 0;
+                    }
+                } else if (type == 1) {
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        for (Object val : list) {
+                            if (NumberUtils.toInt(val.toString()) >= NumberUtils.toInt(tc.getValue())) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        return NumberUtils.toInt(value.toString()) >= NumberUtils.toInt(tc.getValue());
+                    }
+                } else {
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        for (Object val : list) {
+                            if (NumberUtils.toFloat(val.toString()) >= NumberUtils.toFloat(tc.getValue())) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        return NumberUtils.toFloat(value.toString()) >= NumberUtils.toFloat(tc.getValue());
+                    }
+                }
+                break;
+            case "<":
+                if (type == 0) {
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        for (Object val : list) {
+                            if (val.toString().compareTo(tc.getValue()) < 0) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        return value.toString().compareTo(tc.getValue()) < 0;
+                    }
+                } else if (type == 1) {
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        for (Object val : list) {
+                            if (NumberUtils.toInt(val.toString()) < NumberUtils.toInt(tc.getValue())) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        return NumberUtils.toInt(value.toString()) < NumberUtils.toInt(tc.getValue());
+                    }
+                } else {
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        for (Object val : list) {
+                            if (NumberUtils.toFloat(val.toString()) < NumberUtils.toFloat(tc.getValue())) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        return NumberUtils.toFloat(value.toString()) < NumberUtils.toFloat(tc.getValue());
+                    }
+                }
+                break;
+            case "<=":
+                if (type == 0) {
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        for (Object val : list) {
+                            if (val.toString().compareTo(tc.getValue()) <= 0) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        return value.toString().compareTo(tc.getValue()) <= 0;
+                    }
+                } else if (type == 1) {
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        for (Object val : list) {
+                            if (NumberUtils.toInt(val.toString()) <= NumberUtils.toInt(tc.getValue())) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        return NumberUtils.toInt(value.toString()) <= NumberUtils.toInt(tc.getValue());
+                    }
+                } else {
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        for (Object val : list) {
+                            if (NumberUtils.toFloat(val.toString()) <= NumberUtils.toFloat(tc.getValue())) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        return NumberUtils.toFloat(value.toString()) <= NumberUtils.toFloat(tc.getValue());
+                    }
+                }
+                break;
+            case "=":
+                if (type == 0) {
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        for (Object val : list) {
+                            if (val.toString().compareTo(tc.getValue()) == 0) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        return value.toString().compareTo(tc.getValue()) == 0;
+                    }
+                } else if (type == 1) {
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        for (Object val : list) {
+                            if (NumberUtils.toInt(val.toString()) == NumberUtils.toInt(tc.getValue())) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        return NumberUtils.toInt(value.toString()) == NumberUtils.toInt(tc.getValue());
+                    }
+                } else {
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        for (Object val : list) {
+                            if (NumberUtils.toFloat(val.toString()) == NumberUtils.toFloat(tc.getValue())) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        return NumberUtils.toFloat(value.toString()) == NumberUtils.toFloat(tc.getValue());
+                    }
+                }
+                break;
+            case "!=":
+                if (type == 0) {
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        for (Object val : list) {
+                            if (val.toString().compareTo(tc.getValue()) != 0) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        return value.toString().compareTo(tc.getValue()) != 0;
+                    }
+                } else if (type == 1) {
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        for (Object val : list) {
+                            if (NumberUtils.toInt(val.toString()) == NumberUtils.toInt(tc.getValue())) {
+                                return false;
+                            }
+                        }
+                    } else {
+                        return NumberUtils.toInt(value.toString()) != NumberUtils.toInt(tc.getValue());
+                    }
+                } else {
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        for (Object val : list) {
+                            if (NumberUtils.toFloat(val.toString()) != NumberUtils.toFloat(tc.getValue())) {
+                                return true;
+                            }
+                        }
+                    } else {
+                        return NumberUtils.toFloat(value.toString()) != NumberUtils.toFloat(tc.getValue());
+                    }
+                }
+                break;
+            case "in":
+                if (type == 0) {
+                    Set<String> tcVals = new HashSet<>(tc.getValuesList());
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        tcVals.retainAll(list.stream().map(Object::toString).collect(Collectors.toSet()));
+                        return !tcVals.isEmpty();
+                    } else {
+                        return tcVals.contains(value.toString());
+                    }
+                } else if (type == 1) {
+                    Set<Integer> tcVals = tc.getValuesList().stream().map(NumberUtils::toInt).collect(Collectors.toSet());
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        tcVals.retainAll(list.stream().map(o->NumberUtils.toInt(o.toString())).collect(Collectors.toSet()));
+                        return !tcVals.isEmpty();
+                    } else {
+                        return tcVals.contains(NumberUtils.toInt(value.toString()));
+                    }
+                } else {
+                    Set<Float> tcVals = tc.getValuesList().stream().map(NumberUtils::toFloat).collect(Collectors.toSet());
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        tcVals.retainAll(list.stream().map(o->NumberUtils.toFloat(o.toString())).collect(Collectors.toSet()));
+                        return !tcVals.isEmpty();
+                    } else {
+                        return tcVals.contains(NumberUtils.toFloat(value.toString()));
+                    }
+                }
+            case "notin":
+                if (type == 0) {
+                    Set<String> tcVals = new HashSet<>(tc.getValuesList());
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        tcVals.retainAll(list.stream().map(Object::toString).collect(Collectors.toSet()));
+                        return tcVals.isEmpty();
+                    } else {
+                        return !tcVals.contains(value.toString());
+                    }
+                } else if (type == 1) {
+                    Set<Integer> tcVals = tc.getValuesList().stream().map(NumberUtils::toInt).collect(Collectors.toSet());
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        tcVals.retainAll(list.stream().map(o->NumberUtils.toInt(o.toString())).collect(Collectors.toSet()));
+                        return tcVals.isEmpty();
+                    } else {
+                        return !tcVals.contains(NumberUtils.toInt(value.toString()));
+                    }
+                } else {
+                    Set<Float> tcVals = tc.getValuesList().stream().map(NumberUtils::toFloat).collect(Collectors.toSet());
+                    if (value instanceof Collection) {
+                        Collection<?> list = (Collection<?>) value;
+                        tcVals.retainAll(list.stream().map(o->NumberUtils.toFloat(o.toString())).collect(Collectors.toSet()));
+                        return tcVals.isEmpty();
+                    } else {
+                        return !tcVals.contains(NumberUtils.toFloat(value.toString()));
+                    }
+                }
+        }
+        return true;
     }
 }

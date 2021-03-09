@@ -31,6 +31,7 @@
 
 | Name|Type|Description|Example|Required|
 | --- | ---| --- | --- | --- |
+| reqId| string | AuctionID |BBD6E1CD8C4B40CB8A624BBC7AFE07D6|✖|
 | ts | int64 | Client timestamp(millisecond) | 1567479919643 |✔︎|
 | eid | int32 | [EventID](#eventid)|100 |✔︎|
 | code | string | Error Code, from AdNetwork callback |1001|✖︎|
@@ -49,6 +50,7 @@
 | price | float | BidResponse的价格|2.1|✖︎|
 | cur | string | BidResponse的货币单位|USD|✖︎|
 | abt | int32 | ABTest Mode | 0 |✖︎|
+| ruleId | int32 | Mediation Rule ID |123|✖︎|
 
 #### EventID
 
@@ -88,6 +90,9 @@
 | INSTANCE\_BID\_FAILED | 272 |HeadBidding Failed |
 | INSTANCE\_BID\_WIN | 273 |HeadBidding WinNotice |
 | INSTANCE\_BID\_LOSE | 274 |HeadBidding Lose |
+| INSTANCE\_PAYLOAD\_REQUEST | 275 |Payload Request |
+| INSTANCE\_PAYLOAD\_SUCCESS | 276 |Payload Success |
+| INSTANCE\_PAYLOAD\_FAIL | 277 |Payload Fail |
 |---|||
 | INSTANCE\_OPENED | 300 | Instance 打开|
 | INSTANCE\_CLOSED | 301| Instance 关闭 |

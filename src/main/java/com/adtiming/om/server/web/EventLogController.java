@@ -4,9 +4,7 @@
 package com.adtiming.om.server.web;
 
 import com.adtiming.om.pb.CommonPB;
-import com.adtiming.om.server.dto.EventLogRequest;
-import com.adtiming.om.server.dto.LrRequest;
-import com.adtiming.om.server.dto.Placement;
+import com.adtiming.om.server.dto.*;
 import com.adtiming.om.server.service.AppConfig;
 import com.adtiming.om.server.service.CacheService;
 import com.adtiming.om.server.service.GeoService;
@@ -122,6 +120,15 @@ public class EventLogController extends BaseController {
                     case CALLED_IS_READY_FALSE:
                         lr.setReadyFalse(1);
                         break;
+                    case INSTANCE_PAYLOAD_REQUEST:
+                        lr.setPlReq(1);
+                        break;
+                    case INSTANCE_PAYLOAD_SUCCESS:
+                        lr.setPlSuccess(1);
+                        break;
+                    case INSTANCE_PAYLOAD_FAIL:
+                        lr.setPlFail(1);
+                        break;
                     default:
                         continue;
                 }
@@ -135,6 +142,23 @@ public class EventLogController extends BaseController {
                 lr.setScene(event.scene);
                 lr.setAbt(event.abt);
                 lr.setBid(event.bid);
+                lr.setReqId(event.reqId);
+                lr.setRuleId(event.ruleId);
+                lr.setRevenue(event.revenue);
+                if (event.ruleId > 0) {
+                    InstanceRule rule = cacheService.getInstanceRule(event.ruleId);
+                    if (rule != null) {
+                        lr.setRuleType(rule.isAutoOpt() ? 1 : 0);
+                        lr.setRp(rule.getPriority());
+                        lr.setIi(rule.getInstancePriority(event.iid));
+                    }
+                }
+                if (event.iid > 0) {
+                    Instance instance = cacheService.getInstanceById(event.iid);
+                    if (instance != null) {
+                        lr.setAdnPk(instance.getPlacementKey());
+                    }
+                }
 //                if (event.price > 0F) {
 //                    lr.setPrice(event.price);
 //                }

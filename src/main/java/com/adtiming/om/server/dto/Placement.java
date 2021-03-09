@@ -197,4 +197,7 @@ public class Placement {
         return p.getReloadInterval();
     }
 
+    public String getName() {
+        return p.getName();
+    }
 }

@@ -7,7 +7,6 @@ import com.adtiming.om.pb.*;
 import com.adtiming.om.server.cp.service.CpCacheService;
 import com.adtiming.om.server.dto.*;
 import com.adtiming.om.server.util.CountryCode;
-import com.adtiming.om.server.util.Util;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -78,6 +77,8 @@ public class CacheService extends PBLoader {
 
     // key: placementId, country
     private Map<Integer, Map<String, List<InstanceRule>>> placementCountryRules = Collections.emptyMap();
+
+    private Map<Integer, InstanceRule> instanceRuleMap = Collections.emptyMap();
 
     // key: currency
     private Map<String, Float> currencyRate = Collections.emptyMap();
@@ -330,6 +331,7 @@ public class CacheService extends PBLoader {
     private void loadInstanceRule() {
         load("om_instance_rule", in -> {
             Map<Integer, Map<String, List<InstanceRule>>> map = newMap(this.placementCountryRules, 100, 30);
+            Map<Integer, InstanceRule> ruleMap = newMap(this.instanceRuleMap, 100, 30);
             while (true) {
                 AdNetworkPB.InstanceRule o = AdNetworkPB.InstanceRule.parseDelimitedFrom(in);
                 if (o == null) break;
@@ -338,6 +340,7 @@ public class CacheService extends PBLoader {
                 Map<String, List<InstanceRule>> countryRuleList = map
                         .computeIfAbsent(o.getPlacementId(), k -> new HashMap<>());
                 o.getCountryList().forEach(country -> countryRuleList.computeIfAbsent(country, k -> new ArrayList<>()).add(rule));
+                ruleMap.put(rule.getId(), rule);
             }
 
             // 对 ruleList 按 priority 由小到大进行排序
@@ -346,7 +349,7 @@ public class CacheService extends PBLoader {
                     ruleList.sort(Comparator.comparingInt(InstanceRule::getPriority));
                 });
             });
-
+            this.instanceRuleMap = ruleMap;
             this.placementCountryRules = map;
         });
     }
@@ -476,7 +479,8 @@ public class CacheService extends PBLoader {
      */
     public List<Instance> getPlacementInstancesAfterRuleMatch(
             int placementId, Set<Integer> acceptAdnIdSet, String country,
-            String brand, String model, String channel, int modelType) {
+            String brand, String model, String channel, int modelType, String osv, String sdkv,
+            String appv, String did) {
         List<InstanceRule> ruleList = getCountryRules(placementId, country);
 
         if (CollectionUtils.isEmpty(ruleList)) {
@@ -491,7 +495,7 @@ public class CacheService extends PBLoader {
 
         Set<Integer> insIdSet = new HashSet<>();
         for (InstanceRule rule : ruleList) {
-            if (rule.isHardMatched(brand, model, channel, modelType)) {
+            if (rule.isHardMatched(brand, model, channel, modelType, osv, sdkv, appv, did)) {
                 insIdSet.addAll(rule.getInstanceList());
             }
         }
@@ -696,6 +700,50 @@ public class CacheService extends PBLoader {
             return null;
         }
         return Collections.unmodifiableList(list);
+    }
+
+    /**
+     * for waterfall
+     *
+     * @param placementId placementId
+     * @param country     country
+     * @param req         waterfall request
+     * @return PlacementRule or null
+     */
+    public InstanceRule matchPlacementRule(int placementId, String country, WaterfallRequest req) {
+        List<InstanceRule> ruleList = getPlacementCountryAbtRules(placementId, country);
+        if (ruleList == null) return null;
+
+        for (InstanceRule rule : ruleList) {
+            if (rule.isMatched(req)) {
+                return rule;
+            }
+        }
+        return null;
+    }
+
+    private List<InstanceRule> getPlacementCountryAbtRules(int placementId, String country) {
+        Map<String, List<InstanceRule>> countryRuleList = this.placementCountryRules
+                .getOrDefault(placementId, Collections.emptyMap());
+        if (countryRuleList.isEmpty()) {
+            return null;
+        }
+        List<InstanceRule> ruleList = countryRuleList.get(country);
+        List<InstanceRule> allRuleList = countryRuleList.get("00");
+        if (ruleList == null) {
+            return immutableList(allRuleList);
+        } else if (allRuleList == null) {
+            return immutableList(ruleList);
+        } else /* neither ruleList or allRuleList is null */ {
+            List<InstanceRule> list = new ArrayList<>(ruleList.size() + allRuleList.size());
+            list.addAll(ruleList);
+            list.addAll(allRuleList);
+            return immutableList(list);
+        }
+    }
+
+    public InstanceRule getInstanceRule(int ruleId) {
+        return instanceRuleMap.get(ruleId);
     }
 
 }

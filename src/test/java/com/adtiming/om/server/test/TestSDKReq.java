@@ -103,7 +103,11 @@ public class TestSDKReq {
         JSONObject ps = buildCommonReqeust();
         ps.put("ios", ios);
         ps.put("android", android);
+        long start = System.currentTimeMillis();
+        System.out.println("init start");
         doReq("init?" + query, ps);
+        System.out.println();
+        System.out.println("init finished,cosg:" + (System.currentTimeMillis() - start));
     }
 
     @Test

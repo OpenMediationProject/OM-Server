@@ -566,6 +566,16 @@ public final class PlacementPB {
 
     com.adtiming.om.pb.PlacementPB.Placement.CountrySettings getCountrySettingsOrThrow(
         java.lang.String key);
+
+    /**
+     * <code>optional string name = 44;</code>
+     */
+    java.lang.String getName();
+    /**
+     * <code>optional string name = 44;</code>
+     */
+    com.google.protobuf.ByteString
+        getNameBytes();
   }
   /**
    * Protobuf type {@code Placement}
@@ -611,6 +621,7 @@ public final class PlacementPB {
       modelBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       didBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       sdkvBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      name_ = "";
     }
 
     @java.lang.Override
@@ -882,6 +893,12 @@ public final class PlacementPB {
               countrySettings = input.readMessage(
                   CountrySettingsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               countrySettings_.getMutableMap().put(countrySettings.getKey(), countrySettings.getValue());
+              break;
+            }
+            case 354: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              name_ = s;
               break;
             }
           }
@@ -2728,6 +2745,40 @@ public final class PlacementPB {
       return map.get(key);
     }
 
+    public static final int NAME_FIELD_NUMBER = 44;
+    private volatile java.lang.Object name_;
+    /**
+     * <code>optional string name = 44;</code>
+     */
+    public java.lang.String getName() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        name_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>optional string name = 44;</code>
+     */
+    public com.google.protobuf.ByteString
+        getNameBytes() {
+      java.lang.Object ref = name_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        name_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -2862,6 +2913,9 @@ public final class PlacementPB {
             .setValue(entry.getValue())
             .build();
         output.writeMessage(43, countrySettings);
+      }
+      if (!getNameBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 44, name_);
       }
     }
 
@@ -3064,6 +3118,9 @@ public final class PlacementPB {
         size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(43, countrySettings);
       }
+      if (!getNameBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(44, name_);
+      }
       memoizedSize = size;
       return size;
     }
@@ -3151,6 +3208,8 @@ public final class PlacementPB {
           .equals(other.getSdkvBlacklistList());
       result = result && internalGetCountrySettings().equals(
           other.internalGetCountrySettings());
+      result = result && getName()
+          .equals(other.getName());
       return result;
     }
 
@@ -3263,6 +3322,8 @@ public final class PlacementPB {
         hash = (37 * hash) + COUNTRY_SETTINGS_FIELD_NUMBER;
         hash = (53 * hash) + internalGetCountrySettings().hashCode();
       }
+      hash = (37 * hash) + NAME_FIELD_NUMBER;
+      hash = (53 * hash) + getName().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -3483,6 +3544,8 @@ public final class PlacementPB {
         sdkvBlacklist_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField1_ = (bitField1_ & ~0x00000002);
         internalGetMutableCountrySettings().clear();
+        name_ = "";
+
         return this;
       }
 
@@ -3594,6 +3657,7 @@ public final class PlacementPB {
         result.sdkvBlacklist_ = sdkvBlacklist_;
         result.countrySettings_ = internalGetCountrySettings();
         result.countrySettings_.makeImmutable();
+        result.name_ = name_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -3835,6 +3899,10 @@ public final class PlacementPB {
         }
         internalGetMutableCountrySettings().mergeFrom(
             other.internalGetCountrySettings());
+        if (!other.getName().isEmpty()) {
+          name_ = other.name_;
+          onChanged();
+        }
         onChanged();
         return this;
       }
@@ -6387,6 +6455,75 @@ public final class PlacementPB {
         getMutableCountrySettings().putAll(values);
         return this;
       }
+
+      private java.lang.Object name_ = "";
+      /**
+       * <code>optional string name = 44;</code>
+       */
+      public java.lang.String getName() {
+        java.lang.Object ref = name_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          name_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 44;</code>
+       */
+      public com.google.protobuf.ByteString
+          getNameBytes() {
+        java.lang.Object ref = name_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          name_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string name = 44;</code>
+       */
+      public Builder setName(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        name_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 44;</code>
+       */
+      public Builder clearName() {
+        
+        name_ = getDefaultInstance().getName();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string name = 44;</code>
+       */
+      public Builder setNameBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        name_ = value;
+        onChanged();
+        return this;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
@@ -8184,7 +8321,7 @@ public final class PlacementPB {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\017placement.proto\032\014common.proto\"\374\t\n\tPlac" +
+      "\n\017placement.proto\032\014common.proto\"\212\n\n\tPlac" +
       "ement\022\n\n\002id\030\001 \001(\005\022\024\n\014publisher_id\030\002 \001(\005\022" +
       "\022\n\npub_app_id\030\003 \001(\005\022\016\n\006app_id\030\004 \001(\t\022\014\n\004p" +
       "lat\030\005 \001(\005\022\030\n\007ad_type\030\006 \001(\0162\007.AdType\022\026\n\016m" +
@@ -8207,24 +8344,24 @@ public final class PlacementPB {
       "telist\030\' \003(\t\022\027\n\017model_blacklist\030( \003(\t\022\025\n" +
       "\rdid_blacklist\030) \003(\t\022\026\n\016sdkv_blacklist\030*" +
       " \003(\t\0229\n\020country_settings\030+ \003(\0132\037.Placeme" +
-      "nt.CountrySettingsEntry\032<\n\032InventoryInte" +
-      "rvalStepEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(" +
-      "\005:\0028\001\0328\n\026CountryFloorPriceEntry\022\013\n\003key\030\001" +
-      " \001(\t\022\r\n\005value\030\002 \001(\002:\0028\001\032R\n\024CountrySettin" +
-      "gsEntry\022\013\n\003key\030\001 \001(\t\022)\n\005value\030\002 \001(\0132\032.Pl" +
-      "acement.CountrySettings:\0028\001\032\240\001\n\017CountryS" +
-      "ettings\0226\n\006period\030\001 \003(\0132&.Placement.Coun",
-      "trySettings.PeriodEntry\022\023\n\013floor_price\030\002" +
-      " \001(\002\022\021\n\tmax_price\030\003 \001(\002\032-\n\013PeriodEntry\022\013" +
-      "\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\005:\0028\001\"z\n\005Scene\022" +
-      "\n\n\002id\030\001 \001(\005\022\024\n\014placement_id\030\002 \001(\005\022\014\n\004nam" +
-      "e\030\003 \001(\t\022\025\n\rfrequency_cap\030\004 \001(\005\022\026\n\016freque" +
-      "ncy_unit\030\005 \001(\005\022\022\n\nis_default\030\006 \001(\005\"\220\001\n\017P" +
-      "lacementAbTest\022\024\n\014placement_id\030\001 \001(\005\022\r\n\005" +
-      "a_per\030\002 \001(\005\022\r\n\005b_per\030\003 \001(\005\022\021\n\ta_rule_id\030" +
-      "\004 \001(\005\022\021\n\tb_rule_id\030\005 \001(\005\022\022\n\nsegment_id\030\006" +
-      " \001(\005\022\017\n\007country\030\007 \001(\tB!\n\022com.adtiming.om",
-      ".pbB\013PlacementPBb\006proto3"
+      "nt.CountrySettingsEntry\022\014\n\004name\030, \001(\t\032<\n" +
+      "\032InventoryIntervalStepEntry\022\013\n\003key\030\001 \001(\005" +
+      "\022\r\n\005value\030\002 \001(\005:\0028\001\0328\n\026CountryFloorPrice" +
+      "Entry\022\013\n\003key\030\001 \001(\t\022\r\n\005value\030\002 \001(\002:\0028\001\032R\n" +
+      "\024CountrySettingsEntry\022\013\n\003key\030\001 \001(\t\022)\n\005va" +
+      "lue\030\002 \001(\0132\032.Placement.CountrySettings:\0028" +
+      "\001\032\240\001\n\017CountrySettings\0226\n\006period\030\001 \003(\0132&.",
+      "Placement.CountrySettings.PeriodEntry\022\023\n" +
+      "\013floor_price\030\002 \001(\002\022\021\n\tmax_price\030\003 \001(\002\032-\n" +
+      "\013PeriodEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\005" +
+      ":\0028\001\"z\n\005Scene\022\n\n\002id\030\001 \001(\005\022\024\n\014placement_i" +
+      "d\030\002 \001(\005\022\014\n\004name\030\003 \001(\t\022\025\n\rfrequency_cap\030\004" +
+      " \001(\005\022\026\n\016frequency_unit\030\005 \001(\005\022\022\n\nis_defau" +
+      "lt\030\006 \001(\005\"\220\001\n\017PlacementAbTest\022\024\n\014placemen" +
+      "t_id\030\001 \001(\005\022\r\n\005a_per\030\002 \001(\005\022\r\n\005b_per\030\003 \001(\005" +
+      "\022\021\n\ta_rule_id\030\004 \001(\005\022\021\n\tb_rule_id\030\005 \001(\005\022\022" +
+      "\n\nsegment_id\030\006 \001(\005\022\017\n\007country\030\007 \001(\tB!\n\022c",
+      "om.adtiming.om.pbB\013PlacementPBb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -8244,7 +8381,7 @@ public final class PlacementPB {
     internal_static_Placement_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Placement_descriptor,
-        new java.lang.String[] { "Id", "PublisherId", "PubAppId", "AppId", "Plat", "AdType", "MainPlacement", "IcUrl", "FanOut", "AllowHb", "FrequencyCap", "FrequencyUnit", "FrequencyInterval", "PreloadTimeout", "InventoryIntervalStep", "BatchSize", "InventoryCount", "InventoryInterval", "ReloadInterval", "FloorPrice", "CountryFloorPrice", "Scenes", "OsvMax", "OsvMin", "OsvWhitelist", "OsvBlacklist", "MakeWhitelist", "MakeBlacklist", "BrandWhitelist", "BrandBlacklist", "ModelWhitelist", "ModelBlacklist", "DidBlacklist", "SdkvBlacklist", "CountrySettings", });
+        new java.lang.String[] { "Id", "PublisherId", "PubAppId", "AppId", "Plat", "AdType", "MainPlacement", "IcUrl", "FanOut", "AllowHb", "FrequencyCap", "FrequencyUnit", "FrequencyInterval", "PreloadTimeout", "InventoryIntervalStep", "BatchSize", "InventoryCount", "InventoryInterval", "ReloadInterval", "FloorPrice", "CountryFloorPrice", "Scenes", "OsvMax", "OsvMin", "OsvWhitelist", "OsvBlacklist", "MakeWhitelist", "MakeBlacklist", "BrandWhitelist", "BrandBlacklist", "ModelWhitelist", "ModelBlacklist", "DidBlacklist", "SdkvBlacklist", "CountrySettings", "Name", });
     internal_static_Placement_InventoryIntervalStepEntry_descriptor =
       internal_static_Placement_descriptor.getNestedTypes().get(0);
     internal_static_Placement_InventoryIntervalStepEntry_fieldAccessorTable = new

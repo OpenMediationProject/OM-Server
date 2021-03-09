@@ -98,6 +98,7 @@ public class InitResponse {
             AdnAppConf a = new AdnAppConf();
             a.id = adn.getId();
             a.n = adn.getClassName();
+            a.nn = adn.getClassName().equals(adn.getDescn()) ? null : adn.getDescn();
             a.k = adn.getId() == ADN_CROSSPROMOTION ? pubApp.getAppKey() : m.getAppKey();
             this.adnApps.put(a.id, a);
         }
@@ -112,7 +113,8 @@ public class InitResponse {
                 List<MInstance> pIns = new ArrayList<>(30);
                 if (devAdnId == null) {
                     List<Instance> insList = cs.getPlacementInstancesAfterRuleMatch(p.getId(), this.adnApps.keySet(),
-                            req.getCountry(), req.getBrand(), req.getModel(), req.getCnl(), req.getMtype());
+                            req.getCountry(), req.getBrand(), req.getModel(), req.getCnl(), req.getMtype(),
+                            req.getOsv(), req.getSdkv(), req.getAppv(), req.getDid());
                     addInstances(pIns, insList, hasHb);
                 } else {//dev模式
                     if (this.adnApps.containsKey(devAdnId)) {
@@ -160,6 +162,10 @@ public class InitResponse {
         return placements;
     }
 
+    public Integer getIcs() {
+        return pubApp.getImprCallbackSwitch() == 1 ? 1 : null;
+    }
+
     public static class API {
         public String wf, lr, er, iap, ic, hb, cpcl, cppl;
     }
@@ -174,6 +180,7 @@ public class InitResponse {
     public static class AdnAppConf {
         public int id;
         public String n;
+        public String nn;
         public String k;
     }
 
@@ -189,6 +196,7 @@ public class InitResponse {
 
         // for json output
         public int id;         // placement ID
+        public String n;       // placement name
         public int t;          // adType
         public Integer main;   // is MainPlacemnt, for RewardVideo & Interstitial
         public Integer bs, fo; // batchSize & fanOut
@@ -203,6 +211,7 @@ public class InitResponse {
         InitPlacement(Placement p, List<MInstance> pIns, AtomicBoolean hasHb) {
             this.p = p;
             this.id = p.getId();
+            this.n = p.getName();
             this.t = p.getAdTypeValue();
             this.bs = p.getBatchSize();
             this.ins = pIns;
@@ -287,6 +296,10 @@ public class InitResponse {
 
         public int getId() {
             return o.getId();
+        }
+
+        public String getN() {
+            return o.getName();
         }
 
         public int getM() {

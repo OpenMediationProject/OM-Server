@@ -50,6 +50,10 @@ public class Instance {
         return ins.getId();
     }
 
+    public String getName() {
+        return ins.getName();
+    }
+
     public int getPubAppId() {
         return ins.getPubAppId();
     }
