@@ -10,9 +10,9 @@ MAINTAINER openmediation
 ARG GET_BUILDER_DIR="/data/OM-Server"
 ENV SYSTEMNAME "omsystem"
 ENV SERVERNAME "om-server"
-RUN mkdir -p /${SERVERNAME}/log 
+RUN yum install -y rsync && \
+    mkdir -p /${SERVERNAME}/log 
 ADD docker-entrypoint.sh /
-ADD rsync /bin/
 ADD nginx/ /usr/local/nginx/
 COPY --from=builder ${GET_BUILDER_DIR}/target/${SERVERNAME}.jar /${SERVERNAME}/
 WORKDIR /
