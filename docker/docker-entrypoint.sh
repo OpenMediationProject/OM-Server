@@ -111,6 +111,22 @@ do
 
             continue
         fi 
+	if [[ ${item_name} = "mountdata" ]]; then
+            loginfo_note "[Cloud Storage] Link ${!env_var}/ to /${CONFFILE}/data"
+            if [[ -d /${CONFFILE}/data ]];then
+                rm -fr /${CONFFILE}/data
+            fi
+            ln -sf ${!env_var}/  /${CONFFILE}/data
+            continue
+        fi 
+	if [[ ${item_name} = "mountlogs" ]]; then
+            loginfo_note "[Cloud Storage] Link ${!env_var}/ to /${CONFFILE}/log"
+            if [[ -d /${CONFFILE}/log ]];then
+                rm -fr /${CONFFILE}/log
+            fi
+            ln -sf ${!env_var}/  /${CONFFILE}/log
+            continue
+        fi 
     fi
 
     if [[ $env_var =~ ^OMCONF_ ]]; then
