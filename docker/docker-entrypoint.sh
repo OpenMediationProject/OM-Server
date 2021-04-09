@@ -127,6 +127,22 @@ do
             ln -sf ${!env_var}/  /${CONFFILE}/log
             continue
         fi 
+	if [[ ${item_name} = "mountconf" ]]; then
+            loginfo_note "[Cloud Storage] Link ${!env_var}/ to /usr/local/nginx/conf.d"
+            if [[ -d /usr/local/nginx/conf.d ]];then
+                rm -fr /usr/local/nginx/conf.d
+            fi
+            ln -sf ${!env_var}/ /usr/local/nginx/conf.d
+            continue
+        fi 
+	if [[ ${item_name} = "mounthttps" ]]; then
+            loginfo_note "[Cloud Storage] Link ${!env_var}/ to /usr/local/nginx/https"
+            if [[ -d /usr/local/nginx/https ]];then
+                rm -fr /usr/local/nginx/https
+            fi
+            ln -sf ${!env_var}/  /usr/local/nginx/https
+            continue
+        fi 
     fi
 
     if [[ $env_var =~ ^OMCONF_ ]]; then
