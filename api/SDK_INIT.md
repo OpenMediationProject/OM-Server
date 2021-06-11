@@ -2,9 +2,10 @@
 
 ## History
 
-|Version|Description|
-|---------|------|
-| 1 |  |
+|Version|Date|Description|
+|-----|------|------|
+| 1 |  |  |
+| 1 | 2021-06-02 | 增加太极 uarx 上报配置 |
 
 * Request header `Content-Type: application/json` is reqiured
 * The API accepts request body compression, in either `gzip` or `deflate` format, specified by the request header `Content-Encoding`, which is mandatory in this case.
@@ -107,11 +108,13 @@
 | Name | Type | Description | Example | Necessary |
 | --- | ---| --- | --- | --- |
 | d | int8 | debug model, 0-close, 1-open | 1 | ✔︎ |
+| ri | int32 | The next initialization delay time, in minutes| 1440 |✔︎|
 | api | Object of [APIs](#apis) | API URLs |  | ✔︎ |
 | events | Object of [Events](#events) | events need to report, events with no value have no need to report| |✖︎|
 | ms | Array of [Mediation](#mediation) | Mediation list,<br> **when SDK initialization and load. Do not initial all mediations, The principle is to initialize on demand** |  |✔︎|
 | pls | Array of [Placement](#placement) | Placement list |  |✔︎|
 | ics | int8 | Impression Callback switch, 0-off,1-on | 0 |✔︎|
+| uarx | Array of float | UAR report topX, from left to right are top10%,top20%,top30%,top40%,top50% | [5.1, 4.3, 3.2, 2.1, 1.0] |✖︎|
 
 ### APIs
 
@@ -137,6 +140,7 @@
 | mn | int32 | maxNumOfEventsToUpload The maximum number of packet reporting events, once when the queue length reaches mn| 5 |✔︎|
 | ci | int32 | checkInterval Check the event queue interval regularly, in seconds, and report it once when there are events in the queue| 10 |✔︎|
 | ids | Array of [EventID](SDK_EVENT.md#eventid) | List of EventIDs to be reported| [100,101] |✖︎|
+| fids | Array of [EventID](SDK_EVENT.md#eventid) | List of EventIDs to be reported immediately| [103,104] |✖︎|
 
 ### Mediation
 

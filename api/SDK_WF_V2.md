@@ -6,6 +6,7 @@
 |------|------|
 | 1 | see [WF_V1](SDK_WF.md) |
 | 2 | support impression revenue callback|
+| 3 | request before c2s, response add c2s |
 
 
 * API URL from /init Response
@@ -68,6 +69,7 @@
 | rule | Object of [MediationRule](#mediationrule) | Mediation Rule | |✖︎|
 | abt | int32 | ABTest Mode | 0 |✖︎|
 | ins | Array of [Instance](#instance) | Sorted Instance List with revenue | | ✔︎ |
+| c2s | Array of int32 | C2S InstanceID List | |✖|
 | bidresp | Array of [S2SBidResponse](#s2sbidresponse) | S2SBidResponse with Payload | | ✖︎ |
 
 #### MediationRule
@@ -142,6 +144,7 @@
       "rp": 1
     }
   ],
+  "c2s": [1235, 345],
   "bidresp": [
     {
       "iid": 123,

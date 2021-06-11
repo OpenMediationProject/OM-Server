@@ -49,7 +49,9 @@ public class KafkaService {
     }
 
     public void send(ProducerRecord<String, String> r) {
-        producer.send(r);
+        if (isEnabled()) {
+            producer.send(r);
+        }
     }
 
     public boolean isEnabled() {

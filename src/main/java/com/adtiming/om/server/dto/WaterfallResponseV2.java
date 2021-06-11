@@ -18,6 +18,7 @@ public class WaterfallResponseV2 implements WfResInterface {
     private int abt;
 
     private InstanceRule hitRule;
+    private List<Integer> c2s;// V3版本新增参数
 
     public WaterfallResponseV2(int code, String msg, int abt, boolean debug) {
         this.code = code;
@@ -110,6 +111,14 @@ public class WaterfallResponseV2 implements WfResInterface {
             }
         }
         return this;
+    }
+
+    public List<Integer> getC2s() {
+        return c2s;
+    }
+
+    public void setC2s(List<Integer> c2s) {
+        this.c2s = c2s;
     }
 
     public List<CharSequence> getDebug() {

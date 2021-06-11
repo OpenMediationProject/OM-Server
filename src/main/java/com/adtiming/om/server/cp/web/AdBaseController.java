@@ -143,6 +143,14 @@ public class AdBaseController extends BaseController {
         final float maxPrice = 99F;
 
         final Map<Long, MatchedCampaign> campaignMatched = new HashMap<>();
+        final List<String> imprFreqCids = new ArrayList<>(pcs.size());
+        for (Campaign c : pcs) {
+            if (c.getImprFreq() > 0) {
+                imprFreqCids.add(String.valueOf(c.getId()));
+            }
+        }
+
+        Map<Long, Integer> campaignFreqs = cpCacheService.getDeviceImpressionCount(req.getDid(), imprFreqCids);
 
         for (Campaign c : pcs) {
             final CrossPromotionPB.App capp = cpCacheService.getApp(c.getAppId());
@@ -224,6 +232,16 @@ public class AdBaseController extends BaseController {
                     res.setLastReason("same appId").addDebug(
                             "remove %d, pub_app equals campaign app: %s", c.getId(), c.getAppId());
                     continue; // 过滤 publisher_app.app_id = campaign.app_id
+                }
+
+                if (c.getImprFreq() > 0) {
+                    int imprCount = campaignFreqs.getOrDefault(c.getId(), 0);
+                    if (imprCount >= c.getImprFreq()) {
+                        res.setLastReason("impr_freq reach did impr frequency").addDebug(
+                                "remove %d, impr_freq reach frequency: %d, current: %d",
+                                c.getId(), c.getImprFreq(), imprCount);
+                        continue; // 根据活动配置的impr_freq限制单device活动展现次数
+                    }
                 }
 
                 // remove bidPrice < floorPrice
@@ -357,6 +375,18 @@ public class AdBaseController extends BaseController {
             res.addDebug("devMode random sort, return %d", c.getCampaignId());
             return Collections.singletonList(c);
         }
+
+        campaignMatched.values().removeIf(cresp -> {
+            Campaign c = cresp.getCampaign();
+            if (c.getDailyCap() == 0) {//0为不控制Cap
+                return false;
+            }
+            int cap = cpCacheService.getCampaignCap(c.getId());
+            if (cap <= 0) {
+                res.setLastReason("cap is run out").addDebug("remove %d, cap is run out: %s", c.getId(), cap);
+            }
+            return false;
+        });
 
 
         if (campaignMatched.size() == 1) {

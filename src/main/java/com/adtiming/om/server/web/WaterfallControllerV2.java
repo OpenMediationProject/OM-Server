@@ -21,12 +21,12 @@ import org.springframework.web.context.request.async.AsyncRequestTimeoutExceptio
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.adtiming.om.server.dto.AdNetwork.ADN_CROSSPROMOTION;
-import static com.adtiming.om.server.dto.AdNetwork.ADN_FACEBOOK;
+import static com.adtiming.om.server.dto.AdNetwork.*;
 import static com.adtiming.om.server.dto.WaterfallResponse.*;
 
 @RestController
@@ -48,8 +48,9 @@ public class WaterfallControllerV2 extends WaterfallBase {
 
     /**
      * waterfall
+     * V3 version added C2S modification
      */
-    @PostMapping(value = "/wf", params = "v=2")
+    @PostMapping(value = "/wf")
     public Object wf(HttpServletRequest req,
                      @RequestParam("v") int version, // api version
                      @RequestParam("plat") int plat, // platform
@@ -129,7 +130,20 @@ public class WaterfallControllerV2 extends WaterfallBase {
         res.setHitRule(rule);
         Map<Integer, Instance> bidInsMap = new HashMap<>();
         List<WaterfallInstance> insList = getIns(devDevicePubId, o, placement, res, bidInsMap, rule);
-
+        if (version > 2) {//V3版本开始增加返回C2S集合
+            if (!bidInsMap.isEmpty()) {
+                List<Integer> c2sIns = new ArrayList<>(3);
+                bidInsMap.forEach((k, v) -> {
+                    if (v.isHeadBidding() && C2S_ADN.contains(v.getAdnId())
+                            && !o.getBidPriceMap().containsKey(k)) {//C2S Instance无缓存时
+                        c2sIns.add(k);
+                    }
+                });
+                if (!c2sIns.isEmpty()) {
+                    res.setC2s(c2sIns);
+                }
+            }
+        }
         if (o.getBids2s() != null) {
             o.getBids2s().removeIf(bidderToken -> {
                 Instance instance = bidInsMap.get(bidderToken.iid);

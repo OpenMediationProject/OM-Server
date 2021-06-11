@@ -13,10 +13,13 @@ import com.adtiming.om.server.cp.dto.CampaignTargeting;
 import com.adtiming.om.server.cp.util.ECDSAUtil;
 import com.adtiming.om.server.dto.Placement;
 import com.adtiming.om.server.service.DictManager;
+import com.adtiming.om.server.service.KafkaService;
 import com.adtiming.om.server.service.PBLoader;
+import com.adtiming.om.server.service.RedisService;
 import com.adtiming.om.server.util.CountryCode;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
+import org.apache.kafka.clients.producer.ProducerRecord;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -24,6 +27,9 @@ import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
 import java.security.PrivateKey;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -57,6 +63,16 @@ public class CpCacheService extends PBLoader {
     private String skAdNetworkVersion;
     private String skAdNetworkId;
     private PrivateKey skPrivateKey;
+
+    private static final String CP_IMPR_FREQ_PREFIX = "cp_impr_freq_";
+
+    private static final DateTimeFormatter KEY_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+    @Resource
+    private RedisService redisService;
+
+    @Resource
+    private KafkaService kafkaService;
 
     public void reloadCache() {
         LOG.info("reload cp cache start");
@@ -289,5 +305,69 @@ public class CpCacheService extends PBLoader {
 
     public PrivateKey getSkPrivateKey() {
         return skPrivateKey;
+    }
+
+    public Map<Long, Integer> getDeviceImpressionCount(String deviceId, List<String> campaignIds) {
+        if (campaignIds.isEmpty())
+            return Collections.emptyMap();
+        try {
+            int day = LocalDate.now().getDayOfMonth();
+            String key = CP_IMPR_FREQ_PREFIX + day + "_" + deviceId;
+            List<String> campaignCount = redisService.hmget(key, campaignIds.toArray(new String[0]));
+            if (campaignCount.isEmpty()) {
+                return Collections.emptyMap();
+            }
+            Map<Long, Integer> map = new HashMap<>(campaignIds.size());
+            int index = 0;
+            for (String cid : campaignIds) {
+                map.put(NumberUtils.toLong(cid), NumberUtils.toInt(campaignCount.get(index++)));
+            }
+            return map;
+        } catch (Exception e) {
+            LOG.error("getDeviceCpImprCount error", e);
+        }
+        return Collections.emptyMap();
+    }
+
+    public void setDeviceImpressionCount(String deviceId, long campaignId) {
+        int day = LocalDate.now().getDayOfMonth();
+        String key = CP_IMPR_FREQ_PREFIX + day + "_" + deviceId;
+        try {
+            redisService.hincrBy(key, String.valueOf(campaignId), 1);
+            redisService.expire(key, 86400);
+        } catch (Exception e) {
+            LOG.error("setDeviceImprCount error, prefix:{}, device:{}, cid:{}",
+                    deviceId, campaignId, CP_IMPR_FREQ_PREFIX, e);
+        }
+    }
+
+    public void decrCap(long campaignId) {
+        try {
+            final LocalTime time = LocalTime.now();
+            final int expireSeconds = 86400 - time.toSecondOfDay() + 3600; // 今天系统时区剩余时间秒+1小时
+            final String date = LocalDate.now().format(KEY_DATE_FORMAT);
+            final String key = String.format("cp_cap_%s_%d", date, campaignId);
+            redisService.decrBy(key, 1);
+            redisService.expire(key, expireSeconds);
+            kafkaService.send(new ProducerRecord<>("cp_campaign_cap_decr", StringUtils.joinWith("\1", campaignId, 1)));
+        } catch (Exception e) {
+            LOG.error("decrCap error, cid:{}",
+                    campaignId, e);
+        }
+    }
+
+    public int getCampaignCap(long campaignId) {
+        final String redisKeyDatePrefix = LocalDate.now().format(KEY_DATE_FORMAT);
+        try {
+            String key = String.format("cp_cap_%s_%d", redisKeyDatePrefix, campaignId);
+            String cap = redisService.get(key);
+            if (StringUtils.isNotBlank(cap)) {
+                return NumberUtils.toInt(cap);
+            }
+        } catch (Exception e) {
+            LOG.error("getCampaignCap error, cid:{}",
+                    campaignId, e);
+        }
+        return 0;
     }
 }

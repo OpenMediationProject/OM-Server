@@ -5,10 +5,7 @@ import com.adtiming.om.server.cp.dto.TrackRequest;
 import com.adtiming.om.server.cp.service.CpCacheService;
 import com.adtiming.om.server.dto.GeoData;
 import com.adtiming.om.server.dto.Placement;
-import com.adtiming.om.server.service.AppConfig;
-import com.adtiming.om.server.service.CacheService;
-import com.adtiming.om.server.service.GeoService;
-import com.adtiming.om.server.service.LogService;
+import com.adtiming.om.server.service.*;
 import com.adtiming.om.server.web.BaseController;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
@@ -91,6 +88,10 @@ public class TrackController extends BaseController {
             if (StringUtils.isNotEmpty(o.getPrice()) && !cs.isTestCampaign(o.getCid())) {
                 o.setCost(new BigDecimal(o.getPrice()));
             }
+            //CP活动频次控制
+            cs.setDeviceImpressionCount(o.getDid(), o.getCid());
+            //CP活动Cap控制
+            cs.decrCap(o.getCid());
         } else {
             o.setClick(1);
         }

@@ -16,6 +16,9 @@ public class NodeConfig {
     @JsonProperty("kafka_servers")
     public String kafkaServers;
 
+    @JsonProperty("redis_servers")
+    public String redisServers;
+
     @JsonProperty("s3_status")
     public int s3Status;
 
@@ -38,6 +41,7 @@ public class NodeConfig {
                 ", dcenter=" + dcenter +
                 ", kafkaStatus=" + kafkaStatus +
                 ", kafkaServers='" + kafkaServers + '\'' +
+                ", redisServers='" + redisServers + '\'' +
                 ", s3Status=" + s3Status +
                 ", s3Region='" + s3Region + '\'' +
                 ", s3Bucket='" + s3Bucket + '\'' +
