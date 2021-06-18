@@ -183,7 +183,7 @@ public class WaterfallControllerV2 extends WaterfallBase {
 
         if (CollectionUtils.isEmpty(o.getBids2s())) {
             List<WaterfallInstance> ins = getWfInsWithBidInstance(o, insList);
-            if (ins == null || ins.isEmpty()) {
+            if (CollectionUtils.isEmpty(ins) && CollectionUtils.isEmpty(res.getC2s())) {
                 res.setCode(CODE_INSTANCE_EMPTY).setMsg("instance empty");
                 lr.setStatus(0, res.getMsg()).writeToLog(logService);
                 return response(res);
