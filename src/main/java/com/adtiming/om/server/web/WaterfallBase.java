@@ -289,6 +289,9 @@ public class WaterfallBase extends BaseController {
                         totalEcpm += ecpm.ecpm;
                         ecpmSize++;
                     }
+                    if (ecpm != null && res.isDebugEnabled()) {
+                        res.addDebug("InstanceID:%s, Ecpm: %s, EcpmLevel: %s", ins.getIns(), ecpm.ecpm, ecpm.dataLevel);
+                    }
 
                     int weight = insConfigWeight.get(ins.getId());
                     if (weight > 0) {
