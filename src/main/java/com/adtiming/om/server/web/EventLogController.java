@@ -95,18 +95,22 @@ public class EventLogController extends BaseController {
                 lr.setTs(event.ts);
                 lr.setServerTs(event.serverTs);
                 lr.setType(event.eid);
+                lr.setBid(event.bid);
                 switch (event.eid) {
                     case INSTANCE_BID_REQUEST:
                         lr.setBidReq(1);
+                        lr.setBid(1);
                         break;
                     case INSTANCE_BID_RESPONSE:
                         lr.setBidRes(1);
+                        lr.setBid(1);
                         if (event.price > 0F) {
                             lr.setBidResPrice(event.price);
                         }
                         break;
                     case INSTANCE_BID_WIN:
                         lr.setBidWin(1);
+                        lr.setBid(1);
                         if (event.price > 0F) {
                             lr.setBidWinPrice(event.price);
                         }
@@ -121,12 +125,15 @@ public class EventLogController extends BaseController {
                         lr.setReadyFalse(1);
                         break;
                     case INSTANCE_PAYLOAD_REQUEST:
+                        lr.setBid(1);
                         lr.setPlReq(1);
                         break;
                     case INSTANCE_PAYLOAD_SUCCESS:
+                        lr.setBid(1);
                         lr.setPlSuccess(1);
                         break;
                     case INSTANCE_PAYLOAD_FAIL:
+                        lr.setBid(1);
                         lr.setPlFail(1);
                         break;
                     default:
@@ -141,7 +148,6 @@ public class EventLogController extends BaseController {
                 lr.setIid(event.iid);
                 lr.setScene(event.scene);
                 lr.setAbt(event.abt);
-                lr.setBid(event.bid);
                 lr.setReqId(event.reqId);
                 lr.setRuleId(event.ruleId);
                 lr.setRevenue(event.revenue);
