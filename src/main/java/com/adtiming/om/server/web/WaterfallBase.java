@@ -314,8 +314,9 @@ public class WaterfallBase extends BaseController {
                 if (totalEcpm > 0F) {
                     float avgEcpm = totalEcpm / ecpmSize;
                     sortIns.forEach(wfIns -> {
-                        if (wfIns.ecpm == 0) {
+                        if (wfIns.ecpm <= 0) {
                             wfIns.ecpm = avgEcpm;
+                            res.addDebug("InstanceId:%d, Use avg ecpm: %f", wfIns.instance.getId(), avgEcpm);
                         }
                     });
                 }
