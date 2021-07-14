@@ -153,6 +153,11 @@ public class InstanceRule {
         return instancePriority.getOrDefault(instanceId, 0);
     }
 
+
+    public int getAlgorithmId() {
+        return rule.getAlgorithmId();
+    }
+
     /**
      * determin if match rule
      *

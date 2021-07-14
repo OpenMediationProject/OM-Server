@@ -116,7 +116,7 @@ public class DictManager extends PBLoader {
         return doubleVal(path, 0.0);
     }
 
-    public double floatVal(String path, float Default) {
+    public float floatVal(String path, float Default) {
         Dict d = getDict(path);
         return d == null ? Default : NumberUtils.toFloat(d.getValue(), Default);
     }

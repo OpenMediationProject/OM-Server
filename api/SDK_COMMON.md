@@ -139,4 +139,5 @@
 |21|KsAd|KsAd|
 |22|Ogury|Ogury|
 |23|HyBid|HyBid|
+|24|AdMost|AdMost|
 |30|fyber|Fyber|

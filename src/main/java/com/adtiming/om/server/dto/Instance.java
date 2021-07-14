@@ -147,4 +147,18 @@ public class Instance {
 
         return true;
     }
+
+    public Float getInstanceManualEcpm(String country) {
+        float manualEcpm = -1F;
+        if (ins.getCountryManualEcpmCount() > 0) {
+            manualEcpm = ins.getCountryManualEcpmOrDefault(country, -1F);
+        }
+        if (manualEcpm == -1F) { // 国家ALL配置
+            manualEcpm = ins.getCountryManualEcpmOrDefault("00", -1F);
+        }
+        if (manualEcpm > 0F) {
+            return manualEcpm;
+        }
+        return null;
+    }
 }

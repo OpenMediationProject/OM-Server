@@ -1,15 +1,12 @@
 package com.adtiming.om.server.web;
 
 import com.adtiming.om.server.dto.*;
-import com.adtiming.om.server.service.AppConfig;
-import com.adtiming.om.server.service.CacheService;
-import com.adtiming.om.server.service.GeoService;
-import com.adtiming.om.server.service.LogService;
+import com.adtiming.om.server.service.*;
 import com.adtiming.om.server.util.Compressor;
 import com.adtiming.om.server.util.RandomUtil;
 import com.adtiming.om.server.util.Util;
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.micrometer.core.lang.Nullable;
 import org.apache.commons.lang3.StringUtils;
@@ -56,6 +53,10 @@ public class WaterfallBase extends BaseController {
 
     @Resource
     private LogService logService;
+
+    @Resource
+    private WaterfallEcpmService ecpmService;
+
 
     private final RequestConfig bidReqCfg = RequestConfig.custom()
             .setConnectTimeout(2000)
@@ -240,7 +241,8 @@ public class WaterfallBase extends BaseController {
                         continue;
                     }
                     insAdnIdMap.put(ins.getId(), ins.getAdnId());
-                    totalEcpm += setInstanceEcpm(o, ins, priorityIns, insEcpm, totalEcpm, res, p.getAdTypeValue(), cacheService);
+                    totalEcpm += setInstanceEcpm(o, matchedRule, ins, priorityIns, insEcpm, totalEcpm, res.isDebugEnabled(),
+                            res.getDebug(), p.getAdTypeValue());
                 }
                 if (priorityIns.isEmpty()) {
                     res.addDebug("Has no instance match");
@@ -282,15 +284,12 @@ public class WaterfallBase extends BaseController {
                     }
                     insAdnIdMap.put(ins.getId(), ins.getAdnId());
 
-                    InstanceEcpm ecpm = cacheService.getInstanceEcpm(ins.getAdnId(), ins.getId(), o.getCountry(), p.getAdTypeValue());
+                    InstanceEcpm ecpm = ecpmService.getInstanceEcpm(ins, matchedRule.getAlgorithmId(), o.getCountry(), p.getAdTypeValue());
                     float ecpmVal = 0F;
                     if (ecpm != null && ecpm.ecpm > -1F) {
                         ecpmVal = ecpm.ecpm;
                         totalEcpm += ecpm.ecpm;
                         ecpmSize++;
-                    }
-                    if (ecpm != null && res.isDebugEnabled()) {
-                        res.addDebug("InstanceID:%s, Ecpm: %s, EcpmLevel: %s", ins.getIns(), ecpm.ecpm, ecpm.dataLevel);
                     }
 
                     int weight = insConfigWeight.get(ins.getId());
@@ -342,7 +341,8 @@ public class WaterfallBase extends BaseController {
                 }
                 insAdnIdMap.put(ins.getId(), ins.getAdnId());
 
-                totalEcpm += setInstanceEcpm(o, ins, priorityIns, insEcpm, totalEcpm, res, p.getAdTypeValue(), cacheService);
+                totalEcpm += setInstanceEcpm(o, null, ins, priorityIns, insEcpm, totalEcpm, res.isDebugEnabled(),
+                        res.getDebug(), p.getAdTypeValue());
             }
             if (priorityIns.isEmpty()) {
                 res.addDebug("Has no instance match");
@@ -367,30 +367,27 @@ public class WaterfallBase extends BaseController {
         return sortIns;
     }
 
-    private float setInstanceEcpm(WaterfallRequest o, Instance ins, Map<Float, List<WaterfallInstance>> priorityIns,
-                                  Map<Integer, Float> insEcpm, float totalEcpm, WfResInterface res,
-                                  int adType, CacheService cacheService) {
-        /*Float bidPrice = o.getBidPrice(ins.getId());
+    private float setInstanceEcpm(WaterfallRequest req, InstanceRule rule, Instance ins, Map<Float, List<WaterfallInstance>> priorityIns,
+                                  Map<Integer, Float> insEcpm, float totalEcpm, boolean DEBUG, List<CharSequence> dmsg,
+                                  int placementType) {
+        /*Float bidPrice = req.getBidPrice(ins.getId());
         if (bidPrice != null) {
-            priorityIns.computeIfAbsent(bidPrice, k -> new ArrayList<>()).add(ins.getId());
+            priorityIns.computeIfAbsent(bidPrice, k -> new ArrayList<>()).add(new WaterfallInstance(ins, bidPrice));
             insEcpm.put(ins.getId(), bidPrice);
             totalEcpm += bidPrice;
             if (DEBUG) {
                 dmsg.add("Instance: " + ins.getId() + ", BidPrice:" + bidPrice);
             }
         } else {*/
-        InstanceEcpm ecpm = cacheService.getInstanceEcpm(ins.getAdnId(), ins.getId(), o.getCountry(), adType);
+        int algorithmId = rule != null ? rule.getAlgorithmId() : ecpmService.defalutEcpmAlgorithmId;
+        InstanceEcpm ecpm = ecpmService.getInstanceEcpm(ins, algorithmId, req.getCountry(), placementType);
         priorityIns.computeIfAbsent(ecpm.ecpm, k -> new ArrayList<>()).add(new WaterfallInstance(ins, ecpm.ecpm));
         if (ecpm.ecpm > -1F) {
             insEcpm.put(ins.getId(), ecpm.ecpm);
+            totalEcpm += ecpm.ecpm;
         }
-        totalEcpm += ecpm.ecpm;
-        if (res.isDebugEnabled()) {
-            try {
-                res.addDebug("Instance Ecpm: %s", objectMapper.writeValueAsString(ecpm));
-            } catch (JsonProcessingException e) {
-                LOG.error("error", e);
-            }
+        if (DEBUG) {
+            dmsg.add("Instance Ecpm:" + JSON.toJSONString(ecpm));
         }
         //}
         return totalEcpm;
@@ -538,7 +535,7 @@ public class WaterfallBase extends BaseController {
                     } catch (Exception e) {
                         if (DEBUG) {
                             resp.getDebug().add(String.format("bidresp from %d error, %s, headers: %s, body: %s",
-                                    bidderToken.iid, e.toString(), headers, content));
+                                    bidderToken.iid, e, headers, content));
                         }
                         LOG.error("adn {} parse error, req: {}, resp: {}", bidderToken.adn, reqData, content, e);
                     } finally {
@@ -552,7 +549,7 @@ public class WaterfallBase extends BaseController {
                     String msg = ex.toString();
                     LOG.debug("adn {} failed: {}", bidderToken.adn, msg);
                     if (DEBUG) {
-                        resp.getDebug().add(String.format("bidresp from %d failed: %s", bidderToken.iid, ex.toString()));
+                        resp.getDebug().add(String.format("bidresp from %d failed: %s", bidderToken.iid, ex));
                     }
                     handleS2SBidResponse(count, bidderToken, isTest, null, msg, o, resp, lr, callback, dr);
                 }

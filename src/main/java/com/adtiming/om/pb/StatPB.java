@@ -4408,6 +4408,3666 @@ public final class StatPB {
 
   }
 
+  public interface InstanceCountryDayEcpmOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:InstanceCountryDayEcpm)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string day = 1;</code>
+     */
+    java.lang.String getDay();
+    /**
+     * <code>optional string day = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getDayBytes();
+
+    /**
+     * <code>optional int32 instance_id = 2;</code>
+     */
+    int getInstanceId();
+
+    /**
+     * <code>optional string country = 3;</code>
+     */
+    java.lang.String getCountry();
+    /**
+     * <code>optional string country = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getCountryBytes();
+
+    /**
+     * <code>optional int32 impr = 4;</code>
+     */
+    int getImpr();
+
+    /**
+     * <code>optional float cost = 5;</code>
+     */
+    float getCost();
+  }
+  /**
+   * <pre>
+   *For Auto Waterfall ExponentialSmoothing instance+country+7day
+   * </pre>
+   *
+   * Protobuf type {@code InstanceCountryDayEcpm}
+   */
+  public  static final class InstanceCountryDayEcpm extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:InstanceCountryDayEcpm)
+      InstanceCountryDayEcpmOrBuilder {
+    // Use InstanceCountryDayEcpm.newBuilder() to construct.
+    private InstanceCountryDayEcpm(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private InstanceCountryDayEcpm() {
+      day_ = "";
+      instanceId_ = 0;
+      country_ = "";
+      impr_ = 0;
+      cost_ = 0F;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private InstanceCountryDayEcpm(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              day_ = s;
+              break;
+            }
+            case 16: {
+
+              instanceId_ = input.readInt32();
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              country_ = s;
+              break;
+            }
+            case 32: {
+
+              impr_ = input.readInt32();
+              break;
+            }
+            case 45: {
+
+              cost_ = input.readFloat();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.adtiming.om.pb.StatPB.internal_static_InstanceCountryDayEcpm_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.adtiming.om.pb.StatPB.internal_static_InstanceCountryDayEcpm_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm.class, com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm.Builder.class);
+    }
+
+    public static final int DAY_FIELD_NUMBER = 1;
+    private volatile java.lang.Object day_;
+    /**
+     * <code>optional string day = 1;</code>
+     */
+    public java.lang.String getDay() {
+      java.lang.Object ref = day_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        day_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>optional string day = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDayBytes() {
+      java.lang.Object ref = day_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        day_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int INSTANCE_ID_FIELD_NUMBER = 2;
+    private int instanceId_;
+    /**
+     * <code>optional int32 instance_id = 2;</code>
+     */
+    public int getInstanceId() {
+      return instanceId_;
+    }
+
+    public static final int COUNTRY_FIELD_NUMBER = 3;
+    private volatile java.lang.Object country_;
+    /**
+     * <code>optional string country = 3;</code>
+     */
+    public java.lang.String getCountry() {
+      java.lang.Object ref = country_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        country_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>optional string country = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCountryBytes() {
+      java.lang.Object ref = country_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        country_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int IMPR_FIELD_NUMBER = 4;
+    private int impr_;
+    /**
+     * <code>optional int32 impr = 4;</code>
+     */
+    public int getImpr() {
+      return impr_;
+    }
+
+    public static final int COST_FIELD_NUMBER = 5;
+    private float cost_;
+    /**
+     * <code>optional float cost = 5;</code>
+     */
+    public float getCost() {
+      return cost_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getDayBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, day_);
+      }
+      if (instanceId_ != 0) {
+        output.writeInt32(2, instanceId_);
+      }
+      if (!getCountryBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, country_);
+      }
+      if (impr_ != 0) {
+        output.writeInt32(4, impr_);
+      }
+      if (cost_ != 0F) {
+        output.writeFloat(5, cost_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getDayBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, day_);
+      }
+      if (instanceId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, instanceId_);
+      }
+      if (!getCountryBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, country_);
+      }
+      if (impr_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, impr_);
+      }
+      if (cost_ != 0F) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(5, cost_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm)) {
+        return super.equals(obj);
+      }
+      com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm other = (com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm) obj;
+
+      boolean result = true;
+      result = result && getDay()
+          .equals(other.getDay());
+      result = result && (getInstanceId()
+          == other.getInstanceId());
+      result = result && getCountry()
+          .equals(other.getCountry());
+      result = result && (getImpr()
+          == other.getImpr());
+      result = result && (
+          java.lang.Float.floatToIntBits(getCost())
+          == java.lang.Float.floatToIntBits(
+              other.getCost()));
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + DAY_FIELD_NUMBER;
+      hash = (53 * hash) + getDay().hashCode();
+      hash = (37 * hash) + INSTANCE_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getInstanceId();
+      hash = (37 * hash) + COUNTRY_FIELD_NUMBER;
+      hash = (53 * hash) + getCountry().hashCode();
+      hash = (37 * hash) + IMPR_FIELD_NUMBER;
+      hash = (53 * hash) + getImpr();
+      hash = (37 * hash) + COST_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getCost());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *For Auto Waterfall ExponentialSmoothing instance+country+7day
+     * </pre>
+     *
+     * Protobuf type {@code InstanceCountryDayEcpm}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:InstanceCountryDayEcpm)
+        com.adtiming.om.pb.StatPB.InstanceCountryDayEcpmOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.adtiming.om.pb.StatPB.internal_static_InstanceCountryDayEcpm_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.adtiming.om.pb.StatPB.internal_static_InstanceCountryDayEcpm_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm.class, com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm.Builder.class);
+      }
+
+      // Construct using com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        day_ = "";
+
+        instanceId_ = 0;
+
+        country_ = "";
+
+        impr_ = 0;
+
+        cost_ = 0F;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.adtiming.om.pb.StatPB.internal_static_InstanceCountryDayEcpm_descriptor;
+      }
+
+      public com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm getDefaultInstanceForType() {
+        return com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm.getDefaultInstance();
+      }
+
+      public com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm build() {
+        com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm buildPartial() {
+        com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm result = new com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm(this);
+        result.day_ = day_;
+        result.instanceId_ = instanceId_;
+        result.country_ = country_;
+        result.impr_ = impr_;
+        result.cost_ = cost_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm) {
+          return mergeFrom((com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm other) {
+        if (other == com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm.getDefaultInstance()) return this;
+        if (!other.getDay().isEmpty()) {
+          day_ = other.day_;
+          onChanged();
+        }
+        if (other.getInstanceId() != 0) {
+          setInstanceId(other.getInstanceId());
+        }
+        if (!other.getCountry().isEmpty()) {
+          country_ = other.country_;
+          onChanged();
+        }
+        if (other.getImpr() != 0) {
+          setImpr(other.getImpr());
+        }
+        if (other.getCost() != 0F) {
+          setCost(other.getCost());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object day_ = "";
+      /**
+       * <code>optional string day = 1;</code>
+       */
+      public java.lang.String getDay() {
+        java.lang.Object ref = day_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          day_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string day = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDayBytes() {
+        java.lang.Object ref = day_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          day_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string day = 1;</code>
+       */
+      public Builder setDay(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        day_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string day = 1;</code>
+       */
+      public Builder clearDay() {
+        
+        day_ = getDefaultInstance().getDay();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string day = 1;</code>
+       */
+      public Builder setDayBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        day_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int instanceId_ ;
+      /**
+       * <code>optional int32 instance_id = 2;</code>
+       */
+      public int getInstanceId() {
+        return instanceId_;
+      }
+      /**
+       * <code>optional int32 instance_id = 2;</code>
+       */
+      public Builder setInstanceId(int value) {
+        
+        instanceId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 instance_id = 2;</code>
+       */
+      public Builder clearInstanceId() {
+        
+        instanceId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object country_ = "";
+      /**
+       * <code>optional string country = 3;</code>
+       */
+      public java.lang.String getCountry() {
+        java.lang.Object ref = country_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          country_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string country = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCountryBytes() {
+        java.lang.Object ref = country_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          country_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string country = 3;</code>
+       */
+      public Builder setCountry(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        country_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string country = 3;</code>
+       */
+      public Builder clearCountry() {
+        
+        country_ = getDefaultInstance().getCountry();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string country = 3;</code>
+       */
+      public Builder setCountryBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        country_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int impr_ ;
+      /**
+       * <code>optional int32 impr = 4;</code>
+       */
+      public int getImpr() {
+        return impr_;
+      }
+      /**
+       * <code>optional int32 impr = 4;</code>
+       */
+      public Builder setImpr(int value) {
+        
+        impr_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 impr = 4;</code>
+       */
+      public Builder clearImpr() {
+        
+        impr_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private float cost_ ;
+      /**
+       * <code>optional float cost = 5;</code>
+       */
+      public float getCost() {
+        return cost_;
+      }
+      /**
+       * <code>optional float cost = 5;</code>
+       */
+      public Builder setCost(float value) {
+        
+        cost_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float cost = 5;</code>
+       */
+      public Builder clearCost() {
+        
+        cost_ = 0F;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:InstanceCountryDayEcpm)
+    }
+
+    // @@protoc_insertion_point(class_scope:InstanceCountryDayEcpm)
+    private static final com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm();
+    }
+
+    public static com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<InstanceCountryDayEcpm>
+        PARSER = new com.google.protobuf.AbstractParser<InstanceCountryDayEcpm>() {
+      public InstanceCountryDayEcpm parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new InstanceCountryDayEcpm(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<InstanceCountryDayEcpm> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<InstanceCountryDayEcpm> getParserForType() {
+      return PARSER;
+    }
+
+    public com.adtiming.om.pb.StatPB.InstanceCountryDayEcpm getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface AdnCountryAdTypeEcpmOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:AdnCountryAdTypeEcpm)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 adn_id = 1;</code>
+     */
+    int getAdnId();
+
+    /**
+     * <code>optional int32 ad_type = 2;</code>
+     */
+    int getAdType();
+
+    /**
+     * <code>optional string country = 3;</code>
+     */
+    java.lang.String getCountry();
+    /**
+     * <code>optional string country = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getCountryBytes();
+
+    /**
+     * <code>optional float ecpm = 4;</code>
+     */
+    float getEcpm();
+  }
+  /**
+   * <pre>
+   *For Auto Waterfall ExponentialSmoothing adn+country+近3天
+   * </pre>
+   *
+   * Protobuf type {@code AdnCountryAdTypeEcpm}
+   */
+  public  static final class AdnCountryAdTypeEcpm extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:AdnCountryAdTypeEcpm)
+      AdnCountryAdTypeEcpmOrBuilder {
+    // Use AdnCountryAdTypeEcpm.newBuilder() to construct.
+    private AdnCountryAdTypeEcpm(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private AdnCountryAdTypeEcpm() {
+      adnId_ = 0;
+      adType_ = 0;
+      country_ = "";
+      ecpm_ = 0F;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private AdnCountryAdTypeEcpm(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              adnId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+
+              adType_ = input.readInt32();
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              country_ = s;
+              break;
+            }
+            case 37: {
+
+              ecpm_ = input.readFloat();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.adtiming.om.pb.StatPB.internal_static_AdnCountryAdTypeEcpm_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.adtiming.om.pb.StatPB.internal_static_AdnCountryAdTypeEcpm_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm.class, com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm.Builder.class);
+    }
+
+    public static final int ADN_ID_FIELD_NUMBER = 1;
+    private int adnId_;
+    /**
+     * <code>optional int32 adn_id = 1;</code>
+     */
+    public int getAdnId() {
+      return adnId_;
+    }
+
+    public static final int AD_TYPE_FIELD_NUMBER = 2;
+    private int adType_;
+    /**
+     * <code>optional int32 ad_type = 2;</code>
+     */
+    public int getAdType() {
+      return adType_;
+    }
+
+    public static final int COUNTRY_FIELD_NUMBER = 3;
+    private volatile java.lang.Object country_;
+    /**
+     * <code>optional string country = 3;</code>
+     */
+    public java.lang.String getCountry() {
+      java.lang.Object ref = country_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        country_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>optional string country = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCountryBytes() {
+      java.lang.Object ref = country_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        country_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ECPM_FIELD_NUMBER = 4;
+    private float ecpm_;
+    /**
+     * <code>optional float ecpm = 4;</code>
+     */
+    public float getEcpm() {
+      return ecpm_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (adnId_ != 0) {
+        output.writeInt32(1, adnId_);
+      }
+      if (adType_ != 0) {
+        output.writeInt32(2, adType_);
+      }
+      if (!getCountryBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, country_);
+      }
+      if (ecpm_ != 0F) {
+        output.writeFloat(4, ecpm_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (adnId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, adnId_);
+      }
+      if (adType_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, adType_);
+      }
+      if (!getCountryBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, country_);
+      }
+      if (ecpm_ != 0F) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(4, ecpm_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm)) {
+        return super.equals(obj);
+      }
+      com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm other = (com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm) obj;
+
+      boolean result = true;
+      result = result && (getAdnId()
+          == other.getAdnId());
+      result = result && (getAdType()
+          == other.getAdType());
+      result = result && getCountry()
+          .equals(other.getCountry());
+      result = result && (
+          java.lang.Float.floatToIntBits(getEcpm())
+          == java.lang.Float.floatToIntBits(
+              other.getEcpm()));
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + ADN_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getAdnId();
+      hash = (37 * hash) + AD_TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getAdType();
+      hash = (37 * hash) + COUNTRY_FIELD_NUMBER;
+      hash = (53 * hash) + getCountry().hashCode();
+      hash = (37 * hash) + ECPM_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getEcpm());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *For Auto Waterfall ExponentialSmoothing adn+country+近3天
+     * </pre>
+     *
+     * Protobuf type {@code AdnCountryAdTypeEcpm}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:AdnCountryAdTypeEcpm)
+        com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpmOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.adtiming.om.pb.StatPB.internal_static_AdnCountryAdTypeEcpm_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.adtiming.om.pb.StatPB.internal_static_AdnCountryAdTypeEcpm_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm.class, com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm.Builder.class);
+      }
+
+      // Construct using com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        adnId_ = 0;
+
+        adType_ = 0;
+
+        country_ = "";
+
+        ecpm_ = 0F;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.adtiming.om.pb.StatPB.internal_static_AdnCountryAdTypeEcpm_descriptor;
+      }
+
+      public com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm getDefaultInstanceForType() {
+        return com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm.getDefaultInstance();
+      }
+
+      public com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm build() {
+        com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm buildPartial() {
+        com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm result = new com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm(this);
+        result.adnId_ = adnId_;
+        result.adType_ = adType_;
+        result.country_ = country_;
+        result.ecpm_ = ecpm_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm) {
+          return mergeFrom((com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm other) {
+        if (other == com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm.getDefaultInstance()) return this;
+        if (other.getAdnId() != 0) {
+          setAdnId(other.getAdnId());
+        }
+        if (other.getAdType() != 0) {
+          setAdType(other.getAdType());
+        }
+        if (!other.getCountry().isEmpty()) {
+          country_ = other.country_;
+          onChanged();
+        }
+        if (other.getEcpm() != 0F) {
+          setEcpm(other.getEcpm());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int adnId_ ;
+      /**
+       * <code>optional int32 adn_id = 1;</code>
+       */
+      public int getAdnId() {
+        return adnId_;
+      }
+      /**
+       * <code>optional int32 adn_id = 1;</code>
+       */
+      public Builder setAdnId(int value) {
+        
+        adnId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 adn_id = 1;</code>
+       */
+      public Builder clearAdnId() {
+        
+        adnId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int adType_ ;
+      /**
+       * <code>optional int32 ad_type = 2;</code>
+       */
+      public int getAdType() {
+        return adType_;
+      }
+      /**
+       * <code>optional int32 ad_type = 2;</code>
+       */
+      public Builder setAdType(int value) {
+        
+        adType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 ad_type = 2;</code>
+       */
+      public Builder clearAdType() {
+        
+        adType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object country_ = "";
+      /**
+       * <code>optional string country = 3;</code>
+       */
+      public java.lang.String getCountry() {
+        java.lang.Object ref = country_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          country_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string country = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCountryBytes() {
+        java.lang.Object ref = country_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          country_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string country = 3;</code>
+       */
+      public Builder setCountry(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        country_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string country = 3;</code>
+       */
+      public Builder clearCountry() {
+        
+        country_ = getDefaultInstance().getCountry();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string country = 3;</code>
+       */
+      public Builder setCountryBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        country_ = value;
+        onChanged();
+        return this;
+      }
+
+      private float ecpm_ ;
+      /**
+       * <code>optional float ecpm = 4;</code>
+       */
+      public float getEcpm() {
+        return ecpm_;
+      }
+      /**
+       * <code>optional float ecpm = 4;</code>
+       */
+      public Builder setEcpm(float value) {
+        
+        ecpm_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float ecpm = 4;</code>
+       */
+      public Builder clearEcpm() {
+        
+        ecpm_ = 0F;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:AdnCountryAdTypeEcpm)
+    }
+
+    // @@protoc_insertion_point(class_scope:AdnCountryAdTypeEcpm)
+    private static final com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm();
+    }
+
+    public static com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<AdnCountryAdTypeEcpm>
+        PARSER = new com.google.protobuf.AbstractParser<AdnCountryAdTypeEcpm>() {
+      public AdnCountryAdTypeEcpm parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new AdnCountryAdTypeEcpm(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<AdnCountryAdTypeEcpm> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AdnCountryAdTypeEcpm> getParserForType() {
+      return PARSER;
+    }
+
+    public com.adtiming.om.pb.StatPB.AdnCountryAdTypeEcpm getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface CountryEcpmOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:CountryEcpm)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional string country = 1;</code>
+     */
+    java.lang.String getCountry();
+    /**
+     * <code>optional string country = 1;</code>
+     */
+    com.google.protobuf.ByteString
+        getCountryBytes();
+
+    /**
+     * <code>optional float ecpm = 2;</code>
+     */
+    float getEcpm();
+  }
+  /**
+   * Protobuf type {@code CountryEcpm}
+   */
+  public  static final class CountryEcpm extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:CountryEcpm)
+      CountryEcpmOrBuilder {
+    // Use CountryEcpm.newBuilder() to construct.
+    private CountryEcpm(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private CountryEcpm() {
+      country_ = "";
+      ecpm_ = 0F;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private CountryEcpm(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              country_ = s;
+              break;
+            }
+            case 21: {
+
+              ecpm_ = input.readFloat();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.adtiming.om.pb.StatPB.internal_static_CountryEcpm_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.adtiming.om.pb.StatPB.internal_static_CountryEcpm_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.adtiming.om.pb.StatPB.CountryEcpm.class, com.adtiming.om.pb.StatPB.CountryEcpm.Builder.class);
+    }
+
+    public static final int COUNTRY_FIELD_NUMBER = 1;
+    private volatile java.lang.Object country_;
+    /**
+     * <code>optional string country = 1;</code>
+     */
+    public java.lang.String getCountry() {
+      java.lang.Object ref = country_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        country_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>optional string country = 1;</code>
+     */
+    public com.google.protobuf.ByteString
+        getCountryBytes() {
+      java.lang.Object ref = country_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        country_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ECPM_FIELD_NUMBER = 2;
+    private float ecpm_;
+    /**
+     * <code>optional float ecpm = 2;</code>
+     */
+    public float getEcpm() {
+      return ecpm_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getCountryBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, country_);
+      }
+      if (ecpm_ != 0F) {
+        output.writeFloat(2, ecpm_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getCountryBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, country_);
+      }
+      if (ecpm_ != 0F) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(2, ecpm_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.adtiming.om.pb.StatPB.CountryEcpm)) {
+        return super.equals(obj);
+      }
+      com.adtiming.om.pb.StatPB.CountryEcpm other = (com.adtiming.om.pb.StatPB.CountryEcpm) obj;
+
+      boolean result = true;
+      result = result && getCountry()
+          .equals(other.getCountry());
+      result = result && (
+          java.lang.Float.floatToIntBits(getEcpm())
+          == java.lang.Float.floatToIntBits(
+              other.getEcpm()));
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + COUNTRY_FIELD_NUMBER;
+      hash = (53 * hash) + getCountry().hashCode();
+      hash = (37 * hash) + ECPM_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getEcpm());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.adtiming.om.pb.StatPB.CountryEcpm parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.StatPB.CountryEcpm parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.CountryEcpm parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.StatPB.CountryEcpm parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.CountryEcpm parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.StatPB.CountryEcpm parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.CountryEcpm parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.StatPB.CountryEcpm parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.CountryEcpm parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.StatPB.CountryEcpm parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.adtiming.om.pb.StatPB.CountryEcpm prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code CountryEcpm}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:CountryEcpm)
+        com.adtiming.om.pb.StatPB.CountryEcpmOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.adtiming.om.pb.StatPB.internal_static_CountryEcpm_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.adtiming.om.pb.StatPB.internal_static_CountryEcpm_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.adtiming.om.pb.StatPB.CountryEcpm.class, com.adtiming.om.pb.StatPB.CountryEcpm.Builder.class);
+      }
+
+      // Construct using com.adtiming.om.pb.StatPB.CountryEcpm.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        country_ = "";
+
+        ecpm_ = 0F;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.adtiming.om.pb.StatPB.internal_static_CountryEcpm_descriptor;
+      }
+
+      public com.adtiming.om.pb.StatPB.CountryEcpm getDefaultInstanceForType() {
+        return com.adtiming.om.pb.StatPB.CountryEcpm.getDefaultInstance();
+      }
+
+      public com.adtiming.om.pb.StatPB.CountryEcpm build() {
+        com.adtiming.om.pb.StatPB.CountryEcpm result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.adtiming.om.pb.StatPB.CountryEcpm buildPartial() {
+        com.adtiming.om.pb.StatPB.CountryEcpm result = new com.adtiming.om.pb.StatPB.CountryEcpm(this);
+        result.country_ = country_;
+        result.ecpm_ = ecpm_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.adtiming.om.pb.StatPB.CountryEcpm) {
+          return mergeFrom((com.adtiming.om.pb.StatPB.CountryEcpm)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.adtiming.om.pb.StatPB.CountryEcpm other) {
+        if (other == com.adtiming.om.pb.StatPB.CountryEcpm.getDefaultInstance()) return this;
+        if (!other.getCountry().isEmpty()) {
+          country_ = other.country_;
+          onChanged();
+        }
+        if (other.getEcpm() != 0F) {
+          setEcpm(other.getEcpm());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.adtiming.om.pb.StatPB.CountryEcpm parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.adtiming.om.pb.StatPB.CountryEcpm) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object country_ = "";
+      /**
+       * <code>optional string country = 1;</code>
+       */
+      public java.lang.String getCountry() {
+        java.lang.Object ref = country_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          country_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>optional string country = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCountryBytes() {
+        java.lang.Object ref = country_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          country_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>optional string country = 1;</code>
+       */
+      public Builder setCountry(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        country_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string country = 1;</code>
+       */
+      public Builder clearCountry() {
+        
+        country_ = getDefaultInstance().getCountry();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional string country = 1;</code>
+       */
+      public Builder setCountryBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        country_ = value;
+        onChanged();
+        return this;
+      }
+
+      private float ecpm_ ;
+      /**
+       * <code>optional float ecpm = 2;</code>
+       */
+      public float getEcpm() {
+        return ecpm_;
+      }
+      /**
+       * <code>optional float ecpm = 2;</code>
+       */
+      public Builder setEcpm(float value) {
+        
+        ecpm_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float ecpm = 2;</code>
+       */
+      public Builder clearEcpm() {
+        
+        ecpm_ = 0F;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:CountryEcpm)
+    }
+
+    // @@protoc_insertion_point(class_scope:CountryEcpm)
+    private static final com.adtiming.om.pb.StatPB.CountryEcpm DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.adtiming.om.pb.StatPB.CountryEcpm();
+    }
+
+    public static com.adtiming.om.pb.StatPB.CountryEcpm getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<CountryEcpm>
+        PARSER = new com.google.protobuf.AbstractParser<CountryEcpm>() {
+      public CountryEcpm parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new CountryEcpm(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<CountryEcpm> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<CountryEcpm> getParserForType() {
+      return PARSER;
+    }
+
+    public com.adtiming.om.pb.StatPB.CountryEcpm getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface AdnAdTypeEcpmOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:AdnAdTypeEcpm)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 adn_id = 1;</code>
+     */
+    int getAdnId();
+
+    /**
+     * <code>optional int32 ad_type = 2;</code>
+     */
+    int getAdType();
+
+    /**
+     * <code>optional float ecpm = 3;</code>
+     */
+    float getEcpm();
+  }
+  /**
+   * Protobuf type {@code AdnAdTypeEcpm}
+   */
+  public  static final class AdnAdTypeEcpm extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:AdnAdTypeEcpm)
+      AdnAdTypeEcpmOrBuilder {
+    // Use AdnAdTypeEcpm.newBuilder() to construct.
+    private AdnAdTypeEcpm(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private AdnAdTypeEcpm() {
+      adnId_ = 0;
+      adType_ = 0;
+      ecpm_ = 0F;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private AdnAdTypeEcpm(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              adnId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+
+              adType_ = input.readInt32();
+              break;
+            }
+            case 29: {
+
+              ecpm_ = input.readFloat();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.adtiming.om.pb.StatPB.internal_static_AdnAdTypeEcpm_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.adtiming.om.pb.StatPB.internal_static_AdnAdTypeEcpm_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.adtiming.om.pb.StatPB.AdnAdTypeEcpm.class, com.adtiming.om.pb.StatPB.AdnAdTypeEcpm.Builder.class);
+    }
+
+    public static final int ADN_ID_FIELD_NUMBER = 1;
+    private int adnId_;
+    /**
+     * <code>optional int32 adn_id = 1;</code>
+     */
+    public int getAdnId() {
+      return adnId_;
+    }
+
+    public static final int AD_TYPE_FIELD_NUMBER = 2;
+    private int adType_;
+    /**
+     * <code>optional int32 ad_type = 2;</code>
+     */
+    public int getAdType() {
+      return adType_;
+    }
+
+    public static final int ECPM_FIELD_NUMBER = 3;
+    private float ecpm_;
+    /**
+     * <code>optional float ecpm = 3;</code>
+     */
+    public float getEcpm() {
+      return ecpm_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (adnId_ != 0) {
+        output.writeInt32(1, adnId_);
+      }
+      if (adType_ != 0) {
+        output.writeInt32(2, adType_);
+      }
+      if (ecpm_ != 0F) {
+        output.writeFloat(3, ecpm_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (adnId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, adnId_);
+      }
+      if (adType_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, adType_);
+      }
+      if (ecpm_ != 0F) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(3, ecpm_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.adtiming.om.pb.StatPB.AdnAdTypeEcpm)) {
+        return super.equals(obj);
+      }
+      com.adtiming.om.pb.StatPB.AdnAdTypeEcpm other = (com.adtiming.om.pb.StatPB.AdnAdTypeEcpm) obj;
+
+      boolean result = true;
+      result = result && (getAdnId()
+          == other.getAdnId());
+      result = result && (getAdType()
+          == other.getAdType());
+      result = result && (
+          java.lang.Float.floatToIntBits(getEcpm())
+          == java.lang.Float.floatToIntBits(
+              other.getEcpm()));
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + ADN_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getAdnId();
+      hash = (37 * hash) + AD_TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getAdType();
+      hash = (37 * hash) + ECPM_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getEcpm());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.adtiming.om.pb.StatPB.AdnAdTypeEcpm parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnAdTypeEcpm parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnAdTypeEcpm parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnAdTypeEcpm parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnAdTypeEcpm parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnAdTypeEcpm parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnAdTypeEcpm parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnAdTypeEcpm parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnAdTypeEcpm parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnAdTypeEcpm parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.adtiming.om.pb.StatPB.AdnAdTypeEcpm prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code AdnAdTypeEcpm}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:AdnAdTypeEcpm)
+        com.adtiming.om.pb.StatPB.AdnAdTypeEcpmOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.adtiming.om.pb.StatPB.internal_static_AdnAdTypeEcpm_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.adtiming.om.pb.StatPB.internal_static_AdnAdTypeEcpm_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.adtiming.om.pb.StatPB.AdnAdTypeEcpm.class, com.adtiming.om.pb.StatPB.AdnAdTypeEcpm.Builder.class);
+      }
+
+      // Construct using com.adtiming.om.pb.StatPB.AdnAdTypeEcpm.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        adnId_ = 0;
+
+        adType_ = 0;
+
+        ecpm_ = 0F;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.adtiming.om.pb.StatPB.internal_static_AdnAdTypeEcpm_descriptor;
+      }
+
+      public com.adtiming.om.pb.StatPB.AdnAdTypeEcpm getDefaultInstanceForType() {
+        return com.adtiming.om.pb.StatPB.AdnAdTypeEcpm.getDefaultInstance();
+      }
+
+      public com.adtiming.om.pb.StatPB.AdnAdTypeEcpm build() {
+        com.adtiming.om.pb.StatPB.AdnAdTypeEcpm result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.adtiming.om.pb.StatPB.AdnAdTypeEcpm buildPartial() {
+        com.adtiming.om.pb.StatPB.AdnAdTypeEcpm result = new com.adtiming.om.pb.StatPB.AdnAdTypeEcpm(this);
+        result.adnId_ = adnId_;
+        result.adType_ = adType_;
+        result.ecpm_ = ecpm_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.adtiming.om.pb.StatPB.AdnAdTypeEcpm) {
+          return mergeFrom((com.adtiming.om.pb.StatPB.AdnAdTypeEcpm)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.adtiming.om.pb.StatPB.AdnAdTypeEcpm other) {
+        if (other == com.adtiming.om.pb.StatPB.AdnAdTypeEcpm.getDefaultInstance()) return this;
+        if (other.getAdnId() != 0) {
+          setAdnId(other.getAdnId());
+        }
+        if (other.getAdType() != 0) {
+          setAdType(other.getAdType());
+        }
+        if (other.getEcpm() != 0F) {
+          setEcpm(other.getEcpm());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.adtiming.om.pb.StatPB.AdnAdTypeEcpm parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.adtiming.om.pb.StatPB.AdnAdTypeEcpm) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int adnId_ ;
+      /**
+       * <code>optional int32 adn_id = 1;</code>
+       */
+      public int getAdnId() {
+        return adnId_;
+      }
+      /**
+       * <code>optional int32 adn_id = 1;</code>
+       */
+      public Builder setAdnId(int value) {
+        
+        adnId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 adn_id = 1;</code>
+       */
+      public Builder clearAdnId() {
+        
+        adnId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int adType_ ;
+      /**
+       * <code>optional int32 ad_type = 2;</code>
+       */
+      public int getAdType() {
+        return adType_;
+      }
+      /**
+       * <code>optional int32 ad_type = 2;</code>
+       */
+      public Builder setAdType(int value) {
+        
+        adType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 ad_type = 2;</code>
+       */
+      public Builder clearAdType() {
+        
+        adType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private float ecpm_ ;
+      /**
+       * <code>optional float ecpm = 3;</code>
+       */
+      public float getEcpm() {
+        return ecpm_;
+      }
+      /**
+       * <code>optional float ecpm = 3;</code>
+       */
+      public Builder setEcpm(float value) {
+        
+        ecpm_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float ecpm = 3;</code>
+       */
+      public Builder clearEcpm() {
+        
+        ecpm_ = 0F;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:AdnAdTypeEcpm)
+    }
+
+    // @@protoc_insertion_point(class_scope:AdnAdTypeEcpm)
+    private static final com.adtiming.om.pb.StatPB.AdnAdTypeEcpm DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.adtiming.om.pb.StatPB.AdnAdTypeEcpm();
+    }
+
+    public static com.adtiming.om.pb.StatPB.AdnAdTypeEcpm getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<AdnAdTypeEcpm>
+        PARSER = new com.google.protobuf.AbstractParser<AdnAdTypeEcpm>() {
+      public AdnAdTypeEcpm parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new AdnAdTypeEcpm(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<AdnAdTypeEcpm> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AdnAdTypeEcpm> getParserForType() {
+      return PARSER;
+    }
+
+    public com.adtiming.om.pb.StatPB.AdnAdTypeEcpm getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface AdTypeEcpmOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:AdTypeEcpm)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 ad_type = 1;</code>
+     */
+    int getAdType();
+
+    /**
+     * <code>optional float ecpm = 2;</code>
+     */
+    float getEcpm();
+  }
+  /**
+   * Protobuf type {@code AdTypeEcpm}
+   */
+  public  static final class AdTypeEcpm extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:AdTypeEcpm)
+      AdTypeEcpmOrBuilder {
+    // Use AdTypeEcpm.newBuilder() to construct.
+    private AdTypeEcpm(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private AdTypeEcpm() {
+      adType_ = 0;
+      ecpm_ = 0F;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private AdTypeEcpm(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              adType_ = input.readInt32();
+              break;
+            }
+            case 21: {
+
+              ecpm_ = input.readFloat();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.adtiming.om.pb.StatPB.internal_static_AdTypeEcpm_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.adtiming.om.pb.StatPB.internal_static_AdTypeEcpm_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.adtiming.om.pb.StatPB.AdTypeEcpm.class, com.adtiming.om.pb.StatPB.AdTypeEcpm.Builder.class);
+    }
+
+    public static final int AD_TYPE_FIELD_NUMBER = 1;
+    private int adType_;
+    /**
+     * <code>optional int32 ad_type = 1;</code>
+     */
+    public int getAdType() {
+      return adType_;
+    }
+
+    public static final int ECPM_FIELD_NUMBER = 2;
+    private float ecpm_;
+    /**
+     * <code>optional float ecpm = 2;</code>
+     */
+    public float getEcpm() {
+      return ecpm_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (adType_ != 0) {
+        output.writeInt32(1, adType_);
+      }
+      if (ecpm_ != 0F) {
+        output.writeFloat(2, ecpm_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (adType_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, adType_);
+      }
+      if (ecpm_ != 0F) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(2, ecpm_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.adtiming.om.pb.StatPB.AdTypeEcpm)) {
+        return super.equals(obj);
+      }
+      com.adtiming.om.pb.StatPB.AdTypeEcpm other = (com.adtiming.om.pb.StatPB.AdTypeEcpm) obj;
+
+      boolean result = true;
+      result = result && (getAdType()
+          == other.getAdType());
+      result = result && (
+          java.lang.Float.floatToIntBits(getEcpm())
+          == java.lang.Float.floatToIntBits(
+              other.getEcpm()));
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + AD_TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getAdType();
+      hash = (37 * hash) + ECPM_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getEcpm());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.adtiming.om.pb.StatPB.AdTypeEcpm parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.StatPB.AdTypeEcpm parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.AdTypeEcpm parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.StatPB.AdTypeEcpm parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.AdTypeEcpm parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.StatPB.AdTypeEcpm parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.AdTypeEcpm parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.StatPB.AdTypeEcpm parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.AdTypeEcpm parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.StatPB.AdTypeEcpm parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.adtiming.om.pb.StatPB.AdTypeEcpm prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code AdTypeEcpm}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:AdTypeEcpm)
+        com.adtiming.om.pb.StatPB.AdTypeEcpmOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.adtiming.om.pb.StatPB.internal_static_AdTypeEcpm_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.adtiming.om.pb.StatPB.internal_static_AdTypeEcpm_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.adtiming.om.pb.StatPB.AdTypeEcpm.class, com.adtiming.om.pb.StatPB.AdTypeEcpm.Builder.class);
+      }
+
+      // Construct using com.adtiming.om.pb.StatPB.AdTypeEcpm.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        adType_ = 0;
+
+        ecpm_ = 0F;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.adtiming.om.pb.StatPB.internal_static_AdTypeEcpm_descriptor;
+      }
+
+      public com.adtiming.om.pb.StatPB.AdTypeEcpm getDefaultInstanceForType() {
+        return com.adtiming.om.pb.StatPB.AdTypeEcpm.getDefaultInstance();
+      }
+
+      public com.adtiming.om.pb.StatPB.AdTypeEcpm build() {
+        com.adtiming.om.pb.StatPB.AdTypeEcpm result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.adtiming.om.pb.StatPB.AdTypeEcpm buildPartial() {
+        com.adtiming.om.pb.StatPB.AdTypeEcpm result = new com.adtiming.om.pb.StatPB.AdTypeEcpm(this);
+        result.adType_ = adType_;
+        result.ecpm_ = ecpm_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.adtiming.om.pb.StatPB.AdTypeEcpm) {
+          return mergeFrom((com.adtiming.om.pb.StatPB.AdTypeEcpm)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.adtiming.om.pb.StatPB.AdTypeEcpm other) {
+        if (other == com.adtiming.om.pb.StatPB.AdTypeEcpm.getDefaultInstance()) return this;
+        if (other.getAdType() != 0) {
+          setAdType(other.getAdType());
+        }
+        if (other.getEcpm() != 0F) {
+          setEcpm(other.getEcpm());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.adtiming.om.pb.StatPB.AdTypeEcpm parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.adtiming.om.pb.StatPB.AdTypeEcpm) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int adType_ ;
+      /**
+       * <code>optional int32 ad_type = 1;</code>
+       */
+      public int getAdType() {
+        return adType_;
+      }
+      /**
+       * <code>optional int32 ad_type = 1;</code>
+       */
+      public Builder setAdType(int value) {
+        
+        adType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 ad_type = 1;</code>
+       */
+      public Builder clearAdType() {
+        
+        adType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private float ecpm_ ;
+      /**
+       * <code>optional float ecpm = 2;</code>
+       */
+      public float getEcpm() {
+        return ecpm_;
+      }
+      /**
+       * <code>optional float ecpm = 2;</code>
+       */
+      public Builder setEcpm(float value) {
+        
+        ecpm_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float ecpm = 2;</code>
+       */
+      public Builder clearEcpm() {
+        
+        ecpm_ = 0F;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:AdTypeEcpm)
+    }
+
+    // @@protoc_insertion_point(class_scope:AdTypeEcpm)
+    private static final com.adtiming.om.pb.StatPB.AdTypeEcpm DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.adtiming.om.pb.StatPB.AdTypeEcpm();
+    }
+
+    public static com.adtiming.om.pb.StatPB.AdTypeEcpm getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<AdTypeEcpm>
+        PARSER = new com.google.protobuf.AbstractParser<AdTypeEcpm>() {
+      public AdTypeEcpm parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new AdTypeEcpm(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<AdTypeEcpm> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AdTypeEcpm> getParserForType() {
+      return PARSER;
+    }
+
+    public com.adtiming.om.pb.StatPB.AdTypeEcpm getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface AdnEcpmOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:AdnEcpm)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 adn_id = 1;</code>
+     */
+    int getAdnId();
+
+    /**
+     * <code>optional float ecpm = 2;</code>
+     */
+    float getEcpm();
+  }
+  /**
+   * Protobuf type {@code AdnEcpm}
+   */
+  public  static final class AdnEcpm extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:AdnEcpm)
+      AdnEcpmOrBuilder {
+    // Use AdnEcpm.newBuilder() to construct.
+    private AdnEcpm(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private AdnEcpm() {
+      adnId_ = 0;
+      ecpm_ = 0F;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private AdnEcpm(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              adnId_ = input.readInt32();
+              break;
+            }
+            case 21: {
+
+              ecpm_ = input.readFloat();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.adtiming.om.pb.StatPB.internal_static_AdnEcpm_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.adtiming.om.pb.StatPB.internal_static_AdnEcpm_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.adtiming.om.pb.StatPB.AdnEcpm.class, com.adtiming.om.pb.StatPB.AdnEcpm.Builder.class);
+    }
+
+    public static final int ADN_ID_FIELD_NUMBER = 1;
+    private int adnId_;
+    /**
+     * <code>optional int32 adn_id = 1;</code>
+     */
+    public int getAdnId() {
+      return adnId_;
+    }
+
+    public static final int ECPM_FIELD_NUMBER = 2;
+    private float ecpm_;
+    /**
+     * <code>optional float ecpm = 2;</code>
+     */
+    public float getEcpm() {
+      return ecpm_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (adnId_ != 0) {
+        output.writeInt32(1, adnId_);
+      }
+      if (ecpm_ != 0F) {
+        output.writeFloat(2, ecpm_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (adnId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, adnId_);
+      }
+      if (ecpm_ != 0F) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(2, ecpm_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.adtiming.om.pb.StatPB.AdnEcpm)) {
+        return super.equals(obj);
+      }
+      com.adtiming.om.pb.StatPB.AdnEcpm other = (com.adtiming.om.pb.StatPB.AdnEcpm) obj;
+
+      boolean result = true;
+      result = result && (getAdnId()
+          == other.getAdnId());
+      result = result && (
+          java.lang.Float.floatToIntBits(getEcpm())
+          == java.lang.Float.floatToIntBits(
+              other.getEcpm()));
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + ADN_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getAdnId();
+      hash = (37 * hash) + ECPM_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getEcpm());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.adtiming.om.pb.StatPB.AdnEcpm parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnEcpm parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnEcpm parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnEcpm parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnEcpm parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnEcpm parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnEcpm parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnEcpm parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnEcpm parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.StatPB.AdnEcpm parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.adtiming.om.pb.StatPB.AdnEcpm prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code AdnEcpm}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:AdnEcpm)
+        com.adtiming.om.pb.StatPB.AdnEcpmOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.adtiming.om.pb.StatPB.internal_static_AdnEcpm_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.adtiming.om.pb.StatPB.internal_static_AdnEcpm_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.adtiming.om.pb.StatPB.AdnEcpm.class, com.adtiming.om.pb.StatPB.AdnEcpm.Builder.class);
+      }
+
+      // Construct using com.adtiming.om.pb.StatPB.AdnEcpm.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        adnId_ = 0;
+
+        ecpm_ = 0F;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.adtiming.om.pb.StatPB.internal_static_AdnEcpm_descriptor;
+      }
+
+      public com.adtiming.om.pb.StatPB.AdnEcpm getDefaultInstanceForType() {
+        return com.adtiming.om.pb.StatPB.AdnEcpm.getDefaultInstance();
+      }
+
+      public com.adtiming.om.pb.StatPB.AdnEcpm build() {
+        com.adtiming.om.pb.StatPB.AdnEcpm result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.adtiming.om.pb.StatPB.AdnEcpm buildPartial() {
+        com.adtiming.om.pb.StatPB.AdnEcpm result = new com.adtiming.om.pb.StatPB.AdnEcpm(this);
+        result.adnId_ = adnId_;
+        result.ecpm_ = ecpm_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.adtiming.om.pb.StatPB.AdnEcpm) {
+          return mergeFrom((com.adtiming.om.pb.StatPB.AdnEcpm)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.adtiming.om.pb.StatPB.AdnEcpm other) {
+        if (other == com.adtiming.om.pb.StatPB.AdnEcpm.getDefaultInstance()) return this;
+        if (other.getAdnId() != 0) {
+          setAdnId(other.getAdnId());
+        }
+        if (other.getEcpm() != 0F) {
+          setEcpm(other.getEcpm());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.adtiming.om.pb.StatPB.AdnEcpm parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.adtiming.om.pb.StatPB.AdnEcpm) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int adnId_ ;
+      /**
+       * <code>optional int32 adn_id = 1;</code>
+       */
+      public int getAdnId() {
+        return adnId_;
+      }
+      /**
+       * <code>optional int32 adn_id = 1;</code>
+       */
+      public Builder setAdnId(int value) {
+        
+        adnId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 adn_id = 1;</code>
+       */
+      public Builder clearAdnId() {
+        
+        adnId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private float ecpm_ ;
+      /**
+       * <code>optional float ecpm = 2;</code>
+       */
+      public float getEcpm() {
+        return ecpm_;
+      }
+      /**
+       * <code>optional float ecpm = 2;</code>
+       */
+      public Builder setEcpm(float value) {
+        
+        ecpm_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional float ecpm = 2;</code>
+       */
+      public Builder clearEcpm() {
+        
+        ecpm_ = 0F;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:AdnEcpm)
+    }
+
+    // @@protoc_insertion_point(class_scope:AdnEcpm)
+    private static final com.adtiming.om.pb.StatPB.AdnEcpm DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.adtiming.om.pb.StatPB.AdnEcpm();
+    }
+
+    public static com.adtiming.om.pb.StatPB.AdnEcpm getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<AdnEcpm>
+        PARSER = new com.google.protobuf.AbstractParser<AdnEcpm>() {
+      public AdnEcpm parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new AdnEcpm(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<AdnEcpm> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<AdnEcpm> getParserForType() {
+      return PARSER;
+    }
+
+    public com.adtiming.om.pb.StatPB.AdnEcpm getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_PlacementEcpm_descriptor;
   private static final 
@@ -4443,6 +8103,36 @@ public final class StatPB {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_PlacementCountryEcpm_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_InstanceCountryDayEcpm_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_InstanceCountryDayEcpm_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_AdnCountryAdTypeEcpm_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_AdnCountryAdTypeEcpm_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_CountryEcpm_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_CountryEcpm_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_AdnAdTypeEcpm_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_AdnAdTypeEcpm_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_AdTypeEcpm_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_AdTypeEcpm_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_AdnEcpm_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_AdnEcpm_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -4465,8 +8155,17 @@ public final class StatPB {
       "\023\n\013instance_id\030\001 \001(\005\022\017\n\007country\030\002 \001(\t\022\014\n" +
       "\004ecpm\030\003 \001(\002\"K\n\024PlacementCountryEcpm\022\024\n\014p" +
       "lacement_id\030\001 \001(\005\022\017\n\007country\030\002 \001(\t\022\014\n\004ec" +
-      "pm\030\003 \001(\002B\034\n\022com.adtiming.om.pbB\006StatPBb\006" +
-      "proto3"
+      "pm\030\003 \001(\002\"g\n\026InstanceCountryDayEcpm\022\013\n\003da" +
+      "y\030\001 \001(\t\022\023\n\013instance_id\030\002 \001(\005\022\017\n\007country\030" +
+      "\003 \001(\t\022\014\n\004impr\030\004 \001(\005\022\014\n\004cost\030\005 \001(\002\"V\n\024Adn" +
+      "CountryAdTypeEcpm\022\016\n\006adn_id\030\001 \001(\005\022\017\n\007ad_" +
+      "type\030\002 \001(\005\022\017\n\007country\030\003 \001(\t\022\014\n\004ecpm\030\004 \001(" +
+      "\002\",\n\013CountryEcpm\022\017\n\007country\030\001 \001(\t\022\014\n\004ecp" +
+      "m\030\002 \001(\002\">\n\rAdnAdTypeEcpm\022\016\n\006adn_id\030\001 \001(\005",
+      "\022\017\n\007ad_type\030\002 \001(\005\022\014\n\004ecpm\030\003 \001(\002\"+\n\nAdTyp" +
+      "eEcpm\022\017\n\007ad_type\030\001 \001(\005\022\014\n\004ecpm\030\002 \001(\002\"\'\n\007" +
+      "AdnEcpm\022\016\n\006adn_id\030\001 \001(\005\022\014\n\004ecpm\030\002 \001(\002B\034\n" +
+      "\022com.adtiming.om.pbB\006StatPBb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4522,6 +8221,42 @@ public final class StatPB {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_PlacementCountryEcpm_descriptor,
         new java.lang.String[] { "PlacementId", "Country", "Ecpm", });
+    internal_static_InstanceCountryDayEcpm_descriptor =
+      getDescriptor().getMessageTypes().get(7);
+    internal_static_InstanceCountryDayEcpm_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_InstanceCountryDayEcpm_descriptor,
+        new java.lang.String[] { "Day", "InstanceId", "Country", "Impr", "Cost", });
+    internal_static_AdnCountryAdTypeEcpm_descriptor =
+      getDescriptor().getMessageTypes().get(8);
+    internal_static_AdnCountryAdTypeEcpm_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_AdnCountryAdTypeEcpm_descriptor,
+        new java.lang.String[] { "AdnId", "AdType", "Country", "Ecpm", });
+    internal_static_CountryEcpm_descriptor =
+      getDescriptor().getMessageTypes().get(9);
+    internal_static_CountryEcpm_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_CountryEcpm_descriptor,
+        new java.lang.String[] { "Country", "Ecpm", });
+    internal_static_AdnAdTypeEcpm_descriptor =
+      getDescriptor().getMessageTypes().get(10);
+    internal_static_AdnAdTypeEcpm_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_AdnAdTypeEcpm_descriptor,
+        new java.lang.String[] { "AdnId", "AdType", "Ecpm", });
+    internal_static_AdTypeEcpm_descriptor =
+      getDescriptor().getMessageTypes().get(11);
+    internal_static_AdTypeEcpm_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_AdTypeEcpm_descriptor,
+        new java.lang.String[] { "AdType", "Ecpm", });
+    internal_static_AdnEcpm_descriptor =
+      getDescriptor().getMessageTypes().get(12);
+    internal_static_AdnEcpm_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_AdnEcpm_descriptor,
+        new java.lang.String[] { "AdnId", "Ecpm", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -18,7 +18,6 @@ import org.springframework.util.CollectionUtils;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.util.*;
-import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 /**
@@ -38,6 +37,9 @@ public class CacheService extends PBLoader {
 
     @Resource
     private CpCacheService cpCacheService;
+
+    @Resource
+    private WaterfallEcpmService ecpmService;
 
     // key: pubAppKey
     private Map<String, PublisherApp> appkeyPubApps = Collections.emptyMap();
@@ -85,18 +87,6 @@ public class CacheService extends PBLoader {
 
     // key: placementId, country
     private Map<Integer, Map<String, PlacementPB.PlacementAbTest>> placementAbTest = Collections.emptyMap();
-
-    // for auto waterfall, key: instanceId, country
-    private Map<Integer, Map<String, Float>> instanceCountryEcpm3h = Collections.emptyMap();
-    private Map<Integer, Map<String, Float>> instanceCountryEcpm6h = Collections.emptyMap();
-    private Map<Integer, Map<String, Float>> instanceCountryEcpm12h = Collections.emptyMap();
-    private Map<Integer, Map<String, Float>> instanceCountryEcpm24h = Collections.emptyMap();
-    // key: adNetworkId, country
-    private Map<Integer, Map<String, Float>> adnCountryEcpm24h = Collections.emptyMap();
-    // key: adNetowrkId
-    private Map<Integer, Float> adnEcpm3d = Collections.emptyMap();
-    // key: adNetworkId, adType, country
-    private Map<Integer, Map<Integer, Map<String, Float>>> adnAdTypeCountryEcpm3d = Collections.emptyMap();
 
     @PostConstruct
     private void init() {
@@ -148,16 +138,7 @@ public class CacheService extends PBLoader {
         loadInstanceRule();
         loadCurrency();
         loadAbTest();
-
-        // loadInstanceCountryEcpm
-        getInstanceCountryEcpm("3h", m -> this.instanceCountryEcpm3h = m);
-        getInstanceCountryEcpm("6h", m -> this.instanceCountryEcpm6h = m);
-        getInstanceCountryEcpm("12h", m -> this.instanceCountryEcpm12h = m);
-        getInstanceCountryEcpm("24h", m -> this.instanceCountryEcpm24h = m);
-        loadAdnCountryEcpm24h();
-        loadAdnEcpm();
-        loadAdnAdTypeCountryEcpm3d();
-
+        ecpmService.reloadCache();
         LOG.info("reload cache finished, cost: {} ms", System.currentTimeMillis() - start);
     }
 
@@ -344,11 +325,8 @@ public class CacheService extends PBLoader {
             }
 
             // 对 ruleList 按 priority 由小到大进行排序
-            map.forEach((pid, countryRuleList) -> {
-                countryRuleList.forEach((country, ruleList) -> {
-                    ruleList.sort(Comparator.comparingInt(InstanceRule::getPriority));
-                });
-            });
+            map.forEach((pid, countryRuleList) -> countryRuleList.forEach((country, ruleList) ->
+                    ruleList.sort(Comparator.comparingInt(InstanceRule::getPriority))));
             this.instanceRuleMap = ruleMap;
             this.placementCountryRules = map;
         });
@@ -376,58 +354,6 @@ public class CacheService extends PBLoader {
                         .put(abTest.getCountry(), abTest);
             }
             this.placementAbTest = map;
-        });
-    }
-
-    private void getInstanceCountryEcpm(String hourCount, Consumer<Map<Integer, Map<String, Float>>> fn) {
-        load("stat_instance_country_ecpm_" + hourCount, in -> {
-            Map<Integer, Map<String, Float>> map = newMap(null, 2000, 100);
-            while (true) {
-                StatPB.InstanceCountryEcpm o = StatPB.InstanceCountryEcpm.parseDelimitedFrom(in);
-                if (o == null) break;
-                map.computeIfAbsent(o.getInstanceId(), k -> new HashMap<>())
-                        .put(o.getCountry(), o.getEcpm());
-            }
-            fn.accept(map);
-        });
-    }
-
-    private void loadAdnCountryEcpm24h() {
-        load("stat_adn_country_ecpm24h", in -> {
-            Map<Integer, Map<String, Float>> map = newMap(this.adnCountryEcpm24h, 1000, 100);
-            while (true) {
-                StatPB.AdNetworkCountryEcpm o = StatPB.AdNetworkCountryEcpm.parseDelimitedFrom(in);
-                if (o == null) break;
-                map.computeIfAbsent(o.getAdnId(), k -> new HashMap<>())
-                        .put(o.getCountry(), o.getEcpm());
-            }
-            this.adnCountryEcpm24h = map;
-        });
-    }
-
-    private void loadAdnEcpm() {
-        load("stat_adn_ecpm3d", in -> {
-            Map<Integer, Float> map = newMap(this.adnEcpm3d, 14, 10);
-            while (true) {
-                StatPB.AdNetworkEcpm o = StatPB.AdNetworkEcpm.parseDelimitedFrom(in);
-                if (o == null) break;
-                map.put(o.getAdnId(), o.getEcpm());
-            }
-            this.adnEcpm3d = map;
-        });
-    }
-
-    private void loadAdnAdTypeCountryEcpm3d() {
-        load("stat_adn_adtype_country_ecpm3d", in -> {
-            Map<Integer, Map<Integer, Map<String, Float>>> map = newMap(this.adnAdTypeCountryEcpm3d, 1000, 100);
-            while (true) {
-                StatPB.AdNetworkAdTypeCountryEcpm o = StatPB.AdNetworkAdTypeCountryEcpm.parseDelimitedFrom(in);
-                if (o == null) break;
-                map.computeIfAbsent(o.getMediationId(), k -> new HashMap<>())
-                        .computeIfAbsent(o.getPlacementType(), k -> new HashMap<>())
-                        .put(o.getCountry(), o.getEcpm());
-            }
-            this.adnAdTypeCountryEcpm3d = map;
         });
     }
 
@@ -639,60 +565,6 @@ public class CacheService extends PBLoader {
         return countryAdTypeEcpm
                 .getOrDefault(country, Collections.emptyMap())
                 .getOrDefault(adType, -1F);
-    }
-
-    public InstanceEcpm getInstanceEcpm(int mid, int iid, String country, int placementType) {
-        Map<String, Float> countryEcpm3h = instanceCountryEcpm3h.get(iid);
-        if (countryEcpm3h != null) {
-            Float ecpm = countryEcpm3h.get(country);
-            if (ecpm != null) {
-                return new InstanceEcpm(iid, ecpm, "instanceCountryEcpm3h");
-            }
-        }
-
-        Map<String, Float> countryEcpm6h = instanceCountryEcpm6h.get(iid);
-        if (countryEcpm6h != null) {
-            Float ecpm = countryEcpm6h.get(country);
-            if (ecpm != null) {
-                return new InstanceEcpm(iid, ecpm, "instanceCountryEcpm6h");
-            }
-        }
-
-        Map<String, Float> countryEcpm12h = instanceCountryEcpm12h.get(iid);
-        if (countryEcpm12h != null) {
-            Float ecpm = countryEcpm12h.get(country);
-            if (ecpm != null) {
-                return new InstanceEcpm(iid, ecpm, "instanceCountryEcpm12h");
-            }
-        }
-
-        Map<String, Float> countryEcpm24h = instanceCountryEcpm24h.get(iid);
-        if (countryEcpm24h != null) {
-            Float ecpm = countryEcpm24h.get(country);
-            if (ecpm != null) {
-                return new InstanceEcpm(iid, ecpm, "instanceCountryEcpm24h");
-            }
-        }
-
-        Map<String, Float> mEcpm24h = adnCountryEcpm24h.get(mid);
-        if (mEcpm24h != null) {
-            Float ecpm = mEcpm24h.get(country);
-            if (ecpm != null) {
-                return new InstanceEcpm(iid, ecpm, "mediationCountryEcpm24h");
-            }
-        }
-        Map<String, Float> mtcEcpm = adnAdTypeCountryEcpm3d.getOrDefault(mid, Collections.emptyMap()).get(placementType);
-        if (mtcEcpm != null) {
-            Float ecpm = mtcEcpm.get(country);
-            if (ecpm != null) {
-                return new InstanceEcpm(iid, ecpm, "mediationAdTypeCountryEcpm3d");
-            }
-        }
-        Float ecpm = adnEcpm3d.get(mid);
-        if (ecpm != null) {
-            return new InstanceEcpm(iid, ecpm, "mediationEcpm3d");
-        }
-        return new InstanceEcpm(iid, -1F, "noEcpmData");
     }
 
     private <T> List<T> immutableList(List<T> list) {

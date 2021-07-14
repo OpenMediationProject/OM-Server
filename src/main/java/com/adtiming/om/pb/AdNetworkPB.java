@@ -4375,6 +4375,40 @@ public final class AdNetworkPB {
      */
     com.google.protobuf.ByteString
         getNameBytes();
+
+    /**
+     * <code>map&lt;string, float&gt; country_manual_ecpm = 22;</code>
+     */
+    int getCountryManualEcpmCount();
+    /**
+     * <code>map&lt;string, float&gt; country_manual_ecpm = 22;</code>
+     */
+    boolean containsCountryManualEcpm(
+        java.lang.String key);
+    /**
+     * Use {@link #getCountryManualEcpmMap()} instead.
+     */
+    @java.lang.Deprecated
+    java.util.Map<java.lang.String, java.lang.Float>
+    getCountryManualEcpm();
+    /**
+     * <code>map&lt;string, float&gt; country_manual_ecpm = 22;</code>
+     */
+    java.util.Map<java.lang.String, java.lang.Float>
+    getCountryManualEcpmMap();
+    /**
+     * <code>map&lt;string, float&gt; country_manual_ecpm = 22;</code>
+     */
+
+    float getCountryManualEcpmOrDefault(
+        java.lang.String key,
+        float defaultValue);
+    /**
+     * <code>map&lt;string, float&gt; country_manual_ecpm = 22;</code>
+     */
+
+    float getCountryManualEcpmOrThrow(
+        java.lang.String key);
   }
   /**
    * Protobuf type {@code Instance}
@@ -4576,6 +4610,18 @@ public final class AdNetworkPB {
               name_ = s;
               break;
             }
+            case 178: {
+              if (!((mutable_bitField0_ & 0x00200000) == 0x00200000)) {
+                countryManualEcpm_ = com.google.protobuf.MapField.newMapField(
+                    CountryManualEcpmDefaultEntryHolder.defaultEntry);
+                mutable_bitField0_ |= 0x00200000;
+              }
+              com.google.protobuf.MapEntry<java.lang.String, java.lang.Float>
+              countryManualEcpm = input.readMessage(
+                  CountryManualEcpmDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
+              countryManualEcpm_.getMutableMap().put(countryManualEcpm.getKey(), countryManualEcpm.getValue());
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -4616,6 +4662,8 @@ public final class AdNetworkPB {
       switch (number) {
         case 20:
           return internalGetCountrySettings();
+        case 22:
+          return internalGetCountryManualEcpm();
         default:
           throw new RuntimeException(
               "Invalid map field number: " + number);
@@ -5826,6 +5874,82 @@ public final class AdNetworkPB {
       }
     }
 
+    public static final int COUNTRY_MANUAL_ECPM_FIELD_NUMBER = 22;
+    private static final class CountryManualEcpmDefaultEntryHolder {
+      static final com.google.protobuf.MapEntry<
+          java.lang.String, java.lang.Float> defaultEntry =
+              com.google.protobuf.MapEntry
+              .<java.lang.String, java.lang.Float>newDefaultInstance(
+                  com.adtiming.om.pb.AdNetworkPB.internal_static_Instance_CountryManualEcpmEntry_descriptor, 
+                  com.google.protobuf.WireFormat.FieldType.STRING,
+                  "",
+                  com.google.protobuf.WireFormat.FieldType.FLOAT,
+                  0F);
+    }
+    private com.google.protobuf.MapField<
+        java.lang.String, java.lang.Float> countryManualEcpm_;
+    private com.google.protobuf.MapField<java.lang.String, java.lang.Float>
+    internalGetCountryManualEcpm() {
+      if (countryManualEcpm_ == null) {
+        return com.google.protobuf.MapField.emptyMapField(
+            CountryManualEcpmDefaultEntryHolder.defaultEntry);
+      }
+      return countryManualEcpm_;
+    }
+
+    public int getCountryManualEcpmCount() {
+      return internalGetCountryManualEcpm().getMap().size();
+    }
+    /**
+     * <code>map&lt;string, float&gt; country_manual_ecpm = 22;</code>
+     */
+
+    public boolean containsCountryManualEcpm(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      return internalGetCountryManualEcpm().getMap().containsKey(key);
+    }
+    /**
+     * Use {@link #getCountryManualEcpmMap()} instead.
+     */
+    @java.lang.Deprecated
+    public java.util.Map<java.lang.String, java.lang.Float> getCountryManualEcpm() {
+      return getCountryManualEcpmMap();
+    }
+    /**
+     * <code>map&lt;string, float&gt; country_manual_ecpm = 22;</code>
+     */
+
+    public java.util.Map<java.lang.String, java.lang.Float> getCountryManualEcpmMap() {
+      return internalGetCountryManualEcpm().getMap();
+    }
+    /**
+     * <code>map&lt;string, float&gt; country_manual_ecpm = 22;</code>
+     */
+
+    public float getCountryManualEcpmOrDefault(
+        java.lang.String key,
+        float defaultValue) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, java.lang.Float> map =
+          internalGetCountryManualEcpm().getMap();
+      return map.containsKey(key) ? map.get(key) : defaultValue;
+    }
+    /**
+     * <code>map&lt;string, float&gt; country_manual_ecpm = 22;</code>
+     */
+
+    public float getCountryManualEcpmOrThrow(
+        java.lang.String key) {
+      if (key == null) { throw new java.lang.NullPointerException(); }
+      java.util.Map<java.lang.String, java.lang.Float> map =
+          internalGetCountryManualEcpm().getMap();
+      if (!map.containsKey(key)) {
+        throw new java.lang.IllegalArgumentException();
+      }
+      return map.get(key);
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -5906,6 +6030,15 @@ public final class AdNetworkPB {
       }
       if (!getNameBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 21, name_);
+      }
+      for (java.util.Map.Entry<java.lang.String, java.lang.Float> entry
+           : internalGetCountryManualEcpm().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.String, java.lang.Float>
+        countryManualEcpm = CountryManualEcpmDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        output.writeMessage(22, countryManualEcpm);
       }
     }
 
@@ -6023,6 +6156,16 @@ public final class AdNetworkPB {
       if (!getNameBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(21, name_);
       }
+      for (java.util.Map.Entry<java.lang.String, java.lang.Float> entry
+           : internalGetCountryManualEcpm().getMap().entrySet()) {
+        com.google.protobuf.MapEntry<java.lang.String, java.lang.Float>
+        countryManualEcpm = CountryManualEcpmDefaultEntryHolder.defaultEntry.newBuilderForType()
+            .setKey(entry.getKey())
+            .setValue(entry.getValue())
+            .build();
+        size += com.google.protobuf.CodedOutputStream
+            .computeMessageSize(22, countryManualEcpm);
+      }
       memoizedSize = size;
       return size;
     }
@@ -6083,6 +6226,8 @@ public final class AdNetworkPB {
           other.internalGetCountrySettings());
       result = result && getName()
           .equals(other.getName());
+      result = result && internalGetCountryManualEcpm().equals(
+          other.internalGetCountryManualEcpm());
       return result;
     }
 
@@ -6151,6 +6296,10 @@ public final class AdNetworkPB {
       }
       hash = (37 * hash) + NAME_FIELD_NUMBER;
       hash = (53 * hash) + getName().hashCode();
+      if (!internalGetCountryManualEcpm().getMap().isEmpty()) {
+        hash = (37 * hash) + COUNTRY_MANUAL_ECPM_FIELD_NUMBER;
+        hash = (53 * hash) + internalGetCountryManualEcpm().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -6251,6 +6400,8 @@ public final class AdNetworkPB {
         switch (number) {
           case 20:
             return internalGetCountrySettings();
+          case 22:
+            return internalGetCountryManualEcpm();
           default:
             throw new RuntimeException(
                 "Invalid map field number: " + number);
@@ -6262,6 +6413,8 @@ public final class AdNetworkPB {
         switch (number) {
           case 20:
             return internalGetMutableCountrySettings();
+          case 22:
+            return internalGetMutableCountryManualEcpm();
           default:
             throw new RuntimeException(
                 "Invalid map field number: " + number);
@@ -6332,6 +6485,7 @@ public final class AdNetworkPB {
         internalGetMutableCountrySettings().clear();
         name_ = "";
 
+        internalGetMutableCountryManualEcpm().clear();
         return this;
       }
 
@@ -6402,6 +6556,8 @@ public final class AdNetworkPB {
         result.countrySettings_ = internalGetCountrySettings();
         result.countrySettings_.makeImmutable();
         result.name_ = name_;
+        result.countryManualEcpm_ = internalGetCountryManualEcpm();
+        result.countryManualEcpm_.makeImmutable();
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -6553,6 +6709,8 @@ public final class AdNetworkPB {
           name_ = other.name_;
           onChanged();
         }
+        internalGetMutableCountryManualEcpm().mergeFrom(
+            other.internalGetCountryManualEcpm());
         onChanged();
         return this;
       }
@@ -7910,6 +8068,125 @@ public final class AdNetworkPB {
         onChanged();
         return this;
       }
+
+      private com.google.protobuf.MapField<
+          java.lang.String, java.lang.Float> countryManualEcpm_;
+      private com.google.protobuf.MapField<java.lang.String, java.lang.Float>
+      internalGetCountryManualEcpm() {
+        if (countryManualEcpm_ == null) {
+          return com.google.protobuf.MapField.emptyMapField(
+              CountryManualEcpmDefaultEntryHolder.defaultEntry);
+        }
+        return countryManualEcpm_;
+      }
+      private com.google.protobuf.MapField<java.lang.String, java.lang.Float>
+      internalGetMutableCountryManualEcpm() {
+        onChanged();;
+        if (countryManualEcpm_ == null) {
+          countryManualEcpm_ = com.google.protobuf.MapField.newMapField(
+              CountryManualEcpmDefaultEntryHolder.defaultEntry);
+        }
+        if (!countryManualEcpm_.isMutable()) {
+          countryManualEcpm_ = countryManualEcpm_.copy();
+        }
+        return countryManualEcpm_;
+      }
+
+      public int getCountryManualEcpmCount() {
+        return internalGetCountryManualEcpm().getMap().size();
+      }
+      /**
+       * <code>map&lt;string, float&gt; country_manual_ecpm = 22;</code>
+       */
+
+      public boolean containsCountryManualEcpm(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        return internalGetCountryManualEcpm().getMap().containsKey(key);
+      }
+      /**
+       * Use {@link #getCountryManualEcpmMap()} instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, java.lang.Float> getCountryManualEcpm() {
+        return getCountryManualEcpmMap();
+      }
+      /**
+       * <code>map&lt;string, float&gt; country_manual_ecpm = 22;</code>
+       */
+
+      public java.util.Map<java.lang.String, java.lang.Float> getCountryManualEcpmMap() {
+        return internalGetCountryManualEcpm().getMap();
+      }
+      /**
+       * <code>map&lt;string, float&gt; country_manual_ecpm = 22;</code>
+       */
+
+      public float getCountryManualEcpmOrDefault(
+          java.lang.String key,
+          float defaultValue) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, java.lang.Float> map =
+            internalGetCountryManualEcpm().getMap();
+        return map.containsKey(key) ? map.get(key) : defaultValue;
+      }
+      /**
+       * <code>map&lt;string, float&gt; country_manual_ecpm = 22;</code>
+       */
+
+      public float getCountryManualEcpmOrThrow(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        java.util.Map<java.lang.String, java.lang.Float> map =
+            internalGetCountryManualEcpm().getMap();
+        if (!map.containsKey(key)) {
+          throw new java.lang.IllegalArgumentException();
+        }
+        return map.get(key);
+      }
+
+      public Builder clearCountryManualEcpm() {
+        getMutableCountryManualEcpm().clear();
+        return this;
+      }
+      /**
+       * <code>map&lt;string, float&gt; country_manual_ecpm = 22;</code>
+       */
+
+      public Builder removeCountryManualEcpm(
+          java.lang.String key) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        getMutableCountryManualEcpm().remove(key);
+        return this;
+      }
+      /**
+       * Use alternate mutation accessors instead.
+       */
+      @java.lang.Deprecated
+      public java.util.Map<java.lang.String, java.lang.Float>
+      getMutableCountryManualEcpm() {
+        return internalGetMutableCountryManualEcpm().getMutableMap();
+      }
+      /**
+       * <code>map&lt;string, float&gt; country_manual_ecpm = 22;</code>
+       */
+      public Builder putCountryManualEcpm(
+          java.lang.String key,
+          float value) {
+        if (key == null) { throw new java.lang.NullPointerException(); }
+        
+        getMutableCountryManualEcpm().put(key, value);
+        return this;
+      }
+      /**
+       * <code>map&lt;string, float&gt; country_manual_ecpm = 22;</code>
+       */
+
+      public Builder putAllCountryManualEcpm(
+          java.util.Map<java.lang.String, java.lang.Float> values) {
+        getMutableCountryManualEcpm().putAll(values);
+        return this;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
@@ -8452,6 +8729,15 @@ public final class AdNetworkPB {
 
     com.adtiming.om.pb.AdNetworkPB.CustomTag getCustomTagsOrThrow(
         java.lang.String key);
+
+    /**
+     * <pre>
+     * ECPM预估算法ID om_ecpm_algorithm.id
+     * </pre>
+     *
+     * <code>optional int32 algorithm_id = 35;</code>
+     */
+    int getAlgorithmId();
   }
   /**
    * Protobuf type {@code InstanceRule}
@@ -8497,6 +8783,7 @@ public final class AdNetworkPB {
       appvWhite_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       appvRange_ = java.util.Collections.emptyList();
       requireDid_ = 0;
+      algorithmId_ = 0;
     }
 
     @java.lang.Override
@@ -8761,6 +9048,11 @@ public final class AdNetworkPB {
               customTags = input.readMessage(
                   CustomTagsDefaultEntryHolder.defaultEntry.getParserForType(), extensionRegistry);
               customTags_.getMutableMap().put(customTags.getKey(), customTags.getValue());
+              break;
+            }
+            case 280: {
+
+              algorithmId_ = input.readInt32();
               break;
             }
           }
@@ -9645,6 +9937,19 @@ public final class AdNetworkPB {
       return map.get(key);
     }
 
+    public static final int ALGORITHM_ID_FIELD_NUMBER = 35;
+    private int algorithmId_;
+    /**
+     * <pre>
+     * ECPM预估算法ID om_ecpm_algorithm.id
+     * </pre>
+     *
+     * <code>optional int32 algorithm_id = 35;</code>
+     */
+    public int getAlgorithmId() {
+      return algorithmId_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -9770,6 +10075,9 @@ public final class AdNetworkPB {
             .setValue(entry.getValue())
             .build();
         output.writeMessage(34, customTags);
+      }
+      if (algorithmId_ != 0) {
+        output.writeInt32(35, algorithmId_);
       }
     }
 
@@ -9965,6 +10273,10 @@ public final class AdNetworkPB {
         size += com.google.protobuf.CodedOutputStream
             .computeMessageSize(34, customTags);
       }
+      if (algorithmId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(35, algorithmId_);
+      }
       memoizedSize = size;
       return size;
     }
@@ -10052,6 +10364,8 @@ public final class AdNetworkPB {
           == other.getRequireDid());
       result = result && internalGetCustomTags().equals(
           other.internalGetCustomTags());
+      result = result && (getAlgorithmId()
+          == other.getAlgorithmId());
       return result;
     }
 
@@ -10163,6 +10477,8 @@ public final class AdNetworkPB {
         hash = (37 * hash) + CUSTOM_TAGS_FIELD_NUMBER;
         hash = (53 * hash) + internalGetCustomTags().hashCode();
       }
+      hash = (37 * hash) + ALGORITHM_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getAlgorithmId();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -10388,6 +10704,8 @@ public final class AdNetworkPB {
         requireDid_ = 0;
 
         internalGetMutableCustomTags().clear();
+        algorithmId_ = 0;
+
         return this;
       }
 
@@ -10513,6 +10831,7 @@ public final class AdNetworkPB {
         result.requireDid_ = requireDid_;
         result.customTags_ = internalGetCustomTags();
         result.customTags_.makeImmutable();
+        result.algorithmId_ = algorithmId_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -10795,6 +11114,9 @@ public final class AdNetworkPB {
         }
         internalGetMutableCustomTags().mergeFrom(
             other.internalGetCustomTags());
+        if (other.getAlgorithmId() != 0) {
+          setAlgorithmId(other.getAlgorithmId());
+        }
         onChanged();
         return this;
       }
@@ -13427,6 +13749,44 @@ public final class AdNetworkPB {
         getMutableCustomTags().putAll(values);
         return this;
       }
+
+      private int algorithmId_ ;
+      /**
+       * <pre>
+       * ECPM预估算法ID om_ecpm_algorithm.id
+       * </pre>
+       *
+       * <code>optional int32 algorithm_id = 35;</code>
+       */
+      public int getAlgorithmId() {
+        return algorithmId_;
+      }
+      /**
+       * <pre>
+       * ECPM预估算法ID om_ecpm_algorithm.id
+       * </pre>
+       *
+       * <code>optional int32 algorithm_id = 35;</code>
+       */
+      public Builder setAlgorithmId(int value) {
+        
+        algorithmId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * ECPM预估算法ID om_ecpm_algorithm.id
+       * </pre>
+       *
+       * <code>optional int32 algorithm_id = 35;</code>
+       */
+      public Builder clearAlgorithmId() {
+        
+        algorithmId_ = 0;
+        onChanged();
+        return this;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
@@ -15398,6 +15758,11 @@ public final class AdNetworkPB {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Instance_CountrySettingsEntry_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Instance_CountryManualEcpmEntry_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_Instance_CountryManualEcpmEntry_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_Instance_CountrySettings_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -15453,7 +15818,7 @@ public final class AdNetworkPB {
       "\013sdk_version\030\004 \001(\t\022\017\n\007osv_max\030\005 \001(\t\022\017\n\007o",
       "sv_min\030\006 \001(\t\022\035\n\025make_device_blacklist\030\007 " +
       "\003(\t\022\035\n\025brand_model_blacklist\030\010 \003(\t\022\023\n\013ap" +
-      "p_version\030\t \001(\t\"\262\005\n\010Instance\022\n\n\002id\030\001 \001(\005" +
+      "p_version\030\t \001(\t\"\253\006\n\010Instance\022\n\n\002id\030\001 \001(\005" +
       "\022\022\n\npub_app_id\030\002 \001(\005\022\024\n\014placement_id\030\003 \001" +
       "(\005\022\016\n\006adn_id\030\004 \001(\005\022\025\n\rplacement_key\030\005 \001(" +
       "\t\022\023\n\013app_unit_id\030\006 \001(\t\022\017\n\007osv_max\030\007 \001(\t\022" +
@@ -15465,39 +15830,43 @@ public final class AdNetworkPB {
       "_unit\030\020 \001(\005\022\032\n\022frequency_interval\030\021 \001(\005\022" +
       "\021\n\thb_status\030\022 \001(\010\022\014\n\004ecpm\030\023 \001(\002\0228\n\020coun" +
       "try_settings\030\024 \003(\0132\036.Instance.CountrySet" +
-      "tingsEntry\022\014\n\004name\030\025 \001(\t\032Q\n\024CountrySetti" +
-      "ngsEntry\022\013\n\003key\030\001 \001(\t\022(\n\005value\030\002 \001(\0132\031.I" +
-      "nstance.CountrySettings:\0028\001\032w\n\017CountrySe" +
-      "ttings\0225\n\006period\030\001 \003(\0132%.Instance.Countr" +
-      "ySettings.PeriodEntry\032-\n\013PeriodEntry\022\013\n\003" +
-      "key\030\001 \001(\005\022\r\n\005value\030\002 \001(\005:\0028\001\"\373\006\n\014Instanc",
-      "eRule\022\n\n\002id\030\001 \001(\005\022\024\n\014publisher_id\030\002 \001(\005\022" +
-      "\022\n\npub_app_id\030\003 \001(\005\022\024\n\014placement_id\030\004 \001(" +
-      "\005\022\017\n\007country\030\005 \003(\t\022\021\n\tsort_type\030\006 \001(\005\022\024\n" +
-      "\003abt\030\007 \001(\0162\007.ABTest\022\023\n\013auto_switch\030\010 \001(\005" +
-      "\022:\n\017instance_weight\030\t \003(\0132!.InstanceRule" +
-      ".InstanceWeightEntry\022\020\n\010priority\030\n \001(\005\022\021" +
-      "\n\tfrequency\030\013 \001(\005\022\020\n\010con_type\030\014 \001(\005\022\027\n\017b" +
-      "rand_whitelist\030\r \003(\t\022\027\n\017brand_blacklist\030" +
-      "\016 \003(\t\022\027\n\017model_whitelist\030\017 \003(\t\022\027\n\017model_" +
-      "blacklist\030\020 \003(\t\022\017\n\007iap_min\030\021 \001(\002\022\017\n\007iap_",
-      "max\030\022 \001(\002\022\022\n\nmodel_type\030\023 \001(\005\022\023\n\013channel" +
-      "_bow\030\024 \001(\010\022\017\n\007channel\030\025 \003(\t\022\016\n\006gender\030\026 " +
-      "\001(\005\022\020\n\010interest\030\027 \003(\t\022\017\n\007age_min\030\030 \001(\005\022\017" +
-      "\n\007age_max\030\031 \001(\005\022\014\n\004name\030\032 \001(\t\022\021\n\tosv_whi" +
-      "te\030\033 \003(\t\022\031\n\tosv_range\030\034 \003(\0132\006.Range\022\022\n\ns" +
-      "dkv_white\030\035 \003(\t\022\032\n\nsdkv_range\030\036 \003(\0132\006.Ra" +
-      "nge\022\022\n\nappv_white\030\037 \003(\t\022\032\n\nappv_range\030  " +
-      "\003(\0132\006.Range\022\023\n\013require_did\030! \001(\005\0222\n\013cust" +
-      "om_tags\030\" \003(\0132\035.InstanceRule.CustomTagsE" +
-      "ntry\0325\n\023InstanceWeightEntry\022\013\n\003key\030\001 \001(\005",
-      "\022\r\n\005value\030\002 \001(\005:\0028\001\032=\n\017CustomTagsEntry\022\013" +
-      "\n\003key\030\001 \001(\t\022\031\n\005value\030\002 \001(\0132\n.CustomTag:\002" +
-      "8\001\"J\n\tCustomTag\022\014\n\004name\030\001 \001(\t\022\014\n\004type\030\002 " +
-      "\001(\005\022!\n\nconditions\030\003 \003(\0132\r.TagCondition\"?" +
-      "\n\014TagCondition\022\020\n\010operator\030\001 \001(\t\022\r\n\005valu" +
-      "e\030\002 \001(\t\022\016\n\006values\030\003 \003(\tB!\n\022com.adtiming." +
-      "om.pbB\013AdNetworkPBb\006proto3"
+      "tingsEntry\022\014\n\004name\030\025 \001(\t\022=\n\023country_manu" +
+      "al_ecpm\030\026 \003(\0132 .Instance.CountryManualEc" +
+      "pmEntry\032Q\n\024CountrySettingsEntry\022\013\n\003key\030\001" +
+      " \001(\t\022(\n\005value\030\002 \001(\0132\031.Instance.CountrySe" +
+      "ttings:\0028\001\0328\n\026CountryManualEcpmEntry\022\013\n\003" +
+      "key\030\001 \001(\t\022\r\n\005value\030\002 \001(\002:\0028\001\032w\n\017CountryS",
+      "ettings\0225\n\006period\030\001 \003(\0132%.Instance.Count" +
+      "rySettings.PeriodEntry\032-\n\013PeriodEntry\022\013\n" +
+      "\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\005:\0028\001\"\221\007\n\014Instan" +
+      "ceRule\022\n\n\002id\030\001 \001(\005\022\024\n\014publisher_id\030\002 \001(\005" +
+      "\022\022\n\npub_app_id\030\003 \001(\005\022\024\n\014placement_id\030\004 \001" +
+      "(\005\022\017\n\007country\030\005 \003(\t\022\021\n\tsort_type\030\006 \001(\005\022\024" +
+      "\n\003abt\030\007 \001(\0162\007.ABTest\022\023\n\013auto_switch\030\010 \001(" +
+      "\005\022:\n\017instance_weight\030\t \003(\0132!.InstanceRul" +
+      "e.InstanceWeightEntry\022\020\n\010priority\030\n \001(\005\022" +
+      "\021\n\tfrequency\030\013 \001(\005\022\020\n\010con_type\030\014 \001(\005\022\027\n\017",
+      "brand_whitelist\030\r \003(\t\022\027\n\017brand_blacklist" +
+      "\030\016 \003(\t\022\027\n\017model_whitelist\030\017 \003(\t\022\027\n\017model" +
+      "_blacklist\030\020 \003(\t\022\017\n\007iap_min\030\021 \001(\002\022\017\n\007iap" +
+      "_max\030\022 \001(\002\022\022\n\nmodel_type\030\023 \001(\005\022\023\n\013channe" +
+      "l_bow\030\024 \001(\010\022\017\n\007channel\030\025 \003(\t\022\016\n\006gender\030\026" +
+      " \001(\005\022\020\n\010interest\030\027 \003(\t\022\017\n\007age_min\030\030 \001(\005\022" +
+      "\017\n\007age_max\030\031 \001(\005\022\014\n\004name\030\032 \001(\t\022\021\n\tosv_wh" +
+      "ite\030\033 \003(\t\022\031\n\tosv_range\030\034 \003(\0132\006.Range\022\022\n\n" +
+      "sdkv_white\030\035 \003(\t\022\032\n\nsdkv_range\030\036 \003(\0132\006.R" +
+      "ange\022\022\n\nappv_white\030\037 \003(\t\022\032\n\nappv_range\030 ",
+      " \003(\0132\006.Range\022\023\n\013require_did\030! \001(\005\0222\n\013cus" +
+      "tom_tags\030\" \003(\0132\035.InstanceRule.CustomTags" +
+      "Entry\022\024\n\014algorithm_id\030# \001(\005\0325\n\023InstanceW" +
+      "eightEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\005:\002" +
+      "8\001\032=\n\017CustomTagsEntry\022\013\n\003key\030\001 \001(\t\022\031\n\005va" +
+      "lue\030\002 \001(\0132\n.CustomTag:\0028\001\"J\n\tCustomTag\022\014" +
+      "\n\004name\030\001 \001(\t\022\014\n\004type\030\002 \001(\005\022!\n\nconditions" +
+      "\030\003 \003(\0132\r.TagCondition\"?\n\014TagCondition\022\020\n" +
+      "\010operator\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\022\016\n\006values" +
+      "\030\003 \003(\tB!\n\022com.adtiming.om.pbB\013AdNetworkP",
+      "Bb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -15535,15 +15904,21 @@ public final class AdNetworkPB {
     internal_static_Instance_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Instance_descriptor,
-        new java.lang.String[] { "Id", "PubAppId", "PlacementId", "AdnId", "PlacementKey", "AppUnitId", "OsvMax", "OsvMin", "MakeWhitelist", "MakeBlacklist", "BrandWhitelist", "BrandBlacklist", "ModelWhitelist", "ModelBlacklist", "FrequencyCap", "FrequencyUnit", "FrequencyInterval", "HbStatus", "Ecpm", "CountrySettings", "Name", });
+        new java.lang.String[] { "Id", "PubAppId", "PlacementId", "AdnId", "PlacementKey", "AppUnitId", "OsvMax", "OsvMin", "MakeWhitelist", "MakeBlacklist", "BrandWhitelist", "BrandBlacklist", "ModelWhitelist", "ModelBlacklist", "FrequencyCap", "FrequencyUnit", "FrequencyInterval", "HbStatus", "Ecpm", "CountrySettings", "Name", "CountryManualEcpm", });
     internal_static_Instance_CountrySettingsEntry_descriptor =
       internal_static_Instance_descriptor.getNestedTypes().get(0);
     internal_static_Instance_CountrySettingsEntry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Instance_CountrySettingsEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
-    internal_static_Instance_CountrySettings_descriptor =
+    internal_static_Instance_CountryManualEcpmEntry_descriptor =
       internal_static_Instance_descriptor.getNestedTypes().get(1);
+    internal_static_Instance_CountryManualEcpmEntry_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Instance_CountryManualEcpmEntry_descriptor,
+        new java.lang.String[] { "Key", "Value", });
+    internal_static_Instance_CountrySettings_descriptor =
+      internal_static_Instance_descriptor.getNestedTypes().get(2);
     internal_static_Instance_CountrySettings_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Instance_CountrySettings_descriptor,
@@ -15559,7 +15934,7 @@ public final class AdNetworkPB {
     internal_static_InstanceRule_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_InstanceRule_descriptor,
-        new java.lang.String[] { "Id", "PublisherId", "PubAppId", "PlacementId", "Country", "SortType", "Abt", "AutoSwitch", "InstanceWeight", "Priority", "Frequency", "ConType", "BrandWhitelist", "BrandBlacklist", "ModelWhitelist", "ModelBlacklist", "IapMin", "IapMax", "ModelType", "ChannelBow", "Channel", "Gender", "Interest", "AgeMin", "AgeMax", "Name", "OsvWhite", "OsvRange", "SdkvWhite", "SdkvRange", "AppvWhite", "AppvRange", "RequireDid", "CustomTags", });
+        new java.lang.String[] { "Id", "PublisherId", "PubAppId", "PlacementId", "Country", "SortType", "Abt", "AutoSwitch", "InstanceWeight", "Priority", "Frequency", "ConType", "BrandWhitelist", "BrandBlacklist", "ModelWhitelist", "ModelBlacklist", "IapMin", "IapMax", "ModelType", "ChannelBow", "Channel", "Gender", "Interest", "AgeMin", "AgeMax", "Name", "OsvWhite", "OsvRange", "SdkvWhite", "SdkvRange", "AppvWhite", "AppvRange", "RequireDid", "CustomTags", "AlgorithmId", });
     internal_static_InstanceRule_InstanceWeightEntry_descriptor =
       internal_static_InstanceRule_descriptor.getNestedTypes().get(0);
     internal_static_InstanceRule_InstanceWeightEntry_fieldAccessorTable = new
