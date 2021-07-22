@@ -156,6 +156,30 @@ public final class PubAppPB {
      * <code>optional int32 impr_callback_switch = 11;</code>
      */
     int getImprCallbackSwitch();
+
+    /**
+     * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+     */
+    java.util.List<com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar> 
+        getCountryUarsList();
+    /**
+     * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+     */
+    com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar getCountryUars(int index);
+    /**
+     * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+     */
+    int getCountryUarsCount();
+    /**
+     * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+     */
+    java.util.List<? extends com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUarOrBuilder> 
+        getCountryUarsOrBuilderList();
+    /**
+     * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+     */
+    com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUarOrBuilder getCountryUarsOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code PublisherApp}
@@ -180,6 +204,7 @@ public final class PubAppPB {
       eventIds_ = java.util.Collections.emptyList();
       blockRules_ = java.util.Collections.emptyList();
       imprCallbackSwitch_ = 0;
+      countryUars_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -286,6 +311,15 @@ public final class PubAppPB {
               imprCallbackSwitch_ = input.readInt32();
               break;
             }
+            case 98: {
+              if (!((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+                countryUars_ = new java.util.ArrayList<com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar>();
+                mutable_bitField0_ |= 0x00000800;
+              }
+              countryUars_.add(
+                  input.readMessage(com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar.parser(), extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -300,6 +334,9 @@ public final class PubAppPB {
         if (((mutable_bitField0_ & 0x00000200) == 0x00000200)) {
           blockRules_ = java.util.Collections.unmodifiableList(blockRules_);
         }
+        if (((mutable_bitField0_ & 0x00000800) == 0x00000800)) {
+          countryUars_ = java.util.Collections.unmodifiableList(countryUars_);
+        }
         makeExtensionsImmutable();
       }
     }
@@ -313,6 +350,683 @@ public final class PubAppPB {
       return com.adtiming.om.pb.PubAppPB.internal_static_PublisherApp_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
               com.adtiming.om.pb.PubAppPB.PublisherApp.class, com.adtiming.om.pb.PubAppPB.PublisherApp.Builder.class);
+    }
+
+    public interface CountryUarOrBuilder extends
+        // @@protoc_insertion_point(interface_extends:PublisherApp.CountryUar)
+        com.google.protobuf.MessageOrBuilder {
+
+      /**
+       * <code>optional string country = 1;</code>
+       */
+      java.lang.String getCountry();
+      /**
+       * <code>optional string country = 1;</code>
+       */
+      com.google.protobuf.ByteString
+          getCountryBytes();
+
+      /**
+       * <code>repeated float uarx = 2;</code>
+       */
+      java.util.List<java.lang.Float> getUarxList();
+      /**
+       * <code>repeated float uarx = 2;</code>
+       */
+      int getUarxCount();
+      /**
+       * <code>repeated float uarx = 2;</code>
+       */
+      float getUarx(int index);
+    }
+    /**
+     * Protobuf type {@code PublisherApp.CountryUar}
+     */
+    public  static final class CountryUar extends
+        com.google.protobuf.GeneratedMessageV3 implements
+        // @@protoc_insertion_point(message_implements:PublisherApp.CountryUar)
+        CountryUarOrBuilder {
+      // Use CountryUar.newBuilder() to construct.
+      private CountryUar(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+        super(builder);
+      }
+      private CountryUar() {
+        country_ = "";
+        uarx_ = java.util.Collections.emptyList();
+      }
+
+      @java.lang.Override
+      public final com.google.protobuf.UnknownFieldSet
+      getUnknownFields() {
+        return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+      }
+      private CountryUar(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        this();
+        int mutable_bitField0_ = 0;
+        try {
+          boolean done = false;
+          while (!done) {
+            int tag = input.readTag();
+            switch (tag) {
+              case 0:
+                done = true;
+                break;
+              default: {
+                if (!input.skipField(tag)) {
+                  done = true;
+                }
+                break;
+              }
+              case 10: {
+                java.lang.String s = input.readStringRequireUtf8();
+
+                country_ = s;
+                break;
+              }
+              case 21: {
+                if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+                  uarx_ = new java.util.ArrayList<java.lang.Float>();
+                  mutable_bitField0_ |= 0x00000002;
+                }
+                uarx_.add(input.readFloat());
+                break;
+              }
+              case 18: {
+                int length = input.readRawVarint32();
+                int limit = input.pushLimit(length);
+                if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
+                  uarx_ = new java.util.ArrayList<java.lang.Float>();
+                  mutable_bitField0_ |= 0x00000002;
+                }
+                while (input.getBytesUntilLimit() > 0) {
+                  uarx_.add(input.readFloat());
+                }
+                input.popLimit(limit);
+                break;
+              }
+            }
+          }
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          throw e.setUnfinishedMessage(this);
+        } catch (java.io.IOException e) {
+          throw new com.google.protobuf.InvalidProtocolBufferException(
+              e).setUnfinishedMessage(this);
+        } finally {
+          if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+            uarx_ = java.util.Collections.unmodifiableList(uarx_);
+          }
+          makeExtensionsImmutable();
+        }
+      }
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.adtiming.om.pb.PubAppPB.internal_static_PublisherApp_CountryUar_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.adtiming.om.pb.PubAppPB.internal_static_PublisherApp_CountryUar_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar.class, com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar.Builder.class);
+      }
+
+      private int bitField0_;
+      public static final int COUNTRY_FIELD_NUMBER = 1;
+      private volatile java.lang.Object country_;
+      /**
+       * <code>optional string country = 1;</code>
+       */
+      public java.lang.String getCountry() {
+        java.lang.Object ref = country_;
+        if (ref instanceof java.lang.String) {
+          return (java.lang.String) ref;
+        } else {
+          com.google.protobuf.ByteString bs = 
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          country_ = s;
+          return s;
+        }
+      }
+      /**
+       * <code>optional string country = 1;</code>
+       */
+      public com.google.protobuf.ByteString
+          getCountryBytes() {
+        java.lang.Object ref = country_;
+        if (ref instanceof java.lang.String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          country_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+
+      public static final int UARX_FIELD_NUMBER = 2;
+      private java.util.List<java.lang.Float> uarx_;
+      /**
+       * <code>repeated float uarx = 2;</code>
+       */
+      public java.util.List<java.lang.Float>
+          getUarxList() {
+        return uarx_;
+      }
+      /**
+       * <code>repeated float uarx = 2;</code>
+       */
+      public int getUarxCount() {
+        return uarx_.size();
+      }
+      /**
+       * <code>repeated float uarx = 2;</code>
+       */
+      public float getUarx(int index) {
+        return uarx_.get(index);
+      }
+      private int uarxMemoizedSerializedSize = -1;
+
+      private byte memoizedIsInitialized = -1;
+      public final boolean isInitialized() {
+        byte isInitialized = memoizedIsInitialized;
+        if (isInitialized == 1) return true;
+        if (isInitialized == 0) return false;
+
+        memoizedIsInitialized = 1;
+        return true;
+      }
+
+      public void writeTo(com.google.protobuf.CodedOutputStream output)
+                          throws java.io.IOException {
+        getSerializedSize();
+        if (!getCountryBytes().isEmpty()) {
+          com.google.protobuf.GeneratedMessageV3.writeString(output, 1, country_);
+        }
+        if (getUarxList().size() > 0) {
+          output.writeUInt32NoTag(18);
+          output.writeUInt32NoTag(uarxMemoizedSerializedSize);
+        }
+        for (int i = 0; i < uarx_.size(); i++) {
+          output.writeFloatNoTag(uarx_.get(i));
+        }
+      }
+
+      public int getSerializedSize() {
+        int size = memoizedSize;
+        if (size != -1) return size;
+
+        size = 0;
+        if (!getCountryBytes().isEmpty()) {
+          size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, country_);
+        }
+        {
+          int dataSize = 0;
+          dataSize = 4 * getUarxList().size();
+          size += dataSize;
+          if (!getUarxList().isEmpty()) {
+            size += 1;
+            size += com.google.protobuf.CodedOutputStream
+                .computeInt32SizeNoTag(dataSize);
+          }
+          uarxMemoizedSerializedSize = dataSize;
+        }
+        memoizedSize = size;
+        return size;
+      }
+
+      private static final long serialVersionUID = 0L;
+      @java.lang.Override
+      public boolean equals(final java.lang.Object obj) {
+        if (obj == this) {
+         return true;
+        }
+        if (!(obj instanceof com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar)) {
+          return super.equals(obj);
+        }
+        com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar other = (com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar) obj;
+
+        boolean result = true;
+        result = result && getCountry()
+            .equals(other.getCountry());
+        result = result && getUarxList()
+            .equals(other.getUarxList());
+        return result;
+      }
+
+      @java.lang.Override
+      public int hashCode() {
+        if (memoizedHashCode != 0) {
+          return memoizedHashCode;
+        }
+        int hash = 41;
+        hash = (19 * hash) + getDescriptorForType().hashCode();
+        hash = (37 * hash) + COUNTRY_FIELD_NUMBER;
+        hash = (53 * hash) + getCountry().hashCode();
+        if (getUarxCount() > 0) {
+          hash = (37 * hash) + UARX_FIELD_NUMBER;
+          hash = (53 * hash) + getUarxList().hashCode();
+        }
+        hash = (29 * hash) + unknownFields.hashCode();
+        memoizedHashCode = hash;
+        return hash;
+      }
+
+      public static com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar parseFrom(
+          com.google.protobuf.ByteString data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar parseFrom(
+          com.google.protobuf.ByteString data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar parseFrom(byte[] data)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data);
+      }
+      public static com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar parseFrom(
+          byte[] data,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return PARSER.parseFrom(data, extensionRegistry);
+      }
+      public static com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar parseFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar parseFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar parseDelimitedFrom(java.io.InputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input);
+      }
+      public static com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar parseDelimitedFrom(
+          java.io.InputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+      }
+      public static com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar parseFrom(
+          com.google.protobuf.CodedInputStream input)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input);
+      }
+      public static com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar parseFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        return com.google.protobuf.GeneratedMessageV3
+            .parseWithIOException(PARSER, input, extensionRegistry);
+      }
+
+      public Builder newBuilderForType() { return newBuilder(); }
+      public static Builder newBuilder() {
+        return DEFAULT_INSTANCE.toBuilder();
+      }
+      public static Builder newBuilder(com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar prototype) {
+        return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+      }
+      public Builder toBuilder() {
+        return this == DEFAULT_INSTANCE
+            ? new Builder() : new Builder().mergeFrom(this);
+      }
+
+      @java.lang.Override
+      protected Builder newBuilderForType(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        Builder builder = new Builder(parent);
+        return builder;
+      }
+      /**
+       * Protobuf type {@code PublisherApp.CountryUar}
+       */
+      public static final class Builder extends
+          com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+          // @@protoc_insertion_point(builder_implements:PublisherApp.CountryUar)
+          com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUarOrBuilder {
+        public static final com.google.protobuf.Descriptors.Descriptor
+            getDescriptor() {
+          return com.adtiming.om.pb.PubAppPB.internal_static_PublisherApp_CountryUar_descriptor;
+        }
+
+        protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+            internalGetFieldAccessorTable() {
+          return com.adtiming.om.pb.PubAppPB.internal_static_PublisherApp_CountryUar_fieldAccessorTable
+              .ensureFieldAccessorsInitialized(
+                  com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar.class, com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar.Builder.class);
+        }
+
+        // Construct using com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar.newBuilder()
+        private Builder() {
+          maybeForceBuilderInitialization();
+        }
+
+        private Builder(
+            com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+          super(parent);
+          maybeForceBuilderInitialization();
+        }
+        private void maybeForceBuilderInitialization() {
+          if (com.google.protobuf.GeneratedMessageV3
+                  .alwaysUseFieldBuilders) {
+          }
+        }
+        public Builder clear() {
+          super.clear();
+          country_ = "";
+
+          uarx_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          return this;
+        }
+
+        public com.google.protobuf.Descriptors.Descriptor
+            getDescriptorForType() {
+          return com.adtiming.om.pb.PubAppPB.internal_static_PublisherApp_CountryUar_descriptor;
+        }
+
+        public com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar getDefaultInstanceForType() {
+          return com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar.getDefaultInstance();
+        }
+
+        public com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar build() {
+          com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar result = buildPartial();
+          if (!result.isInitialized()) {
+            throw newUninitializedMessageException(result);
+          }
+          return result;
+        }
+
+        public com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar buildPartial() {
+          com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar result = new com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar(this);
+          int from_bitField0_ = bitField0_;
+          int to_bitField0_ = 0;
+          result.country_ = country_;
+          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+            uarx_ = java.util.Collections.unmodifiableList(uarx_);
+            bitField0_ = (bitField0_ & ~0x00000002);
+          }
+          result.uarx_ = uarx_;
+          result.bitField0_ = to_bitField0_;
+          onBuilt();
+          return result;
+        }
+
+        public Builder clone() {
+          return (Builder) super.clone();
+        }
+        public Builder setField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            Object value) {
+          return (Builder) super.setField(field, value);
+        }
+        public Builder clearField(
+            com.google.protobuf.Descriptors.FieldDescriptor field) {
+          return (Builder) super.clearField(field);
+        }
+        public Builder clearOneof(
+            com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+          return (Builder) super.clearOneof(oneof);
+        }
+        public Builder setRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            int index, Object value) {
+          return (Builder) super.setRepeatedField(field, index, value);
+        }
+        public Builder addRepeatedField(
+            com.google.protobuf.Descriptors.FieldDescriptor field,
+            Object value) {
+          return (Builder) super.addRepeatedField(field, value);
+        }
+        public Builder mergeFrom(com.google.protobuf.Message other) {
+          if (other instanceof com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar) {
+            return mergeFrom((com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar)other);
+          } else {
+            super.mergeFrom(other);
+            return this;
+          }
+        }
+
+        public Builder mergeFrom(com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar other) {
+          if (other == com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar.getDefaultInstance()) return this;
+          if (!other.getCountry().isEmpty()) {
+            country_ = other.country_;
+            onChanged();
+          }
+          if (!other.uarx_.isEmpty()) {
+            if (uarx_.isEmpty()) {
+              uarx_ = other.uarx_;
+              bitField0_ = (bitField0_ & ~0x00000002);
+            } else {
+              ensureUarxIsMutable();
+              uarx_.addAll(other.uarx_);
+            }
+            onChanged();
+          }
+          onChanged();
+          return this;
+        }
+
+        public final boolean isInitialized() {
+          return true;
+        }
+
+        public Builder mergeFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws java.io.IOException {
+          com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar parsedMessage = null;
+          try {
+            parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+          } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+            parsedMessage = (com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar) e.getUnfinishedMessage();
+            throw e.unwrapIOException();
+          } finally {
+            if (parsedMessage != null) {
+              mergeFrom(parsedMessage);
+            }
+          }
+          return this;
+        }
+        private int bitField0_;
+
+        private java.lang.Object country_ = "";
+        /**
+         * <code>optional string country = 1;</code>
+         */
+        public java.lang.String getCountry() {
+          java.lang.Object ref = country_;
+          if (!(ref instanceof java.lang.String)) {
+            com.google.protobuf.ByteString bs =
+                (com.google.protobuf.ByteString) ref;
+            java.lang.String s = bs.toStringUtf8();
+            country_ = s;
+            return s;
+          } else {
+            return (java.lang.String) ref;
+          }
+        }
+        /**
+         * <code>optional string country = 1;</code>
+         */
+        public com.google.protobuf.ByteString
+            getCountryBytes() {
+          java.lang.Object ref = country_;
+          if (ref instanceof String) {
+            com.google.protobuf.ByteString b = 
+                com.google.protobuf.ByteString.copyFromUtf8(
+                    (java.lang.String) ref);
+            country_ = b;
+            return b;
+          } else {
+            return (com.google.protobuf.ByteString) ref;
+          }
+        }
+        /**
+         * <code>optional string country = 1;</code>
+         */
+        public Builder setCountry(
+            java.lang.String value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  
+          country_ = value;
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string country = 1;</code>
+         */
+        public Builder clearCountry() {
+          
+          country_ = getDefaultInstance().getCountry();
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>optional string country = 1;</code>
+         */
+        public Builder setCountryBytes(
+            com.google.protobuf.ByteString value) {
+          if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+          
+          country_ = value;
+          onChanged();
+          return this;
+        }
+
+        private java.util.List<java.lang.Float> uarx_ = java.util.Collections.emptyList();
+        private void ensureUarxIsMutable() {
+          if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+            uarx_ = new java.util.ArrayList<java.lang.Float>(uarx_);
+            bitField0_ |= 0x00000002;
+           }
+        }
+        /**
+         * <code>repeated float uarx = 2;</code>
+         */
+        public java.util.List<java.lang.Float>
+            getUarxList() {
+          return java.util.Collections.unmodifiableList(uarx_);
+        }
+        /**
+         * <code>repeated float uarx = 2;</code>
+         */
+        public int getUarxCount() {
+          return uarx_.size();
+        }
+        /**
+         * <code>repeated float uarx = 2;</code>
+         */
+        public float getUarx(int index) {
+          return uarx_.get(index);
+        }
+        /**
+         * <code>repeated float uarx = 2;</code>
+         */
+        public Builder setUarx(
+            int index, float value) {
+          ensureUarxIsMutable();
+          uarx_.set(index, value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated float uarx = 2;</code>
+         */
+        public Builder addUarx(float value) {
+          ensureUarxIsMutable();
+          uarx_.add(value);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated float uarx = 2;</code>
+         */
+        public Builder addAllUarx(
+            java.lang.Iterable<? extends java.lang.Float> values) {
+          ensureUarxIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, uarx_);
+          onChanged();
+          return this;
+        }
+        /**
+         * <code>repeated float uarx = 2;</code>
+         */
+        public Builder clearUarx() {
+          uarx_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000002);
+          onChanged();
+          return this;
+        }
+        public final Builder setUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return this;
+        }
+
+        public final Builder mergeUnknownFields(
+            final com.google.protobuf.UnknownFieldSet unknownFields) {
+          return this;
+        }
+
+
+        // @@protoc_insertion_point(builder_scope:PublisherApp.CountryUar)
+      }
+
+      // @@protoc_insertion_point(class_scope:PublisherApp.CountryUar)
+      private static final com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar DEFAULT_INSTANCE;
+      static {
+        DEFAULT_INSTANCE = new com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar();
+      }
+
+      public static com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar getDefaultInstance() {
+        return DEFAULT_INSTANCE;
+      }
+
+      private static final com.google.protobuf.Parser<CountryUar>
+          PARSER = new com.google.protobuf.AbstractParser<CountryUar>() {
+        public CountryUar parsePartialFrom(
+            com.google.protobuf.CodedInputStream input,
+            com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+            throws com.google.protobuf.InvalidProtocolBufferException {
+            return new CountryUar(input, extensionRegistry);
+        }
+      };
+
+      public static com.google.protobuf.Parser<CountryUar> parser() {
+        return PARSER;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Parser<CountryUar> getParserForType() {
+        return PARSER;
+      }
+
+      public com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar getDefaultInstanceForType() {
+        return DEFAULT_INSTANCE;
+      }
+
     }
 
     private int bitField0_;
@@ -592,6 +1306,41 @@ public final class PubAppPB {
       return imprCallbackSwitch_;
     }
 
+    public static final int COUNTRYUARS_FIELD_NUMBER = 12;
+    private java.util.List<com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar> countryUars_;
+    /**
+     * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+     */
+    public java.util.List<com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar> getCountryUarsList() {
+      return countryUars_;
+    }
+    /**
+     * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+     */
+    public java.util.List<? extends com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUarOrBuilder> 
+        getCountryUarsOrBuilderList() {
+      return countryUars_;
+    }
+    /**
+     * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+     */
+    public int getCountryUarsCount() {
+      return countryUars_.size();
+    }
+    /**
+     * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+     */
+    public com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar getCountryUars(int index) {
+      return countryUars_.get(index);
+    }
+    /**
+     * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+     */
+    public com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUarOrBuilder getCountryUarsOrBuilder(
+        int index) {
+      return countryUars_.get(index);
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -641,6 +1390,9 @@ public final class PubAppPB {
       }
       if (imprCallbackSwitch_ != 0) {
         output.writeInt32(11, imprCallbackSwitch_);
+      }
+      for (int i = 0; i < countryUars_.size(); i++) {
+        output.writeMessage(12, countryUars_.get(i));
       }
     }
 
@@ -699,6 +1451,10 @@ public final class PubAppPB {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(11, imprCallbackSwitch_);
       }
+      for (int i = 0; i < countryUars_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(12, countryUars_.get(i));
+      }
       memoizedSize = size;
       return size;
     }
@@ -737,6 +1493,8 @@ public final class PubAppPB {
           .equals(other.getBlockRulesList());
       result = result && (getImprCallbackSwitch()
           == other.getImprCallbackSwitch());
+      result = result && getCountryUarsList()
+          .equals(other.getCountryUarsList());
       return result;
     }
 
@@ -773,6 +1531,10 @@ public final class PubAppPB {
       }
       hash = (37 * hash) + IMPR_CALLBACK_SWITCH_FIELD_NUMBER;
       hash = (53 * hash) + getImprCallbackSwitch();
+      if (getCountryUarsCount() > 0) {
+        hash = (37 * hash) + COUNTRYUARS_FIELD_NUMBER;
+        hash = (53 * hash) + getCountryUarsList().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -888,6 +1650,7 @@ public final class PubAppPB {
         if (com.google.protobuf.GeneratedMessageV3
                 .alwaysUseFieldBuilders) {
           getBlockRulesFieldBuilder();
+          getCountryUarsFieldBuilder();
         }
       }
       public Builder clear() {
@@ -918,6 +1681,12 @@ public final class PubAppPB {
         }
         imprCallbackSwitch_ = 0;
 
+        if (countryUarsBuilder_ == null) {
+          countryUars_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000800);
+        } else {
+          countryUarsBuilder_.clear();
+        }
         return this;
       }
 
@@ -965,6 +1734,15 @@ public final class PubAppPB {
           result.blockRules_ = blockRulesBuilder_.build();
         }
         result.imprCallbackSwitch_ = imprCallbackSwitch_;
+        if (countryUarsBuilder_ == null) {
+          if (((bitField0_ & 0x00000800) == 0x00000800)) {
+            countryUars_ = java.util.Collections.unmodifiableList(countryUars_);
+            bitField0_ = (bitField0_ & ~0x00000800);
+          }
+          result.countryUars_ = countryUars_;
+        } else {
+          result.countryUars_ = countryUarsBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1073,6 +1851,32 @@ public final class PubAppPB {
         }
         if (other.getImprCallbackSwitch() != 0) {
           setImprCallbackSwitch(other.getImprCallbackSwitch());
+        }
+        if (countryUarsBuilder_ == null) {
+          if (!other.countryUars_.isEmpty()) {
+            if (countryUars_.isEmpty()) {
+              countryUars_ = other.countryUars_;
+              bitField0_ = (bitField0_ & ~0x00000800);
+            } else {
+              ensureCountryUarsIsMutable();
+              countryUars_.addAll(other.countryUars_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.countryUars_.isEmpty()) {
+            if (countryUarsBuilder_.isEmpty()) {
+              countryUarsBuilder_.dispose();
+              countryUarsBuilder_ = null;
+              countryUars_ = other.countryUars_;
+              bitField0_ = (bitField0_ & ~0x00000800);
+              countryUarsBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getCountryUarsFieldBuilder() : null;
+            } else {
+              countryUarsBuilder_.addAllMessages(other.countryUars_);
+            }
+          }
         }
         onChanged();
         return this;
@@ -1913,6 +2717,246 @@ public final class PubAppPB {
         imprCallbackSwitch_ = 0;
         onChanged();
         return this;
+      }
+
+      private java.util.List<com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar> countryUars_ =
+        java.util.Collections.emptyList();
+      private void ensureCountryUarsIsMutable() {
+        if (!((bitField0_ & 0x00000800) == 0x00000800)) {
+          countryUars_ = new java.util.ArrayList<com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar>(countryUars_);
+          bitField0_ |= 0x00000800;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar, com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar.Builder, com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUarOrBuilder> countryUarsBuilder_;
+
+      /**
+       * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+       */
+      public java.util.List<com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar> getCountryUarsList() {
+        if (countryUarsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(countryUars_);
+        } else {
+          return countryUarsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+       */
+      public int getCountryUarsCount() {
+        if (countryUarsBuilder_ == null) {
+          return countryUars_.size();
+        } else {
+          return countryUarsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+       */
+      public com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar getCountryUars(int index) {
+        if (countryUarsBuilder_ == null) {
+          return countryUars_.get(index);
+        } else {
+          return countryUarsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+       */
+      public Builder setCountryUars(
+          int index, com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar value) {
+        if (countryUarsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureCountryUarsIsMutable();
+          countryUars_.set(index, value);
+          onChanged();
+        } else {
+          countryUarsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+       */
+      public Builder setCountryUars(
+          int index, com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar.Builder builderForValue) {
+        if (countryUarsBuilder_ == null) {
+          ensureCountryUarsIsMutable();
+          countryUars_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          countryUarsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+       */
+      public Builder addCountryUars(com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar value) {
+        if (countryUarsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureCountryUarsIsMutable();
+          countryUars_.add(value);
+          onChanged();
+        } else {
+          countryUarsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+       */
+      public Builder addCountryUars(
+          int index, com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar value) {
+        if (countryUarsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureCountryUarsIsMutable();
+          countryUars_.add(index, value);
+          onChanged();
+        } else {
+          countryUarsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+       */
+      public Builder addCountryUars(
+          com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar.Builder builderForValue) {
+        if (countryUarsBuilder_ == null) {
+          ensureCountryUarsIsMutable();
+          countryUars_.add(builderForValue.build());
+          onChanged();
+        } else {
+          countryUarsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+       */
+      public Builder addCountryUars(
+          int index, com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar.Builder builderForValue) {
+        if (countryUarsBuilder_ == null) {
+          ensureCountryUarsIsMutable();
+          countryUars_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          countryUarsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+       */
+      public Builder addAllCountryUars(
+          java.lang.Iterable<? extends com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar> values) {
+        if (countryUarsBuilder_ == null) {
+          ensureCountryUarsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, countryUars_);
+          onChanged();
+        } else {
+          countryUarsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+       */
+      public Builder clearCountryUars() {
+        if (countryUarsBuilder_ == null) {
+          countryUars_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000800);
+          onChanged();
+        } else {
+          countryUarsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+       */
+      public Builder removeCountryUars(int index) {
+        if (countryUarsBuilder_ == null) {
+          ensureCountryUarsIsMutable();
+          countryUars_.remove(index);
+          onChanged();
+        } else {
+          countryUarsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+       */
+      public com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar.Builder getCountryUarsBuilder(
+          int index) {
+        return getCountryUarsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+       */
+      public com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUarOrBuilder getCountryUarsOrBuilder(
+          int index) {
+        if (countryUarsBuilder_ == null) {
+          return countryUars_.get(index);  } else {
+          return countryUarsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+       */
+      public java.util.List<? extends com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUarOrBuilder> 
+           getCountryUarsOrBuilderList() {
+        if (countryUarsBuilder_ != null) {
+          return countryUarsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(countryUars_);
+        }
+      }
+      /**
+       * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+       */
+      public com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar.Builder addCountryUarsBuilder() {
+        return getCountryUarsFieldBuilder().addBuilder(
+            com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+       */
+      public com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar.Builder addCountryUarsBuilder(
+          int index) {
+        return getCountryUarsFieldBuilder().addBuilder(
+            index, com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .PublisherApp.CountryUar countryUars = 12;</code>
+       */
+      public java.util.List<com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar.Builder> 
+           getCountryUarsBuilderList() {
+        return getCountryUarsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar, com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar.Builder, com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUarOrBuilder> 
+          getCountryUarsFieldBuilder() {
+        if (countryUarsBuilder_ == null) {
+          countryUarsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar, com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUar.Builder, com.adtiming.om.pb.PubAppPB.PublisherApp.CountryUarOrBuilder>(
+                  countryUars_,
+                  ((bitField0_ & 0x00000800) == 0x00000800),
+                  getParentForChildren(),
+                  isClean());
+          countryUars_ = null;
+        }
+        return countryUarsBuilder_;
       }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -3392,6 +4436,11 @@ public final class PubAppPB {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_PublisherApp_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_PublisherApp_CountryUar_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_PublisherApp_CountryUar_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_PublisherAppBlockRule_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -3405,19 +4454,21 @@ public final class PubAppPB {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\014pubapp.proto\"\367\001\n\014PublisherApp\022\n\n\002id\030\001 " +
+      "\n\014pubapp.proto\"\323\002\n\014PublisherApp\022\n\n\002id\030\001 " +
       "\001(\005\022\024\n\014publisher_id\030\002 \001(\005\022\014\n\004plat\030\003 \001(\005\022" +
       "\016\n\006app_id\030\004 \001(\t\022\020\n\010app_name\030\005 \001(\t\022\017\n\007app" +
       "_key\030\006 \001(\t\022\021\n\tbundle_id\030\007 \001(\t\022\023\n\013create_" +
       "time\030\010 \001(\005\022\021\n\tevent_ids\030\t \003(\005\022+\n\013block_r" +
       "ules\030\n \003(\0132\026.PublisherAppBlockRule\022\034\n\024im" +
-      "pr_callback_switch\030\013 \001(\005\"\301\001\n\025PublisherAp" +
-      "pBlockRule\022\n\n\002id\030\001 \001(\005\022\022\n\npub_app_id\030\002 \001" +
-      "(\005\022\023\n\013sdk_version\030\003 \001(\t\022\023\n\013app_version\030\004" +
-      " \001(\t\022\017\n\007osv_max\030\005 \001(\t\022\017\n\007osv_min\030\006 \001(\t\022\035",
-      "\n\025make_device_blacklist\030\007 \003(\t\022\035\n\025brand_m" +
-      "odel_blacklist\030\010 \003(\tB\036\n\022com.adtiming.om." +
-      "pbB\010PubAppPBb\006proto3"
+      "pr_callback_switch\030\013 \001(\005\022-\n\013countryUars\030" +
+      "\014 \003(\0132\030.PublisherApp.CountryUar\032+\n\nCount" +
+      "ryUar\022\017\n\007country\030\001 \001(\t\022\014\n\004uarx\030\002 \003(\002\"\301\001\n" +
+      "\025PublisherAppBlockRule\022\n\n\002id\030\001 \001(\005\022\022\n\npu",
+      "b_app_id\030\002 \001(\005\022\023\n\013sdk_version\030\003 \001(\t\022\023\n\013a" +
+      "pp_version\030\004 \001(\t\022\017\n\007osv_max\030\005 \001(\t\022\017\n\007osv" +
+      "_min\030\006 \001(\t\022\035\n\025make_device_blacklist\030\007 \003(" +
+      "\t\022\035\n\025brand_model_blacklist\030\010 \003(\tB\036\n\022com." +
+      "adtiming.om.pbB\010PubAppPBb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3436,7 +4487,13 @@ public final class PubAppPB {
     internal_static_PublisherApp_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_PublisherApp_descriptor,
-        new java.lang.String[] { "Id", "PublisherId", "Plat", "AppId", "AppName", "AppKey", "BundleId", "CreateTime", "EventIds", "BlockRules", "ImprCallbackSwitch", });
+        new java.lang.String[] { "Id", "PublisherId", "Plat", "AppId", "AppName", "AppKey", "BundleId", "CreateTime", "EventIds", "BlockRules", "ImprCallbackSwitch", "CountryUars", });
+    internal_static_PublisherApp_CountryUar_descriptor =
+      internal_static_PublisherApp_descriptor.getNestedTypes().get(0);
+    internal_static_PublisherApp_CountryUar_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_PublisherApp_CountryUar_descriptor,
+        new java.lang.String[] { "Country", "Uarx", });
     internal_static_PublisherAppBlockRule_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_PublisherAppBlockRule_fieldAccessorTable = new

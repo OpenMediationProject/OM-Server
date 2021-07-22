@@ -166,6 +166,10 @@ public class InitResponse {
         return pubApp.getImprCallbackSwitch() == 1 ? 1 : null;
     }
 
+    public List<Float> getUarx() {
+        return pubApp.getCountryUars(req.getCountry());
+    }
+
     public static class API {
         public String wf, lr, er, iap, ic, hb, cpcl, cppl;
     }

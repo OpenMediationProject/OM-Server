@@ -6,9 +6,7 @@ package com.adtiming.om.server.dto;
 import com.adtiming.om.pb.PubAppPB;
 import com.adtiming.om.server.util.Util;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class PublisherApp {
 
@@ -16,12 +14,21 @@ public class PublisherApp {
 
     private List<AppBlockRule> blockRule = Collections.emptyList();
 
+    private Map<String, List<Float>> countryUars = Collections.emptyMap();
+
     public PublisherApp(PubAppPB.PublisherApp p) {
         this.p = p;
         if (p.getBlockRulesCount() > 0) {
             blockRule = new ArrayList<>(p.getBlockRulesCount());
             for (PubAppPB.PublisherAppBlockRule rule : p.getBlockRulesList()) {
                 blockRule.add(new PublisherAppBlockRule(rule));
+            }
+        }
+
+        if (p.getCountryUarsCount() > 0) {
+            countryUars = new HashMap<>(p.getCountryUarsCount());
+            for (PubAppPB.PublisherApp.CountryUar cuar : p.getCountryUarsList()) {
+                countryUars.put(cuar.getCountry(), cuar.getUarxList());
             }
         }
     }
@@ -70,5 +77,9 @@ public class PublisherApp {
 
     public int getImprCallbackSwitch() {
         return p.getImprCallbackSwitch();
+    }
+
+    public List<Float> getCountryUars(String country) {
+        return countryUars.get(country);
     }
 }
