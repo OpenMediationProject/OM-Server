@@ -41,6 +41,9 @@ public class CacheService extends PBLoader {
     @Resource
     private WaterfallEcpmService ecpmService;
 
+    @Resource
+    private GeoService geoService;
+
     // key: pubAppKey
     private Map<String, PublisherApp> appkeyPubApps = Collections.emptyMap();
     // key: pubAppId
@@ -91,6 +94,8 @@ public class CacheService extends PBLoader {
     @PostConstruct
     private void init() {
         reloadCacheCron();
+        // ensure geoService init after rsync geo file
+        geoService.init();
     }
 
     @Scheduled(fixedDelay = 60000, initialDelay = 60000)

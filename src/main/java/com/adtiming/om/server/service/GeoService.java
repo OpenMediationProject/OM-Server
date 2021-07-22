@@ -49,7 +49,6 @@ public class GeoService {
         Country, City;
     }
 
-    @PostConstruct
     @Scheduled(cron = "0 5 13 * * ?")
     synchronized void init() {
         // A File object pointing to your GeoIP2 or GeoLite2 database
