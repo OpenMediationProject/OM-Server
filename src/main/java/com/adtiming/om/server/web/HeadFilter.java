@@ -23,7 +23,7 @@ public class HeadFilter implements Filter {
 
     @PostConstruct
     private void init() {
-        hv = String.format("%d-%d", nc.dcenter, nc.id);
+        hv = String.format("%d-%d", nc.getDcenter(), nc.getId());
     }
 
     @Override

@@ -8,7 +8,6 @@ import com.adtiming.om.server.util.Util;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.micrometer.core.lang.Nullable;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -27,6 +26,7 @@ import org.apache.http.util.EntityUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.ResponseEntity;
+import org.springframework.lang.Nullable;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.context.request.async.DeferredResult;
 
@@ -256,7 +256,7 @@ public class WaterfallBase extends BaseController {
                     }
                     needAvgEcpmIns.forEach(wfIns -> wfIns.ecpm = avgEcpm);
                     // 无ecpm数据按平均ecpm
-                    priorityIns.computeIfAbsent(avgEcpm, k-> new ArrayList<>()).addAll(needAvgEcpmIns);
+                    priorityIns.computeIfAbsent(avgEcpm, k -> new ArrayList<>()).addAll(needAvgEcpmIns);
                     priorityIns.remove(-1F);
                 }
                 sortIns = Util.sortByEcpm(priorityIns);
@@ -355,7 +355,7 @@ public class WaterfallBase extends BaseController {
                     res.addDebug("No rule auto optimize,Instance AvgEcpm:%f,UseAvgEcpm:%s", avgEcpm, needAvgEcpmIns);
                 }
                 needAvgEcpmIns.forEach(wfIns -> wfIns.ecpm = avgEcpm);
-                priorityIns.computeIfAbsent(avgEcpm, k-> new ArrayList<>()).addAll(needAvgEcpmIns);
+                priorityIns.computeIfAbsent(avgEcpm, k -> new ArrayList<>()).addAll(needAvgEcpmIns);
                 priorityIns.remove(-1F);
             }
             sortIns = Util.sortByEcpm(priorityIns);
@@ -729,6 +729,7 @@ public class WaterfallBase extends BaseController {
 
         return bid;
     }
+
     public ResponseEntity<?> asyncExceptionHandler(HttpServletRequest req) throws IOException {
         WaterfallResponse res = (WaterfallResponse) req.getAttribute("res");
         LrRequest lr = (LrRequest) req.getAttribute("lr");

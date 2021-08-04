@@ -32,11 +32,6 @@ public class BaseErrorPage extends AbstractErrorController {
         super(errorAttributes, errorViewResolvers);
     }
 
-    @Override
-    public String getErrorPath() {
-        return "/error";
-    }
-
     @RequestMapping
     public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
         Map<String, Object> body = getErrorAttributes(request, ErrorAttributeOptions.defaults());

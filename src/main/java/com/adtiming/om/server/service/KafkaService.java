@@ -31,9 +31,9 @@ public class KafkaService {
 
     @PostConstruct
     private void init() {
-        if (nc.kafkaStatus == 1) {
+        if (nc.getKafkaStatus() == 1) {
             Map<String, Object> props = new HashMap<>();
-            props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, nc.kafkaServers);
+            props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, nc.getKafkaServers());
             props.put(ProducerConfig.ACKS_CONFIG, "all");
             props.put(ProducerConfig.RETRIES_CONFIG, 3);
             props.put(ProducerConfig.BATCH_SIZE_CONFIG, 16384);
@@ -44,7 +44,7 @@ public class KafkaService {
             props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
             producer = new KafkaProducer<>(props);
 
-            LOG.info("init kafka producer, servers: {}", nc.kafkaServers);
+            LOG.info("init kafka producer, servers: {}", nc.getKafkaServers());
         }
     }
 

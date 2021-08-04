@@ -170,6 +170,13 @@ public class InitResponse {
         return pubApp.getCountryUars(req.getCountry());
     }
 
+    /**
+     * reinit after minutes
+     */
+    public Integer getRi() {
+        return 1440;
+    }
+
     public static class API {
         public String wf, lr, er, iap, ic, hb, cpcl, cppl;
     }

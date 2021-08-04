@@ -1,38 +1,70 @@
 package com.adtiming.om.server.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public class NodeConfig {
 
-    @JsonProperty("id")
-    public int id;
+    private int id;
+    private int dcenter;
+    private int kafkaStatus;
+    private String kafkaServers;
+    private String redisServers;
+    private String cloudType;
+    private String cloudConfig;
 
-    @JsonProperty("dcenter")
-    public int dcenter;
+    public int getId() {
+        return id;
+    }
 
-    @JsonProperty("kafka_status")
-    public int kafkaStatus;
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    @JsonProperty("kafka_servers")
-    public String kafkaServers;
+    public int getDcenter() {
+        return dcenter;
+    }
 
-    @JsonProperty("redis_servers")
-    public String redisServers;
+    public void setDcenter(int dcenter) {
+        this.dcenter = dcenter;
+    }
 
-    @JsonProperty("s3_status")
-    public int s3Status;
+    public int getKafkaStatus() {
+        return kafkaStatus;
+    }
 
-    @JsonProperty("s3_region")
-    public String s3Region;
+    public void setKafkaStatus(int kafkaStatus) {
+        this.kafkaStatus = kafkaStatus;
+    }
 
-    @JsonProperty("s3_bucket")
-    public String s3Bucket;
+    public String getKafkaServers() {
+        return kafkaServers;
+    }
 
-    @JsonProperty("s3_access_key_id")
-    public String s3AccessKeyId;
+    public void setKafkaServers(String kafkaServers) {
+        this.kafkaServers = kafkaServers;
+    }
 
-    @JsonProperty("s3_secret_access_key")
-    public String s3SecretAccessKey;
+    public String getRedisServers() {
+        return redisServers;
+    }
+
+    public void setRedisServers(String redisServers) {
+        this.redisServers = redisServers;
+    }
+
+    public String getCloudType() {
+        return cloudType;
+    }
+
+    public void setCloudType(String cloudType) {
+        this.cloudType = cloudType;
+    }
+
+    public String getCloudConfig() {
+        return cloudConfig;
+    }
+
+    public void setCloudConfig(String cloudConfig) {
+        this.cloudConfig = cloudConfig;
+    }
 
     @Override
     public String toString() {
@@ -42,11 +74,8 @@ public class NodeConfig {
                 ", kafkaStatus=" + kafkaStatus +
                 ", kafkaServers='" + kafkaServers + '\'' +
                 ", redisServers='" + redisServers + '\'' +
-                ", s3Status=" + s3Status +
-                ", s3Region='" + s3Region + '\'' +
-                ", s3Bucket='" + s3Bucket + '\'' +
-                ", s3AccessKeyId='" + s3AccessKeyId + '\'' +
-                ", s3SecretAccessKey='" + s3SecretAccessKey + '\'' +
+                ", cloudType=" + cloudType +
+                ", cloudConfig=" + cloudConfig +
                 '}';
     }
 }

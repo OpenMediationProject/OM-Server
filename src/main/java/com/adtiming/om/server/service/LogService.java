@@ -28,7 +28,7 @@ import java.util.Map;
  * If AWS s3 is enabled, upload files to s3 every hour
  *
  * @see KafkaService
- * @see AwsClient
+ * @see CloudClient
  */
 @Service
 public class LogService {
@@ -48,7 +48,7 @@ public class LogService {
     private KafkaService kafkaService;
 
     @Resource
-    private AwsClient awsClient;
+    private CloudClient cloudClient;
 
     @Resource
     private NodeConfig nodeConfig;
@@ -73,13 +73,13 @@ public class LogService {
     }
 
     /**
-     * put log to aws s3 bucket hourly
+     * put log to cloud hourly
      */
     @Scheduled(cron = "0 5 * * * ?")
-    public void awsS3Push() {
-        if (!awsClient.isEnabled())
+    public void cloudFilePush() {
+        if (!cloudClient.isEnabled())
             return;
-        LOG.info("awsS3Push start");
+        LOG.info("cloud push start");
         final long allStart = System.currentTimeMillis();
 
         final LocalDateTime lastHour = LocalDateTime.now().plusHours(-1);
@@ -108,13 +108,13 @@ public class LogService {
                     continue;
                 }
                 String key = name.replace('.', '/') + '/' + keyTimePath + '/'
-                        + fileName.replace(".log.gz", ".") + nodeConfig.id + ".log.gz";
-                awsClient.putObject(key, file);
+                        + fileName.replace(".log.gz", ".") + nodeConfig.getId() + ".log.gz";
+                cloudClient.putObject(key, file);
             }
 
         }
 
-        LOG.info("awsS3Push finished, cost: {}", System.currentTimeMillis() - allStart);
+        LOG.info("cloud push finished, cost: {}", System.currentTimeMillis() - allStart);
 
     }
 

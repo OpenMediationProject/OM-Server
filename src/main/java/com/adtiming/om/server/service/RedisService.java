@@ -7,6 +7,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 import redis.clients.jedis.HostAndPort;
+import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisCluster;
 
 import javax.annotation.PostConstruct;
@@ -28,15 +29,15 @@ public class RedisService {
 
     @PostConstruct
     private void init() {
-        if (StringUtils.isNoneBlank(nc.redisServers)) {
-            GenericObjectPoolConfig<?> cfg = new GenericObjectPoolConfig<>();
+        if (StringUtils.isNoneBlank(nc.getRedisServers())) {
+            GenericObjectPoolConfig<Jedis> cfg = new GenericObjectPoolConfig<>();
             cfg.setMaxWaitMillis(-1);
             cfg.setMaxTotal(1000);
             cfg.setMinIdle(3);
             cfg.setMaxIdle(20);
-            String[] rs = nc.redisServers.split(",");
+            String[] rs = nc.getRedisServers().split(",");
             jedis = new JedisCluster(Stream.of(rs).map(HostAndPort::parseString).collect(Collectors.toSet()), cfg);
-            LOG.info("init jedis cluster, servers: {}", nc.redisServers);
+            LOG.info("init jedis cluster, servers: {}", nc.getRedisServers());
         }
     }
 

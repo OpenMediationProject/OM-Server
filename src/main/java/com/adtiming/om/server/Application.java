@@ -1,11 +1,13 @@
-// Copyright 2020 ADTIMING TECHNOLOGY COMPANY LIMITED
+// Copyright 2021 ADTIMING TECHNOLOGY COMPANY LIMITED
 // Licensed under the GNU Lesser General Public License Version 3
 
 package com.adtiming.om.server;
 
 import com.adtiming.om.server.dto.NodeConfig;
 import com.adtiming.om.server.service.AppConfig;
+import com.adtiming.om.server.service.CloudClient;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.protocol.ResponseContentEncoding;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
@@ -16,6 +18,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.util.ClassUtils;
 
 import java.net.URL;
 import java.nio.file.Files;
@@ -68,15 +71,27 @@ public class Application {
             String url = String.format("http://%s:19012/snode/config/get?nodeid=%s&dcenter=%d",
                     cfg.getDtask(), nodeid, cfg.getDcenter());
             NodeConfig nc = objectMapper.readValue(new URL(url), NodeConfig.class);
-            cfg.setSnode(nc.id);
+            cfg.setSnode(nc.getId());
             LOG.info("OM-Server init, snode: {}, dc: {}, dtask: {}, {}",
-                    nc.id, cfg.getDcenter(), cfg.getDtask(), nc);
+                    nc.getId(), cfg.getDcenter(), cfg.getDtask(), nc);
             return nc;
         } catch (Exception e) {
             LOG.error("load snode/config from dtask error", e);
             System.exit(1);
         }
         return new NodeConfig();
+    }
+
+    @Bean
+    public CloudClient cloudClient(@Autowired NodeConfig nc) throws Exception {
+        if (StringUtils.isBlank(nc.getCloudType())) {
+            return CloudClient.CLIENT0;
+        }
+        // dynamic load class to avoid unnecessary memory cost
+        String namePrefix = StringUtils.capitalize(nc.getCloudType());
+        String className = "com.adtiming.om.server.service." + namePrefix + "CloudClient";
+        Class<?> clazz = ClassUtils.forName(className, null);
+        return (CloudClient) clazz.getConstructor(NodeConfig.class).newInstance(nc);
     }
 
 }
