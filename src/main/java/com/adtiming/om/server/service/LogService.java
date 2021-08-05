@@ -103,10 +103,6 @@ public class LogService {
                     LOG.warn("file not found: {}", file);
                     continue;
                 }
-                if (file.length() < 22) {
-                    LOG.debug("file empty: {}", file);
-                    continue;
-                }
                 String key = name.replace('.', '/') + '/' + keyTimePath + '/'
                         + fileName.replace(".log.gz", ".") + nodeConfig.getId() + ".log.gz";
                 cloudClient.putObject(key, file);

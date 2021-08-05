@@ -46,6 +46,10 @@ public class AwsCloudClient implements CloudClient {
 
     public void putObject(String key, File file) {
         try {
+            if (file.length() < 22) {
+                LOG.debug("file empty: {}", file);
+                return;
+            }
             long start = System.currentTimeMillis();
             LOG.info("s3 putObject start, region:{}, bucket:{}, {} to {}", cfg.region, cfg.bucket, file, key);
             client.putObject(cfg.bucket, key, file);
