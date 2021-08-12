@@ -14,6 +14,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import static com.adtiming.om.pb.CommonPB.AdType.*;
 import static com.adtiming.om.server.dto.EventLogRequest.REQUIRED_EVENT_IDS;
+import static com.adtiming.om.server.dto.EventLogRequest.REQUIRED_IMMEDIATELY_EVENT_IDS;
 
 public class InitResponse {
 
@@ -58,7 +59,7 @@ public class InitResponse {
             events.ids.addAll(eids);
             events.ids.addAll(REQUIRED_EVENT_IDS);
         }
-
+        events.fids = REQUIRED_IMMEDIATELY_EVENT_IDS;
         addAdnToResponseList(devAdnId);
         addPlacementToResponseList(devAdnId);
     }
@@ -186,6 +187,7 @@ public class InitResponse {
         public int mn = 10; // maxNumOfEventsToUpload
         public int ci = 30; // checkInterval
         public Collection<Integer> ids;
+        public Collection<Integer> fids; // List of EventIDs that need to be reported immediately
     }
 
     public static class AdnAppConf {

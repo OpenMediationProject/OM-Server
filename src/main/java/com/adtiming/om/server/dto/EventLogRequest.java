@@ -40,6 +40,11 @@ public class EventLogRequest extends CommonRequest {
             INSTANCE_PAYLOAD_FAIL
     ).collect(Collectors.toSet()));
 
+    //需要立即上报的EventID列表
+    public static final Set<Integer> REQUIRED_IMMEDIATELY_EVENT_IDS = Collections.unmodifiableSet(Stream.of(
+            INSTANCE_BID_WIN
+    ).collect(Collectors.toSet()));
+
     public List<Event> events;
 
     public static class Event {
