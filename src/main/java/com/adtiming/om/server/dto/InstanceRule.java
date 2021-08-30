@@ -27,6 +27,7 @@ public class InstanceRule {
     private List<VersionRange> sdkvRanges;
     private List<VersionRange> appvRanges;
     private Map<Integer, Integer> instancePriority = Collections.emptyMap();
+    private Map<Integer, InstanceRuleGroup> ruleGroups = Collections.emptyMap();
 
     public InstanceRule(AdNetworkPB.InstanceRule rule) {
         this.rule = rule;
@@ -91,6 +92,10 @@ public class InstanceRule {
                 }
                 index++;
             }*/
+        }
+        if (rule.getGroupsCount() > 0) {
+            ruleGroups = new HashMap<>();
+            rule.getGroupsList().forEach(group->ruleGroups.put(group.getGroupLevel(), new InstanceRuleGroup(group)));
         }
     }
 
@@ -584,5 +589,9 @@ public class InstanceRule {
                 }
         }
         return true;
+    }
+
+    public Map<Integer, InstanceRuleGroup> getRuleGroups() {
+        return ruleGroups;
     }
 }

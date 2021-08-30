@@ -18,7 +18,6 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileInputStream;
@@ -46,7 +45,7 @@ public class GeoService {
     private final long[] fileLTS = {0, 0};
 
     private enum DBType {
-        Country, City;
+        Country, City
     }
 
     @Scheduled(cron = "0 5 13 * * ?")
@@ -130,12 +129,22 @@ public class GeoService {
 
     public static String getClientIP(HttpServletRequest req) {
         String remoteIp = req.getHeader("X-Real-IP");
-        return remoteIp == null ? req.getRemoteAddr() : remoteIp;
-//        String xff = req.getHeader("X-Forwarded-For");
-//        if (StringUtils.isNotBlank(xff)) {
-//            return StringUtils.trim(xff.split(",")[0]);
-//        } else
-//            return remote_ip;
+        String xRealIp = StringUtils.isBlank(remoteIp) ? req.getRemoteAddr() : remoteIp;
+        String xff = req.getHeader("X-Forwarded-For");
+        if (xRealIp.startsWith("192.168") || xRealIp.startsWith("172.16.")
+                || xRealIp.startsWith("10.") || xRealIp.equals("127.0.0.1")) {
+            xRealIp = req.getRemoteAddr();
+        }
+        if (StringUtils.isNotBlank(xff) && "unKnown".equalsIgnoreCase(xff)) {
+            String xForwardedIp = StringUtils.trim(xff.split(",")[0]);
+            if (xForwardedIp.startsWith("192.168") || xForwardedIp.startsWith("172.16.")
+                    || xForwardedIp.startsWith("10.") || xRealIp.equals("127.0.0.1")) {
+                return xRealIp;
+            }
+            return xForwardedIp;
+        } else {
+            return xRealIp;
+        }
     }
 
     private String getCountry(AbstractCountryResponse res) {

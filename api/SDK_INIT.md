@@ -150,6 +150,7 @@
 | n | string | AdNetwork Name| ChartboostBid |✔︎|
 | nn | string | AdNetwork Nickname| Helium |✖︎|
 | k | string | AdNetwork Key| 1234567 |✔︎|
+| et | int32 | AdNetwork Expired Time,0 or no such attribute means no timeout| 3600 |✔︎|
 
 ### Placement
 

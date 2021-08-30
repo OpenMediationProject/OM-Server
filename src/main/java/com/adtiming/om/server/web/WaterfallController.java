@@ -10,11 +10,11 @@ import com.adtiming.om.server.service.AppConfig;
 import com.adtiming.om.server.service.CacheService;
 import com.adtiming.om.server.service.GeoService;
 import com.adtiming.om.server.service.LogService;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.AsyncRequestTimeoutException;
 
@@ -108,9 +108,10 @@ public class WaterfallController extends WaterfallBase {
         }
 
         if (StringUtils.isEmpty(o.getCountry())) {
-            lr.setStatus(0, "country not found").writeToLog(logService);
+            /*lr.setStatus(0, "country not found").writeToLog(logService);
             res.setCode(CODE_COUNTRY_NOT_FOUND).setMsg("country not found");
-            return response(res);
+            return response(res);*/
+            o.setCountry("00");//Set All when the country is not fetched
         }
 
         //placement target filter
@@ -141,6 +142,11 @@ public class WaterfallController extends WaterfallBase {
                 if (adn == null || StringUtils.isBlank(adn.getBidEndpoint())) {
                     LOG.debug("adn not found or s2s bidding not support, {}", bidderToken.iid);
                     res.addDebug("adnApp not found, remove instance: %d", bidderToken.iid);
+                    return true;
+                }
+                if (adn.getBidType() != 1) {//Non-s2s adn
+                    LOG.debug("adn not support s2s, {}", bidderToken.iid);
+                    res.addDebug(String.format("adn not support s2s, remove adn:%d, instance: %d", adn.getId(), bidderToken.iid));
                     return true;
                 }
                 AdNetworkApp adnApp = cacheService.getAdnApp(instance.getPubAppId(), instance.getAdnId());
@@ -199,13 +205,12 @@ public class WaterfallController extends WaterfallBase {
                     }
 
                     List<Integer> ins = getInsWithBidInstance(o, insList);
-                    if (ins == null || ins.isEmpty()) {
+                    if (CollectionUtils.isEmpty(ins)) {
                         res.setCode(CODE_NOAVAILABLE_INSTANCE).setMsg("no available instance");
                         dr.setResult(response(res));
                         lr.setStatus(0, res.getMsg()).writeToLog(logService);
                         return;
                     }
-
                     res.setIns(ins);
                     lr.setStatus(1, null).writeToLog(logService);
                     dr.setResult(response(res));

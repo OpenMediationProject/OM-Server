@@ -1,5 +1,6 @@
 package com.adtiming.om.server.web;
 
+import com.adtiming.om.pb.AdNetworkPB;
 import com.adtiming.om.server.dto.*;
 import com.adtiming.om.server.service.*;
 import com.adtiming.om.server.util.Compressor;
@@ -8,6 +9,7 @@ import com.adtiming.om.server.util.Util;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -27,7 +29,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.context.request.async.DeferredResult;
 
 import javax.annotation.Resource;
@@ -179,8 +180,13 @@ public class WaterfallBase extends BaseController {
             List<WaterfallInstance> rv = new ArrayList<>(devIns.size());
             for (Instance ins : devIns) {
                 if (ins.isHeadBidding()) {
-                    if (returnBidIids != null) returnBidIids.put(ins.getId(), ins);
-                    continue;
+                    AdNetworkPB.AdNetwork adn = cacheService.getAdNetwork(ins.getAdnId());
+                    //The previous version of waterfall V4 Waterfall does not modify the Bidding processing logic
+                    if (!o.isOmWaterfallV4() || (o.isOmWaterfallV4() && adn.getBidType() != 3)) {
+                        if (returnBidIids != null) returnBidIids.put(ins.getId(), ins);
+                        // Remove bid instance of nobid (Standard C2S & S2S)
+                        continue;
+                    }
                 }
                 rv.add(new WaterfallInstance(ins, 0F));
             }
@@ -215,118 +221,19 @@ public class WaterfallBase extends BaseController {
 
         List<Instance> pmInstances = new ArrayList<>(mps);
         List<WaterfallInstance> sortIns;
-        Map<Integer, Integer> insAdnIdMap = new HashMap<>(pmInstances.size());
         if (matchedRule != null) {//has rule
             Set<Integer> insIdSet = matchedRule.getInstanceList();
             if (res.isDebugEnabled()) {
-                res.addDebug("Rule instance list: %s", insIdSet);
+                res.addDebug("Hit Rule:" + matchedRule.getId());
+                res.addDebug("Ecpm Algorithm:" + matchedRule.getAlgorithmId());
+                res.addDebug("Rule instance list:" + insIdSet);
             }
-            if (insIdSet.isEmpty()) {
-                return null;
-            }
-            if (matchedRule.isAutoOpt()) {//auto waterfall, ecpm priority
-                Map<Integer, Float> insEcpm = new HashMap<>(insIdSet.size());
-                float totalEcpm = 0;
-                Map<Float, List<WaterfallInstance>> priorityIns = new HashMap<>(insIdSet.size());
-                for (Instance ins : pmInstances) {
-                    if (!insIdSet.contains(ins.getId())) {
-                        continue;
-                    }
-                    if (blockAdnIds.contains(ins.getAdnId()) || !ins.matchInstance(o)) {
-                        continue;
-                    }
-                    if (ins.isHeadBidding()) {
-                        if (returnBidIids != null) returnBidIids.put(ins.getId(), ins);
-                        // Remove bid instance of nobid
-                        continue;
-                    }
-                    insAdnIdMap.put(ins.getId(), ins.getAdnId());
-                    totalEcpm += setInstanceEcpm(o, matchedRule, ins, priorityIns, insEcpm, totalEcpm, res.isDebugEnabled(),
-                            res.getDebug(), p.getAdTypeValue());
-                }
-                if (priorityIns.isEmpty()) {
-                    res.addDebug("Has no instance match");
-                    return null;
-                }
-                if (priorityIns.containsKey(-1F)) {//No ecpm use average ecpm
-                    float avgEcpm = totalEcpm > 0 ? totalEcpm / insEcpm.size() : 0;
-                    List<WaterfallInstance> needAvgEcpmIns = priorityIns.get(-1F);
-                    if (res.isDebugEnabled() && !CollectionUtils.isEmpty(needAvgEcpmIns)) {
-                        res.addDebug("Rule auto optimize,Instance AvgEcpm:%f,UseAvgEcpm:%s", avgEcpm, needAvgEcpmIns);
-                    }
-                    needAvgEcpmIns.forEach(wfIns -> wfIns.ecpm = avgEcpm);
-                    // 无ecpm数据按平均ecpm
-                    priorityIns.computeIfAbsent(avgEcpm, k -> new ArrayList<>()).addAll(needAvgEcpmIns);
-                    priorityIns.remove(-1F);
-                }
-                sortIns = Util.sortByEcpm(priorityIns);
-                if (res.isDebugEnabled()) {
-                    res.addDebug("Instance Ecpm: %s", insEcpm);
-                    res.addDebug("Instance sort: %s", sortIns);
-                }
-            } else { // Non-auto sort by rule configuration
-
-                Map<Integer, Integer> insConfigWeight = matchedRule.getInstanceWeightMap();
-                Map<WaterfallInstance, Integer> insWeight = new HashMap<>(insIdSet.size());
-                float totalEcpm = 0F;
-                int ecpmSize = 0;
-                for (Instance ins : pmInstances) {
-                    if (!insIdSet.contains(ins.getId())) {
-                        continue;
-                    }
-                    if (blockAdnIds.contains(ins.getAdnId()) || !ins.matchInstance(o)) {
-                        continue;
-                    }
-                    if (ins.isHeadBidding()) {
-                        if (returnBidIids != null) returnBidIids.put(ins.getId(), ins);
-                        // Remove bid instance of nobid
-                        continue;
-                    }
-                    insAdnIdMap.put(ins.getId(), ins.getAdnId());
-
-                    InstanceEcpm ecpm = ecpmService.getInstanceEcpm(ins, matchedRule.getAlgorithmId(), o.getCountry(), p.getAdTypeValue());
-                    float ecpmVal = 0F;
-                    if (ecpm != null && ecpm.ecpm > -1F) {
-                        ecpmVal = ecpm.ecpm;
-                        totalEcpm += ecpm.ecpm;
-                        ecpmSize++;
-                    }
-
-                    int weight = insConfigWeight.get(ins.getId());
-                    if (weight > 0) {
-                        insWeight.put(new WaterfallInstance(ins, ecpmVal), weight);
-                    }
-                }
-                if (insAdnIdMap.isEmpty()) {
-                    res.addDebug("Has no instance match");
-                    return null;
-                }
-
-                // Sorting type, 0: use weight; 1: use absolute priority
-                if (matchedRule.getSortType() == 0) {
-                    sortIns = RandomUtil.sortByWeight(insWeight);
-                } else {
-                    // When absolute priority, an instance is randomly selected with the same weight
-                    sortIns = Util.sortByPriority(insWeight);
-                }
-
-                if (totalEcpm > 0F) {
-                    float avgEcpm = totalEcpm / ecpmSize;
-                    sortIns.forEach(wfIns -> {
-                        if (wfIns.ecpm <= 0) {
-                            wfIns.ecpm = avgEcpm;
-                            res.addDebug("InstanceId:%d, Use avg ecpm: %f", wfIns.instance.getId(), avgEcpm);
-                        }
-                    });
-                }
-
-                if (res.isDebugEnabled()) {
-                    String sortName = (matchedRule.getSortType() == 1 ? "Priority" : "Weight");
-                    res.addDebug("Sort type:%s, %s:%s", sortName, sortName, insWeight);
-                    res.addDebug("Instance sort: %s", sortIns);
-                }
-            }
+            sortIns = getInstanceByRule(matchedRule, pmInstances, returnBidIids, blockAdnIds, o, res);
         } else {// Rule is not configured by ecpm absolute priority ordering
+            if (res.isDebugEnabled()) {
+                res.addDebug("Missmatch mediation rule");
+                res.addDebug("Ecpm Algorithm:" + ecpmService.defalutEcpmAlgorithmId);
+            }
             Map<Integer, Float> insEcpm = new HashMap<>(pmInstances.size());
             float totalEcpm = 0;
             Map<Float, List<WaterfallInstance>> priorityIns = new HashMap<>(pmInstances.size());
@@ -334,15 +241,16 @@ public class WaterfallBase extends BaseController {
                 if (blockAdnIds.contains(ins.getAdnId()) || !ins.matchInstance(o)) {
                     continue;
                 }
-                if (ins.isHeadBidding()) {
+                AdNetworkPB.AdNetwork adn = cacheService.getAdNetwork(ins.getAdnId());
+                //The previous version of waterfall V4 Waterfall does not modify the Bidding processing logic
+                if (ins.isHeadBidding() && (!o.isOmWaterfallV4()
+                        || (o.isOmWaterfallV4() && adn.getBidType() != 3))) {
                     if (returnBidIids != null) returnBidIids.put(ins.getId(), ins);
-                    // Remove bid instance of nobid
+                    // Remove bid instance of nobid (Standard C2S & S2S)
                     continue;
                 }
-                insAdnIdMap.put(ins.getId(), ins.getAdnId());
 
-                totalEcpm += setInstanceEcpm(o, null, ins, priorityIns, insEcpm, totalEcpm, res.isDebugEnabled(),
-                        res.getDebug(), p.getAdTypeValue());
+                totalEcpm += setInstanceEcpm(o, res, null, ins, priorityIns, insEcpm, totalEcpm);
             }
             if (priorityIns.isEmpty()) {
                 res.addDebug("Has no instance match");
@@ -367,29 +275,274 @@ public class WaterfallBase extends BaseController {
         return sortIns;
     }
 
-    private float setInstanceEcpm(WaterfallRequest req, InstanceRule rule, Instance ins, Map<Float, List<WaterfallInstance>> priorityIns,
-                                  Map<Integer, Float> insEcpm, float totalEcpm, boolean DEBUG, List<CharSequence> dmsg,
-                                  int placementType) {
-        /*Float bidPrice = req.getBidPrice(ins.getId());
-        if (bidPrice != null) {
-            priorityIns.computeIfAbsent(bidPrice, k -> new ArrayList<>()).add(new WaterfallInstance(ins, bidPrice));
-            insEcpm.put(ins.getId(), bidPrice);
-            totalEcpm += bidPrice;
-            if (DEBUG) {
-                dmsg.add("Instance: " + ins.getId() + ", BidPrice:" + bidPrice);
+    private List<WaterfallInstance> getInstanceByRule(InstanceRule rule, List<Instance> insList,
+                                                      @Nullable Map<Integer, Instance> returnBidInsMap,
+                                                      Set<Integer> blockAdnIdSet, WaterfallRequest req, WfResInterface res) {
+        if (rule == null || CollectionUtils.isEmpty(insList))
+            return Collections.emptyList();
+        Map<Integer, InstanceRuleGroup> ruleGroupMap = rule.getRuleGroups();
+        if (ruleGroupMap.isEmpty())
+            return Collections.emptyList();
+        List<WaterfallInstance> returnIns = new ArrayList<>();
+        Map<WaterfallInstance, Integer> insWeight = new HashMap<>();
+        TreeMap<Float, WaterfallInstance> biddingIns = new TreeMap<>();
+        for (Map.Entry<Integer, InstanceRuleGroup> entry : ruleGroupMap.entrySet()) {
+            Integer groupLevel = entry.getKey();
+            InstanceRuleGroup group = entry.getValue();
+            if (rule.getSortType() == 0) {//Weight sorting regardless of group configuration
+                Set<Integer> insIds = group.getInsList();
+                Map<Integer, Integer> ruleInsWeight = group.getInsPriority();
+                for (int insId : insIds) {
+                    Instance ins = cacheService.getInstanceById(insId);
+                    if (ins == null || blockAdnIdSet.contains(ins.getAdnId()) || !ins.matchInstance(req)) {
+                        continue;
+                    }
+                    AdNetworkPB.AdNetwork adn = cacheService.getAdNetwork(ins.getAdnId());
+                    //The previous version of waterfall V4 Waterfall does not modify the Bidding processing logic
+                    if (ins.isHeadBidding() && (!req.isOmWaterfallV4()
+                            || (req.isOmWaterfallV4() && adn.getBidType() != 3))) {
+                        if (returnBidInsMap != null) returnBidInsMap.put(ins.getId(), ins);
+                        // Remove bid instance of nobid (Standard C2S & S2S)
+                        continue;
+                    }
+                    InstanceEcpm ecpm = ecpmService.getInstanceEcpm(ins, rule.getAlgorithmId(), req.getCountry(),
+                            req.getAdType());
+                    Float bidPrice = null;
+                    if (!req.getBidPriceMap().isEmpty()) {
+                        bidPrice = req.getBidPrice(insId);
+                    }
+                    if (bidPrice != null) {
+                        ecpm.ecpm = bidPrice;
+                        ecpm.dataLevel = "bidCachePrice";
+                    }
+                    WaterfallInstance wfIns = new WaterfallInstance(ins, ecpm.ecpm);
+                    if (ins.isHeadBidding()) {
+                        if (res.isDebugEnabled()) {
+                            res.addDebug("Bidding Instance,AdnId:%d,instanceId:%d,InstanceName:%s,Ecpm:%f,Ecpm Level:%s,data:%s",
+                                    adn.getId(), ins.getId(), ins.getName(), ecpm.ecpm, ecpm.dataLevel,
+                                    JSON.toJSONString(ecpm.ecpmDatas));
+                        }
+                        biddingIns.put(ecpm.ecpm, wfIns);
+                    } else {
+                        if (res.isDebugEnabled()) {
+                            res.addDebug("AdnId:%d,instanceId:%d,InstanceName:%s,Ecpm:%f,Ecpm Level:%s,data:%s",
+                                    adn.getId(), ins.getId(), ins.getName(), ecpm.ecpm, ecpm.dataLevel,
+                                    JSON.toJSONString(ecpm.ecpmDatas));
+
+                        }
+                        insWeight.put(wfIns, ruleInsWeight.get(insId));
+                    }
+                }
+            } else {
+                if (group.getAutoSwitch() == 1) {//auto waterfall sorted by ecpm
+                    Set<Integer> insIds = group.getInsList();
+                    if (res.isDebugEnabled()) {
+                        res.addDebug("Group:%d,autoSwitch:%s", groupLevel, group.getAutoSwitch() == 1 ? "On" : "Off");
+                        res.addDebug("Group instances:%s", JSON.toJSONString(insIds));
+                    }
+                    Map<Integer, Float> insEcpm = new HashMap<>(insIds.size());
+                    float totalEcpm = 0;
+                    Map<Float, List<WaterfallInstance>> sortInsMap = new HashMap<>(insIds.size());
+                    for (int insId : insIds) {
+                        Instance ins = cacheService.getInstanceById(insId);
+                        if (ins == null || blockAdnIdSet.contains(ins.getAdnId()) || !ins.matchInstance(req)) {
+                            continue;
+                        }
+                        AdNetworkPB.AdNetwork adn = cacheService.getAdNetwork(ins.getAdnId());
+                        //The previous version of waterfall V4 Waterfall does not modify the Bidding processing logic
+                        if (ins.isHeadBidding() && (!req.isOmWaterfallV4()
+                                || (req.isOmWaterfallV4() && adn.getBidType() != 3))) {
+                            if (returnBidInsMap != null) returnBidInsMap.put(ins.getId(), ins);
+                            // Remove bid instance of nobid (Standard C2S & S2S)
+                            continue;
+                        }
+                        InstanceEcpm ecpm = ecpmService.getInstanceEcpm(ins, rule.getAlgorithmId(), req.getCountry(),
+                                req.getAdType());
+                        Float bidPrice = null;
+                        if (!req.getBidPriceMap().isEmpty()) {
+                            bidPrice = req.getBidPrice(insId);
+                        }
+                        if (bidPrice != null) {
+                            ecpm.ecpm = bidPrice;
+                            ecpm.dataLevel = "bidCachePrice";
+                        }
+                        if (ins.isHeadBidding()) {
+                            if (res.isDebugEnabled()) {
+                                res.addDebug("Bidding Instance,AdnId:%d,instanceId:%d,InstanceName:%s,Ecpm:%f,Ecpm Level:%s,data:%s",
+                                        adn.getId(), ins.getId(), ins.getName(), ecpm.ecpm, ecpm.dataLevel,
+                                        JSON.toJSONString(ecpm.ecpmDatas));
+                            }
+                            biddingIns.put(ecpm.ecpm, new WaterfallInstance(ins, ecpm.ecpm));
+                        } else {
+                            totalEcpm = setInstanceEcpm(req, res, rule, ins, sortInsMap, insEcpm, totalEcpm);
+                        }
+                    }
+                    if (sortInsMap.isEmpty()) {
+                        continue;
+                    }
+                    List<WaterfallInstance> needAvgEcpmIns = sortInsMap.get(-1F);
+                    if (needAvgEcpmIns != null) {
+                        float avgEcpm = totalEcpm > 0 ? totalEcpm / insEcpm.size() : 0;//Average ecpm
+                        if (res.isDebugEnabled()) {
+                            res.addDebug("Rule auto optimize,Instance AvgEcpm:%f,UseAvgEcpm:%s", avgEcpm, needAvgEcpmIns);
+                        }
+                        needAvgEcpmIns.forEach(o -> o.ecpm = avgEcpm);
+                        // Average ecpm without ecpm data
+                        sortInsMap.computeIfAbsent(avgEcpm, k -> new ArrayList<>()).addAll(needAvgEcpmIns);
+                        sortInsMap.remove(-1F);
+                    }
+                    List<WaterfallInstance> sortIns = Util.sortByEcpm(sortInsMap);//按ecpm排序,相同ecpm shuffle
+                    if (res.isDebugEnabled()) {
+                        res.addDebug("Instance Ecpm:" + insEcpm);
+                        res.addDebug("Instance sort result:" + sortIns);
+                    }
+                    returnIns.addAll(sortIns);
+                } else {//手动排序
+                    Map<Integer, Integer> iidConfigPriority = group.getInsPriority();
+                    Set<Integer> insIds = group.getInsList();
+                    if (res.isDebugEnabled()) {
+                        res.addDebug("Group:%d,autoSwitch:%s", groupLevel, group.getAutoSwitch() == 1 ? "On" : "Off");
+                        res.addDebug("Group instances:%s", JSON.toJSONString(insIds));
+                    }
+                    Map<WaterfallInstance, Integer> priorityIns = new HashMap<>(iidConfigPriority.size());
+                    float totalEcpm = 0;
+                    int ecpmSize = 0;
+                    for (int insId : insIds) {
+                        Instance ins = cacheService.getInstanceById(insId);
+                        if (ins == null || blockAdnIdSet.contains(ins.getAdnId()) || !ins.matchInstance(req)) {
+                            continue;
+                        }
+                        AdNetworkPB.AdNetwork adn = cacheService.getAdNetwork(ins.getAdnId());
+                        //The previous version of waterfall V4 Waterfall does not modify the Bidding processing logic
+                        if (ins.isHeadBidding() && (!req.isOmWaterfallV4()
+                                || (req.isOmWaterfallV4() && adn.getBidType() != 3))) {
+                            if (returnBidInsMap != null) returnBidInsMap.put(ins.getId(), ins);
+                            // Remove bid instance of nobid (Standard C2S & S2S)
+                            continue;
+                        }
+                        InstanceEcpm ecpm = ecpmService.getInstanceEcpm(ins, rule.getAlgorithmId(), req.getCountry(), req.getAdType());
+                        Float bidPrice = null;
+                        if (!req.getBidPriceMap().isEmpty()) {
+                            bidPrice = req.getBidPrice(insId);
+                        }
+                        if (bidPrice != null) {
+                            ecpm.ecpm = bidPrice;
+                            ecpm.dataLevel = "bidCachePrice";
+                        }
+                        float ecpmVal = 0F;
+                        if (ecpm.ecpm > -1F) {
+                            ecpmVal = ecpm.ecpm;
+                            totalEcpm += ecpm.ecpm;
+                            ecpmSize++;
+                        }
+                        if (ins.isHeadBidding()) {
+                            if (res.isDebugEnabled()) {
+                                res.addDebug("Bidding Instance,AdnId:%d,instanceId:%d,InstanceName:%s,Ecpm:%f,Ecpm Level:%s,data:%s",
+                                        adn.getId(), ins.getId(), ins.getName(), ecpm.ecpm, ecpm.dataLevel,
+                                        JSON.toJSONString(ecpm.ecpmDatas));
+                            }
+                            biddingIns.put(ecpmVal, new WaterfallInstance(ins, ecpmVal));
+                        } else {
+                            if (res.isDebugEnabled()) {
+                                res.addDebug("Instance,AdnId:%d,instanceId:%d,InstanceName:%s,Ecpm:%f,Ecpm Level:%s,data:%s",
+                                        adn.getId(), ins.getId(), ins.getName(), ecpm.ecpm, ecpm.dataLevel,
+                                        JSON.toJSONString(ecpm.ecpmDatas));
+                            }
+                            int priority = iidConfigPriority.get(ins.getId());
+                            if (priority > 0) {
+                                priorityIns.put(new WaterfallInstance(ins, ecpmVal), priority);
+                            }
+                        }
+                    }
+                    if (priorityIns.isEmpty()) {
+                        continue;
+                    }
+                    List<WaterfallInstance> sortIns;
+                    //Sorting type, 0: use weight; 1: use absolute priority
+                    if (rule.getSortType() == 0) {
+                        sortIns = RandomUtil.sortByWeight(priorityIns);
+                    } else {//In absolute priority, an instance is randomly selected with the same weight
+                        sortIns = Util.sortByPriority(priorityIns);
+                    }
+                    if (totalEcpm > 0) {
+                        float avgEcpm = totalEcpm / ecpmSize;
+                        sortIns.forEach(o -> {
+                            if (o.ecpm == 0) {
+                                o.ecpm = avgEcpm;
+                            }
+                        });
+                    }
+                    if (res.isDebugEnabled()) {
+                        res.addDebug("Instance sort result:%s", sortIns);
+                    }
+                    returnIns.addAll(sortIns);
+                }
             }
-        } else {*/
+        }
+        if (rule.getSortType() == 0) {//Sort by weight
+            if (biddingIns.isEmpty() && insWeight.isEmpty()) {
+                return Collections.emptyList();
+            }
+            List<WaterfallInstance> sortIns = RandomUtil.sortByWeight(insWeight);
+            returnIns.addAll(sortIns);
+        }
+        if (!biddingIns.isEmpty()) {
+            biddingIns.forEach((ecpm, bidIns) -> {
+                if (returnIns.isEmpty()) {//Only non-standard c2s scene
+                    returnIns.add(bidIns);
+                } else {//According to the order of ecpm insertion
+                    boolean added = false;
+                    for (int i = 0; i < returnIns.size(); i++) {
+                        WaterfallInstance ins = returnIns.get(i);
+                        if (ins == null || ecpm > ins.ecpm) {
+                            added = true;
+                            returnIns.add(i, bidIns);
+                            break;
+                        }
+                    }
+                    if (!added) {
+                        returnIns.add(bidIns);
+                    }
+                }
+            });
+        }
+        if (!returnIns.isEmpty()) {
+            if (res.isDebugEnabled()) {
+                List<String> list = new ArrayList<>();
+                for (WaterfallInstance wfIns : returnIns) {
+                    list.add(String.format("AdnId:%d, instanceId:%d, InstanceName:%s, Ecpm:%f",
+                            wfIns.instance.getAdnId(), wfIns.instance.getId(), wfIns.instance.getName(), wfIns.ecpm));
+                }
+                res.addDebug("Final result:" + JSON.toJSONString(list));
+            }
+        }
+        return returnIns;
+    }
+
+    private float setInstanceEcpm(WaterfallRequest req, WfResInterface res, InstanceRule rule, Instance ins,
+                                  Map<Float, List<WaterfallInstance>> sortIns,
+                                  Map<Integer, Float> insEcpm, float totalEcpm) {
         int algorithmId = rule != null ? rule.getAlgorithmId() : ecpmService.defalutEcpmAlgorithmId;
+        int placementType = req.getAdType();
         InstanceEcpm ecpm = ecpmService.getInstanceEcpm(ins, algorithmId, req.getCountry(), placementType);
-        priorityIns.computeIfAbsent(ecpm.ecpm, k -> new ArrayList<>()).add(new WaterfallInstance(ins, ecpm.ecpm));
+        Float bidPrice = null;
+        if (!req.getBidPriceMap().isEmpty()) {
+            bidPrice = req.getBidPrice(ins.getId());
+        }
+        if (bidPrice != null) {
+            ecpm.ecpm = bidPrice;
+            ecpm.dataLevel = "bidCachePrice";
+        }
+        sortIns.computeIfAbsent(ecpm.ecpm, k -> new ArrayList<>()).add(new WaterfallInstance(ins, ecpm.ecpm));
         if (ecpm.ecpm > -1F) {
             insEcpm.put(ins.getId(), ecpm.ecpm);
             totalEcpm += ecpm.ecpm;
         }
-        if (DEBUG) {
-            dmsg.add("Instance Ecpm:" + JSON.toJSONString(ecpm));
+        if (res.isDebugEnabled()) {
+            res.addDebug("AdnId:%d,instanceId:%d,InstanceName:%s,Ecpm:%f,Ecpm Level:%s,data:%s",
+                    ins.getAdnId(), ins.getId(), ins.getName(), ecpm.ecpm, ecpm.dataLevel,
+                    JSON.toJSONString(ecpm.ecpmDatas));
         }
-        //}
         return totalEcpm;
     }
 

@@ -115,6 +115,20 @@ public final class AdNetworkPB {
      */
     com.google.protobuf.ByteString
         getDescnBytes();
+
+    /**
+     * <pre>
+     *0:非Bid,1:s2s,2:c2s,3:非标c2s
+     * </pre>
+     *
+     * <code>optional int32 bid_type = 8;</code>
+     */
+    int getBidType();
+
+    /**
+     * <code>optional int32 expired_time = 9;</code>
+     */
+    int getExpiredTime();
   }
   /**
    * Protobuf type {@code AdNetwork}
@@ -135,6 +149,8 @@ public final class AdNetworkPB {
       sdkVersion_ = "";
       bidEndpoint_ = "";
       descn_ = "";
+      bidType_ = 0;
+      expiredTime_ = 0;
     }
 
     @java.lang.Override
@@ -200,6 +216,16 @@ public final class AdNetworkPB {
               java.lang.String s = input.readStringRequireUtf8();
 
               descn_ = s;
+              break;
+            }
+            case 64: {
+
+              bidType_ = input.readInt32();
+              break;
+            }
+            case 72: {
+
+              expiredTime_ = input.readInt32();
               break;
             }
           }
@@ -451,6 +477,28 @@ public final class AdNetworkPB {
       }
     }
 
+    public static final int BID_TYPE_FIELD_NUMBER = 8;
+    private int bidType_;
+    /**
+     * <pre>
+     *0:非Bid,1:s2s,2:c2s,3:非标c2s
+     * </pre>
+     *
+     * <code>optional int32 bid_type = 8;</code>
+     */
+    public int getBidType() {
+      return bidType_;
+    }
+
+    public static final int EXPIRED_TIME_FIELD_NUMBER = 9;
+    private int expiredTime_;
+    /**
+     * <code>optional int32 expired_time = 9;</code>
+     */
+    public int getExpiredTime() {
+      return expiredTime_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -484,6 +532,12 @@ public final class AdNetworkPB {
       if (!getDescnBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 7, descn_);
       }
+      if (bidType_ != 0) {
+        output.writeInt32(8, bidType_);
+      }
+      if (expiredTime_ != 0) {
+        output.writeInt32(9, expiredTime_);
+      }
     }
 
     public int getSerializedSize() {
@@ -513,6 +567,14 @@ public final class AdNetworkPB {
       }
       if (!getDescnBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(7, descn_);
+      }
+      if (bidType_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(8, bidType_);
+      }
+      if (expiredTime_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(9, expiredTime_);
       }
       memoizedSize = size;
       return size;
@@ -544,6 +606,10 @@ public final class AdNetworkPB {
           .equals(other.getBidEndpoint());
       result = result && getDescn()
           .equals(other.getDescn());
+      result = result && (getBidType()
+          == other.getBidType());
+      result = result && (getExpiredTime()
+          == other.getExpiredTime());
       return result;
     }
 
@@ -568,6 +634,10 @@ public final class AdNetworkPB {
       hash = (53 * hash) + getBidEndpoint().hashCode();
       hash = (37 * hash) + DESCN_FIELD_NUMBER;
       hash = (53 * hash) + getDescn().hashCode();
+      hash = (37 * hash) + BID_TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getBidType();
+      hash = (37 * hash) + EXPIRED_TIME_FIELD_NUMBER;
+      hash = (53 * hash) + getExpiredTime();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -700,6 +770,10 @@ public final class AdNetworkPB {
 
         descn_ = "";
 
+        bidType_ = 0;
+
+        expiredTime_ = 0;
+
         return this;
       }
 
@@ -729,6 +803,8 @@ public final class AdNetworkPB {
         result.sdkVersion_ = sdkVersion_;
         result.bidEndpoint_ = bidEndpoint_;
         result.descn_ = descn_;
+        result.bidType_ = bidType_;
+        result.expiredTime_ = expiredTime_;
         onBuilt();
         return result;
       }
@@ -795,6 +871,12 @@ public final class AdNetworkPB {
         if (!other.getDescn().isEmpty()) {
           descn_ = other.descn_;
           onChanged();
+        }
+        if (other.getBidType() != 0) {
+          setBidType(other.getBidType());
+        }
+        if (other.getExpiredTime() != 0) {
+          setExpiredTime(other.getExpiredTime());
         }
         onChanged();
         return this;
@@ -1314,6 +1396,70 @@ public final class AdNetworkPB {
   checkByteStringIsUtf8(value);
         
         descn_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int bidType_ ;
+      /**
+       * <pre>
+       *0:非Bid,1:s2s,2:c2s,3:非标c2s
+       * </pre>
+       *
+       * <code>optional int32 bid_type = 8;</code>
+       */
+      public int getBidType() {
+        return bidType_;
+      }
+      /**
+       * <pre>
+       *0:非Bid,1:s2s,2:c2s,3:非标c2s
+       * </pre>
+       *
+       * <code>optional int32 bid_type = 8;</code>
+       */
+      public Builder setBidType(int value) {
+        
+        bidType_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       *0:非Bid,1:s2s,2:c2s,3:非标c2s
+       * </pre>
+       *
+       * <code>optional int32 bid_type = 8;</code>
+       */
+      public Builder clearBidType() {
+        
+        bidType_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int expiredTime_ ;
+      /**
+       * <code>optional int32 expired_time = 9;</code>
+       */
+      public int getExpiredTime() {
+        return expiredTime_;
+      }
+      /**
+       * <code>optional int32 expired_time = 9;</code>
+       */
+      public Builder setExpiredTime(int value) {
+        
+        expiredTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 expired_time = 9;</code>
+       */
+      public Builder clearExpiredTime() {
+        
+        expiredTime_ = 0;
         onChanged();
         return this;
       }
@@ -8738,6 +8884,30 @@ public final class AdNetworkPB {
      * <code>optional int32 algorithm_id = 35;</code>
      */
     int getAlgorithmId();
+
+    /**
+     * <code>repeated .InstanceRuleGroup groups = 36;</code>
+     */
+    java.util.List<com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup> 
+        getGroupsList();
+    /**
+     * <code>repeated .InstanceRuleGroup groups = 36;</code>
+     */
+    com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup getGroups(int index);
+    /**
+     * <code>repeated .InstanceRuleGroup groups = 36;</code>
+     */
+    int getGroupsCount();
+    /**
+     * <code>repeated .InstanceRuleGroup groups = 36;</code>
+     */
+    java.util.List<? extends com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroupOrBuilder> 
+        getGroupsOrBuilderList();
+    /**
+     * <code>repeated .InstanceRuleGroup groups = 36;</code>
+     */
+    com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroupOrBuilder getGroupsOrBuilder(
+        int index);
   }
   /**
    * Protobuf type {@code InstanceRule}
@@ -8784,6 +8954,7 @@ public final class AdNetworkPB {
       appvRange_ = java.util.Collections.emptyList();
       requireDid_ = 0;
       algorithmId_ = 0;
+      groups_ = java.util.Collections.emptyList();
     }
 
     @java.lang.Override
@@ -9055,6 +9226,15 @@ public final class AdNetworkPB {
               algorithmId_ = input.readInt32();
               break;
             }
+            case 290: {
+              if (!((mutable_bitField1_ & 0x00000008) == 0x00000008)) {
+                groups_ = new java.util.ArrayList<com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup>();
+                mutable_bitField1_ |= 0x00000008;
+              }
+              groups_.add(
+                  input.readMessage(com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup.parser(), extensionRegistry));
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -9101,6 +9281,9 @@ public final class AdNetworkPB {
         }
         if (((mutable_bitField0_ & 0x80000000) == 0x80000000)) {
           appvRange_ = java.util.Collections.unmodifiableList(appvRange_);
+        }
+        if (((mutable_bitField1_ & 0x00000008) == 0x00000008)) {
+          groups_ = java.util.Collections.unmodifiableList(groups_);
         }
         makeExtensionsImmutable();
       }
@@ -9950,6 +10133,41 @@ public final class AdNetworkPB {
       return algorithmId_;
     }
 
+    public static final int GROUPS_FIELD_NUMBER = 36;
+    private java.util.List<com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup> groups_;
+    /**
+     * <code>repeated .InstanceRuleGroup groups = 36;</code>
+     */
+    public java.util.List<com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup> getGroupsList() {
+      return groups_;
+    }
+    /**
+     * <code>repeated .InstanceRuleGroup groups = 36;</code>
+     */
+    public java.util.List<? extends com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroupOrBuilder> 
+        getGroupsOrBuilderList() {
+      return groups_;
+    }
+    /**
+     * <code>repeated .InstanceRuleGroup groups = 36;</code>
+     */
+    public int getGroupsCount() {
+      return groups_.size();
+    }
+    /**
+     * <code>repeated .InstanceRuleGroup groups = 36;</code>
+     */
+    public com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup getGroups(int index) {
+      return groups_.get(index);
+    }
+    /**
+     * <code>repeated .InstanceRuleGroup groups = 36;</code>
+     */
+    public com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroupOrBuilder getGroupsOrBuilder(
+        int index) {
+      return groups_.get(index);
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -10078,6 +10296,9 @@ public final class AdNetworkPB {
       }
       if (algorithmId_ != 0) {
         output.writeInt32(35, algorithmId_);
+      }
+      for (int i = 0; i < groups_.size(); i++) {
+        output.writeMessage(36, groups_.get(i));
       }
     }
 
@@ -10277,6 +10498,10 @@ public final class AdNetworkPB {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(35, algorithmId_);
       }
+      for (int i = 0; i < groups_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(36, groups_.get(i));
+      }
       memoizedSize = size;
       return size;
     }
@@ -10366,6 +10591,8 @@ public final class AdNetworkPB {
           other.internalGetCustomTags());
       result = result && (getAlgorithmId()
           == other.getAlgorithmId());
+      result = result && getGroupsList()
+          .equals(other.getGroupsList());
       return result;
     }
 
@@ -10479,6 +10706,10 @@ public final class AdNetworkPB {
       }
       hash = (37 * hash) + ALGORITHM_ID_FIELD_NUMBER;
       hash = (53 * hash) + getAlgorithmId();
+      if (getGroupsCount() > 0) {
+        hash = (37 * hash) + GROUPS_FIELD_NUMBER;
+        hash = (53 * hash) + getGroupsList().hashCode();
+      }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -10622,6 +10853,7 @@ public final class AdNetworkPB {
           getOsvRangeFieldBuilder();
           getSdkvRangeFieldBuilder();
           getAppvRangeFieldBuilder();
+          getGroupsFieldBuilder();
         }
       }
       public Builder clear() {
@@ -10706,6 +10938,12 @@ public final class AdNetworkPB {
         internalGetMutableCustomTags().clear();
         algorithmId_ = 0;
 
+        if (groupsBuilder_ == null) {
+          groups_ = java.util.Collections.emptyList();
+          bitField1_ = (bitField1_ & ~0x00000008);
+        } else {
+          groupsBuilder_.clear();
+        }
         return this;
       }
 
@@ -10832,6 +11070,15 @@ public final class AdNetworkPB {
         result.customTags_ = internalGetCustomTags();
         result.customTags_.makeImmutable();
         result.algorithmId_ = algorithmId_;
+        if (groupsBuilder_ == null) {
+          if (((bitField1_ & 0x00000008) == 0x00000008)) {
+            groups_ = java.util.Collections.unmodifiableList(groups_);
+            bitField1_ = (bitField1_ & ~0x00000008);
+          }
+          result.groups_ = groups_;
+        } else {
+          result.groups_ = groupsBuilder_.build();
+        }
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -11116,6 +11363,32 @@ public final class AdNetworkPB {
             other.internalGetCustomTags());
         if (other.getAlgorithmId() != 0) {
           setAlgorithmId(other.getAlgorithmId());
+        }
+        if (groupsBuilder_ == null) {
+          if (!other.groups_.isEmpty()) {
+            if (groups_.isEmpty()) {
+              groups_ = other.groups_;
+              bitField1_ = (bitField1_ & ~0x00000008);
+            } else {
+              ensureGroupsIsMutable();
+              groups_.addAll(other.groups_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.groups_.isEmpty()) {
+            if (groupsBuilder_.isEmpty()) {
+              groupsBuilder_.dispose();
+              groupsBuilder_ = null;
+              groups_ = other.groups_;
+              bitField1_ = (bitField1_ & ~0x00000008);
+              groupsBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getGroupsFieldBuilder() : null;
+            } else {
+              groupsBuilder_.addAllMessages(other.groups_);
+            }
+          }
         }
         onChanged();
         return this;
@@ -13787,6 +14060,246 @@ public final class AdNetworkPB {
         onChanged();
         return this;
       }
+
+      private java.util.List<com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup> groups_ =
+        java.util.Collections.emptyList();
+      private void ensureGroupsIsMutable() {
+        if (!((bitField1_ & 0x00000008) == 0x00000008)) {
+          groups_ = new java.util.ArrayList<com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup>(groups_);
+          bitField1_ |= 0x00000008;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup, com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup.Builder, com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroupOrBuilder> groupsBuilder_;
+
+      /**
+       * <code>repeated .InstanceRuleGroup groups = 36;</code>
+       */
+      public java.util.List<com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup> getGroupsList() {
+        if (groupsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(groups_);
+        } else {
+          return groupsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .InstanceRuleGroup groups = 36;</code>
+       */
+      public int getGroupsCount() {
+        if (groupsBuilder_ == null) {
+          return groups_.size();
+        } else {
+          return groupsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .InstanceRuleGroup groups = 36;</code>
+       */
+      public com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup getGroups(int index) {
+        if (groupsBuilder_ == null) {
+          return groups_.get(index);
+        } else {
+          return groupsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .InstanceRuleGroup groups = 36;</code>
+       */
+      public Builder setGroups(
+          int index, com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup value) {
+        if (groupsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGroupsIsMutable();
+          groups_.set(index, value);
+          onChanged();
+        } else {
+          groupsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .InstanceRuleGroup groups = 36;</code>
+       */
+      public Builder setGroups(
+          int index, com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup.Builder builderForValue) {
+        if (groupsBuilder_ == null) {
+          ensureGroupsIsMutable();
+          groups_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          groupsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .InstanceRuleGroup groups = 36;</code>
+       */
+      public Builder addGroups(com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup value) {
+        if (groupsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGroupsIsMutable();
+          groups_.add(value);
+          onChanged();
+        } else {
+          groupsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .InstanceRuleGroup groups = 36;</code>
+       */
+      public Builder addGroups(
+          int index, com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup value) {
+        if (groupsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureGroupsIsMutable();
+          groups_.add(index, value);
+          onChanged();
+        } else {
+          groupsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .InstanceRuleGroup groups = 36;</code>
+       */
+      public Builder addGroups(
+          com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup.Builder builderForValue) {
+        if (groupsBuilder_ == null) {
+          ensureGroupsIsMutable();
+          groups_.add(builderForValue.build());
+          onChanged();
+        } else {
+          groupsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .InstanceRuleGroup groups = 36;</code>
+       */
+      public Builder addGroups(
+          int index, com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup.Builder builderForValue) {
+        if (groupsBuilder_ == null) {
+          ensureGroupsIsMutable();
+          groups_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          groupsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .InstanceRuleGroup groups = 36;</code>
+       */
+      public Builder addAllGroups(
+          java.lang.Iterable<? extends com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup> values) {
+        if (groupsBuilder_ == null) {
+          ensureGroupsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, groups_);
+          onChanged();
+        } else {
+          groupsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .InstanceRuleGroup groups = 36;</code>
+       */
+      public Builder clearGroups() {
+        if (groupsBuilder_ == null) {
+          groups_ = java.util.Collections.emptyList();
+          bitField1_ = (bitField1_ & ~0x00000008);
+          onChanged();
+        } else {
+          groupsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .InstanceRuleGroup groups = 36;</code>
+       */
+      public Builder removeGroups(int index) {
+        if (groupsBuilder_ == null) {
+          ensureGroupsIsMutable();
+          groups_.remove(index);
+          onChanged();
+        } else {
+          groupsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .InstanceRuleGroup groups = 36;</code>
+       */
+      public com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup.Builder getGroupsBuilder(
+          int index) {
+        return getGroupsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .InstanceRuleGroup groups = 36;</code>
+       */
+      public com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroupOrBuilder getGroupsOrBuilder(
+          int index) {
+        if (groupsBuilder_ == null) {
+          return groups_.get(index);  } else {
+          return groupsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .InstanceRuleGroup groups = 36;</code>
+       */
+      public java.util.List<? extends com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroupOrBuilder> 
+           getGroupsOrBuilderList() {
+        if (groupsBuilder_ != null) {
+          return groupsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(groups_);
+        }
+      }
+      /**
+       * <code>repeated .InstanceRuleGroup groups = 36;</code>
+       */
+      public com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup.Builder addGroupsBuilder() {
+        return getGroupsFieldBuilder().addBuilder(
+            com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .InstanceRuleGroup groups = 36;</code>
+       */
+      public com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup.Builder addGroupsBuilder(
+          int index) {
+        return getGroupsFieldBuilder().addBuilder(
+            index, com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .InstanceRuleGroup groups = 36;</code>
+       */
+      public java.util.List<com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup.Builder> 
+           getGroupsBuilderList() {
+        return getGroupsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup, com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup.Builder, com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroupOrBuilder> 
+          getGroupsFieldBuilder() {
+        if (groupsBuilder_ == null) {
+          groupsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup, com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup.Builder, com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroupOrBuilder>(
+                  groups_,
+                  ((bitField1_ & 0x00000008) == 0x00000008),
+                  getParentForChildren(),
+                  isClean());
+          groups_ = null;
+        }
+        return groupsBuilder_;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return this;
@@ -13831,6 +14344,1614 @@ public final class AdNetworkPB {
     }
 
     public com.adtiming.om.pb.AdNetworkPB.InstanceRule getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface InstanceRuleGroupOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:InstanceRuleGroup)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 rule_id = 1;</code>
+     */
+    int getRuleId();
+
+    /**
+     * <code>optional int32 group_id = 2;</code>
+     */
+    int getGroupId();
+
+    /**
+     * <code>optional int32 group_level = 3;</code>
+     */
+    int getGroupLevel();
+
+    /**
+     * <code>optional int32 auto_switch = 4;</code>
+     */
+    int getAutoSwitch();
+
+    /**
+     * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+     */
+    java.util.List<com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation> 
+        getInstanceWeightList();
+    /**
+     * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+     */
+    com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation getInstanceWeight(int index);
+    /**
+     * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+     */
+    int getInstanceWeightCount();
+    /**
+     * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+     */
+    java.util.List<? extends com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediationOrBuilder> 
+        getInstanceWeightOrBuilderList();
+    /**
+     * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+     */
+    com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediationOrBuilder getInstanceWeightOrBuilder(
+        int index);
+  }
+  /**
+   * Protobuf type {@code InstanceRuleGroup}
+   */
+  public  static final class InstanceRuleGroup extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:InstanceRuleGroup)
+      InstanceRuleGroupOrBuilder {
+    // Use InstanceRuleGroup.newBuilder() to construct.
+    private InstanceRuleGroup(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private InstanceRuleGroup() {
+      ruleId_ = 0;
+      groupId_ = 0;
+      groupLevel_ = 0;
+      autoSwitch_ = 0;
+      instanceWeight_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private InstanceRuleGroup(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              ruleId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+
+              groupId_ = input.readInt32();
+              break;
+            }
+            case 24: {
+
+              groupLevel_ = input.readInt32();
+              break;
+            }
+            case 32: {
+
+              autoSwitch_ = input.readInt32();
+              break;
+            }
+            case 42: {
+              if (!((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+                instanceWeight_ = new java.util.ArrayList<com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation>();
+                mutable_bitField0_ |= 0x00000010;
+              }
+              instanceWeight_.add(
+                  input.readMessage(com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation.parser(), extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000010) == 0x00000010)) {
+          instanceWeight_ = java.util.Collections.unmodifiableList(instanceWeight_);
+        }
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.adtiming.om.pb.AdNetworkPB.internal_static_InstanceRuleGroup_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.adtiming.om.pb.AdNetworkPB.internal_static_InstanceRuleGroup_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup.class, com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int RULE_ID_FIELD_NUMBER = 1;
+    private int ruleId_;
+    /**
+     * <code>optional int32 rule_id = 1;</code>
+     */
+    public int getRuleId() {
+      return ruleId_;
+    }
+
+    public static final int GROUP_ID_FIELD_NUMBER = 2;
+    private int groupId_;
+    /**
+     * <code>optional int32 group_id = 2;</code>
+     */
+    public int getGroupId() {
+      return groupId_;
+    }
+
+    public static final int GROUP_LEVEL_FIELD_NUMBER = 3;
+    private int groupLevel_;
+    /**
+     * <code>optional int32 group_level = 3;</code>
+     */
+    public int getGroupLevel() {
+      return groupLevel_;
+    }
+
+    public static final int AUTO_SWITCH_FIELD_NUMBER = 4;
+    private int autoSwitch_;
+    /**
+     * <code>optional int32 auto_switch = 4;</code>
+     */
+    public int getAutoSwitch() {
+      return autoSwitch_;
+    }
+
+    public static final int INSTANCE_WEIGHT_FIELD_NUMBER = 5;
+    private java.util.List<com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation> instanceWeight_;
+    /**
+     * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+     */
+    public java.util.List<com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation> getInstanceWeightList() {
+      return instanceWeight_;
+    }
+    /**
+     * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+     */
+    public java.util.List<? extends com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediationOrBuilder> 
+        getInstanceWeightOrBuilderList() {
+      return instanceWeight_;
+    }
+    /**
+     * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+     */
+    public int getInstanceWeightCount() {
+      return instanceWeight_.size();
+    }
+    /**
+     * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+     */
+    public com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation getInstanceWeight(int index) {
+      return instanceWeight_.get(index);
+    }
+    /**
+     * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+     */
+    public com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediationOrBuilder getInstanceWeightOrBuilder(
+        int index) {
+      return instanceWeight_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (ruleId_ != 0) {
+        output.writeInt32(1, ruleId_);
+      }
+      if (groupId_ != 0) {
+        output.writeInt32(2, groupId_);
+      }
+      if (groupLevel_ != 0) {
+        output.writeInt32(3, groupLevel_);
+      }
+      if (autoSwitch_ != 0) {
+        output.writeInt32(4, autoSwitch_);
+      }
+      for (int i = 0; i < instanceWeight_.size(); i++) {
+        output.writeMessage(5, instanceWeight_.get(i));
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (ruleId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, ruleId_);
+      }
+      if (groupId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, groupId_);
+      }
+      if (groupLevel_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, groupLevel_);
+      }
+      if (autoSwitch_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, autoSwitch_);
+      }
+      for (int i = 0; i < instanceWeight_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, instanceWeight_.get(i));
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup)) {
+        return super.equals(obj);
+      }
+      com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup other = (com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup) obj;
+
+      boolean result = true;
+      result = result && (getRuleId()
+          == other.getRuleId());
+      result = result && (getGroupId()
+          == other.getGroupId());
+      result = result && (getGroupLevel()
+          == other.getGroupLevel());
+      result = result && (getAutoSwitch()
+          == other.getAutoSwitch());
+      result = result && getInstanceWeightList()
+          .equals(other.getInstanceWeightList());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + RULE_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getRuleId();
+      hash = (37 * hash) + GROUP_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getGroupId();
+      hash = (37 * hash) + GROUP_LEVEL_FIELD_NUMBER;
+      hash = (53 * hash) + getGroupLevel();
+      hash = (37 * hash) + AUTO_SWITCH_FIELD_NUMBER;
+      hash = (53 * hash) + getAutoSwitch();
+      if (getInstanceWeightCount() > 0) {
+        hash = (37 * hash) + INSTANCE_WEIGHT_FIELD_NUMBER;
+        hash = (53 * hash) + getInstanceWeightList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code InstanceRuleGroup}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:InstanceRuleGroup)
+        com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroupOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.adtiming.om.pb.AdNetworkPB.internal_static_InstanceRuleGroup_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.adtiming.om.pb.AdNetworkPB.internal_static_InstanceRuleGroup_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup.class, com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup.Builder.class);
+      }
+
+      // Construct using com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getInstanceWeightFieldBuilder();
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        ruleId_ = 0;
+
+        groupId_ = 0;
+
+        groupLevel_ = 0;
+
+        autoSwitch_ = 0;
+
+        if (instanceWeightBuilder_ == null) {
+          instanceWeight_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+        } else {
+          instanceWeightBuilder_.clear();
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.adtiming.om.pb.AdNetworkPB.internal_static_InstanceRuleGroup_descriptor;
+      }
+
+      public com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup getDefaultInstanceForType() {
+        return com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup.getDefaultInstance();
+      }
+
+      public com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup build() {
+        com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup buildPartial() {
+        com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup result = new com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.ruleId_ = ruleId_;
+        result.groupId_ = groupId_;
+        result.groupLevel_ = groupLevel_;
+        result.autoSwitch_ = autoSwitch_;
+        if (instanceWeightBuilder_ == null) {
+          if (((bitField0_ & 0x00000010) == 0x00000010)) {
+            instanceWeight_ = java.util.Collections.unmodifiableList(instanceWeight_);
+            bitField0_ = (bitField0_ & ~0x00000010);
+          }
+          result.instanceWeight_ = instanceWeight_;
+        } else {
+          result.instanceWeight_ = instanceWeightBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup) {
+          return mergeFrom((com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup other) {
+        if (other == com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup.getDefaultInstance()) return this;
+        if (other.getRuleId() != 0) {
+          setRuleId(other.getRuleId());
+        }
+        if (other.getGroupId() != 0) {
+          setGroupId(other.getGroupId());
+        }
+        if (other.getGroupLevel() != 0) {
+          setGroupLevel(other.getGroupLevel());
+        }
+        if (other.getAutoSwitch() != 0) {
+          setAutoSwitch(other.getAutoSwitch());
+        }
+        if (instanceWeightBuilder_ == null) {
+          if (!other.instanceWeight_.isEmpty()) {
+            if (instanceWeight_.isEmpty()) {
+              instanceWeight_ = other.instanceWeight_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+            } else {
+              ensureInstanceWeightIsMutable();
+              instanceWeight_.addAll(other.instanceWeight_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.instanceWeight_.isEmpty()) {
+            if (instanceWeightBuilder_.isEmpty()) {
+              instanceWeightBuilder_.dispose();
+              instanceWeightBuilder_ = null;
+              instanceWeight_ = other.instanceWeight_;
+              bitField0_ = (bitField0_ & ~0x00000010);
+              instanceWeightBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getInstanceWeightFieldBuilder() : null;
+            } else {
+              instanceWeightBuilder_.addAllMessages(other.instanceWeight_);
+            }
+          }
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private int ruleId_ ;
+      /**
+       * <code>optional int32 rule_id = 1;</code>
+       */
+      public int getRuleId() {
+        return ruleId_;
+      }
+      /**
+       * <code>optional int32 rule_id = 1;</code>
+       */
+      public Builder setRuleId(int value) {
+        
+        ruleId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 rule_id = 1;</code>
+       */
+      public Builder clearRuleId() {
+        
+        ruleId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int groupId_ ;
+      /**
+       * <code>optional int32 group_id = 2;</code>
+       */
+      public int getGroupId() {
+        return groupId_;
+      }
+      /**
+       * <code>optional int32 group_id = 2;</code>
+       */
+      public Builder setGroupId(int value) {
+        
+        groupId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 group_id = 2;</code>
+       */
+      public Builder clearGroupId() {
+        
+        groupId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int groupLevel_ ;
+      /**
+       * <code>optional int32 group_level = 3;</code>
+       */
+      public int getGroupLevel() {
+        return groupLevel_;
+      }
+      /**
+       * <code>optional int32 group_level = 3;</code>
+       */
+      public Builder setGroupLevel(int value) {
+        
+        groupLevel_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 group_level = 3;</code>
+       */
+      public Builder clearGroupLevel() {
+        
+        groupLevel_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int autoSwitch_ ;
+      /**
+       * <code>optional int32 auto_switch = 4;</code>
+       */
+      public int getAutoSwitch() {
+        return autoSwitch_;
+      }
+      /**
+       * <code>optional int32 auto_switch = 4;</code>
+       */
+      public Builder setAutoSwitch(int value) {
+        
+        autoSwitch_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 auto_switch = 4;</code>
+       */
+      public Builder clearAutoSwitch() {
+        
+        autoSwitch_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation> instanceWeight_ =
+        java.util.Collections.emptyList();
+      private void ensureInstanceWeightIsMutable() {
+        if (!((bitField0_ & 0x00000010) == 0x00000010)) {
+          instanceWeight_ = new java.util.ArrayList<com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation>(instanceWeight_);
+          bitField0_ |= 0x00000010;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation, com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation.Builder, com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediationOrBuilder> instanceWeightBuilder_;
+
+      /**
+       * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+       */
+      public java.util.List<com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation> getInstanceWeightList() {
+        if (instanceWeightBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(instanceWeight_);
+        } else {
+          return instanceWeightBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+       */
+      public int getInstanceWeightCount() {
+        if (instanceWeightBuilder_ == null) {
+          return instanceWeight_.size();
+        } else {
+          return instanceWeightBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+       */
+      public com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation getInstanceWeight(int index) {
+        if (instanceWeightBuilder_ == null) {
+          return instanceWeight_.get(index);
+        } else {
+          return instanceWeightBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+       */
+      public Builder setInstanceWeight(
+          int index, com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation value) {
+        if (instanceWeightBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureInstanceWeightIsMutable();
+          instanceWeight_.set(index, value);
+          onChanged();
+        } else {
+          instanceWeightBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+       */
+      public Builder setInstanceWeight(
+          int index, com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation.Builder builderForValue) {
+        if (instanceWeightBuilder_ == null) {
+          ensureInstanceWeightIsMutable();
+          instanceWeight_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          instanceWeightBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+       */
+      public Builder addInstanceWeight(com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation value) {
+        if (instanceWeightBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureInstanceWeightIsMutable();
+          instanceWeight_.add(value);
+          onChanged();
+        } else {
+          instanceWeightBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+       */
+      public Builder addInstanceWeight(
+          int index, com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation value) {
+        if (instanceWeightBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureInstanceWeightIsMutable();
+          instanceWeight_.add(index, value);
+          onChanged();
+        } else {
+          instanceWeightBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+       */
+      public Builder addInstanceWeight(
+          com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation.Builder builderForValue) {
+        if (instanceWeightBuilder_ == null) {
+          ensureInstanceWeightIsMutable();
+          instanceWeight_.add(builderForValue.build());
+          onChanged();
+        } else {
+          instanceWeightBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+       */
+      public Builder addInstanceWeight(
+          int index, com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation.Builder builderForValue) {
+        if (instanceWeightBuilder_ == null) {
+          ensureInstanceWeightIsMutable();
+          instanceWeight_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          instanceWeightBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+       */
+      public Builder addAllInstanceWeight(
+          java.lang.Iterable<? extends com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation> values) {
+        if (instanceWeightBuilder_ == null) {
+          ensureInstanceWeightIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, instanceWeight_);
+          onChanged();
+        } else {
+          instanceWeightBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+       */
+      public Builder clearInstanceWeight() {
+        if (instanceWeightBuilder_ == null) {
+          instanceWeight_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000010);
+          onChanged();
+        } else {
+          instanceWeightBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+       */
+      public Builder removeInstanceWeight(int index) {
+        if (instanceWeightBuilder_ == null) {
+          ensureInstanceWeightIsMutable();
+          instanceWeight_.remove(index);
+          onChanged();
+        } else {
+          instanceWeightBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+       */
+      public com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation.Builder getInstanceWeightBuilder(
+          int index) {
+        return getInstanceWeightFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+       */
+      public com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediationOrBuilder getInstanceWeightOrBuilder(
+          int index) {
+        if (instanceWeightBuilder_ == null) {
+          return instanceWeight_.get(index);  } else {
+          return instanceWeightBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+       */
+      public java.util.List<? extends com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediationOrBuilder> 
+           getInstanceWeightOrBuilderList() {
+        if (instanceWeightBuilder_ != null) {
+          return instanceWeightBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(instanceWeight_);
+        }
+      }
+      /**
+       * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+       */
+      public com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation.Builder addInstanceWeightBuilder() {
+        return getInstanceWeightFieldBuilder().addBuilder(
+            com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+       */
+      public com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation.Builder addInstanceWeightBuilder(
+          int index) {
+        return getInstanceWeightFieldBuilder().addBuilder(
+            index, com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .InstanceRuleMediation instance_weight = 5;</code>
+       */
+      public java.util.List<com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation.Builder> 
+           getInstanceWeightBuilderList() {
+        return getInstanceWeightFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation, com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation.Builder, com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediationOrBuilder> 
+          getInstanceWeightFieldBuilder() {
+        if (instanceWeightBuilder_ == null) {
+          instanceWeightBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation, com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation.Builder, com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediationOrBuilder>(
+                  instanceWeight_,
+                  ((bitField0_ & 0x00000010) == 0x00000010),
+                  getParentForChildren(),
+                  isClean());
+          instanceWeight_ = null;
+        }
+        return instanceWeightBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:InstanceRuleGroup)
+    }
+
+    // @@protoc_insertion_point(class_scope:InstanceRuleGroup)
+    private static final com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup();
+    }
+
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<InstanceRuleGroup>
+        PARSER = new com.google.protobuf.AbstractParser<InstanceRuleGroup>() {
+      public InstanceRuleGroup parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new InstanceRuleGroup(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<InstanceRuleGroup> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<InstanceRuleGroup> getParserForType() {
+      return PARSER;
+    }
+
+    public com.adtiming.om.pb.AdNetworkPB.InstanceRuleGroup getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface InstanceRuleMediationOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:InstanceRuleMediation)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>optional int32 rule_id = 1;</code>
+     */
+    int getRuleId();
+
+    /**
+     * <code>optional int32 group_id = 2;</code>
+     */
+    int getGroupId();
+
+    /**
+     * <code>optional int32 instance_id = 3;</code>
+     */
+    int getInstanceId();
+
+    /**
+     * <code>optional int32 priority = 4;</code>
+     */
+    int getPriority();
+  }
+  /**
+   * Protobuf type {@code InstanceRuleMediation}
+   */
+  public  static final class InstanceRuleMediation extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:InstanceRuleMediation)
+      InstanceRuleMediationOrBuilder {
+    // Use InstanceRuleMediation.newBuilder() to construct.
+    private InstanceRuleMediation(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private InstanceRuleMediation() {
+      ruleId_ = 0;
+      groupId_ = 0;
+      instanceId_ = 0;
+      priority_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return com.google.protobuf.UnknownFieldSet.getDefaultInstance();
+    }
+    private InstanceRuleMediation(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      int mutable_bitField0_ = 0;
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!input.skipField(tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              ruleId_ = input.readInt32();
+              break;
+            }
+            case 16: {
+
+              groupId_ = input.readInt32();
+              break;
+            }
+            case 24: {
+
+              instanceId_ = input.readInt32();
+              break;
+            }
+            case 32: {
+
+              priority_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.adtiming.om.pb.AdNetworkPB.internal_static_InstanceRuleMediation_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.adtiming.om.pb.AdNetworkPB.internal_static_InstanceRuleMediation_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation.class, com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation.Builder.class);
+    }
+
+    public static final int RULE_ID_FIELD_NUMBER = 1;
+    private int ruleId_;
+    /**
+     * <code>optional int32 rule_id = 1;</code>
+     */
+    public int getRuleId() {
+      return ruleId_;
+    }
+
+    public static final int GROUP_ID_FIELD_NUMBER = 2;
+    private int groupId_;
+    /**
+     * <code>optional int32 group_id = 2;</code>
+     */
+    public int getGroupId() {
+      return groupId_;
+    }
+
+    public static final int INSTANCE_ID_FIELD_NUMBER = 3;
+    private int instanceId_;
+    /**
+     * <code>optional int32 instance_id = 3;</code>
+     */
+    public int getInstanceId() {
+      return instanceId_;
+    }
+
+    public static final int PRIORITY_FIELD_NUMBER = 4;
+    private int priority_;
+    /**
+     * <code>optional int32 priority = 4;</code>
+     */
+    public int getPriority() {
+      return priority_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (ruleId_ != 0) {
+        output.writeInt32(1, ruleId_);
+      }
+      if (groupId_ != 0) {
+        output.writeInt32(2, groupId_);
+      }
+      if (instanceId_ != 0) {
+        output.writeInt32(3, instanceId_);
+      }
+      if (priority_ != 0) {
+        output.writeInt32(4, priority_);
+      }
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (ruleId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, ruleId_);
+      }
+      if (groupId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, groupId_);
+      }
+      if (instanceId_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, instanceId_);
+      }
+      if (priority_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(4, priority_);
+      }
+      memoizedSize = size;
+      return size;
+    }
+
+    private static final long serialVersionUID = 0L;
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation)) {
+        return super.equals(obj);
+      }
+      com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation other = (com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation) obj;
+
+      boolean result = true;
+      result = result && (getRuleId()
+          == other.getRuleId());
+      result = result && (getGroupId()
+          == other.getGroupId());
+      result = result && (getInstanceId()
+          == other.getInstanceId());
+      result = result && (getPriority()
+          == other.getPriority());
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptorForType().hashCode();
+      hash = (37 * hash) + RULE_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getRuleId();
+      hash = (37 * hash) + GROUP_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getGroupId();
+      hash = (37 * hash) + INSTANCE_ID_FIELD_NUMBER;
+      hash = (53 * hash) + getInstanceId();
+      hash = (37 * hash) + PRIORITY_FIELD_NUMBER;
+      hash = (53 * hash) + getPriority();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code InstanceRuleMediation}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:InstanceRuleMediation)
+        com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediationOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.adtiming.om.pb.AdNetworkPB.internal_static_InstanceRuleMediation_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.adtiming.om.pb.AdNetworkPB.internal_static_InstanceRuleMediation_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation.class, com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation.Builder.class);
+      }
+
+      // Construct using com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        ruleId_ = 0;
+
+        groupId_ = 0;
+
+        instanceId_ = 0;
+
+        priority_ = 0;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.adtiming.om.pb.AdNetworkPB.internal_static_InstanceRuleMediation_descriptor;
+      }
+
+      public com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation getDefaultInstanceForType() {
+        return com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation.getDefaultInstance();
+      }
+
+      public com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation build() {
+        com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation buildPartial() {
+        com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation result = new com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation(this);
+        result.ruleId_ = ruleId_;
+        result.groupId_ = groupId_;
+        result.instanceId_ = instanceId_;
+        result.priority_ = priority_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation) {
+          return mergeFrom((com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation other) {
+        if (other == com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation.getDefaultInstance()) return this;
+        if (other.getRuleId() != 0) {
+          setRuleId(other.getRuleId());
+        }
+        if (other.getGroupId() != 0) {
+          setGroupId(other.getGroupId());
+        }
+        if (other.getInstanceId() != 0) {
+          setInstanceId(other.getInstanceId());
+        }
+        if (other.getPriority() != 0) {
+          setPriority(other.getPriority());
+        }
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int ruleId_ ;
+      /**
+       * <code>optional int32 rule_id = 1;</code>
+       */
+      public int getRuleId() {
+        return ruleId_;
+      }
+      /**
+       * <code>optional int32 rule_id = 1;</code>
+       */
+      public Builder setRuleId(int value) {
+        
+        ruleId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 rule_id = 1;</code>
+       */
+      public Builder clearRuleId() {
+        
+        ruleId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int groupId_ ;
+      /**
+       * <code>optional int32 group_id = 2;</code>
+       */
+      public int getGroupId() {
+        return groupId_;
+      }
+      /**
+       * <code>optional int32 group_id = 2;</code>
+       */
+      public Builder setGroupId(int value) {
+        
+        groupId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 group_id = 2;</code>
+       */
+      public Builder clearGroupId() {
+        
+        groupId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int instanceId_ ;
+      /**
+       * <code>optional int32 instance_id = 3;</code>
+       */
+      public int getInstanceId() {
+        return instanceId_;
+      }
+      /**
+       * <code>optional int32 instance_id = 3;</code>
+       */
+      public Builder setInstanceId(int value) {
+        
+        instanceId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 instance_id = 3;</code>
+       */
+      public Builder clearInstanceId() {
+        
+        instanceId_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int priority_ ;
+      /**
+       * <code>optional int32 priority = 4;</code>
+       */
+      public int getPriority() {
+        return priority_;
+      }
+      /**
+       * <code>optional int32 priority = 4;</code>
+       */
+      public Builder setPriority(int value) {
+        
+        priority_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>optional int32 priority = 4;</code>
+       */
+      public Builder clearPriority() {
+        
+        priority_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return this;
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:InstanceRuleMediation)
+    }
+
+    // @@protoc_insertion_point(class_scope:InstanceRuleMediation)
+    private static final com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation();
+    }
+
+    public static com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<InstanceRuleMediation>
+        PARSER = new com.google.protobuf.AbstractParser<InstanceRuleMediation>() {
+      public InstanceRuleMediation parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+          return new InstanceRuleMediation(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<InstanceRuleMediation> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<InstanceRuleMediation> getParserForType() {
+      return PARSER;
+    }
+
+    public com.adtiming.om.pb.AdNetworkPB.InstanceRuleMediation getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -15788,6 +17909,16 @@ public final class AdNetworkPB {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_InstanceRule_CustomTagsEntry_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_InstanceRuleGroup_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_InstanceRuleGroup_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_InstanceRuleMediation_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_InstanceRuleMediation_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_CustomTag_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
@@ -15806,16 +17937,17 @@ public final class AdNetworkPB {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\tadn.proto\032\014common.proto\"\201\001\n\tAdNetwork\022" +
+      "\n\tadn.proto\032\014common.proto\"\251\001\n\tAdNetwork\022" +
       "\n\n\002id\030\001 \001(\005\022\014\n\004name\030\002 \001(\t\022\022\n\nclass_name\030" +
       "\003 \001(\t\022\014\n\004type\030\004 \001(\005\022\023\n\013sdk_version\030\005 \001(\t" +
-      "\022\024\n\014bid_endpoint\030\006 \001(\t\022\r\n\005descn\030\007 \001(\t\"|\n" +
+      "\022\024\n\014bid_endpoint\030\006 \001(\t\022\r\n\005descn\030\007 \001(\t\022\020\n" +
+      "\010bid_type\030\010 \001(\005\022\024\n\014expired_time\030\t \001(\005\"|\n" +
       "\014AdNetworkApp\022\n\n\002id\030\001 \001(\005\022\016\n\006adn_id\030\002 \001(" +
       "\005\022\022\n\npub_app_id\030\003 \001(\005\022\017\n\007app_key\030\004 \001(\t\022+" +
       "\n\013block_rules\030\006 \003(\0132\026.AdNetworkAppBlockR" +
       "ule\"\321\001\n\025AdNetworkAppBlockRule\022\n\n\002id\030\001 \001(" +
-      "\005\022\022\n\npub_app_id\030\002 \001(\005\022\016\n\006adn_id\030\003 \001(\005\022\023\n" +
-      "\013sdk_version\030\004 \001(\t\022\017\n\007osv_max\030\005 \001(\t\022\017\n\007o",
+      "\005\022\022\n\npub_app_id\030\002 \001(\005\022\016\n\006adn_id\030\003 \001(\005\022\023\n",
+      "\013sdk_version\030\004 \001(\t\022\017\n\007osv_max\030\005 \001(\t\022\017\n\007o" +
       "sv_min\030\006 \001(\t\022\035\n\025make_device_blacklist\030\007 " +
       "\003(\t\022\035\n\025brand_model_blacklist\030\010 \003(\t\022\023\n\013ap" +
       "p_version\030\t \001(\t\"\253\006\n\010Instance\022\n\n\002id\030\001 \001(\005" +
@@ -15824,8 +17956,8 @@ public final class AdNetworkPB {
       "\t\022\023\n\013app_unit_id\030\006 \001(\t\022\017\n\007osv_max\030\007 \001(\t\022" +
       "\017\n\007osv_min\030\010 \001(\t\022\026\n\016make_whitelist\030\t \003(\t" +
       "\022\026\n\016make_blacklist\030\n \003(\t\022\027\n\017brand_whitel" +
-      "ist\030\013 \003(\t\022\027\n\017brand_blacklist\030\014 \003(\t\022\027\n\017mo" +
-      "del_whitelist\030\r \003(\t\022\027\n\017model_blacklist\030\016",
+      "ist\030\013 \003(\t\022\027\n\017brand_blacklist\030\014 \003(\t\022\027\n\017mo",
+      "del_whitelist\030\r \003(\t\022\027\n\017model_blacklist\030\016" +
       " \003(\t\022\025\n\rfrequency_cap\030\017 \001(\005\022\026\n\016frequency" +
       "_unit\030\020 \001(\005\022\032\n\022frequency_interval\030\021 \001(\005\022" +
       "\021\n\thb_status\030\022 \001(\010\022\014\n\004ecpm\030\023 \001(\002\0228\n\020coun" +
@@ -15834,18 +17966,18 @@ public final class AdNetworkPB {
       "al_ecpm\030\026 \003(\0132 .Instance.CountryManualEc" +
       "pmEntry\032Q\n\024CountrySettingsEntry\022\013\n\003key\030\001" +
       " \001(\t\022(\n\005value\030\002 \001(\0132\031.Instance.CountrySe" +
-      "ttings:\0028\001\0328\n\026CountryManualEcpmEntry\022\013\n\003" +
-      "key\030\001 \001(\t\022\r\n\005value\030\002 \001(\002:\0028\001\032w\n\017CountryS",
+      "ttings:\0028\001\0328\n\026CountryManualEcpmEntry\022\013\n\003",
+      "key\030\001 \001(\t\022\r\n\005value\030\002 \001(\002:\0028\001\032w\n\017CountryS" +
       "ettings\0225\n\006period\030\001 \003(\0132%.Instance.Count" +
       "rySettings.PeriodEntry\032-\n\013PeriodEntry\022\013\n" +
-      "\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\005:\0028\001\"\221\007\n\014Instan" +
+      "\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\005:\0028\001\"\265\007\n\014Instan" +
       "ceRule\022\n\n\002id\030\001 \001(\005\022\024\n\014publisher_id\030\002 \001(\005" +
       "\022\022\n\npub_app_id\030\003 \001(\005\022\024\n\014placement_id\030\004 \001" +
       "(\005\022\017\n\007country\030\005 \003(\t\022\021\n\tsort_type\030\006 \001(\005\022\024" +
       "\n\003abt\030\007 \001(\0162\007.ABTest\022\023\n\013auto_switch\030\010 \001(" +
       "\005\022:\n\017instance_weight\030\t \003(\0132!.InstanceRul" +
-      "e.InstanceWeightEntry\022\020\n\010priority\030\n \001(\005\022" +
-      "\021\n\tfrequency\030\013 \001(\005\022\020\n\010con_type\030\014 \001(\005\022\027\n\017",
+      "e.InstanceWeightEntry\022\020\n\010priority\030\n \001(\005\022",
+      "\021\n\tfrequency\030\013 \001(\005\022\020\n\010con_type\030\014 \001(\005\022\027\n\017" +
       "brand_whitelist\030\r \003(\t\022\027\n\017brand_blacklist" +
       "\030\016 \003(\t\022\027\n\017model_whitelist\030\017 \003(\t\022\027\n\017model" +
       "_blacklist\030\020 \003(\t\022\017\n\007iap_min\030\021 \001(\002\022\017\n\007iap" +
@@ -15854,19 +17986,26 @@ public final class AdNetworkPB {
       " \001(\005\022\020\n\010interest\030\027 \003(\t\022\017\n\007age_min\030\030 \001(\005\022" +
       "\017\n\007age_max\030\031 \001(\005\022\014\n\004name\030\032 \001(\t\022\021\n\tosv_wh" +
       "ite\030\033 \003(\t\022\031\n\tosv_range\030\034 \003(\0132\006.Range\022\022\n\n" +
-      "sdkv_white\030\035 \003(\t\022\032\n\nsdkv_range\030\036 \003(\0132\006.R" +
-      "ange\022\022\n\nappv_white\030\037 \003(\t\022\032\n\nappv_range\030 ",
+      "sdkv_white\030\035 \003(\t\022\032\n\nsdkv_range\030\036 \003(\0132\006.R",
+      "ange\022\022\n\nappv_white\030\037 \003(\t\022\032\n\nappv_range\030 " +
       " \003(\0132\006.Range\022\023\n\013require_did\030! \001(\005\0222\n\013cus" +
       "tom_tags\030\" \003(\0132\035.InstanceRule.CustomTags" +
-      "Entry\022\024\n\014algorithm_id\030# \001(\005\0325\n\023InstanceW" +
-      "eightEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\005:\002" +
-      "8\001\032=\n\017CustomTagsEntry\022\013\n\003key\030\001 \001(\t\022\031\n\005va" +
-      "lue\030\002 \001(\0132\n.CustomTag:\0028\001\"J\n\tCustomTag\022\014" +
-      "\n\004name\030\001 \001(\t\022\014\n\004type\030\002 \001(\005\022!\n\nconditions" +
-      "\030\003 \003(\0132\r.TagCondition\"?\n\014TagCondition\022\020\n" +
-      "\010operator\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\022\016\n\006values" +
-      "\030\003 \003(\tB!\n\022com.adtiming.om.pbB\013AdNetworkP",
-      "Bb\006proto3"
+      "Entry\022\024\n\014algorithm_id\030# \001(\005\022\"\n\006groups\030$ " +
+      "\003(\0132\022.InstanceRuleGroup\0325\n\023InstanceWeigh" +
+      "tEntry\022\013\n\003key\030\001 \001(\005\022\r\n\005value\030\002 \001(\005:\0028\001\032=" +
+      "\n\017CustomTagsEntry\022\013\n\003key\030\001 \001(\t\022\031\n\005value\030" +
+      "\002 \001(\0132\n.CustomTag:\0028\001\"\221\001\n\021InstanceRuleGr" +
+      "oup\022\017\n\007rule_id\030\001 \001(\005\022\020\n\010group_id\030\002 \001(\005\022\023" +
+      "\n\013group_level\030\003 \001(\005\022\023\n\013auto_switch\030\004 \001(\005",
+      "\022/\n\017instance_weight\030\005 \003(\0132\026.InstanceRule" +
+      "Mediation\"a\n\025InstanceRuleMediation\022\017\n\007ru" +
+      "le_id\030\001 \001(\005\022\020\n\010group_id\030\002 \001(\005\022\023\n\013instanc" +
+      "e_id\030\003 \001(\005\022\020\n\010priority\030\004 \001(\005\"J\n\tCustomTa" +
+      "g\022\014\n\004name\030\001 \001(\t\022\014\n\004type\030\002 \001(\005\022!\n\nconditi" +
+      "ons\030\003 \003(\0132\r.TagCondition\"?\n\014TagCondition" +
+      "\022\020\n\010operator\030\001 \001(\t\022\r\n\005value\030\002 \001(\t\022\016\n\006val" +
+      "ues\030\003 \003(\tB!\n\022com.adtiming.om.pbB\013AdNetwo" +
+      "rkPBb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -15886,7 +18025,7 @@ public final class AdNetworkPB {
     internal_static_AdNetwork_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_AdNetwork_descriptor,
-        new java.lang.String[] { "Id", "Name", "ClassName", "Type", "SdkVersion", "BidEndpoint", "Descn", });
+        new java.lang.String[] { "Id", "Name", "ClassName", "Type", "SdkVersion", "BidEndpoint", "Descn", "BidType", "ExpiredTime", });
     internal_static_AdNetworkApp_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_AdNetworkApp_fieldAccessorTable = new
@@ -15934,7 +18073,7 @@ public final class AdNetworkPB {
     internal_static_InstanceRule_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_InstanceRule_descriptor,
-        new java.lang.String[] { "Id", "PublisherId", "PubAppId", "PlacementId", "Country", "SortType", "Abt", "AutoSwitch", "InstanceWeight", "Priority", "Frequency", "ConType", "BrandWhitelist", "BrandBlacklist", "ModelWhitelist", "ModelBlacklist", "IapMin", "IapMax", "ModelType", "ChannelBow", "Channel", "Gender", "Interest", "AgeMin", "AgeMax", "Name", "OsvWhite", "OsvRange", "SdkvWhite", "SdkvRange", "AppvWhite", "AppvRange", "RequireDid", "CustomTags", "AlgorithmId", });
+        new java.lang.String[] { "Id", "PublisherId", "PubAppId", "PlacementId", "Country", "SortType", "Abt", "AutoSwitch", "InstanceWeight", "Priority", "Frequency", "ConType", "BrandWhitelist", "BrandBlacklist", "ModelWhitelist", "ModelBlacklist", "IapMin", "IapMax", "ModelType", "ChannelBow", "Channel", "Gender", "Interest", "AgeMin", "AgeMax", "Name", "OsvWhite", "OsvRange", "SdkvWhite", "SdkvRange", "AppvWhite", "AppvRange", "RequireDid", "CustomTags", "AlgorithmId", "Groups", });
     internal_static_InstanceRule_InstanceWeightEntry_descriptor =
       internal_static_InstanceRule_descriptor.getNestedTypes().get(0);
     internal_static_InstanceRule_InstanceWeightEntry_fieldAccessorTable = new
@@ -15947,14 +18086,26 @@ public final class AdNetworkPB {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_InstanceRule_CustomTagsEntry_descriptor,
         new java.lang.String[] { "Key", "Value", });
-    internal_static_CustomTag_descriptor =
+    internal_static_InstanceRuleGroup_descriptor =
       getDescriptor().getMessageTypes().get(5);
+    internal_static_InstanceRuleGroup_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_InstanceRuleGroup_descriptor,
+        new java.lang.String[] { "RuleId", "GroupId", "GroupLevel", "AutoSwitch", "InstanceWeight", });
+    internal_static_InstanceRuleMediation_descriptor =
+      getDescriptor().getMessageTypes().get(6);
+    internal_static_InstanceRuleMediation_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_InstanceRuleMediation_descriptor,
+        new java.lang.String[] { "RuleId", "GroupId", "InstanceId", "Priority", });
+    internal_static_CustomTag_descriptor =
+      getDescriptor().getMessageTypes().get(7);
     internal_static_CustomTag_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_CustomTag_descriptor,
         new java.lang.String[] { "Name", "Type", "Conditions", });
     internal_static_TagCondition_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_TagCondition_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_TagCondition_descriptor,

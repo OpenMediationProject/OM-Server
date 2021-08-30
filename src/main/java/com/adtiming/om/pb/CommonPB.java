@@ -165,6 +165,14 @@ public final class CommonPB {
      * <code>CrossPromotion = 5;</code>
      */
     CrossPromotion(5),
+    /**
+     * <pre>
+     * 激励插屏
+     * </pre>
+     *
+     * <code>RewardedInterstitial = 6;</code>
+     */
+    RewardedInterstitial(6),
     UNRECOGNIZED(-1),
     ;
 
@@ -216,6 +224,14 @@ public final class CommonPB {
      * <code>CrossPromotion = 5;</code>
      */
     public static final int CrossPromotion_VALUE = 5;
+    /**
+     * <pre>
+     * 激励插屏
+     * </pre>
+     *
+     * <code>RewardedInterstitial = 6;</code>
+     */
+    public static final int RewardedInterstitial_VALUE = 6;
 
 
     public final int getNumber() {
@@ -242,6 +258,7 @@ public final class CommonPB {
         case 3: return Interstitial;
         case 4: return Splash;
         case 5: return CrossPromotion;
+        case 6: return RewardedInterstitial;
         default: return null;
       }
     }
@@ -3583,12 +3600,12 @@ public final class CommonPB {
       "from\030\001 \001(\t\022\016\n\006cur_to\030\002 \001(\t\022\025\n\rexchange_r" +
       "ate\030\003 \001(\002\"E\n\005Range\022\013\n\003min\030\001 \001(\t\022\013\n\003max\030\002" +
       " \001(\t\022\020\n\010min_type\030\003 \001(\010\022\020\n\010max_type\030\004 \001(\010" +
-      "*\034\n\004Plat\022\007\n\003iOS\020\000\022\013\n\007Android\020\001*c\n\006AdType" +
+      "*\034\n\004Plat\022\007\n\003iOS\020\000\022\013\n\007Android\020\001*}\n\006AdType" +
       "\022\n\n\006Banner\020\000\022\n\n\006Native\020\001\022\017\n\013RewardVideo\020" +
       "\002\022\020\n\014Interstitial\020\003\022\n\n\006Splash\020\004\022\022\n\016Cross",
-      "Promotion\020\005* \n\006ABTest\022\010\n\004None\020\000\022\005\n\001A\020\001\022\005" +
-      "\n\001B\020\002B\036\n\022com.adtiming.om.pbB\010CommonPBb\006p" +
-      "roto3"
+      "Promotion\020\005\022\030\n\024RewardedInterstitial\020\006* \n" +
+      "\006ABTest\022\010\n\004None\020\000\022\005\n\001A\020\001\022\005\n\001B\020\002B\036\n\022com.a" +
+      "dtiming.om.pbB\010CommonPBb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {

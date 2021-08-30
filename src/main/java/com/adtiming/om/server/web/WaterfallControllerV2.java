@@ -10,11 +10,11 @@ import com.adtiming.om.server.service.AppConfig;
 import com.adtiming.om.server.service.CacheService;
 import com.adtiming.om.server.service.GeoService;
 import com.adtiming.om.server.service.LogService;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.async.AsyncRequestTimeoutException;
 
@@ -26,7 +26,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.adtiming.om.server.dto.AdNetwork.*;
+import static com.adtiming.om.server.dto.AdNetwork.ADN_CROSSPROMOTION;
+import static com.adtiming.om.server.dto.AdNetwork.ADN_FACEBOOK;
 import static com.adtiming.om.server.dto.WaterfallResponse.*;
 
 @RestController
@@ -62,6 +63,9 @@ public class WaterfallControllerV2 extends WaterfallBase {
         WaterfallRequest o = fillRequestParams(data, version, sdkv, plat, ua, reqHost, req, geoService, cfg, cacheService);
         if (o == null) {
             return ResponseEntity.badRequest().build();
+        }
+        if (version > 3) {
+            o.setOmWaterfallV4(true);
         }
 
         WaterfallResponseV2 res = new WaterfallResponseV2(0, null, o.getAbt(), debug != null);
@@ -109,9 +113,10 @@ public class WaterfallControllerV2 extends WaterfallBase {
         }
 
         if (StringUtils.isEmpty(o.getCountry())) {
-            lr.setStatus(0, "country not found").writeToLog(logService);
+            /*lr.setStatus(0, "country not found").writeToLog(logService);
             res.setCode(CODE_COUNTRY_NOT_FOUND).setMsg("country not found");
-            return response(res);
+            return response(res);*/
+            o.setCountry("00");//Set All when the country is not fetched
         }
 
         //placement target filter
@@ -134,9 +139,17 @@ public class WaterfallControllerV2 extends WaterfallBase {
             if (!bidInsMap.isEmpty()) {
                 List<Integer> c2sIns = new ArrayList<>(3);
                 bidInsMap.forEach((k, v) -> {
-                    if (v.isHeadBidding() && C2S_ADN.contains(v.getAdnId())
-                            && !o.getBidPriceMap().containsKey(k)) {//C2S Instance无缓存时
-                        c2sIns.add(k);
+                    AdNetworkPB.AdNetwork adn = cacheService.getAdNetwork(v.getAdnId());
+                    if (adn == null) return;
+                    if (o.isOmWaterfallV4()) {//V4版本
+                        //标准C2S Instance无缓存时
+                        if (v.isHeadBidding() && adn.getBidType() == 2 && !o.getBidPriceMap().containsKey(k)) {
+                            c2sIns.add(k);
+                        }
+                    } else {// V3版本0:非Bid,1:s2s,2:c2s,3:非标c2s
+                        if (v.isHeadBidding() && (adn.getBidType() == 2 || adn.getBidType() == 3) && !o.getBidPriceMap().containsKey(k)) {
+                            c2sIns.add(k);
+                        }
                     }
                 });
                 if (!c2sIns.isEmpty()) {
@@ -156,6 +169,11 @@ public class WaterfallControllerV2 extends WaterfallBase {
                 if (adn == null || StringUtils.isBlank(adn.getBidEndpoint())) {
                     LOG.debug("adn not found or s2s bidding not support, {}", bidderToken.iid);
                     res.addDebug("adnApp not found, remove instance: %d", bidderToken.iid);
+                    return true;
+                }
+                if (adn.getBidType() != 1) {//Non-s2s adn
+                    LOG.debug("adn not support s2s, {}", bidderToken.iid);
+                    res.addDebug(String.format("adn not support s2s, remove adn:%d, instance: %d", adn.getId(), bidderToken.iid));
                     return true;
                 }
                 AdNetworkApp adnApp = cacheService.getAdnApp(instance.getPubAppId(), instance.getAdnId());
@@ -214,7 +232,7 @@ public class WaterfallControllerV2 extends WaterfallBase {
                     }
 
                     List<WaterfallInstance> ins = getWfInsWithBidInstance(o, insList);
-                    if (ins == null || ins.isEmpty()) {
+                    if (CollectionUtils.isEmpty(ins) && CollectionUtils.isEmpty(res.getC2s())) {
                         res.setCode(CODE_INSTANCE_EMPTY).setMsg("instance not found");
                         dr.setResult(response(res));
                         lr.setStatus(0, "instance not found").writeToLog(logService);

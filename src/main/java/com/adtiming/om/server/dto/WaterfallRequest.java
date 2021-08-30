@@ -4,6 +4,7 @@
 package com.adtiming.om.server.dto;
 
 import com.adtiming.om.server.service.CacheService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;
@@ -28,6 +29,7 @@ public class WaterfallRequest extends CommonRequest {
     private int abt; // abTest
     private Map<Integer, Float> bidPriceMap = Collections.emptyMap();
     private Map<Integer, InstanceLoadStatus> instanceLoadStatusMap = Collections.emptyMap();
+    private boolean isOmWaterfallV4 = false;//Identifies whether it is OM Waterfall V4 or above
 
     public int getPid() {
         return pid;
@@ -110,6 +112,15 @@ public class WaterfallRequest extends CommonRequest {
 
     public int getAdType() {
         return adType;
+    }
+
+    @JsonIgnore
+    public boolean isOmWaterfallV4() {
+        return isOmWaterfallV4;
+    }
+
+    public void setOmWaterfallV4(boolean omWaterfallV4) {
+        isOmWaterfallV4 = omWaterfallV4;
     }
 
     /**

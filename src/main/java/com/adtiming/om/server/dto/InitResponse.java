@@ -101,6 +101,7 @@ public class InitResponse {
             a.n = adn.getClassName();
             a.nn = adn.getClassName().equals(adn.getDescn()) ? null : adn.getDescn();
             a.k = adn.getId() == ADN_CROSSPROMOTION ? pubApp.getAppKey() : m.getAppKey();
+            a.et = adn.getExpiredTime() == 0 ? null : adn.getExpiredTime();
             this.adnApps.put(a.id, a);
         }
     }
@@ -195,6 +196,7 @@ public class InitResponse {
         public String n;
         public String nn;
         public String k;
+        public Integer et;
     }
 
     public static class Scene {
@@ -233,7 +235,7 @@ public class InitResponse {
             }
 
             CommonPB.AdType adType = p.getAdType();
-            if (adType == Banner || adType == Native) {
+            if (adType == Banner || adType == Native || adType == Splash) {
                 if (p.getFanOut())
                     this.fo = 1;
                 if (p.getFrequencyCap() > 0 && p.getFrequencyUnit() > 0) {
@@ -242,7 +244,7 @@ public class InitResponse {
                 }
             }
 
-            if (adType == RewardVideo || adType == Interstitial || adType == CrossPromotion) {
+            if (adType == RewardVideo || adType == Interstitial || adType == CrossPromotion || adType == RewardedInterstitial) {
                 this.cs = p.getInventoryCount();
                 this.rf = p.getInventoryInterval();
                 this.rfs = p.getInventoryIntervalStepMap();
