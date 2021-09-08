@@ -238,7 +238,9 @@ public class WaterfallBase extends BaseController {
             float totalEcpm = 0;
             Map<Float, List<WaterfallInstance>> priorityIns = new HashMap<>(pmInstances.size());
             for (Instance ins : pmInstances) {
-                if (blockAdnIds.contains(ins.getAdnId()) || !ins.matchInstance(o)) {
+                if (blockAdnIds.contains(ins.getAdnId())
+                        || o.getBidPriceMap().containsKey(ins.getId())
+                        || !ins.matchInstance(o)) {
                     continue;
                 }
                 AdNetworkPB.AdNetwork adn = cacheService.getAdNetwork(ins.getAdnId());
@@ -294,7 +296,9 @@ public class WaterfallBase extends BaseController {
                 Map<Integer, Integer> ruleInsWeight = group.getInsPriority();
                 for (int insId : insIds) {
                     Instance ins = cacheService.getInstanceById(insId);
-                    if (ins == null || blockAdnIdSet.contains(ins.getAdnId()) || !ins.matchInstance(req)) {
+                    if (ins == null || blockAdnIdSet.contains(ins.getAdnId())
+                            || req.getBidPriceMap().containsKey(ins.getId())
+                            || !ins.matchInstance(req)) {
                         continue;
                     }
                     AdNetworkPB.AdNetwork adn = cacheService.getAdNetwork(ins.getAdnId());
@@ -345,7 +349,9 @@ public class WaterfallBase extends BaseController {
                     Map<Float, List<WaterfallInstance>> sortInsMap = new HashMap<>(insIds.size());
                     for (int insId : insIds) {
                         Instance ins = cacheService.getInstanceById(insId);
-                        if (ins == null || blockAdnIdSet.contains(ins.getAdnId()) || !ins.matchInstance(req)) {
+                        if (ins == null || blockAdnIdSet.contains(ins.getAdnId())
+                                || req.getBidPriceMap().containsKey(ins.getId())
+                                || !ins.matchInstance(req)) {
                             continue;
                         }
                         AdNetworkPB.AdNetwork adn = cacheService.getAdNetwork(ins.getAdnId());
@@ -409,7 +415,9 @@ public class WaterfallBase extends BaseController {
                     int ecpmSize = 0;
                     for (int insId : insIds) {
                         Instance ins = cacheService.getInstanceById(insId);
-                        if (ins == null || blockAdnIdSet.contains(ins.getAdnId()) || !ins.matchInstance(req)) {
+                        if (ins == null || blockAdnIdSet.contains(ins.getAdnId())
+                                || req.getBidPriceMap().containsKey(ins.getId())
+                                || !ins.matchInstance(req)) {
                             continue;
                         }
                         AdNetworkPB.AdNetwork adn = cacheService.getAdNetwork(ins.getAdnId());
@@ -607,7 +615,7 @@ public class WaterfallBase extends BaseController {
         void cb(DeferredResult<Object> dr);
     }
 
-    protected DeferredResult<Object> bid(WaterfallRequest o, LrRequest wfLr, boolean isTest, Placement placement, WfResInterface resp, WaterfallController.S2SBidCallback callback) {
+    protected DeferredResult<Object> bid(WaterfallRequest o, LrRequest wfLr, boolean isTest, Placement placement, WfResInterface resp, S2SBidCallback callback) {
         final boolean DEBUG = resp.getDebug() != null;
         resp.initBidResponse(new ArrayList<>(o.getBids2s().size()));
         DeferredResult<Object> dr = new DeferredResult<>(1500L);
@@ -719,7 +727,7 @@ public class WaterfallBase extends BaseController {
     private void handleS2SBidResponse(
             AtomicInteger count, WaterfallRequest.S2SBidderToken bidderToken, boolean isTest,
             JSONObject bidresp, String err, WaterfallRequest o, WfResInterface resp, LrRequest lr,
-            WaterfallController.S2SBidCallback callback, DeferredResult<Object> dr) {
+            S2SBidCallback callback, DeferredResult<Object> dr) {
         try {
             WaterfallResponse.S2SBidResponse bres = new WaterfallResponse.S2SBidResponse();
             bres.iid = bidderToken.iid;
