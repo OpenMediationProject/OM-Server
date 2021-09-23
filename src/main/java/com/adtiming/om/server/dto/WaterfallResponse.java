@@ -17,8 +17,7 @@ public class WaterfallResponse implements WfResInterface {
     private int abt;
     private List<CharSequence> debug;
 
-    public WaterfallResponse(int abt, boolean debug) {
-        this.abt = abt;
+    public WaterfallResponse(boolean debug) {
         if (debug) {
             setDebug(new ArrayList<>());
         }

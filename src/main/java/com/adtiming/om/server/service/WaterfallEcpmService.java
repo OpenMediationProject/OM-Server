@@ -70,7 +70,7 @@ public class WaterfallEcpmService extends PBLoader {
         loadAdTypeEcpm3d();
         loadAdnEcpm3d();
         systemDefaultInstanceEcpm = dm.floatVal("/om/system_instance_defualt_ecpm", 1.0F);
-        defalutEcpmAlgorithmId = dm.intVal("/om/default_ecpm_algorithm_id", 1);
+        defalutEcpmAlgorithmId = dm.intVal("/om/default_ecpm_algorithm_id", 2);
     }
 
     private void getInstanceCountryEcpm(String hourCount, Consumer<Map<Integer, Map<String, Float>>> fn) {

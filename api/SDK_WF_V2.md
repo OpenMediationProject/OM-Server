@@ -71,6 +71,7 @@
 | ins | Array of [Instance](#instance) | Sorted Instance List with revenue | | ✔︎ |
 | c2s | Array of int32 | C2S InstanceID List | |✖|
 | bidresp | Array of [S2SBidResponse](#s2sbidresponse) | S2SBidResponse with Payload | | ✖︎ |
+| abtId | int32 | A/B Test ID |0|✖︎|
 
 #### MediationRule
 
@@ -124,6 +125,7 @@
 ```json
 {
   "code": 0,
+  "abtId": 100,
   "rule": {
     "id": 1012,
     "n": "testRule",

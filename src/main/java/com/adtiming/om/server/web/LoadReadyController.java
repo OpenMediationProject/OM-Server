@@ -3,7 +3,6 @@
 
 package com.adtiming.om.server.web;
 
-import com.adtiming.om.pb.CommonPB;
 import com.adtiming.om.server.dto.Instance;
 import com.adtiming.om.server.dto.InstanceRule;
 import com.adtiming.om.server.dto.LrRequest;
@@ -92,6 +91,10 @@ public class LoadReadyController extends BaseController {
             if (rule != null) {
                 o.setRuleType(rule.isAutoOpt() ? 1 : 0);
                 o.setRp(rule.getPriority());
+                if (rule.getAbTestSwitch() == 1) {
+                    o.setAbt(rule.getRuleAbt(o.getDid()));
+                    o.setAbtId(rule.getRuleAbtId());
+                }
             }
         }
         if (o.getIid() > 0) {
@@ -131,7 +134,6 @@ public class LoadReadyController extends BaseController {
         }
 
         o.setPlacement(placement);
-        o.setAbt(CommonPB.ABTest.None_VALUE);
         o.setStatus(1, null);
         o.writeToLog(logService);
         return ResponseEntity.ok().build();

@@ -67,6 +67,9 @@ public class LrRequest extends CommonRequest {
     private int plSuccess;           // PayloadSuccess
     private int plFail;              // PayloadFail
 
+    //2021-09-10
+    private int abtId;               // A/B Test ID
+
     public int getType() {
         return type;
     }
@@ -367,6 +370,15 @@ public class LrRequest extends CommonRequest {
 
     public void setPlFail(int plFail) {
         this.plFail = plFail;
+    }
+
+    public int getAbtId() {
+        return abtId;
+    }
+
+    public LrRequest setAbtId(int abtId) {
+        this.abtId = abtId;
+        return this;
     }
 
     public void writeToLog(LogService logService) {

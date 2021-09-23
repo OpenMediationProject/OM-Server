@@ -156,7 +156,11 @@ public class EventLogController extends BaseController {
                     if (rule != null) {
                         lr.setRuleType(rule.isAutoOpt() ? 1 : 0);
                         lr.setRp(rule.getPriority());
-                        lr.setIi(rule.getInstancePriority(event.iid));
+                        lr.setIi(rule.getInstancePriority(event.iid, lr.getAbt()));
+                        if (rule.getAbTestSwitch() == 1) {
+                            lr.setAbt(rule.getRuleAbt(o.getDid()));
+                            lr.setAbtId(rule.getRuleAbtId());
+                        }
                     }
                 }
                 if (event.iid > 0) {

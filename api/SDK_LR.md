@@ -35,6 +35,7 @@
 | revenue | float | Instance Impression Revenue |1.2|✖︎|
 | rp | int32 | Revenue Precision |0|✖︎|
 | ii | int32 | Instance Priority |0|✖︎|
+| abtId | int32 | A/B Test ID |0|✖︎|
 
 * ruleId, revenue, rp, ii need to be reported only when type=6
 * Resp, Body is empty, Success with http status code=200

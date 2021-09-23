@@ -21,10 +21,7 @@ import org.springframework.web.context.request.async.AsyncRequestTimeoutExceptio
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.adtiming.om.server.dto.AdNetwork.ADN_CROSSPROMOTION;
 import static com.adtiming.om.server.dto.AdNetwork.ADN_FACEBOOK;
@@ -68,7 +65,7 @@ public class WaterfallControllerV2 extends WaterfallBase {
             o.setOmWaterfallV4(true);
         }
 
-        WaterfallResponseV2 res = new WaterfallResponseV2(0, null, o.getAbt(), debug != null);
+        WaterfallResponseV2 res = new WaterfallResponseV2(0, null, debug != null);
 
         LrRequest lr = o.copyTo(new LrRequest());
         lr.setWfReq(1);
@@ -131,6 +128,19 @@ public class WaterfallControllerV2 extends WaterfallBase {
             lr.setRuleId(rule.getId());
             lr.setRuleType(rule.getSortType());
             lr.setRp(rule.getPriority());
+            if (rule.getAbTestSwitch() == 1) {
+                res.setAbt(rule.getRuleAbt(o.getDid()));
+                o.setAbt(res.getAbt());
+                o.setAbtId(rule.getRuleAbtId());
+            }
+            if (res.isDebugEnabled()) {
+                res.addDebug(String.format("Hit Rule %d-%s, rule.priority:%d",
+                        rule.getId(), rule.getName(), rule.getPriority()));
+                res.addDebug(String.format("A/B Test Switch:%s, Abt:%s",
+                        rule.getAbTestSwitch() == 1 ? "On" : "Off",
+                        res.getAbt() == 0 ? "None" : (res.getAbt() == 1 ? "A" : "B")));
+                res.addDebug("Ecpm Algorithm:" + rule.getAlgorithmId());
+            }
         }
         res.setHitRule(rule);
         Map<Integer, Instance> bidInsMap = new HashMap<>();

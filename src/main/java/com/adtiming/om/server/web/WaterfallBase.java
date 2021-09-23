@@ -222,16 +222,10 @@ public class WaterfallBase extends BaseController {
         List<Instance> pmInstances = new ArrayList<>(mps);
         List<WaterfallInstance> sortIns;
         if (matchedRule != null) {//has rule
-            Set<Integer> insIdSet = matchedRule.getInstanceList();
-            if (res.isDebugEnabled()) {
-                res.addDebug("Hit Rule:" + matchedRule.getId());
-                res.addDebug("Ecpm Algorithm:" + matchedRule.getAlgorithmId());
-                res.addDebug("Rule instance list:" + insIdSet);
-            }
             sortIns = getInstanceByRule(matchedRule, pmInstances, returnBidIids, blockAdnIds, o, res);
         } else {// Rule is not configured by ecpm absolute priority ordering
             if (res.isDebugEnabled()) {
-                res.addDebug("Missmatch mediation rule");
+                res.addDebug("Miss match mediation rule");
                 res.addDebug("Ecpm Algorithm:" + ecpmService.defalutEcpmAlgorithmId);
             }
             Map<Integer, Float> insEcpm = new HashMap<>(pmInstances.size());
@@ -282,7 +276,13 @@ public class WaterfallBase extends BaseController {
                                                       Set<Integer> blockAdnIdSet, WaterfallRequest req, WfResInterface res) {
         if (rule == null || CollectionUtils.isEmpty(insList))
             return Collections.emptyList();
-        Map<Integer, InstanceRuleGroup> ruleGroupMap = rule.getRuleGroups();
+        Map<Integer, InstanceRuleGroup> ruleGroupMap;
+        int abt = rule.getRuleAbt(req.getDid());
+        if (rule.getAbTestSwitch() == 1) {
+            ruleGroupMap = rule.getRuleGroups(abt);
+        } else {
+            ruleGroupMap = rule.getRuleGroups(0);
+        }
         if (ruleGroupMap.isEmpty())
             return Collections.emptyList();
         List<WaterfallInstance> returnIns = new ArrayList<>();
@@ -292,8 +292,15 @@ public class WaterfallBase extends BaseController {
             Integer groupLevel = entry.getKey();
             InstanceRuleGroup group = entry.getValue();
             if (rule.getSortType() == 0) {//Weight sorting regardless of group configuration
-                Set<Integer> insIds = group.getInsList();
-                Map<Integer, Integer> ruleInsWeight = group.getInsPriority();
+                Set<Integer> insIds = group.getInsList(abt);
+                Map<Integer, Integer> ruleInsWeight = group.getInsPriority(abt);
+                if (res.isDebugEnabled()) {
+                    res.addDebug("Group:%d,autoSwitch:%s", groupLevel, group.getAutoSwitch() == 1 ? "On" : "Off");
+                    res.addDebug("Group instances:%s", JSON.toJSONString(insIds));
+                }
+                if (insIds.isEmpty()) {
+                    continue;
+                }
                 for (int insId : insIds) {
                     Instance ins = cacheService.getInstanceById(insId);
                     if (ins == null || blockAdnIdSet.contains(ins.getAdnId())
@@ -339,10 +346,13 @@ public class WaterfallBase extends BaseController {
                 }
             } else {
                 if (group.getAutoSwitch() == 1) {//auto waterfall sorted by ecpm
-                    Set<Integer> insIds = group.getInsList();
+                    Set<Integer> insIds = group.getInsList(abt);
                     if (res.isDebugEnabled()) {
                         res.addDebug("Group:%d,autoSwitch:%s", groupLevel, group.getAutoSwitch() == 1 ? "On" : "Off");
                         res.addDebug("Group instances:%s", JSON.toJSONString(insIds));
+                    }
+                    if (insIds.isEmpty()) {
+                        continue;
                     }
                     Map<Integer, Float> insEcpm = new HashMap<>(insIds.size());
                     float totalEcpm = 0;
@@ -404,11 +414,14 @@ public class WaterfallBase extends BaseController {
                     }
                     returnIns.addAll(sortIns);
                 } else {//手动排序
-                    Map<Integer, Integer> iidConfigPriority = group.getInsPriority();
-                    Set<Integer> insIds = group.getInsList();
+                    Map<Integer, Integer> iidConfigPriority = group.getInsPriority(abt);
+                    Set<Integer> insIds = group.getInsList(abt);
                     if (res.isDebugEnabled()) {
                         res.addDebug("Group:%d,autoSwitch:%s", groupLevel, group.getAutoSwitch() == 1 ? "On" : "Off");
                         res.addDebug("Group instances:%s", JSON.toJSONString(insIds));
+                    }
+                    if (iidConfigPriority == null) {
+                        continue;
                     }
                     Map<WaterfallInstance, Integer> priorityIns = new HashMap<>(iidConfigPriority.size());
                     float totalEcpm = 0;
@@ -615,7 +628,7 @@ public class WaterfallBase extends BaseController {
         void cb(DeferredResult<Object> dr);
     }
 
-    protected DeferredResult<Object> bid(WaterfallRequest o, LrRequest wfLr, boolean isTest, Placement placement, WfResInterface resp, S2SBidCallback callback) {
+    protected DeferredResult<Object> bid(WaterfallRequest o, LrRequest wfLr, boolean isTest, Placement placement, WfResInterface resp, WaterfallController.S2SBidCallback callback) {
         final boolean DEBUG = resp.getDebug() != null;
         resp.initBidResponse(new ArrayList<>(o.getBids2s().size()));
         DeferredResult<Object> dr = new DeferredResult<>(1500L);
@@ -655,6 +668,8 @@ public class WaterfallBase extends BaseController {
             lr.setRp(wfLr.getRp());
             lr.setIi(wfLr.getIi());
             lr.setAdnPk(bidderToken.pkey);
+            lr.setAbt(o.getAbt());
+            lr.setAbtId(o.getAbtId());
 //            lr.writeToLog(logService);
 
             HttpClientContext hcc = HttpClientContext.create();
@@ -727,7 +742,7 @@ public class WaterfallBase extends BaseController {
     private void handleS2SBidResponse(
             AtomicInteger count, WaterfallRequest.S2SBidderToken bidderToken, boolean isTest,
             JSONObject bidresp, String err, WaterfallRequest o, WfResInterface resp, LrRequest lr,
-            S2SBidCallback callback, DeferredResult<Object> dr) {
+            WaterfallController.S2SBidCallback callback, DeferredResult<Object> dr) {
         try {
             WaterfallResponse.S2SBidResponse bres = new WaterfallResponse.S2SBidResponse();
             bres.iid = bidderToken.iid;

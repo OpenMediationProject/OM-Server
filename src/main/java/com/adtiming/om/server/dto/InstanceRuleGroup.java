@@ -12,16 +12,18 @@ public class InstanceRuleGroup {
     private int groupId;
     private int groupLevel;
     private int autoSwitch;
-    private Map<Integer, Integer> insPriority = Collections.emptyMap();
+    private int abTest;
+    private Map<Integer, Map<Integer, Integer>> abtInsPriority = Collections.emptyMap();
 
     public InstanceRuleGroup(AdNetworkPB.InstanceRuleGroup group) {
         this.ruleId = group.getRuleId();
         this.groupId = group.getGroupId();
         this.groupLevel = group.getGroupLevel();
         this.autoSwitch = group.getAutoSwitch();
+        this.abTest = group.getAbTest();
         if (group.getInstanceWeightCount() > 0) {
-            insPriority = new HashMap<>(group.getInstanceWeightCount());
-            group.getInstanceWeightList().forEach(iw-> insPriority.put(iw.getInstanceId(), iw.getPriority()));
+            abtInsPriority = new HashMap<>(group.getInstanceWeightCount());
+            group.getInstanceWeightList().forEach(iw-> abtInsPriority.computeIfAbsent(iw.getAbTest(), k -> new HashMap<>()).put(iw.getInstanceId(), iw.getPriority()));
         }
     }
 
@@ -47,12 +49,21 @@ public class InstanceRuleGroup {
         return autoSwitch;
     }
 
-    public Map<Integer, Integer> getInsPriority() {
-        return insPriority;
+    public Map<Integer, Map<Integer, Integer>> getAbtInsPriority() {
+        return abtInsPriority;
     }
 
-    public Set<Integer> getInsList() {
-        if (insPriority.isEmpty()) return Collections.emptySet();
-        return insPriority.keySet();
+    public Map<Integer, Integer> getInsPriority(int abt) {
+        return abtInsPriority.getOrDefault(abt, abtInsPriority.get(0));
+    }
+
+    public int getAbTest() {
+        return abTest;
+    }
+
+    public Set<Integer> getInsList(int abt) {
+        if (abtInsPriority.isEmpty()) return Collections.emptySet();
+        Map<Integer, Integer> insPri = abtInsPriority.getOrDefault(abt, Collections.emptyMap());
+        return insPri.keySet();
     }
 }

@@ -1,7 +1,7 @@
 app:
   env: dev
   dcenter: 1
-  dtask: 192.168.0.6
+  dtask: replace_to_dtask_host
 
 logging:
   config: classpath:log4j2-dev.xml

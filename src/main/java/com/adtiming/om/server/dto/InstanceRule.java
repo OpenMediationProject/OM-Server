@@ -26,8 +26,8 @@ public class InstanceRule {
     private List<VersionRange> osvRanges;
     private List<VersionRange> sdkvRanges;
     private List<VersionRange> appvRanges;
-    private Map<Integer, Integer> instancePriority = Collections.emptyMap();
-    private Map<Integer, InstanceRuleGroup> ruleGroups = Collections.emptyMap();
+    private Map<Integer, Map<Integer, Integer>> abtInstancePriority = Collections.emptyMap();
+    private Map<Integer, Map<Integer, InstanceRuleGroup>> ruleGroups = Collections.emptyMap();
 
     public InstanceRule(AdNetworkPB.InstanceRule rule) {
         this.rule = rule;
@@ -73,16 +73,16 @@ public class InstanceRule {
         if (rule.getAppvRangeCount() > 0) {
             appvRanges = rule.getAppvRangeList().stream().map(VersionRange::new).collect(Collectors.toList());
         }
-        if (rule.getInstanceWeightCount() > 0) {
-            instancePriority = new HashMap<>(rule.getInstanceWeightCount());
+        /*if (rule.getInstanceWeightCount() > 0) {
+            abtInstancePriority = new HashMap<>(rule.getInstanceWeightCount());
             rule.getInstanceWeightMap().forEach((iid, priority) -> {
                 if (isAutoOpt()) {
-                    instancePriority.put(iid, 0);
+                    abtInstancePriority.put(iid, 0);
                 } else {
-                    instancePriority.put(iid, priority);
+                    abtInstancePriority.put(iid, priority);
                 }
             });
-            /*int index = 1;
+            *//*int index = 1;
             List<Integer> instanceList = Util.sortByPriority(rule.getInstanceWeightMap());
             for (int iid : instanceList) {
                 if (isAutoOpt()) {
@@ -91,11 +91,23 @@ public class InstanceRule {
                     instancePriority.put(iid, index);
                 }
                 index++;
-            }*/
-        }
+            }*//*
+        }*/
         if (rule.getGroupsCount() > 0) {
             ruleGroups = new HashMap<>();
-            rule.getGroupsList().forEach(group->ruleGroups.put(group.getGroupLevel(), new InstanceRuleGroup(group)));
+            abtInstancePriority = new HashMap<>();
+            rule.getGroupsList().forEach(group -> {
+                InstanceRuleGroup ruleGroup = new InstanceRuleGroup(group);
+                Map<Integer, Map<Integer, Integer>> abtInsPri = ruleGroup.getAbtInsPriority();
+                abtInsPri.forEach((abt, insPri) -> insPri.forEach((ins, pri) -> {
+                    if (group.getAutoSwitch() == 1) {
+                        abtInstancePriority.computeIfAbsent(abt, k -> new HashMap<>()).put(ins, 0);
+                    } else {
+                        abtInstancePriority.computeIfAbsent(abt, k -> new HashMap<>()).put(ins, pri);
+                    }
+                }));
+                ruleGroups.computeIfAbsent(group.getAbTest(), k -> new HashMap<>(3)).put(group.getGroupLevel(), ruleGroup);
+            });
         }
     }
 
@@ -154,13 +166,17 @@ public class InstanceRule {
         return Collections.emptySet();
     }
 
-    public Integer getInstancePriority(int instanceId) {
-        return instancePriority.getOrDefault(instanceId, 0);
+    public int getInstancePriority(int instanceId, int abt) {
+        return abtInstancePriority.getOrDefault(abt, Collections.emptyMap()).getOrDefault(instanceId, 0);
     }
 
 
     public int getAlgorithmId() {
         return rule.getAlgorithmId();
+    }
+
+    public int getAbTestSwitch() {
+        return rule.getAbTest();
     }
 
     /**
@@ -260,15 +276,15 @@ public class InstanceRule {
             return false;
         }
 
-        if (!CollectionUtils.isEmpty(osvWhite) &&  !osvWhite.contains(osv)) {
+        if (!CollectionUtils.isEmpty(osvWhite) && !osvWhite.contains(osv)) {
             return false;
         }
 
-        if (!CollectionUtils.isEmpty(sdkvWhite) &&  !sdkvWhite.contains(sdkv)) {
+        if (!CollectionUtils.isEmpty(sdkvWhite) && !sdkvWhite.contains(sdkv)) {
             return false;
         }
 
-        if (!CollectionUtils.isEmpty(appvWhite) &&  !appvWhite.contains(appv)) {
+        if (!CollectionUtils.isEmpty(appvWhite) && !appvWhite.contains(appv)) {
             return false;
         }
 
@@ -298,7 +314,7 @@ public class InstanceRule {
     }
 
     private boolean matchedTag(AdNetworkPB.CustomTag tag, Object value) {
-        if (tag.getConditionsCount() > 0 ) {
+        if (tag.getConditionsCount() > 0) {
             if (ObjectUtils.isEmpty(value)) {
                 return false;
             }
@@ -543,7 +559,7 @@ public class InstanceRule {
                     Set<Integer> tcVals = tc.getValuesList().stream().map(NumberUtils::toInt).collect(Collectors.toSet());
                     if (value instanceof Collection) {
                         Collection<?> list = (Collection<?>) value;
-                        tcVals.retainAll(list.stream().map(o->NumberUtils.toInt(o.toString())).collect(Collectors.toSet()));
+                        tcVals.retainAll(list.stream().map(o -> NumberUtils.toInt(o.toString())).collect(Collectors.toSet()));
                         return !tcVals.isEmpty();
                     } else {
                         return tcVals.contains(NumberUtils.toInt(value.toString()));
@@ -552,7 +568,7 @@ public class InstanceRule {
                     Set<Float> tcVals = tc.getValuesList().stream().map(NumberUtils::toFloat).collect(Collectors.toSet());
                     if (value instanceof Collection) {
                         Collection<?> list = (Collection<?>) value;
-                        tcVals.retainAll(list.stream().map(o->NumberUtils.toFloat(o.toString())).collect(Collectors.toSet()));
+                        tcVals.retainAll(list.stream().map(o -> NumberUtils.toFloat(o.toString())).collect(Collectors.toSet()));
                         return !tcVals.isEmpty();
                     } else {
                         return tcVals.contains(NumberUtils.toFloat(value.toString()));
@@ -572,7 +588,7 @@ public class InstanceRule {
                     Set<Integer> tcVals = tc.getValuesList().stream().map(NumberUtils::toInt).collect(Collectors.toSet());
                     if (value instanceof Collection) {
                         Collection<?> list = (Collection<?>) value;
-                        tcVals.retainAll(list.stream().map(o->NumberUtils.toInt(o.toString())).collect(Collectors.toSet()));
+                        tcVals.retainAll(list.stream().map(o -> NumberUtils.toInt(o.toString())).collect(Collectors.toSet()));
                         return tcVals.isEmpty();
                     } else {
                         return !tcVals.contains(NumberUtils.toInt(value.toString()));
@@ -581,7 +597,7 @@ public class InstanceRule {
                     Set<Float> tcVals = tc.getValuesList().stream().map(NumberUtils::toFloat).collect(Collectors.toSet());
                     if (value instanceof Collection) {
                         Collection<?> list = (Collection<?>) value;
-                        tcVals.retainAll(list.stream().map(o->NumberUtils.toFloat(o.toString())).collect(Collectors.toSet()));
+                        tcVals.retainAll(list.stream().map(o -> NumberUtils.toFloat(o.toString())).collect(Collectors.toSet()));
                         return tcVals.isEmpty();
                     } else {
                         return !tcVals.contains(NumberUtils.toFloat(value.toString()));
@@ -591,7 +607,27 @@ public class InstanceRule {
         return true;
     }
 
-    public Map<Integer, InstanceRuleGroup> getRuleGroups() {
-        return ruleGroups;
+    public Map<Integer, InstanceRuleGroup> getRuleGroups(int abt) {
+        Map<Integer, InstanceRuleGroup> groupMap = ruleGroups.get(abt);
+        if (groupMap == null) {
+            return ruleGroups.getOrDefault(0, Collections.emptyMap());
+        }
+        return groupMap;
+    }
+
+    public int getRuleAbt(String device) {
+        if (rule.hasRuleAbt()) {
+            AdNetworkPB.InstanceRuleAbt abt = rule.getRuleAbt();
+            return Math.abs(device.hashCode()) % 100 < abt.getAPer() ? 1 : 2;
+        }
+        return 0;
+    }
+
+    public int getRuleAbtId() {
+        if (rule.hasRuleAbt()) {
+            AdNetworkPB.InstanceRuleAbt abt = rule.getRuleAbt();
+            return abt.getId();
+        }
+        return 0;
     }
 }

@@ -19,11 +19,11 @@ public class WaterfallResponseV2 implements WfResInterface {
 
     private InstanceRule hitRule;
     private List<Integer> c2s;// V3版本新增参数
+    private Integer abtId;
 
-    public WaterfallResponseV2(int code, String msg, int abt, boolean debug) {
+    public WaterfallResponseV2(int code, String msg, boolean debug) {
         this.code = code;
         this.msg = msg;
-        this.abt = abt;
         if (debug) {
             setDebug(new ArrayList<>());
         }
@@ -37,6 +37,9 @@ public class WaterfallResponseV2 implements WfResInterface {
             rule.n = hitRule.getName();
             rule.t = hitRule.isAutoOpt() ? 0 : 1; //0:Auto,1:Manual
             rule.i = hitRule.getPriority();
+            if (hitRule.getAbTestSwitch() == 1) {
+                abtId = hitRule.getRuleAbtId();
+            }
         } else {
             rule.id = 0;
             rule.n = "DefaultAuto";
@@ -88,6 +91,10 @@ public class WaterfallResponseV2 implements WfResInterface {
         return rule;
     }
 
+    public Integer getAbtId() {
+        return abtId;
+    }
+
     @Override
     public WfResInterface setIns(List<?> ins) {
         if (CollectionUtils.isNotEmpty(ins)) {
@@ -100,7 +107,7 @@ public class WaterfallResponseV2 implements WfResInterface {
                     if (wIns.instance.isHeadBidding()) {
                         resInstance.i = 0;
                     } else {
-                        resInstance.i = hitRule.getInstancePriority(wIns.instance.getId());
+                        resInstance.i = hitRule.getInstancePriority(wIns.instance.getId(), abt);
                     }
                 } else {
                     resInstance.i = 0;

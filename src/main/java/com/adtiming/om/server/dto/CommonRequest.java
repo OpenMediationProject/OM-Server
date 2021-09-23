@@ -52,6 +52,7 @@ public class CommonRequest implements DeviceInfo {
     private String cdid;      //  Custom Device ID
     private Map<String, Object> tags; // User tags
     private Integer atts;            // The status value for app tracking authorization.0 = not determined,1 = restricted,2 = denied,3 = authorized
+    private String gcy;       //  TelephonyManager.getNetworkCountryIso()
 
     // not from request params
     // set by api controller
@@ -513,6 +514,14 @@ public class CommonRequest implements DeviceInfo {
 
     public void setAtts(Integer atts) {
         this.atts = atts;
+    }
+
+    public String getGcy() {
+        return gcy;
+    }
+
+    public void setGcy(String gcy) {
+        this.gcy = gcy;
     }
 
     @JsonIgnore

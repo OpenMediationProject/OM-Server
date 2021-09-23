@@ -73,6 +73,7 @@ public class EventLogRequest extends CommonRequest {
         public String reqId;            // Client Waterfall Request ID
         public int ruleId;              // Mediation Rule ID
         public float revenue;           // Instance Impression Revenue
+        public int abtId;               // A/B Test ID
 
         public String getCur() {
             return null;

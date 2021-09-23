@@ -63,7 +63,7 @@ public class WaterfallController extends WaterfallBase {
             return ResponseEntity.badRequest().build();
         }
 
-        WaterfallResponse res = new WaterfallResponse(o.getAbt(), debug != null);
+        WaterfallResponse res = new WaterfallResponse(debug != null);
 
         LrRequest lr = o.copyTo(new LrRequest());
         lr.setWfReq(1);
@@ -125,6 +125,19 @@ public class WaterfallController extends WaterfallBase {
             lr.setRuleId(rule.getId());
             lr.setRuleType(rule.getSortType());
             lr.setRp(rule.getPriority());
+            if (rule.getAbTestSwitch() == 1) {
+                res.setAbt(rule.getRuleAbt(o.getDid()));
+                o.setAbt(res.getAbt());
+                o.setAbtId(rule.getRuleAbtId());
+            }
+            if (res.isDebugEnabled()) {
+                res.addDebug(String.format("Hit Rule %d-%s, rule.priority:%d",
+                        rule.getId(), rule.getName(), rule.getPriority()));
+                res.addDebug(String.format("A/B Test Switch:%s, Abt:%s",
+                        rule.getAbTestSwitch() == 1 ? "On" : "Off",
+                        res.getAbt() == 0 ? "None" : (res.getAbt() == 1 ? "A" : "B")));
+                res.addDebug("Ecpm Algorithm:" + rule.getAlgorithmId());
+            }
         }
 
         Map<Integer, Instance> bidInsMap = new HashMap<>();

@@ -43,6 +43,7 @@
 | cdid | string | Custom DeviceID | |✖︎|
 | tags | Map<string,any> | App defined user tags| { "channel":"a", "likes":[2,6], "gender":1, "age":3 }|✖︎|
 | atts | int8 | The status value for app tracking authorization.<br>0 = not determined,<br>1 = restricted,<br>2 = denied,<br>3 = authorized | 2|✖︎|
+| gcy | string | TelephonyManager.getNetworkCountryIso() | cn |✖︎|
 
 ### ConnectionType
 

@@ -61,7 +61,7 @@ public class HBController extends WaterfallBase {
 
 //        LrRequest lr = o.copyTo(new LrRequest());
 //        lr.setType(LrRequest.TYPE_HB_REQUEST);
-        WaterfallResponse resp = new WaterfallResponse(o.getAbt(), debug != null);
+        WaterfallResponse resp = new WaterfallResponse(debug != null);
         resp.addDebug("request ip:%s, country:%s", o.getIp(), o.getCountry());
 
         Placement placement = cacheService.getPlacement(o.getPid());

@@ -52,6 +52,7 @@
 | cur | string | BidResponse的货币单位|USD|✖︎|
 | abt | int32 | ABTest Mode | 0 |✖︎|
 | ruleId | int32 | Mediation Rule ID |123|✖︎|
+| abtId | int32 | A/B Test ID |0|✖︎|
 
 #### EventID
 

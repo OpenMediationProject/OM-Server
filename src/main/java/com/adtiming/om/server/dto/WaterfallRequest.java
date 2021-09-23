@@ -30,6 +30,7 @@ public class WaterfallRequest extends CommonRequest {
     private Map<Integer, Float> bidPriceMap = Collections.emptyMap();
     private Map<Integer, InstanceLoadStatus> instanceLoadStatusMap = Collections.emptyMap();
     private boolean isOmWaterfallV4 = false;//Identifies whether it is OM Waterfall V4 or above
+    private int abtId;
 
     public int getPid() {
         return pid;
@@ -121,6 +122,16 @@ public class WaterfallRequest extends CommonRequest {
 
     public void setOmWaterfallV4(boolean omWaterfallV4) {
         isOmWaterfallV4 = omWaterfallV4;
+    }
+
+    @JsonIgnore
+    public int getAbtId() {
+        return abtId;
+    }
+
+    public WaterfallRequest setAbtId(int abtId) {
+        this.abtId = abtId;
+        return this;
     }
 
     /**
